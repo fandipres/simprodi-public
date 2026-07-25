@@ -348,16 +348,6 @@ main { flex: 1; }
   display: flex; justify-content: space-between; align-items: center;
   margin-bottom: 16px;
 }
-.btn-share {
-  display: inline-flex; align-items: center; gap: 5px;
-  background: none; border: 1px solid var(--border);
-  border-radius: 7px; padding: 7px 13px;
-  font-size: 0.82rem; font-weight: 600; font-family: var(--font);
-  color: var(--blue); cursor: pointer;
-  transition: border-color .15s, background .15s;
-}
-.btn-share:hover { border-color: var(--blue); background: var(--blue-soft); }
-
 /* ---- TOAST ---- */
 .toast {
   position: fixed; bottom: 24px; left: 50%;
@@ -787,9 +777,6 @@ main { flex: 1; }
           <span class="arr">&#8592;</span>
           <span data-i18n="btn_kembali">Kembali</span>
         </button>
-        <button class="btn-share" onclick="shareStudent()">
-          &#128279; <span data-i18n="btn_salin_link">Salin Link</span>
-        </button>
       </div>
 
       <div class="detail-header">
@@ -973,7 +960,7 @@ const I18N = {
     search_conn_error: 'Tidak dapat terhubung ke server. Periksa koneksi internet dan coba lagi.',
     search_result_found: 'Ditemukan {count} mahasiswa untuk kata kunci "{query}".',
     search_result_toomany: 'Menampilkan 30 dari {total} hasil. Perlengkap kata kunci untuk mempersempit pencarian.',
-    btn_kembali: 'Kembali', btn_salin_link: 'Salin Link',
+    btn_kembali: 'Kembali',
     info_title_mbkm: 'Apa itu MBKM?', info_title_prestasi: 'Apa itu Prestasi?', info_title_sertifikasi: 'Apa itu Sertifikasi?',
     mbkm_title: 'Merdeka Belajar Kampus Merdeka',
     mbkm_body: 'MBKM mencakup berbagai kegiatan pembelajaran di luar program studi yang diakui sebagai bagian dari perkuliahan, seperti magang industri, pertukaran pelajar, riset bersama dosen, kewirausahaan, dan pengabdian kepada masyarakat. Data direkap setiap semester berdasarkan laporan yang telah diverifikasi oleh program studi.',
@@ -984,8 +971,6 @@ const I18N = {
     mbkm_empty: 'Belum ada data MBKM yang tercatat.',
     prestasi_empty: 'Belum ada data prestasi yang tercatat.',
     sertifikasi_empty: 'Belum ada data sertifikasi yang tercatat.',
-    toast_link_copied: 'Link berhasil disalin ke clipboard',
-    prompt_copy_link: 'Salin link ini:',
     lapor_title: 'Ada data yang perlu dikoreksi?',
     lapor_desc: 'Sampaikan ke program studi agar bisa segera diperbaiki.',
     btn_lapor_kesalahan: 'Laporkan Kesalahan',
@@ -1038,7 +1023,7 @@ const I18N = {
     search_conn_error: 'Unable to connect to the server. Check your internet connection and try again.',
     search_result_found: 'Found {count} student(s) for "{query}".',
     search_result_toomany: 'Showing 30 of {total} results. Refine your keyword to narrow the search.',
-    btn_kembali: 'Back', btn_salin_link: 'Copy Link',
+    btn_kembali: 'Back',
     info_title_mbkm: 'What is MBKM?', info_title_prestasi: 'What is Prestasi?', info_title_sertifikasi: 'What is Sertifikasi?',
     mbkm_title: 'Merdeka Belajar Kampus Merdeka (Freedom to Learn – Independent Campus)',
     mbkm_body: 'MBKM covers various learning activities outside the study program that are recognized as part of coursework, such as industry internships, student exchange, research with lecturers, entrepreneurship, and community service. Data is compiled every semester based on reports verified by the study program.',
@@ -1049,8 +1034,6 @@ const I18N = {
     mbkm_empty: 'No MBKM data recorded yet.',
     prestasi_empty: 'No achievement data recorded yet.',
     sertifikasi_empty: 'No certification data recorded yet.',
-    toast_link_copied: 'Link copied to clipboard',
-    prompt_copy_link: 'Copy this link:',
     lapor_title: 'Is there data that needs correcting?',
     lapor_desc: 'Let the study program know so it can be fixed promptly.',
     btn_lapor_kesalahan: 'Report an Issue',
@@ -1412,17 +1395,6 @@ function showInfo(type) {
 }
 function closeInfo() {
   document.getElementById('infoModal').classList.remove('open');
-}
-
-// ------ SHARE ------
-function shareStudent() {
-  if (!currentStudent) return;
-  const url = location.origin + location.pathname + '?nim=' + encodeURIComponent(currentStudent.nim);
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(url).then(() => showToast(t('toast_link_copied')));
-  } else {
-    prompt(t('prompt_copy_link'), url);
-  }
 }
 
 function showToast(msg) {
