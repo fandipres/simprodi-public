@@ -314,6 +314,8 @@ main { flex: 1; }
 }
 .form-textarea:focus   { border-color: var(--orange); }
 .form-textarea::placeholder { color: var(--subtle); font-size: 0.83rem; }
+.char-counter { font-size: 0.72rem; color: var(--subtle); text-align: right; margin: -4px 0 8px; }
+.char-counter.ok { color: var(--green); }
 .btn-send {
   background: var(--orange); color: #fff; border: none; border-radius: 8px;
   padding: 9px 18px; font-size: 0.88rem; font-weight: 600;
@@ -580,6 +582,13 @@ main { flex: 1; }
   -webkit-tap-highlight-color: transparent;
 }
 .quiz-option:hover { border-color: var(--purple); background: var(--purple-soft); }
+.quiz-prev-btn {
+  display: flex; align-items: center; gap: 6px; margin-top: 16px;
+  background: none; border: none; cursor: pointer; padding: 4px 0;
+  font-size: 0.82rem; font-weight: 600; color: var(--muted);
+  font-family: var(--font); transition: color .15s;
+}
+.quiz-prev-btn:hover { color: var(--purple); }
 
 /* ---- HASIL KUIS ---- */
 .result-hero {
@@ -832,9 +841,10 @@ main { flex: 1; }
         </div>
         <div id="laporForm" class="lapor-form">
           <label class="form-label" for="laporPesan" data-i18n="lapor_pesan_label">Jelaskan data yang perlu dikoreksi</label>
-          <textarea class="form-textarea" id="laporPesan"
+          <textarea class="form-textarea" id="laporPesan" oninput="updateCharCounter('laporPesan','laporPesanCount',10)"
             data-i18n-placeholder="lapor_pesan_placeholder"
             placeholder="Contoh: pada semester Ganjil 2025/2026, kegiatan saya seharusnya Juara 2, bukan Peserta."></textarea>
+          <div class="char-counter" id="laporPesanCount">0/10</div>
           <div class="lapor-note" data-i18n="lapor_note">
             Tindak lanjut laporan akan disampaikan melalui nomor yang tercatat di MIKA kamu.
             Pastikan nomor tersebut sudah diperbarui sebelum mengirim.
@@ -860,6 +870,9 @@ main { flex: 1; }
       <div class="quiz-card">
         <div id="quizQ" class="quiz-q"></div>
         <div id="quizOpts" class="quiz-options"></div>
+        <button id="quizPrevBtn" class="quiz-prev-btn" onclick="goToPreviousQuestion()" style="display:none;">
+          <span class="arr">&#8592;</span> <span data-i18n="btn_pertanyaan_sebelumnya">Pertanyaan Sebelumnya</span>
+        </button>
       </div>
     </div>
 
@@ -978,6 +991,7 @@ const I18N = {
     notfound_success_msg: 'Laporan berhasil dikirim. Program studi akan segera menindaklanjuti, terima kasih.',
     quiz_disclaimer: 'Hasil ini berdasarkan preferensi yang kamu pilih dan bersifat indikatif. Konsultasikan dengan dosen wali atau pembimbing akademik untuk keputusan final pemilihan peminatan.',
     btn_ulangi_tes: 'Ulangi Tes',
+    btn_pertanyaan_sebelumnya: 'Pertanyaan Sebelumnya',
     quiz_step_label: 'Pertanyaan {n} dari {total}',
     quiz_score_line: '{score} dari {total} jawabanmu mengarah ke peminatan ini.',
     quiz_answer_unit: 'jawaban',
@@ -1041,6 +1055,7 @@ const I18N = {
     notfound_success_msg: 'Report submitted successfully. The study program will follow up shortly, thank you.',
     quiz_disclaimer: 'This result is based on the preferences you selected and is indicative only. Consult your academic advisor for the final specialization decision.',
     btn_ulangi_tes: 'Retake Test',
+    btn_pertanyaan_sebelumnya: 'Previous Question',
     quiz_step_label: 'Question {n} of {total}',
     quiz_score_line: '{score} of {total} of your answers point to this track.',
     quiz_answer_unit: 'answers',
@@ -1206,8 +1221,9 @@ function renderList() {
             '</div>' +
             '<div>' +
               '<label class="form-label" for="notFoundPesan">' + t('notfound_ket_label') + ' <span style="color:#dc2626;">*</span></label>' +
-              '<textarea class="form-textarea" id="notFoundPesan"' +
+              '<textarea class="form-textarea" id="notFoundPesan" oninput="updateCharCounter(\'notFoundPesan\',\'notFoundPesanCount\',10)"' +
               ' placeholder="' + t('notfound_ket_placeholder') + '"></textarea>' +
+              '<div class="char-counter" id="notFoundPesanCount">0/10</div>' +
             '</div>' +
           '</div>' +
           '<div class="lapor-note">' + t('lapor_note') + '</div>' +
@@ -1272,10 +1288,15 @@ function openDetail(idx) {
   fillPrestasi(s.prestasi || []);
   fillSertifikasi(s.sertifikasi || []);
 
-  ['prestasi', 'mbkm', 'sertifikasi'].forEach(openAcc);
+  // Buka accordion yang punya data, tutup yang kosong (tidak ada gunanya
+  // dibuka kalau isinya cuma pesan "belum ada data").
+  (cm ? openAcc : closeAcc)('mbkm');
+  (cp ? openAcc : closeAcc)('prestasi');
+  (cs ? openAcc : closeAcc)('sertifikasi');
 
   document.getElementById('laporForm').classList.remove('open');
   document.getElementById('laporPesan').value   = '';
+  updateCharCounter('laporPesan', 'laporPesanCount', 10);
   document.getElementById('laporMsg').innerHTML  = '';
 
   document.getElementById('listView').style.display      = 'none';
@@ -1298,6 +1319,11 @@ function openAcc(k) {
   document.getElementById('panel-' + k).classList.add('open');
   document.getElementById('ico-'   + k).classList.add('open');
   document.getElementById('trg-'   + k).classList.add('is-open');
+}
+function closeAcc(k) {
+  document.getElementById('panel-' + k).classList.remove('open');
+  document.getElementById('ico-'   + k).classList.remove('open');
+  document.getElementById('trg-'   + k).classList.remove('is-open');
 }
 
 // ------ HELPERS ------
@@ -1418,6 +1444,7 @@ async function doLapor() {
     if (res.ok) {
       msgEl.innerHTML = '<div class="alert alert-ok">' + t('lapor_success_msg') + '</div>';
       document.getElementById('laporPesan').value = '';
+      updateCharCounter('laporPesan', 'laporPesanCount', 10);
     } else {
       msgEl.innerHTML = `<div class="alert alert-err">${escHtml(res.message)}</div>`;
     }
@@ -1470,6 +1497,7 @@ async function doLaporNotFound() {
       document.getElementById('notFoundNim').value   = '';
       document.getElementById('notFoundNama').value  = '';
       document.getElementById('notFoundPesan').value = '';
+      updateCharCounter('notFoundPesan', 'notFoundPesanCount', 10);
     } else {
       msgEl.innerHTML = '<div class="alert alert-err">' + escHtml(res.message) + '</div>';
     }
@@ -1501,6 +1529,13 @@ function escHtml(s) {
   return String(s)
     .replace(/&/g, '&amp;').replace(/</g, '&lt;')
     .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function updateCharCounter(textareaId, counterId, min) {
+  var len = document.getElementById(textareaId).value.trim().length;
+  var el  = document.getElementById(counterId);
+  el.textContent = len + '/' + min;
+  el.classList.toggle('ok', len >= min);
 }
 
 // ------ NAVIGASI BERANDA ------
@@ -1642,6 +1677,7 @@ function renderQuizQuestion() {
   document.getElementById('quizOpts').innerHTML = q.opts.map(function(opt) {
     return '<button class="quiz-option" onclick="selectAnswer(\'' + opt.pem + '\')">' + escHtml(pick(opt.text)) + '</button>';
   }).join('');
+  document.getElementById('quizPrevBtn').style.display = quizCurrent > 0 ? 'flex' : 'none';
 }
 
 function selectAnswer(pem) {
@@ -1653,6 +1689,14 @@ function selectAnswer(pem) {
     renderQuizQuestion();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+}
+
+function goToPreviousQuestion() {
+  if (quizCurrent <= 0) return;
+  quizCurrent--;
+  quizAnswers.pop();
+  renderQuizQuestion();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function showQuizResult() {
