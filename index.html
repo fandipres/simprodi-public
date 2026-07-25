@@ -1,0 +1,1748 @@
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIMPRODI</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue:        #2563eb;
+  --blue-soft:   #eff6ff;
+  --blue-border: #bfdbfe;
+  --green:       #16a34a;
+  --green-soft:  #f0fdf4;
+  --green-border:#bbf7d0;
+  --purple:      #7c3aed;
+  --purple-soft: #faf5ff;
+  --purple-border:#ddd6fe;
+  --orange:      #ea580c;
+  --orange-soft: #fff7ed;
+  --orange-border:#fed7aa;
+  --bg:          #f1f5f9;
+  --card:        #ffffff;
+  --border:      #e2e8f0;
+  --text:        #0f172a;
+  --muted:       #64748b;
+  --subtle:      #94a3b8;
+  --radius:      10px;
+  --font: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+  font-family: var(--font); background: var(--bg);
+  color: var(--text); min-height: 100vh;
+  font-size: 15px; line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  display: flex; flex-direction: column;
+}
+main { flex: 1; }
+
+/* ---- HEADER ---- */
+.site-header {
+  background: var(--card);
+  box-shadow: 0 1px 6px rgba(0,0,0,.07);
+  position: sticky; top: 0; z-index: 100;
+}
+.header-inner {
+  max-width: 680px; margin: 0 auto;
+  padding: 0 16px; height: 48px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.header-brand {
+  font-size: 0.92rem; font-weight: 800; color: var(--text);
+  letter-spacing: -0.02em;
+}
+.header-brand span { color: var(--blue); }
+.header-info-btn {
+  width: 24px; height: 24px; border-radius: 50%;
+  border: 1.5px solid var(--border); background: var(--card);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 0.68rem; font-weight: 700;
+  color: var(--subtle); font-family: Georgia, serif;
+  transition: border-color .15s, color .15s, background .15s;
+  flex-shrink: 0; line-height: 1;
+}
+.header-info-btn:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-soft); }
+.lang-toggle {
+  display: flex; border: 1.5px solid var(--border); border-radius: 20px;
+  overflow: hidden; flex-shrink: 0;
+}
+.lang-btn {
+  border: none; background: var(--card); color: var(--subtle);
+  font-family: var(--font); font-size: 0.66rem; font-weight: 700;
+  padding: 4px 9px; cursor: pointer; transition: background .15s, color .15s;
+}
+.lang-btn.active { background: var(--blue); color: #fff; }
+
+/* ---- MODAL ABOUT ---- */
+.about-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(15,23,42,.35); z-index: 300;
+  align-items: flex-end; justify-content: center;
+  padding: 0 16px 24px;
+}
+.about-overlay.open { display: flex; }
+.about-modal {
+  background: var(--card); border-radius: 16px;
+  padding: 22px 20px 20px; width: 100%; max-width: 480px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.18);
+  animation: slideUp .18s ease;
+}
+@keyframes slideUp { from { transform: translateY(16px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.about-eyebrow {
+  font-size: 0.62rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--subtle); margin-bottom: 10px;
+}
+.about-brand {
+  font-size: 1.1rem; font-weight: 800; color: var(--text);
+  letter-spacing: -0.02em; margin-bottom: 4px;
+}
+.about-brand b { color: var(--blue); }
+.about-expand {
+  font-size: 0.78rem; font-weight: 600; color: var(--muted);
+  margin-bottom: 12px; line-height: 1.5;
+}
+.about-desc {
+  font-size: 0.80rem; color: var(--muted); line-height: 1.65;
+}
+.about-close {
+  display: block; width: 100%; margin-top: 16px;
+  background: var(--bg); border: none; border-radius: 8px;
+  padding: 10px; font-size: 0.84rem; font-weight: 600;
+  font-family: var(--font); color: var(--muted); cursor: pointer;
+  transition: background .15s;
+}
+.about-close:hover { background: var(--border); }
+
+/* ---- LAYOUT ---- */
+.page-wrap { max-width: 680px; margin: 0 auto; padding: 20px 16px 48px; }
+
+/* ---- SEARCH ---- */
+.search-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px; margin-bottom: 18px;
+}
+.search-row { display: flex; gap: 8px; }
+.search-input {
+  flex: 1; border: 1.5px solid var(--border); border-radius: 8px;
+  padding: 10px 13px; font-size: 0.92rem; font-family: var(--font);
+  color: var(--text); outline: none; transition: border-color .15s;
+  background: var(--card);
+}
+.search-input:focus   { border-color: var(--blue); }
+.search-input::placeholder { color: var(--subtle); }
+.search-btn {
+  background: var(--blue); color: #fff; border: none;
+  border-radius: 8px; padding: 10px 20px;
+  font-size: 0.92rem; font-weight: 600; font-family: var(--font);
+  cursor: pointer; transition: background .15s; white-space: nowrap;
+}
+.search-btn:hover    { background: #1d4ed8; }
+.search-btn:disabled { background: #93c5fd; cursor: not-allowed; }
+.search-hint { font-size: 0.78rem; color: var(--muted); margin-top: 8px; }
+
+/* ---- STATUS ---- */
+.msg-center { text-align: center; padding: 20px 0; font-size: 0.87rem; color: var(--muted); }
+.msg-error  { text-align: center; padding: 20px 0; font-size: 0.87rem; color: #dc2626; }
+
+/* ---- RESULT INFO ---- */
+.result-info {
+  font-size: 0.82rem; color: var(--blue);
+  background: var(--blue-soft); border: 1px solid var(--blue-border);
+  border-radius: 8px; padding: 9px 14px; margin-bottom: 12px;
+}
+
+/* ---- STUDENT CARDS ---- */
+.student-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 13px 15px;
+  margin-bottom: 8px; cursor: pointer;
+  display: flex; align-items: center; gap: 12px;
+  transition: border-color .15s, box-shadow .15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.student-card:hover {
+  border-color: var(--blue);
+  box-shadow: 0 2px 12px rgba(37,99,235,.1);
+}
+.s-init {
+  width: 40px; height: 40px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--blue), var(--purple));
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 1rem; flex-shrink: 0;
+}
+.s-body  { flex: 1; min-width: 0; }
+.s-name  { font-weight: 600; font-size: 0.92rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.s-nim   { font-size: 0.78rem; color: var(--muted); margin-top: 1px; }
+.s-tags  { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+.tag {
+  font-size: 0.70rem; font-weight: 600; padding: 2px 8px;
+  border-radius: 20px; border: 1px solid; line-height: 1.4;
+}
+.tag-p  { background: var(--blue-soft);   color: var(--blue);   border-color: var(--blue-border);   }
+.tag-m  { background: var(--green-soft);  color: var(--green);  border-color: var(--green-border);  }
+.tag-s  { background: var(--purple-soft); color: var(--purple); border-color: var(--purple-border); }
+.tag-0  { background: #f8fafc; color: var(--subtle); border-color: var(--border); }
+.s-chevron {
+  width: 8px; height: 8px; flex-shrink: 0;
+  border-right: 2px solid var(--border);
+  border-top:   2px solid var(--border);
+  transform: rotate(45deg); margin-right: 4px;
+}
+
+/* ---- DETAIL VIEW ---- */
+#detailView { display: none; }
+
+.back-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: none; border: 1px solid var(--border);
+  border-radius: 7px; padding: 7px 13px;
+  font-size: 0.82rem; font-weight: 600; font-family: var(--font);
+  color: var(--muted); cursor: pointer; margin-bottom: 16px;
+  transition: border-color .15s, color .15s;
+}
+.back-btn:hover { border-color: var(--blue); color: var(--blue); }
+.back-btn .arr  { font-size: 0.9rem; }
+
+.detail-header {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px;
+  display: flex; align-items: center; gap: 14px; margin-bottom: 14px;
+}
+.d-init {
+  width: 46px; height: 46px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--blue), var(--purple));
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 1.15rem; flex-shrink: 0;
+}
+.d-name    { font-size: 1rem; font-weight: 700; }
+.d-nim     { font-size: 0.80rem; color: var(--muted); margin-top: 2px; }
+.d-summary { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.d-tag     { font-size: 0.72rem; font-weight: 600; padding: 3px 9px; border-radius: 20px; border: 1px solid; }
+
+/* ---- ACCORDION ---- */
+.acc-wrap  { margin-bottom: 8px; }
+
+.acc-btn {
+  width: 100%; background: var(--card);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 12px 16px; display: flex; align-items: center;
+  justify-content: space-between; cursor: pointer;
+  font-family: var(--font); transition: border-color .15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.acc-btn:hover { border-color: var(--muted); }
+.acc-btn.is-open { border-radius: var(--radius) var(--radius) 0 0; }
+
+.acc-lhs   { display: flex; align-items: center; gap: 10px; }
+.acc-dot   { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.dot-blue  { background: var(--blue); }
+.dot-green { background: var(--green); }
+.dot-purple{ background: var(--purple); }
+.acc-label { font-size: 0.88rem; font-weight: 600; color: var(--text); }
+.acc-count { font-size: 0.70rem; font-weight: 700; padding: 2px 7px; border-radius: 20px; }
+.c-blue    { background: var(--blue-soft);   color: var(--blue);   }
+.c-green   { background: var(--green-soft);  color: var(--green);  }
+.c-purple  { background: var(--purple-soft); color: var(--purple); }
+
+.acc-icon {
+  width: 7px; height: 7px; flex-shrink: 0;
+  border-right: 2px solid var(--subtle);
+  border-bottom: 2px solid var(--subtle);
+  transform: rotate(45deg); transition: transform .2s;
+}
+.acc-icon.open { transform: rotate(-135deg); }
+
+.acc-body {
+  display: none; background: var(--card);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+.acc-body.open { display: block; }
+
+.acc-empty {
+  padding: 18px 16px; font-size: 0.84rem; color: var(--subtle); font-style: italic;
+}
+
+/* ---- DATA ROWS ---- */
+.data-row {
+  padding: 12px 16px; border-bottom: 1px solid #f1f5f9;
+}
+.data-row:last-child { border-bottom: none; }
+
+.row-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; margin-bottom: 5px; }
+.sem-tag {
+  font-size: 0.70rem; font-weight: 600; padding: 2px 7px;
+  border-radius: 4px; background: #f1f5f9; color: var(--muted);
+}
+.kat-tag {
+  font-size: 0.70rem; font-weight: 600; padding: 2px 7px;
+  border-radius: 4px; background: var(--purple-soft);
+  color: var(--purple); border: 1px solid var(--purple-border);
+}
+.row-main { font-size: 0.86rem; color: var(--text); line-height: 1.55; }
+.row-sub  { font-size: 0.81rem; color: var(--muted); line-height: 1.5; margin-top: 3px; font-style: italic; }
+
+/* ---- LAPORAN ---- */
+.lapor-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px; margin-top: 10px;
+}
+.lapor-header {
+  display: flex; align-items: flex-start;
+  justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+.lapor-title { font-size: 0.88rem; font-weight: 600; }
+.lapor-desc  { font-size: 0.79rem; color: var(--muted); margin-top: 3px; }
+.btn-lapor {
+  background: var(--orange-soft); color: var(--orange);
+  border: 1px solid var(--orange-border); border-radius: 7px;
+  padding: 7px 14px; font-size: 0.82rem; font-weight: 600;
+  font-family: var(--font); cursor: pointer; white-space: nowrap;
+  transition: background .15s; flex-shrink: 0;
+}
+.btn-lapor:hover { background: #ffedd5; }
+
+.lapor-form {
+  display: none; border-top: 1px solid var(--border);
+  margin-top: 14px; padding-top: 14px;
+}
+.lapor-form.open { display: block; }
+.lapor-note {
+  font-size: 0.78rem; color: var(--muted); line-height: 1.55;
+  background: #f8fafc; border: 1px solid var(--border);
+  border-radius: 6px; padding: 8px 11px; margin: 10px 0 12px;
+}
+.form-label {
+  display: block; font-size: 0.81rem; font-weight: 600;
+  color: #374151; margin-bottom: 6px;
+}
+.form-textarea {
+  width: 100%; border: 1.5px solid var(--border); border-radius: 8px;
+  padding: 10px 12px; font-size: 0.86rem; font-family: var(--font);
+  resize: vertical; min-height: 90px; outline: none; margin-bottom: 10px;
+  color: var(--text); transition: border-color .15s; line-height: 1.5;
+}
+.form-textarea:focus   { border-color: var(--orange); }
+.form-textarea::placeholder { color: var(--subtle); font-size: 0.83rem; }
+.btn-send {
+  background: var(--orange); color: #fff; border: none; border-radius: 8px;
+  padding: 9px 18px; font-size: 0.88rem; font-weight: 600;
+  font-family: var(--font); cursor: pointer; transition: background .15s;
+}
+.btn-send:hover    { background: #c2410c; }
+.btn-send:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.alert {
+  margin-top: 10px; padding: 10px 13px; border-radius: 8px;
+  font-size: 0.83rem; line-height: 1.5;
+}
+.alert-ok  { background: var(--green-soft); color: #15803d; border: 1px solid var(--green-border); }
+.alert-err { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+
+/* ---- DETAIL TOPBAR ---- */
+.detail-topbar {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 16px;
+}
+.btn-share {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: none; border: 1px solid var(--border);
+  border-radius: 7px; padding: 7px 13px;
+  font-size: 0.82rem; font-weight: 600; font-family: var(--font);
+  color: var(--blue); cursor: pointer;
+  transition: border-color .15s, background .15s;
+}
+.btn-share:hover { border-color: var(--blue); background: var(--blue-soft); }
+
+/* ---- TOAST ---- */
+.toast {
+  position: fixed; bottom: 24px; left: 50%;
+  transform: translateX(-50%) translateY(12px);
+  background: #1e293b; color: #fff;
+  padding: 10px 18px; border-radius: 8px;
+  font-size: 0.83rem; font-weight: 500;
+  opacity: 0; transition: opacity .2s, transform .2s;
+  z-index: 400; pointer-events: none; white-space: nowrap;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ---- FOOTER ---- */
+
+/* ---- SEMESTER GROUP ---- */
+.sem-group { }
+.sem-group-label {
+  font-size: 0.70rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.6px; color: var(--muted);
+  padding: 7px 16px 5px; background: #f8fafc;
+  border-bottom: 1px solid var(--border);
+  border-top: 1px solid var(--border);
+}
+.sem-group:first-child .sem-group-label { border-top: none; }
+.sem-group .data-row { border-bottom: 1px solid #f8fafc; }
+.sem-group .data-row:last-child { border-bottom: none; }
+
+/* ---- INFO BUTTON ---- */
+.info-btn {
+  width: 15px; height: 15px; border-radius: 50%;
+  background: var(--border); color: var(--muted);
+  border: none; cursor: pointer; font-size: 0.62rem; font-weight: 700;
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: background .15s, color .15s;
+  font-family: Georgia, serif; line-height: 1; user-select: none;
+}
+.info-btn:hover, .info-btn:focus-visible { background: var(--blue); color: #fff; outline: none; }
+
+/* ---- INFO MODAL ---- */
+.info-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.4); z-index: 300;
+  align-items: center; justify-content: center; padding: 20px;
+}
+.info-overlay.open { display: flex; }
+.info-box {
+  background: var(--card); border-radius: 14px;
+  padding: 22px 20px 20px; max-width: 340px; width: 100%;
+  position: relative; box-shadow: 0 12px 40px rgba(0,0,0,.18);
+  animation: popIn .15s ease;
+}
+@keyframes popIn { from { transform: scale(.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.info-close {
+  position: absolute; top: 12px; right: 12px;
+  background: none; border: none; cursor: pointer;
+  color: var(--subtle); font-size: 0.85rem; line-height: 1;
+  width: 26px; height: 26px; display: flex; align-items: center; justify-content: center;
+  border-radius: 6px; transition: background .15s, color .15s;
+}
+.info-close:hover { background: #f1f5f9; color: var(--text); }
+.info-cat {
+  font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.6px; margin-bottom: 6px; padding: 3px 8px;
+  border-radius: 4px; display: inline-block;
+}
+.info-cat.mbkm   { background: var(--green-soft);  color: var(--green); }
+.info-cat.pres   { background: var(--blue-soft);   color: var(--blue);  }
+.info-cat.sert   { background: var(--purple-soft); color: var(--purple);}
+.info-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+.info-body  { font-size: 0.83rem; color: var(--muted); line-height: 1.7; }
+
+/* ---- TEXT INPUT (for not-found form) ---- */
+.text-input {
+  width: 100%; border: 1.5px solid var(--border); border-radius: 8px;
+  padding: 9px 12px; font-size: 0.88rem; font-family: var(--font);
+  color: var(--text); outline: none; transition: border-color .15s;
+  background: var(--card);
+}
+.text-input:focus { border-color: var(--blue); }
+.text-input::placeholder { color: var(--subtle); }
+
+/* ---- SPINNER ---- */
+.spinner {
+  display: inline-block; width: 13px; height: 13px;
+  border: 2px solid rgba(255,255,255,.35); border-top-color: #fff;
+  border-radius: 50%; animation: spin .65s linear infinite;
+  vertical-align: middle; margin-right: 5px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---- MOBILE ---- */
+@media (max-width: 480px) {
+  .search-btn { padding: 10px 14px; font-size: 0.88rem; }
+  .s-name { font-size: 0.90rem; }
+  .lapor-header { flex-direction: column; }
+  .btn-lapor { width: 100%; text-align: center; }
+}
+
+/* ---- BERANDA ---- */
+.home-hero { padding: 26px 0 20px; }
+.home-headline {
+  font-size: 1.6rem; font-weight: 800; line-height: 1.2;
+  color: var(--text); letter-spacing: -0.02em; text-wrap: balance; margin-bottom: 10px;
+}
+.home-sub { font-size: 0.84rem; color: var(--muted); line-height: 1.65; }
+
+.home-cards {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 14px; margin-bottom: 24px;
+}
+@media (max-width: 400px) {
+  .home-cards { grid-template-columns: 1fr; }
+  .home-headline { font-size: 1.32rem; }
+}
+.home-card {
+  background: var(--card); border: 1.5px solid var(--border);
+  border-radius: 16px; overflow: hidden; cursor: pointer;
+  transition: border-color .18s, box-shadow .18s, transform .14s;
+  -webkit-tap-highlight-color: transparent; outline: none;
+  display: flex; flex-direction: column;
+}
+.home-card-1:hover, .home-card-1:focus-visible {
+  border-color: var(--blue);
+  box-shadow: 0 8px 28px rgba(37,99,235,.15);
+  transform: translateY(-2px);
+}
+.home-card-2:hover, .home-card-2:focus-visible {
+  border-color: var(--purple);
+  box-shadow: 0 8px 28px rgba(124,58,237,.15);
+  transform: translateY(-2px);
+}
+.home-card-illus {
+  height: 118px; position: relative; overflow: hidden;
+  display: flex; align-items: flex-end; padding: 0 18px 16px;
+}
+.home-card-illus::before {
+  content: ''; position: absolute; right: -18px; top: -18px;
+  width: 76px; height: 76px; border-radius: 50%; background: rgba(255,255,255,.09);
+}
+.home-card-illus::after {
+  content: ''; position: absolute; right: 38px; top: 12px;
+  width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,.06);
+}
+.illus-blue   { background: linear-gradient(140deg, #1D4ED8 0%, #2563EB 55%, #4F46E5 100%); }
+
+/* Ilustrasi Portofolio Akademik — list kategori */
+.illus-list { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+.illus-list-row { display: flex; align-items: center; gap: 8px; }
+.illus-list-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(255,255,255,.9); flex-shrink: 0;
+}
+.illus-list-dot.dim { background: rgba(255,255,255,.35); }
+.illus-list-label {
+  font-size: 0.68rem; font-weight: 700; color: rgba(255,255,255,.9); flex: 1;
+}
+.illus-list-label.dim { color: rgba(255,255,255,.38); }
+.illus-list-badge {
+  font-size: 0.58rem; font-weight: 700;
+  background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.22);
+  border-radius: 20px; padding: 1px 7px; color: rgba(255,255,255,.8);
+}
+.illus-list-badge.dim { opacity: 0.35; }
+
+/* Ilustrasi Tes Peminatan — komparasi SSD vs AISD */
+.illus-vs-wrap {
+  display: flex; width: 100%; height: 100%;
+  position: absolute; inset: 0;
+}
+.illus-vs-side {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 6px;
+  position: relative;
+}
+.illus-vs-left  { background: linear-gradient(160deg, #1D4ED8, #3B82F6); }
+.illus-vs-right { background: linear-gradient(160deg, #7C3AED, #A21CAF); }
+.illus-vs-label {
+  font-size: 0.75rem; font-weight: 800; letter-spacing: 0.05em;
+  color: rgba(255,255,255,.95);
+}
+.illus-vs-dots { display: flex; gap: 4px; }
+.illus-vs-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: rgba(255,255,255,.3);
+}
+.illus-vs-dot.on { background: rgba(255,255,255,.88); }
+.illus-vs-badge {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 26px; height: 26px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.52rem; font-weight: 800; letter-spacing: 0.03em;
+  color: rgba(255,255,255,.75);
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.home-card-body { padding: 15px 18px 18px; flex: 1; display: flex; flex-direction: column; }
+.home-card-title {
+  font-size: 0.88rem; font-weight: 700; color: var(--text);
+  line-height: 1.3; margin-bottom: 6px;
+}
+.home-card-desc {
+  font-size: 0.77rem; color: var(--muted); line-height: 1.6;
+  flex: 1; margin-bottom: 14px;
+}
+.home-card-btn {
+  display: block; width: 100%; border: none; border-radius: 8px;
+  padding: 9px 12px; font-size: 0.81rem; font-weight: 700;
+  font-family: var(--font); text-align: center; pointer-events: none;
+}
+.btn-card-blue   { background: var(--blue-soft); color: var(--blue); }
+.btn-card-purple { background: var(--purple-soft); color: var(--purple); }
+
+/* ---- KUIS PEMINATAN ---- */
+.quiz-topbar {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 4px;
+}
+.quiz-progress-bar {
+  flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden;
+}
+.quiz-progress-fill {
+  height: 100%; background: var(--purple); border-radius: 2px;
+  transition: width .35s ease;
+}
+.quiz-step-label { font-size: 0.75rem; color: var(--muted); white-space: nowrap; }
+.quiz-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px 18px; margin-top: 12px;
+}
+.quiz-q {
+  font-size: 0.95rem; font-weight: 600; color: var(--text);
+  line-height: 1.6; margin-bottom: 16px;
+}
+.quiz-options { display: flex; flex-direction: column; gap: 10px; }
+.quiz-option {
+  width: 100%; text-align: left; border: 1.5px solid var(--border);
+  border-radius: 10px; padding: 13px 16px;
+  font-size: 0.87rem; font-family: var(--font); color: var(--text);
+  background: var(--card); cursor: pointer; line-height: 1.55;
+  transition: border-color .15s, background .15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.quiz-option:hover { border-color: var(--purple); background: var(--purple-soft); }
+
+/* ---- HASIL KUIS ---- */
+.result-hero {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 22px 20px; text-align: center; margin-bottom: 12px;
+}
+.result-chip {
+  display: inline-block; font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.5px; padding: 3px 10px; border-radius: 20px; margin-bottom: 10px;
+}
+.chip-ssd  { background: var(--blue-soft);   color: var(--blue);   }
+.chip-aisd { background: var(--purple-soft); color: var(--purple); }
+.result-pem-name { font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 5px; line-height: 1.4; }
+.result-score-line { font-size: 0.82rem; color: var(--muted); margin-bottom: 16px; }
+.score-bars { display: flex; flex-direction: column; gap: 8px; text-align: left; }
+.score-row-label {
+  display: flex; justify-content: space-between;
+  font-size: 0.74rem; font-weight: 700; margin-bottom: 4px;
+}
+.score-row-label.ssd  { color: var(--blue);   }
+.score-row-label.aisd { color: var(--purple); }
+.score-track { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+.score-fill-ssd  { height: 100%; background: var(--blue);   border-radius: 3px; transition: width .5s ease; }
+.score-fill-aisd { height: 100%; background: var(--purple); border-radius: 3px; transition: width .5s ease; }
+.result-desc-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px; margin-bottom: 12px;
+}
+.result-desc-title { font-size: 0.86rem; font-weight: 700; color: var(--text); margin-bottom: 7px; }
+.result-desc-body  { font-size: 0.82rem; color: var(--muted); line-height: 1.7; }
+.result-sub-label {
+  font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.05em; color: var(--subtle); margin: 14px 0 8px;
+}
+.result-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.result-tag {
+  font-size: 0.74rem; font-weight: 600; padding: 5px 10px;
+  border-radius: 20px; line-height: 1.3;
+}
+.result-note {
+  font-size: 0.76rem; color: var(--subtle); line-height: 1.6;
+  background: #f8fafc; border: 1px solid var(--border);
+  border-radius: 8px; padding: 10px 13px; margin-bottom: 14px;
+}
+.result-actions { display: flex; flex-direction: column; gap: 8px; }
+.btn-full-primary {
+  width: 100%; background: var(--blue); color: #fff; border: none;
+  border-radius: 10px; padding: 13px; font-size: 0.92rem; font-weight: 700;
+  font-family: var(--font); cursor: pointer; transition: background .15s;
+}
+.btn-full-primary:hover { background: #1d4ed8; }
+.btn-full-sec {
+  width: 100%; background: none; color: var(--muted); border: 1.5px solid var(--border);
+  border-radius: 10px; padding: 12px; font-size: 0.88rem; font-weight: 600;
+  font-family: var(--font); cursor: pointer; transition: border-color .15s, color .15s;
+}
+.btn-full-sec:hover { border-color: var(--blue); color: var(--blue); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <span class="header-brand">SIM<span>PRODI</span></span>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" id="langBtnID" class="lang-btn" onclick="setLang('id')">ID</button>
+        <button type="button" id="langBtnEN" class="lang-btn" onclick="setLang('en')">EN</button>
+      </div>
+      <button class="header-info-btn" onclick="openAboutModal()" data-i18n-aria-label="header_info_aria" aria-label="Tentang SIMPRODI">i</button>
+    </div>
+  </div>
+</header>
+
+<!-- Modal: Tentang SIMPRODI -->
+<div class="about-overlay" id="aboutOverlay" onclick="if(event.target===this)closeAboutModal()">
+  <div class="about-modal">
+    <div class="about-eyebrow" data-i18n="about_eyebrow">Tentang Aplikasi Ini</div>
+    <div class="about-brand">SIM<b>PRODI</b></div>
+    <div class="about-expand" data-i18n="about_expand">Sistem Informasi Program Studi Teknik Informatika</div>
+    <div class="about-desc" data-i18n="about_desc">Dikembangkan oleh Program Studi Teknik Informatika sebagai wadah informasi capaian akademik mahasiswa dan alat bantu pemilihan peminatan studi.</div>
+    <button class="about-close" onclick="closeAboutModal()" data-i18n="btn_tutup">Tutup</button>
+  </div>
+</div>
+
+<main>
+  <div class="page-wrap">
+
+    <!-- Beranda -->
+    <div id="homeView">
+      <div class="home-hero">
+        <div class="home-headline"><span data-i18n="home_headline_l1">Pilih jalanmu.</span><br><span data-i18n="home_headline_l2">Rekam jejakmu.</span></div>
+        <div class="home-sub" data-i18n="home_sub">Pantau capaian akademikmu atau temukan peminatan yang paling sesuai denganmu.</div>
+      </div>
+      <div class="home-cards">
+        <div class="home-card home-card-1" onclick="openPortofolio()" role="button" tabindex="0"
+             onkeydown="if(event.key==='Enter'||event.key===' ')openPortofolio()">
+          <div class="home-card-illus illus-blue">
+            <div class="illus-list">
+              <div class="illus-list-row">
+                <div class="illus-list-dot"></div>
+                <div class="illus-list-label">MBKM</div>
+                <div class="illus-list-badge" data-i18n="illus_count_3">3 keg.</div>
+              </div>
+              <div class="illus-list-row">
+                <div class="illus-list-dot"></div>
+                <div class="illus-list-label">Prestasi</div>
+                <div class="illus-list-badge" data-i18n="illus_count_2">2 keg.</div>
+              </div>
+              <div class="illus-list-row">
+                <div class="illus-list-dot dim"></div>
+                <div class="illus-list-label dim">Sertifikasi</div>
+                <div class="illus-list-badge dim" data-i18n="illus_count_0">0 keg.</div>
+              </div>
+            </div>
+          </div>
+          <div class="home-card-body">
+            <div class="home-card-title" data-i18n="home_card1_title">Portofolio Akademik</div>
+            <div class="home-card-desc" data-i18n="home_card1_desc">Cek prestasi, MBKM, dan sertifikasi yang sudah tercatat di program studi.</div>
+            <div class="home-card-btn btn-card-blue" data-i18n="home_card1_btn">Cek Sekarang</div>
+          </div>
+        </div>
+        <div class="home-card home-card-2" onclick="openQuiz()" role="button" tabindex="0"
+             onkeydown="if(event.key==='Enter'||event.key===' ')openQuiz()">
+          <div class="home-card-illus" style="padding:0;position:relative;">
+            <div class="illus-vs-wrap">
+              <div class="illus-vs-side illus-vs-left">
+                <div class="illus-vs-label">SSD</div>
+                <div class="illus-vs-dots">
+                  <div class="illus-vs-dot on"></div>
+                  <div class="illus-vs-dot on"></div>
+                  <div class="illus-vs-dot"></div>
+                </div>
+              </div>
+              <div class="illus-vs-side illus-vs-right">
+                <div class="illus-vs-label">AISD</div>
+                <div class="illus-vs-dots">
+                  <div class="illus-vs-dot"></div>
+                  <div class="illus-vs-dot on"></div>
+                  <div class="illus-vs-dot on"></div>
+                </div>
+              </div>
+              <div class="illus-vs-badge">vs</div>
+            </div>
+          </div>
+          <div class="home-card-body">
+            <div class="home-card-title" data-i18n="home_card2_title">Tes Peminatan</div>
+            <div class="home-card-desc" data-i18n="home_card2_desc">Jawab 7 pertanyaan singkat untuk tahu apakah kamu lebih cocok ke SSD atau AISD.</div>
+            <div class="home-card-btn btn-card-purple" data-i18n="home_card2_btn">Mulai Tes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Portofolio Akademik -->
+    <div id="searchSection" style="display:none;">
+      <button class="back-btn" onclick="showHome()" style="margin-bottom:4px;">
+        <span class="arr">&#8592;</span> <span data-i18n="btn_beranda">Beranda</span>
+      </button>
+      <div class="search-card">
+        <div class="search-row">
+          <input class="search-input" type="text" id="searchInput"
+                 data-i18n-placeholder="search_placeholder"
+                 placeholder="Cari berdasarkan NIM atau nama..." maxlength="100"
+                 autocomplete="off" autocorrect="off" spellcheck="false">
+          <button class="search-btn" id="searchBtn" onclick="doSearch()" data-i18n="search_btn">Cari</button>
+        </div>
+        <p class="search-hint" data-i18n="search_hint">Masukkan NIM lengkap atau sebagian nama mahasiswa (minimal 3 karakter).</p>
+      </div>
+
+      <p id="statusMsg" class="msg-center"></p>
+
+      <div id="listView"></div>
+    </div>
+
+    <!-- Detail Mahasiswa -->
+    <div id="detailView">
+
+      <div class="detail-topbar">
+        <button class="back-btn" onclick="showList()">
+          <span class="arr">&#8592;</span>
+          <span data-i18n="btn_kembali">Kembali</span>
+        </button>
+        <button class="btn-share" onclick="shareStudent()">
+          &#128279; <span data-i18n="btn_salin_link">Salin Link</span>
+        </button>
+      </div>
+
+      <div class="detail-header">
+        <div class="d-init" id="dInit"></div>
+        <div style="min-width:0;flex:1;">
+          <div class="d-name" id="dNama"></div>
+          <div class="d-nim"  id="dNim"></div>
+          <div class="d-summary" id="dSummary"></div>
+        </div>
+      </div>
+
+      <!-- Accordion: MBKM -->
+      <div class="acc-wrap">
+        <button class="acc-btn is-open" id="trg-mbkm" onclick="toggleAcc('mbkm')">
+          <span class="acc-lhs">
+            <span class="acc-dot dot-green"></span>
+            <span class="acc-label">MBKM</span>
+            <span class="acc-count c-green" id="cnt-mbkm">0</span>
+          </span>
+          <span style="display:flex;align-items:center;gap:8px;">
+            <span class="info-btn" role="button" tabindex="0" onclick="showInfo('mbkm'); event.stopPropagation();" onkeydown="if(event.key==='Enter'||event.key===' '){showInfo('mbkm');event.stopPropagation();}" data-i18n-title="info_title_mbkm" title="Apa itu MBKM?">i</span>
+            <span class="acc-icon open" id="ico-mbkm"></span>
+          </span>
+        </button>
+        <div class="acc-body open" id="panel-mbkm"></div>
+      </div>
+
+      <!-- Accordion: Prestasi -->
+      <div class="acc-wrap">
+        <button class="acc-btn is-open" id="trg-prestasi" onclick="toggleAcc('prestasi')">
+          <span class="acc-lhs">
+            <span class="acc-dot dot-blue"></span>
+            <span class="acc-label">Prestasi</span>
+            <span class="acc-count c-blue" id="cnt-prestasi">0</span>
+          </span>
+          <span style="display:flex;align-items:center;gap:8px;">
+            <span class="info-btn" role="button" tabindex="0" onclick="showInfo('prestasi'); event.stopPropagation();" onkeydown="if(event.key==='Enter'||event.key===' '){showInfo('prestasi');event.stopPropagation();}" data-i18n-title="info_title_prestasi" title="Apa itu Prestasi?">i</span>
+            <span class="acc-icon open" id="ico-prestasi"></span>
+          </span>
+        </button>
+        <div class="acc-body open" id="panel-prestasi"></div>
+      </div>
+
+      <!-- Accordion: Sertifikasi -->
+      <div class="acc-wrap">
+        <button class="acc-btn is-open" id="trg-sertifikasi" onclick="toggleAcc('sertifikasi')">
+          <span class="acc-lhs">
+            <span class="acc-dot dot-purple"></span>
+            <span class="acc-label">Sertifikasi</span>
+            <span class="acc-count c-purple" id="cnt-sertifikasi">0</span>
+          </span>
+          <span style="display:flex;align-items:center;gap:8px;">
+            <span class="info-btn" role="button" tabindex="0" onclick="showInfo('sertifikasi'); event.stopPropagation();" onkeydown="if(event.key==='Enter'||event.key===' '){showInfo('sertifikasi');event.stopPropagation();}" data-i18n-title="info_title_sertifikasi" title="Apa itu Sertifikasi?">i</span>
+            <span class="acc-icon open" id="ico-sertifikasi"></span>
+          </span>
+        </button>
+        <div class="acc-body open" id="panel-sertifikasi"></div>
+      </div>
+
+      <!-- Laporan -->
+      <div class="lapor-card">
+        <div class="lapor-header">
+          <div>
+            <div class="lapor-title" data-i18n="lapor_title">Ada data yang perlu dikoreksi?</div>
+            <div class="lapor-desc" data-i18n="lapor_desc">Sampaikan ke program studi agar bisa segera diperbaiki.</div>
+          </div>
+          <button class="btn-lapor" onclick="toggleLapor()" data-i18n="btn_lapor_kesalahan">Laporkan Kesalahan</button>
+        </div>
+        <div id="laporForm" class="lapor-form">
+          <label class="form-label" for="laporPesan" data-i18n="lapor_pesan_label">Jelaskan data yang perlu dikoreksi</label>
+          <textarea class="form-textarea" id="laporPesan"
+            data-i18n-placeholder="lapor_pesan_placeholder"
+            placeholder="Contoh: pada semester Ganjil 2025/2026, kegiatan saya seharusnya Juara 2, bukan Peserta."></textarea>
+          <div class="lapor-note" data-i18n="lapor_note">
+            Tindak lanjut laporan akan disampaikan melalui nomor yang tercatat di MIKA kamu.
+            Pastikan nomor tersebut sudah diperbarui sebelum mengirim.
+          </div>
+          <button class="btn-send" id="laporBtn" onclick="doLapor()" data-i18n="btn_kirim_laporan">Kirim Laporan</button>
+          <div id="laporMsg"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Kuis Peminatan -->
+    <div id="quizView" style="display:none;">
+      <button class="back-btn" onclick="showHome()">
+        <span class="arr">&#8592;</span> <span data-i18n="btn_beranda">Beranda</span>
+      </button>
+      <div class="quiz-topbar">
+        <span id="quizStepLabel" class="quiz-step-label">Pertanyaan 1 dari 7</span>
+        <div class="quiz-progress-bar">
+          <div id="quizProgressFill" class="quiz-progress-fill" style="width:0%"></div>
+        </div>
+      </div>
+      <div class="quiz-card">
+        <div id="quizQ" class="quiz-q"></div>
+        <div id="quizOpts" class="quiz-options"></div>
+      </div>
+    </div>
+
+    <!-- Hasil Kuis Peminatan -->
+    <div id="quizResultView" style="display:none;">
+      <button class="back-btn" onclick="showHome()">
+        <span class="arr">&#8592;</span> <span data-i18n="btn_beranda">Beranda</span>
+      </button>
+      <div class="result-hero">
+        <div id="resultChip" class="result-chip"></div>
+        <div id="resultPemName" class="result-pem-name"></div>
+        <div id="resultScoreLine" class="result-score-line"></div>
+        <div class="score-bars">
+          <div>
+            <div id="ssdScoreLabel" class="score-row-label ssd"></div>
+            <div class="score-track"><div id="ssdFill" class="score-fill-ssd" style="width:0%"></div></div>
+          </div>
+          <div>
+            <div id="aisdScoreLabel" class="score-row-label aisd"></div>
+            <div class="score-track"><div id="aisdFill" class="score-fill-aisd" style="width:0%"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="result-desc-card">
+        <div id="resultDescTitle" class="result-desc-title"></div>
+        <div id="resultDescBody" class="result-desc-body"></div>
+      </div>
+      <div class="result-note" data-i18n="quiz_disclaimer">
+        Hasil ini berdasarkan preferensi yang kamu pilih dan bersifat indikatif. Konsultasikan dengan dosen wali atau pembimbing akademik untuk keputusan final pemilihan peminatan.
+      </div>
+      <div class="result-actions">
+        <button class="btn-full-primary" onclick="restartQuiz()" data-i18n="btn_ulangi_tes">Ulangi Tes</button>
+      </div>
+    </div>
+
+  </div>
+<div id="toast" class="toast"></div>
+</main>
+
+<!-- Info Modal -->
+<div id="infoModal" class="info-overlay" onclick="closeInfo()">
+  <div class="info-box" onclick="event.stopPropagation()">
+    <button class="info-close" onclick="closeInfo()">&#10005;</button>
+    <div class="info-cat" id="infoCat"></div>
+    <div class="info-title" id="infoTitle"></div>
+    <p class="info-body" id="infoBody"></p>
+  </div>
+</div>
+
+<script>
+// ==============================================================
+// KONFIGURASI
+// Ganti nilai di bawah dengan URL Web App GAS Anda.
+// Buka Google Apps Script > Deploy > Manage Deployments > salin URL.
+// ==============================================================
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbydy_-RvqxTSt7-MRQ8e84QN13YKQDYskFG6g5FJNIPT6ZkF7lDuQPJSXKl2yvCkY7E-w/exec';
+
+// ==============================================================
+// DWIBAHASA (ID/EN)
+// ==============================================================
+const I18N = {
+  id: {
+    header_info_aria: 'Tentang SIMPRODI',
+    about_eyebrow: 'Tentang Aplikasi Ini',
+    about_expand: 'Sistem Informasi Program Studi Teknik Informatika',
+    about_desc: 'Dikembangkan oleh Program Studi Teknik Informatika sebagai wadah informasi capaian akademik mahasiswa dan alat bantu pemilihan peminatan studi.',
+    btn_tutup: 'Tutup',
+    home_headline_l1: 'Pilih jalanmu.', home_headline_l2: 'Rekam jejakmu.',
+    home_sub: 'Pantau capaian akademikmu atau temukan peminatan yang paling sesuai denganmu.',
+    illus_count_3: '3 keg.', illus_count_2: '2 keg.', illus_count_0: '0 keg.',
+    home_card1_title: 'Portofolio Akademik',
+    home_card1_desc: 'Cek prestasi, MBKM, dan sertifikasi yang sudah tercatat di program studi.',
+    home_card1_btn: 'Cek Sekarang',
+    home_card2_title: 'Tes Peminatan',
+    home_card2_desc: 'Jawab 7 pertanyaan singkat untuk tahu apakah kamu lebih cocok ke SSD atau AISD.',
+    home_card2_btn: 'Mulai Tes',
+    btn_beranda: 'Beranda',
+    search_placeholder: 'Cari berdasarkan NIM atau nama...',
+    search_btn: 'Cari', search_btn_loading: 'Mencari...',
+    search_hint: 'Masukkan NIM lengkap atau sebagian nama mahasiswa (minimal 3 karakter).',
+    search_min_chars_msg: 'Masukkan minimal 3 karakter untuk melakukan pencarian.',
+    search_nim_more_digits: 'Masukkan digit NIM yang lebih banyak atau cari menggunakan nama.',
+    search_conn_error: 'Tidak dapat terhubung ke server. Periksa koneksi internet dan coba lagi.',
+    search_result_found: 'Ditemukan {count} mahasiswa untuk kata kunci "{query}".',
+    search_result_toomany: 'Menampilkan 30 dari {total} hasil. Perlengkap kata kunci untuk mempersempit pencarian.',
+    btn_kembali: 'Kembali', btn_salin_link: 'Salin Link',
+    info_title_mbkm: 'Apa itu MBKM?', info_title_prestasi: 'Apa itu Prestasi?', info_title_sertifikasi: 'Apa itu Sertifikasi?',
+    mbkm_title: 'Merdeka Belajar Kampus Merdeka',
+    mbkm_body: 'MBKM mencakup berbagai kegiatan pembelajaran di luar program studi yang diakui sebagai bagian dari perkuliahan, seperti magang industri, pertukaran pelajar, riset bersama dosen, kewirausahaan, dan pengabdian kepada masyarakat. Data direkap setiap semester berdasarkan laporan yang telah diverifikasi oleh program studi.',
+    prestasi_title: 'Prestasi Akademik Mahasiswa',
+    prestasi_body: 'Prestasi yang tercantum di sini adalah capaian pada kompetisi atau kegiatan akademik yang telah diverifikasi dan direkap setiap akhir semester. Termasuk di antaranya kejuaraan ilmiah, olimpiade, dan kompetisi bidang keilmuan yang diselenggarakan oleh institusi resmi di tingkat lokal, nasional, maupun internasional.',
+    sertifikasi_title: 'Sertifikasi Kompetensi',
+    sertifikasi_body: 'Sertifikasi yang tercantum merupakan sertifikat kompetensi yang diperoleh melalui program studi atau lembaga sertifikasi resmi dan terakreditasi, seperti BNSP serta lembaga internasional yang diakui. Data ini mencerminkan kompetensi terverifikasi yang relevan dengan bidang studi dan profesi.',
+    mbkm_empty: 'Belum ada data MBKM yang tercatat.',
+    prestasi_empty: 'Belum ada data prestasi yang tercatat.',
+    sertifikasi_empty: 'Belum ada data sertifikasi yang tercatat.',
+    toast_link_copied: 'Link berhasil disalin ke clipboard',
+    prompt_copy_link: 'Salin link ini:',
+    lapor_title: 'Ada data yang perlu dikoreksi?',
+    lapor_desc: 'Sampaikan ke program studi agar bisa segera diperbaiki.',
+    btn_lapor_kesalahan: 'Laporkan Kesalahan',
+    lapor_pesan_label: 'Jelaskan data yang perlu dikoreksi',
+    lapor_pesan_placeholder: 'Contoh: pada semester Ganjil 2025/2026, kegiatan saya seharusnya Juara 2, bukan Peserta.',
+    lapor_note: 'Tindak lanjut laporan akan disampaikan melalui nomor yang tercatat di MIKA kamu. Pastikan nomor tersebut sudah diperbarui sebelum mengirim.',
+    btn_kirim_laporan: 'Kirim Laporan', lapor_send_loading: 'Mengirim...',
+    lapor_too_short_msg: 'Tuliskan penjelasan yang lebih lengkap agar bisa kami tindaklanjuti.',
+    lapor_success_msg: 'Laporan berhasil dikirim. Terima kasih, kami akan segera meninjau datanya.',
+    lapor_fail_generic: 'Pengiriman gagal. Coba lagi beberapa saat.',
+    notfound_title: 'Data kamu seharusnya tercatat di sini?',
+    notfound_desc: 'Jika sudah pernah lapor namun datamu belum tercatat, sampaikan ke program studi agar dapat segera ditindaklanjuti.',
+    notfound_nim_label: 'NIM', notfound_nim_placeholder: 'Masukkan NIM kamu',
+    notfound_nama_label: 'Nama lengkap', notfound_nama_placeholder: 'Masukkan nama lengkap kamu',
+    notfound_ket_label: 'Keterangan',
+    notfound_ket_placeholder: 'Contoh: Saya mengikuti MBKM Magang Industri semester Ganjil 2025/2026 namun nama saya tidak muncul saat dicari.',
+    notfound_nim_required: 'NIM tidak boleh kosong.', notfound_nim_invalid: 'Format NIM tidak valid.',
+    notfound_nama_required: 'Nama tidak boleh kosong.',
+    notfound_ket_too_short: 'Tuliskan keterangan yang lebih lengkap agar bisa kami tindaklanjuti.',
+    notfound_success_msg: 'Laporan berhasil dikirim. Program studi akan segera menindaklanjuti, terima kasih.',
+    quiz_disclaimer: 'Hasil ini berdasarkan preferensi yang kamu pilih dan bersifat indikatif. Konsultasikan dengan dosen wali atau pembimbing akademik untuk keputusan final pemilihan peminatan.',
+    btn_ulangi_tes: 'Ulangi Tes',
+    quiz_step_label: 'Pertanyaan {n} dari {total}',
+    quiz_score_line: '{score} dari {total} jawabanmu mengarah ke peminatan ini.',
+    quiz_answer_unit: 'jawaban',
+    quiz_careers_label: 'Prospek Karier', quiz_courses_label: 'Mata Kuliah Peminatan',
+    memuat_tes: 'Memuat data tes...'
+  },
+  en: {
+    header_info_aria: 'About SIMPRODI',
+    about_eyebrow: 'About This App',
+    about_expand: 'Information System of the Informatics Engineering Study Program',
+    about_desc: 'Developed by the Informatics Engineering Study Program as a hub for students’ academic achievement records and a specialization-track selection aid.',
+    btn_tutup: 'Close',
+    home_headline_l1: 'Choose your path.', home_headline_l2: 'Record your journey.',
+    home_sub: 'Track your academic achievements or find the specialization track that fits you best.',
+    illus_count_3: '3 act.', illus_count_2: '2 act.', illus_count_0: '0 act.',
+    home_card1_title: 'Academic Portfolio',
+    home_card1_desc: 'Check the achievements, MBKM activities, and certifications recorded by the study program.',
+    home_card1_btn: 'Check Now',
+    home_card2_title: 'Specialization Test',
+    home_card2_desc: 'Answer 7 short questions to find out whether SSD or AISD suits you better.',
+    home_card2_btn: 'Start Test',
+    btn_beranda: 'Home',
+    search_placeholder: 'Search by NIM or name...',
+    search_btn: 'Search', search_btn_loading: 'Searching...',
+    search_hint: 'Enter a full NIM or part of a student name (minimum 3 characters).',
+    search_min_chars_msg: 'Enter at least 3 characters to search.',
+    search_nim_more_digits: 'Enter more NIM digits or search by name instead.',
+    search_conn_error: 'Unable to connect to the server. Check your internet connection and try again.',
+    search_result_found: 'Found {count} student(s) for "{query}".',
+    search_result_toomany: 'Showing 30 of {total} results. Refine your keyword to narrow the search.',
+    btn_kembali: 'Back', btn_salin_link: 'Copy Link',
+    info_title_mbkm: 'What is MBKM?', info_title_prestasi: 'What is Prestasi?', info_title_sertifikasi: 'What is Sertifikasi?',
+    mbkm_title: 'Merdeka Belajar Kampus Merdeka (Freedom to Learn – Independent Campus)',
+    mbkm_body: 'MBKM covers various learning activities outside the study program that are recognized as part of coursework, such as industry internships, student exchange, research with lecturers, entrepreneurship, and community service. Data is compiled every semester based on reports verified by the study program.',
+    prestasi_title: 'Student Academic Achievements',
+    prestasi_body: 'The achievements listed here are results from competitions or academic activities that have been verified and compiled at the end of each semester. These include scientific competitions, olympiads, and field-specific contests organized by official institutions at the local, national, or international level.',
+    sertifikasi_title: 'Competency Certification',
+    sertifikasi_body: 'The certifications listed are competency certificates obtained through the study program or official, accredited certification bodies, such as BNSP and recognized international institutions. This data reflects verified competencies relevant to the field of study and profession.',
+    mbkm_empty: 'No MBKM data recorded yet.',
+    prestasi_empty: 'No achievement data recorded yet.',
+    sertifikasi_empty: 'No certification data recorded yet.',
+    toast_link_copied: 'Link copied to clipboard',
+    prompt_copy_link: 'Copy this link:',
+    lapor_title: 'Is there data that needs correcting?',
+    lapor_desc: 'Let the study program know so it can be fixed promptly.',
+    btn_lapor_kesalahan: 'Report an Issue',
+    lapor_pesan_label: 'Describe the data that needs correcting',
+    lapor_pesan_placeholder: 'Example: in the Odd 2025/2026 semester, my activity should be "2nd Place", not "Participant".',
+    lapor_note: 'Follow-up on your report will be sent to the phone number on file in your MIKA account. Make sure it is up to date before submitting.',
+    btn_kirim_laporan: 'Submit Report', lapor_send_loading: 'Sending...',
+    lapor_too_short_msg: 'Please write a more detailed explanation so we can follow up.',
+    lapor_success_msg: 'Report submitted successfully. Thank you, we will review it shortly.',
+    lapor_fail_generic: 'Submission failed. Please try again shortly.',
+    notfound_title: 'Should your data be listed here?',
+    notfound_desc: "If you've reported this before but your data still isn't listed, let the study program know so it can be followed up.",
+    notfound_nim_label: 'NIM', notfound_nim_placeholder: 'Enter your NIM',
+    notfound_nama_label: 'Full name', notfound_nama_placeholder: 'Enter your full name',
+    notfound_ket_label: 'Details',
+    notfound_ket_placeholder: 'Example: I took part in the MBKM Industry Internship in the Odd 2025/2026 semester but my name does not appear in the search.',
+    notfound_nim_required: 'NIM must not be empty.', notfound_nim_invalid: 'Invalid NIM format.',
+    notfound_nama_required: 'Name must not be empty.',
+    notfound_ket_too_short: 'Please write more detailed information so we can follow up.',
+    notfound_success_msg: 'Report submitted successfully. The study program will follow up shortly, thank you.',
+    quiz_disclaimer: 'This result is based on the preferences you selected and is indicative only. Consult your academic advisor for the final specialization decision.',
+    btn_ulangi_tes: 'Retake Test',
+    quiz_step_label: 'Question {n} of {total}',
+    quiz_score_line: '{score} of {total} of your answers point to this track.',
+    quiz_answer_unit: 'answers',
+    quiz_careers_label: 'Career Prospects', quiz_courses_label: 'Specialization Courses',
+    memuat_tes: 'Loading test data...'
+  }
+};
+
+let currentLang = localStorage.getItem('simprodi_lang') || 'id';
+
+function t(key, vars) {
+  const dict = I18N[currentLang] || I18N.id;
+  let str = (key in dict) ? dict[key] : (I18N.id[key] !== undefined ? I18N.id[key] : key);
+  if (vars) Object.keys(vars).forEach(k => { str = str.replace(new RegExp('\\{' + k + '\\}', 'g'), vars[k]); });
+  return str;
+}
+
+function pick(v) {
+  return (v && typeof v === 'object') ? (v[currentLang] || v.id) : v;
+}
+
+function applyI18n() {
+  document.documentElement.lang = currentLang;
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.getAttribute('data-i18n')); });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { el.placeholder = t(el.getAttribute('data-i18n-placeholder')); });
+  document.querySelectorAll('[data-i18n-aria-label]').forEach(el => { el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria-label'))); });
+  document.querySelectorAll('[data-i18n-title]').forEach(el => { el.setAttribute('title', t(el.getAttribute('data-i18n-title'))); });
+  document.getElementById('langBtnID').classList.toggle('active', currentLang === 'id');
+  document.getElementById('langBtnEN').classList.toggle('active', currentLang === 'en');
+}
+
+function setLang(lang) {
+  if ((lang !== 'id' && lang !== 'en') || lang === currentLang) return;
+  currentLang = lang;
+  localStorage.setItem('simprodi_lang', lang);
+  applyI18n();
+  rerenderActiveView();
+}
+
+function rerenderActiveView() {
+  if (document.getElementById('detailView').style.display !== 'none' && currentStudent) {
+    fillMbkm(currentStudent.mbkm || []);
+    fillPrestasi(currentStudent.prestasi || []);
+    fillSertifikasi(currentStudent.sertifikasi || []);
+    return;
+  }
+  if (document.getElementById('searchSection').style.display !== 'none') {
+    if (lastQuery) doSearch(); else renderList();
+    return;
+  }
+  if (document.getElementById('quizView').style.display !== 'none') { renderQuizQuestion(); return; }
+  if (document.getElementById('quizResultView').style.display !== 'none') { showQuizResult(); }
+}
+
+// ==============================================================
+const searchInput  = document.getElementById('searchInput');
+let allStudents    = [];
+let allTooMany     = false;
+let allTotal       = 0;
+let currentStudent = null;
+let lastQuery      = '';
+let searchCache    = {};
+searchInput.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
+
+let quizConfigPromise = null;
+
+function fetchQuizConfig() {
+  if (!quizConfigPromise) {
+    quizConfigPromise = gasGet({ action: 'config' })
+      .then(res => res && res.quiz)
+      .catch(err => { console.warn('Gagal memuat konfigurasi kuis:', err); return null; });
+  }
+  return quizConfigPromise;
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  applyI18n();
+  const nim = new URLSearchParams(location.search).get('nim');
+  if (nim) { openPortofolio(); searchInput.value = nim; doSearch(true); }
+});
+
+// ------ SEARCH ------
+async function doSearch(autoOpen = false) {
+  const q = searchInput.value.trim();
+  if (q.length < 3) {
+    setStatus(t('search_min_chars_msg'), true);
+    return;
+  }
+  if (/^\d+$/.test(q) && q.length < 5) {
+    setStatus(t('search_nim_more_digits'), true);
+    return;
+  }
+
+  lastQuery = q;
+  setStatus('');
+  document.getElementById('listView').innerHTML = '';
+  document.getElementById('detailView').style.display = 'none';
+
+  const cacheKey = currentLang + '|' + q;
+  if (searchCache[cacheKey]) {
+    const res = searchCache[cacheKey];
+    allStudents = res.students || [];
+    allTooMany  = res.tooMany  || false;
+    allTotal    = res.total    || 0;
+    if (!res.ok) setStatus(res.message, true);
+    if (autoOpen && allStudents.length === 1 && allStudents[0].nim.toLowerCase() === q.toLowerCase()) {
+      renderList(); openDetail(0);
+    } else {
+      renderList();
+    }
+    return;
+  }
+
+  const btn = document.getElementById('searchBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>' + t('search_btn_loading');
+
+  try {
+    const res = await gasGet({ action: 'search', q, lang: currentLang });
+    btn.disabled = false; btn.textContent = t('search_btn');
+    searchCache[cacheKey] = res;
+    allStudents = res.students || [];
+    allTooMany  = res.tooMany  || false;
+    allTotal    = res.total    || 0;
+    if (!res.ok) setStatus(res.message, true);
+    if (autoOpen && allStudents.length === 1 && allStudents[0].nim.toLowerCase() === q.toLowerCase()) {
+      renderList(); openDetail(0);
+    } else {
+      renderList();
+    }
+  } catch {
+    btn.disabled = false; btn.textContent = t('search_btn');
+    setStatus(t('search_conn_error'), true);
+  }
+}
+
+// ------ LIST ------
+function renderList() {
+  const lv = document.getElementById('listView');
+
+  if (!allStudents.length) {
+    const isNimLike = /^\d{9}$/.test(lastQuery);
+    lv.innerHTML =
+      '<div class="lapor-card">' +
+        '<div class="lapor-header">' +
+          '<div>' +
+            '<div class="lapor-title">' + t('notfound_title') + '</div>' +
+            '<div class="lapor-desc">' + t('notfound_desc') + '</div>' +
+          '</div>' +
+          '<button class="btn-lapor" onclick="toggleNotFoundLapor()">' + t('btn_lapor_kesalahan') + '</button>' +
+        '</div>' +
+        '<div id="notFoundLaporForm" class="lapor-form">' +
+          '<div style="display:flex;flex-direction:column;gap:10px;margin-bottom:10px;">' +
+            '<div>' +
+              '<label class="form-label" for="notFoundNim">' + t('notfound_nim_label') + ' <span style="color:#dc2626;">*</span></label>' +
+              '<input class="text-input" type="tel" id="notFoundNim" placeholder="' + t('notfound_nim_placeholder') + '" maxlength="9"' +
+              ' inputmode="numeric" oninput="this.value=this.value.replace(/[^0-9]/g,\'\')"' +
+              ' value="' + (isNimLike ? escHtml(lastQuery) : '') + '">' +
+            '</div>' +
+            '<div>' +
+              '<label class="form-label" for="notFoundNama">' + t('notfound_nama_label') + ' <span style="color:#dc2626;">*</span></label>' +
+              '<input class="text-input" type="text" id="notFoundNama" placeholder="' + t('notfound_nama_placeholder') + '" maxlength="100">' +
+            '</div>' +
+            '<div>' +
+              '<label class="form-label" for="notFoundPesan">' + t('notfound_ket_label') + ' <span style="color:#dc2626;">*</span></label>' +
+              '<textarea class="form-textarea" id="notFoundPesan"' +
+              ' placeholder="' + t('notfound_ket_placeholder') + '"></textarea>' +
+            '</div>' +
+          '</div>' +
+          '<div class="lapor-note">' + t('lapor_note') + '</div>' +
+          '<button class="btn-send" id="notFoundLaporBtn" onclick="doLaporNotFound()">' + t('btn_kirim_laporan') + '</button>' +
+          '<div id="notFoundLaporMsg"></div>' +
+        '</div>' +
+      '</div>';
+    return;
+  }
+
+  const infoText = allTooMany
+    ? t('search_result_toomany', { total: allTotal })
+    : t('search_result_found', { count: allStudents.length, query: escHtml(lastQuery) });
+  let html = `<p class="result-info">${infoText}</p>`;
+
+  allStudents.forEach((s, i) => {
+    const init = (s.nama || s.nim || '?')[0].toUpperCase();
+    const cp = (s.prestasi||[]).length, cm = (s.mbkm||[]).length, cs = (s.sertifikasi||[]).length;
+    html += `<div class="student-card" onclick="openDetail(${i})">
+      <div class="s-init">${escHtml(init)}</div>
+      <div class="s-body">
+        <div class="s-name">${escHtml(s.nama || '-')}</div>
+        <div class="s-nim">NIM. ${escHtml(s.nim)}</div>
+        <div class="s-tags">
+          <span class="tag ${cm ? 'tag-m' : 'tag-0'}">${cm} MBKM</span>
+          <span class="tag ${cp ? 'tag-p' : 'tag-0'}">${cp} Prestasi</span>
+          <span class="tag ${cs ? 'tag-s' : 'tag-0'}">${cs} Sertifikasi</span>
+        </div>
+      </div>
+      <span class="s-chevron"></span>
+    </div>`;
+  });
+
+  lv.innerHTML = html;
+}
+
+function showList() {
+  document.getElementById('detailView').style.display    = 'none';
+  document.getElementById('searchSection').style.display = 'block';
+  document.getElementById('listView').style.display      = 'block';
+  setStatus('');
+}
+
+// ------ DETAIL ------
+function openDetail(idx) {
+  const s = allStudents[idx];
+  if (!s) return;
+  currentStudent = s;
+
+  document.getElementById('dInit').textContent = (s.nama || s.nim || '?')[0].toUpperCase();
+  document.getElementById('dNama').textContent = s.nama || '-';
+  document.getElementById('dNim').textContent  = 'NIM. ' + s.nim;
+
+  const cp = (s.prestasi||[]).length, cm = (s.mbkm||[]).length, cs = (s.sertifikasi||[]).length;
+  document.getElementById('dSummary').innerHTML =
+    `<span class="d-tag tag-m">${cm} MBKM</span>` +
+    `<span class="d-tag tag-p">${cp} Prestasi</span>` +
+    `<span class="d-tag tag-s">${cs} Sertifikasi</span>`;
+
+  document.getElementById('cnt-mbkm').textContent        = cm;
+  document.getElementById('cnt-prestasi').textContent    = cp;
+  document.getElementById('cnt-sertifikasi').textContent = cs;
+
+  fillMbkm(s.mbkm || []);
+  fillPrestasi(s.prestasi || []);
+  fillSertifikasi(s.sertifikasi || []);
+
+  ['prestasi', 'mbkm', 'sertifikasi'].forEach(openAcc);
+
+  document.getElementById('laporForm').classList.remove('open');
+  document.getElementById('laporPesan').value   = '';
+  document.getElementById('laporMsg').innerHTML  = '';
+
+  document.getElementById('listView').style.display      = 'none';
+  document.getElementById('searchSection').style.display = 'none';
+  document.getElementById('detailView').style.display    = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ------ ACCORDION ------
+function toggleAcc(k) {
+  const panel = document.getElementById('panel-' + k);
+  const icon  = document.getElementById('ico-'   + k);
+  const btn   = document.getElementById('trg-'   + k);
+  const open  = panel.classList.contains('open');
+  panel.classList.toggle('open', !open);
+  icon.classList.toggle('open', !open);
+  btn.classList.toggle('is-open', !open);
+}
+function openAcc(k) {
+  document.getElementById('panel-' + k).classList.add('open');
+  document.getElementById('ico-'   + k).classList.add('open');
+  document.getElementById('trg-'   + k).classList.add('is-open');
+}
+
+// ------ HELPERS ------
+function groupBySem(data, key) {
+  const order = [], map = {};
+  data.forEach(r => {
+    const s = r[key] || '-';
+    if (!map[s]) { map[s] = []; order.push(s); }
+    map[s].push(r);
+  });
+  return { order, map };
+}
+
+// ------ FILL PANELS ------
+function fillMbkm(data) {
+  const el = document.getElementById('panel-mbkm');
+  if (!data.length) { el.innerHTML = '<p class="acc-empty">' + t('mbkm_empty') + '</p>'; return; }
+  const { order, map } = groupBySem(data, 'semester');
+  el.innerHTML = order.map(sem =>
+    '<div class="sem-group"><div class="sem-group-label">' + escHtml(sem) + '</div>'
+    + map[sem].map(r => {
+      const primary   = currentLang === 'en' ? (r.gabung_en || r.gabung_id) : r.gabung_id;
+      const secondary = currentLang === 'en' ? r.gabung_id : r.gabung_en;
+      return '<div class="data-row">'
+        + '<div class="row-main">' + escHtml(primary || '-') + '</div>'
+        + (secondary ? '<div class="row-sub">' + escHtml(secondary) + '</div>' : '')
+        + '</div>';
+    }).join('') + '</div>'
+  ).join('');
+}
+
+function fillPrestasi(data) {
+  const el = document.getElementById('panel-prestasi');
+  if (!data.length) { el.innerHTML = '<p class="acc-empty">' + t('prestasi_empty') + '</p>'; return; }
+  const { order, map } = groupBySem(data, 'semester');
+  el.innerHTML = order.map(sem =>
+    '<div class="sem-group"><div class="sem-group-label">' + escHtml(sem) + '</div>'
+    + map[sem].map(r =>
+      '<div class="data-row"><div class="row-main">' + escHtml(r.gabung || '-') + '</div></div>'
+    ).join('') + '</div>'
+  ).join('');
+}
+
+function fillSertifikasi(data) {
+  const el = document.getElementById('panel-sertifikasi');
+  if (!data.length) { el.innerHTML = '<p class="acc-empty">' + t('sertifikasi_empty') + '</p>'; return; }
+  const { order, map } = groupBySem(data, 'semester');
+  el.innerHTML = order.map(sem =>
+    '<div class="sem-group"><div class="sem-group-label">' + escHtml(sem) + '</div>'
+    + map[sem].map(r => {
+      const primary   = currentLang === 'en' ? (r.inggris || r.indonesia) : r.indonesia;
+      const secondary = currentLang === 'en' ? r.indonesia : r.inggris;
+      return '<div class="data-row">'
+        + (r.kategori ? '<div class="row-meta"><span class="kat-tag">' + escHtml(r.kategori) + '</span></div>' : '')
+        + '<div class="row-main">' + escHtml(primary || '-') + '</div>'
+        + (secondary ? '<div class="row-sub">' + escHtml(secondary) + '</div>' : '')
+        + '</div>';
+    }).join('') + '</div>'
+  ).join('');
+}
+
+// ------ INFO MODAL ------
+const INFO_DATA = {
+  mbkm:        { cat: 'mbkm', catLabel: 'MBKM' },
+  prestasi:    { cat: 'pres', catLabel: 'Prestasi' },
+  sertifikasi: { cat: 'sert', catLabel: 'Sertifikasi' }
+};
+function showInfo(type) {
+  const d = INFO_DATA[type];
+  if (!d) return;
+  const cat = document.getElementById('infoCat');
+  cat.textContent = d.catLabel;
+  cat.className   = 'info-cat ' + d.cat;
+  document.getElementById('infoTitle').textContent = t(type + '_title');
+  document.getElementById('infoBody').textContent  = t(type + '_body');
+  document.getElementById('infoModal').classList.add('open');
+}
+function closeInfo() {
+  document.getElementById('infoModal').classList.remove('open');
+}
+
+// ------ SHARE ------
+function shareStudent() {
+  if (!currentStudent) return;
+  const url = location.origin + location.pathname + '?nim=' + encodeURIComponent(currentStudent.nim);
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(() => showToast(t('toast_link_copied')));
+  } else {
+    prompt(t('prompt_copy_link'), url);
+  }
+}
+
+function showToast(msg) {
+  const toastEl = document.getElementById('toast');
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  setTimeout(() => toastEl.classList.remove('show'), 2500);
+}
+
+// ------ LAPORAN ------
+function toggleLapor() {
+  document.getElementById('laporForm').classList.toggle('open');
+}
+
+async function doLapor() {
+  if (!currentStudent) return;
+  const pesan = document.getElementById('laporPesan').value.trim();
+  const msgEl = document.getElementById('laporMsg');
+
+  if (pesan.length < 10) {
+    msgEl.innerHTML = '<div class="alert alert-err">' + t('lapor_too_short_msg') + '</div>';
+    return;
+  }
+
+  const btn = document.getElementById('laporBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>' + t('lapor_send_loading');
+  msgEl.innerHTML = '';
+
+  try {
+    const res = await gasGet({
+      action: 'laporan',
+      nim:   currentStudent.nim,
+      nama:  currentStudent.nama,
+      pesan,
+      lang: currentLang
+    });
+    btn.disabled = false; btn.textContent = t('btn_kirim_laporan');
+    if (res.ok) {
+      msgEl.innerHTML = '<div class="alert alert-ok">' + t('lapor_success_msg') + '</div>';
+      document.getElementById('laporPesan').value = '';
+    } else {
+      msgEl.innerHTML = `<div class="alert alert-err">${escHtml(res.message)}</div>`;
+    }
+  } catch {
+    btn.disabled = false; btn.textContent = t('btn_kirim_laporan');
+    msgEl.innerHTML = '<div class="alert alert-err">' + t('lapor_fail_generic') + '</div>';
+  }
+}
+
+// ------ LAPORAN DATA TIDAK DITEMUKAN ------
+function toggleNotFoundLapor() {
+  document.getElementById('notFoundLaporForm').classList.toggle('open');
+}
+
+async function doLaporNotFound() {
+  const nim   = document.getElementById('notFoundNim').value.trim();
+  const nama  = document.getElementById('notFoundNama').value.trim();
+  const pesan = document.getElementById('notFoundPesan').value.trim();
+  const msgEl = document.getElementById('notFoundLaporMsg');
+
+  if (!nim) {
+    msgEl.innerHTML = '<div class="alert alert-err">' + t('notfound_nim_required') + '</div>'; return;
+  }
+  if (!/^\d{9}$/.test(nim)) {
+    msgEl.innerHTML = '<div class="alert alert-err">' + t('notfound_nim_invalid') + '</div>'; return;
+  }
+  if (!nama) {
+    msgEl.innerHTML = '<div class="alert alert-err">' + t('notfound_nama_required') + '</div>'; return;
+  }
+  if (pesan.length < 10) {
+    msgEl.innerHTML = '<div class="alert alert-err">' + t('notfound_ket_too_short') + '</div>'; return;
+  }
+
+  const btn = document.getElementById('notFoundLaporBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>' + t('lapor_send_loading');
+  msgEl.innerHTML = '';
+
+  try {
+    const res = await gasGet({
+      action: 'laporan',
+      nim,
+      nama,
+      pesan: '[DATA TIDAK DITEMUKAN] ' + pesan,
+      lang: currentLang
+    });
+    btn.disabled = false; btn.textContent = t('btn_kirim_laporan');
+    if (res.ok) {
+      msgEl.innerHTML = '<div class="alert alert-ok">' + t('notfound_success_msg') + '</div>';
+      document.getElementById('notFoundNim').value   = '';
+      document.getElementById('notFoundNama').value  = '';
+      document.getElementById('notFoundPesan').value = '';
+    } else {
+      msgEl.innerHTML = '<div class="alert alert-err">' + escHtml(res.message) + '</div>';
+    }
+  } catch {
+    btn.disabled = false; btn.textContent = t('btn_kirim_laporan');
+    msgEl.innerHTML = '<div class="alert alert-err">' + t('lapor_fail_generic') + '</div>';
+  }
+}
+
+// ------ HELPERS ------
+async function gasGet(params) {
+  const url = GAS_URL + '?' + Object.entries(params)
+    .map(([k, v]) => encodeURIComponent(k) + '=' + encodeURIComponent(v)).join('&');
+  const r = await fetch(url);
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  return r.json();
+}
+
+function setStatus(msg, isErr) {
+  const el = document.getElementById('statusMsg');
+  el.textContent = msg || '';
+  el.className   = isErr ? 'msg-error' : 'msg-center';
+}
+
+function openAboutModal()  { document.getElementById('aboutOverlay').classList.add('open'); }
+function closeAboutModal() { document.getElementById('aboutOverlay').classList.remove('open'); }
+
+function escHtml(s) {
+  return String(s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+// ------ NAVIGASI BERANDA ------
+function showHome() {
+  document.getElementById('homeView').style.display        = 'block';
+  document.getElementById('searchSection').style.display   = 'none';
+  document.getElementById('detailView').style.display      = 'none';
+  document.getElementById('quizView').style.display        = 'none';
+  document.getElementById('quizResultView').style.display  = 'none';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function openPortofolio() {
+  document.getElementById('homeView').style.display        = 'none';
+  document.getElementById('searchSection').style.display   = 'block';
+  document.getElementById('quizView').style.display        = 'none';
+  document.getElementById('quizResultView').style.display  = 'none';
+  setTimeout(function() { searchInput.focus(); }, 80);
+}
+
+let quizConfigApplied = false;
+
+async function ensureQuizConfig() {
+  if (quizConfigApplied) return;
+  const toastTimer = setTimeout(() => showToast(t('memuat_tes')), 300);
+  const quiz = await fetchQuizConfig();
+  clearTimeout(toastTimer);
+  if (quiz && Array.isArray(quiz.questions) && quiz.questions.length
+      && quiz.tracks && quiz.tracks.SSD && quiz.tracks.AISD) {
+    QUIZ     = quiz.questions.map(q => ({ q: q.q, opts: q.opts }));
+    PEM_INFO = quiz.tracks;
+  }
+  quizConfigApplied = true;
+}
+
+async function openQuiz() {
+  document.getElementById('homeView').style.display  = 'none';
+  document.getElementById('quizView').style.display  = 'block';
+  await ensureQuizConfig();
+  startQuiz();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ------ TES PEMINATAN ------
+var QUIZ = [
+  { q: { id: 'Saat mengerjakan proyek software, kamu lebih tertarik...', en: "When working on a software project, you're more drawn to..." }, opts: [
+    { text: { id: 'Merancang sistem yang bisa digunakan banyak orang secara bersamaan tanpa gangguan', en: 'Designing a system that many people can use simultaneously without disruption' }, pem: 'SSD' },
+    { text: { id: 'Membuat sistem yang bisa belajar dari data dan mengambil keputusan sendiri', en: 'Building a system that can learn from data and make decisions on its own' }, pem: 'AISD' }
+  ]},
+  { q: { id: 'Topik mana yang paling membuatmu penasaran?', en: 'Which topic makes you most curious?' }, opts: [
+    { text: { id: 'Bagaimana banyak server bisa bekerja sama agar sistem tetap stabil meski dipakai jutaan orang sekaligus', en: 'How many servers can work together to keep a system stable even when used by millions of people at once' }, pem: 'SSD' },
+    { text: { id: 'Bagaimana komputer bisa belajar mengenali pola dari data, gambar, teks, atau suara', en: 'How computers can learn to recognize patterns from data, images, text, or sound' }, pem: 'AISD' }
+  ]},
+  { q: { id: 'Produk yang paling ingin kamu bangun suatu hari nanti...', en: "The product you'd most want to build someday..." }, opts: [
+    { text: { id: 'Platform digital skala enterprise yang andal, aman, dan mudah dikembangkan', en: "An enterprise-scale digital platform that's reliable, secure, and easy to develop further" }, pem: 'SSD' },
+    { text: { id: 'Chatbot cerdas atau sistem rekomendasi yang makin pintar seiring waktu', en: 'A smart chatbot or recommendation system that gets smarter over time' }, pem: 'AISD' }
+  ]},
+  { q: { id: 'Ketika menemukan masalah pada sistem, kamu lebih suka...', en: "When you find a problem in a system, you'd rather..." }, opts: [
+    { text: { id: 'Menelusuri log dan alur sistem secara sistematis sampai akar penyebabnya ditemukan', en: 'Trace logs and system flow systematically until you find the root cause' }, pem: 'SSD' },
+    { text: { id: 'Bereksperimen mengubah data atau parameter model sampai hasil prediksinya membaik', en: 'Experiment with changing data or model parameters until the predictions improve' }, pem: 'AISD' }
+  ]},
+  { q: { id: 'Mata kuliah peminatan yang paling menarik minatmu...', en: 'The specialization courses that interest you most...' }, opts: [
+    { text: { id: 'Sistem Terdistribusi, Pengembangan dan Operasi, atau Komputasi Awan', en: 'Distributed Systems, DevOps, or Cloud Computing' }, pem: 'SSD' },
+    { text: { id: 'Machine Learning, Natural Language Processing, atau Computer Vision', en: 'Machine Learning, Natural Language Processing, or Computer Vision' }, pem: 'AISD' }
+  ]},
+  { q: { id: 'Dalam kerja tim proyek, kamu paling nyaman berperan sebagai...', en: "In a project team, you're most comfortable as..." }, opts: [
+    { text: { id: 'Orang yang memastikan semua bagian sistem terhubung dan berjalan dengan baik', en: 'The person who makes sure every part of the system connects and runs well' }, pem: 'SSD' },
+    { text: { id: 'Orang yang bereksperimen mencari solusi inovatif berbasis data atau model', en: 'The person who experiments to find innovative data- or model-based solutions' }, pem: 'AISD' }
+  ]},
+  { q: { id: 'Lima tahun ke depan, kamu ingin berkarier sebagai...', en: "Five years from now, you'd want to build a career as..." }, opts: [
+    { text: { id: 'Software QA Analyst, Software System Developer, atau Mobile Programmer Supervisor', en: 'Software QA Analyst, Software System Developer, or Mobile Programmer Supervisor' }, pem: 'SSD' },
+    { text: { id: 'Data Analyst, Data Quality Engineer, atau Data Scientist Supervisor', en: 'Data Analyst, Data Quality Engineer, or Data Scientist Supervisor' }, pem: 'AISD' }
+  ]}
+];
+
+var PEM_INFO = {
+  SSD: {
+    name: { id: 'Scalable Software Development', en: 'Scalable Software Development' },
+    chip: 'SSD', chipClass: 'chip-ssd',
+    desc: {
+      id: 'Peminatan SSD berfokus pada pengembangan software dalam skala penggunaan yang lebih besar (digunakan oleh banyak orang). Pada semester 5 dan 6 kamu akan mendalami mata kuliah yang membekali kemampuan membangun, menguji, dan mengoperasikan perangkat lunak skala besar secara andal dan aman.',
+      en: "The SSD track focuses on developing software at a larger usage scale (used by many people). In semesters 5 and 6 you'll take courses that build your ability to build, test, and operate large-scale software reliably and securely."
+    },
+    careers: {
+      id: ['Software QA Analyst', 'Software System Developer', 'Mobile Programmer Supervisor'],
+      en: ['Software QA Analyst', 'Software System Developer', 'Mobile Programmer Supervisor']
+    },
+    courses: {
+      id: ['Sistem Terdistribusi', 'Pengembangan dan Operasi', 'Komputasi Awan'],
+      en: ['Distributed Systems', 'DevOps', 'Cloud Computing']
+    }
+  },
+  AISD: {
+    name: { id: 'Artificial Intelligence (AI)-Based Software Development', en: 'Artificial Intelligence (AI)-Based Software Development' },
+    chip: 'AISD', chipClass: 'chip-aisd',
+    desc: {
+      id: 'Peminatan AISD berfokus pada pengembangan software berbasis kecerdasan buatan, seperti sistem pendukung keputusan dan sistem prediksi. Kamu akan mendalami mata kuliah yang membekali kemampuan mengolah data dan membangun model cerdas untuk diintegrasikan ke produk nyata.',
+      en: "The AISD track focuses on developing AI-based software, such as decision support systems and predictive systems. You'll take courses that build your ability to process data and build intelligent models that get integrated into real products."
+    },
+    careers: {
+      id: ['Data Analyst', 'Data Quality Engineer', 'Data Scientist Supervisor'],
+      en: ['Data Analyst', 'Data Quality Engineer', 'Data Scientist Supervisor']
+    },
+    courses: {
+      id: ['Machine Learning', 'Natural Language Processing', 'Computer Vision'],
+      en: ['Machine Learning', 'Natural Language Processing', 'Computer Vision']
+    }
+  }
+};
+
+var quizAnswers = [];
+var quizCurrent = 0;
+var quizSession = [];
+
+function shuffleArray(arr) {
+  var a = arr.slice();
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+  }
+  return a;
+}
+
+function startQuiz() {
+  quizAnswers = [];
+  quizCurrent = 0;
+  quizSession = shuffleArray(QUIZ).map(function(q) {
+    return { q: q.q, opts: shuffleArray(q.opts) };
+  });
+  renderQuizQuestion();
+}
+
+function renderQuizQuestion() {
+  var q   = quizSession[quizCurrent];
+  var pct = Math.round(quizCurrent / quizSession.length * 100);
+  document.getElementById('quizStepLabel').textContent    = t('quiz_step_label', { n: quizCurrent + 1, total: quizSession.length });
+  document.getElementById('quizProgressFill').style.width = pct + '%';
+  document.getElementById('quizQ').textContent = pick(q.q);
+  document.getElementById('quizOpts').innerHTML = q.opts.map(function(opt) {
+    return '<button class="quiz-option" onclick="selectAnswer(\'' + opt.pem + '\')">' + escHtml(pick(opt.text)) + '</button>';
+  }).join('');
+}
+
+function selectAnswer(pem) {
+  quizAnswers.push(pem);
+  quizCurrent++;
+  if (quizCurrent >= quizSession.length) {
+    showQuizResult();
+  } else {
+    renderQuizQuestion();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+function showQuizResult() {
+  var ssdCount  = quizAnswers.filter(function(a) { return a === 'SSD';  }).length;
+  var aisdCount = quizAnswers.filter(function(a) { return a === 'AISD'; }).length;
+  var winner    = ssdCount >= aisdCount ? 'SSD' : 'AISD';
+  var info      = PEM_INFO[winner];
+  var total     = quizSession.length;
+
+  document.getElementById('quizView').style.display       = 'none';
+  document.getElementById('quizResultView').style.display = 'block';
+
+  document.getElementById('resultChip').textContent  = info.chip;
+  document.getElementById('resultChip').className    = 'result-chip ' + info.chipClass;
+  document.getElementById('resultPemName').textContent  = pick(info.name);
+  document.getElementById('resultScoreLine').textContent =
+    t('quiz_score_line', { score: Math.max(ssdCount, aisdCount), total: total });
+
+  document.getElementById('ssdFill').style.width  = Math.round(ssdCount  / total * 100) + '%';
+  document.getElementById('aisdFill').style.width = Math.round(aisdCount / total * 100) + '%';
+  document.getElementById('ssdScoreLabel').innerHTML  = '<span>SSD</span><span>'  + ssdCount  + ' ' + t('quiz_answer_unit') + '</span>';
+  document.getElementById('aisdScoreLabel').innerHTML = '<span>AISD</span><span>' + aisdCount + ' ' + t('quiz_answer_unit') + '</span>';
+
+  document.getElementById('resultDescTitle').textContent = pick(info.name);
+  document.getElementById('resultDescBody').innerHTML =
+    '<p>' + escHtml(pick(info.desc)) + '</p>' +
+    '<div class="result-sub-label">' + t('quiz_careers_label') + '</div>' +
+    '<div class="result-tags">' + pick(info.careers).map(function(c) {
+      return '<span class="result-tag ' + info.chipClass + '">' + escHtml(c) + '</span>';
+    }).join('') + '</div>' +
+    '<div class="result-sub-label">' + t('quiz_courses_label') + '</div>' +
+    '<div class="result-tags">' + pick(info.courses).map(function(c) {
+      return '<span class="result-tag ' + info.chipClass + '">' + escHtml(c) + '</span>';
+    }).join('') + '</div>';
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function restartQuiz() {
+  document.getElementById('quizResultView').style.display = 'none';
+  document.getElementById('quizView').style.display       = 'block';
+  startQuiz();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
