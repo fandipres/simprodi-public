@@ -852,7 +852,7 @@ main { flex: 1; }
     <div class="about-eyebrow" data-i18n="about_eyebrow">Tentang Aplikasi Ini</div>
     <div class="about-brand">SIM<b>PRODI</b></div>
     <div class="about-expand" data-i18n="about_expand">Sistem Informasi Program Studi Teknik Informatika</div>
-    <div class="about-desc" data-i18n="about_desc">Dikembangkan oleh Program Studi Teknik Informatika sebagai wadah informasi capaian akademik mahasiswa dan alat bantu pemilihan peminatan studi.</div>
+    <div class="about-desc" data-i18n="about_desc">Dikembangkan oleh Program Studi Teknik Informatika sebagai wadah informasi capaian akademik mahasiswa, alat bantu pemilihan peminatan studi, dan galeri karya mahasiswa.</div>
     <button class="about-close" onclick="closeAboutModal()" data-i18n="btn_tutup">Tutup</button>
   </div>
 </div>
@@ -891,7 +891,7 @@ main { flex: 1; }
     <div id="homeView">
       <div class="home-hero">
         <div class="home-headline"><span data-i18n="home_headline_l1">Pilih jalanmu.</span><br><span data-i18n="home_headline_l2">Rekam jejakmu.</span></div>
-        <div class="home-sub" data-i18n="home_sub">Pantau capaian akademikmu atau temukan peminatan yang paling sesuai denganmu.</div>
+        <div class="home-sub" data-i18n="home_sub">Pantau capaian akademikmu, temukan peminatan yang sesuai, atau jelajahi karya mahasiswa lainnya.</div>
       </div>
       <div class="home-cards">
         <div class="home-card home-card-1 home-card-featured" onclick="openPortofolio()" role="button" tabindex="0"
@@ -1334,6 +1334,7 @@ main { flex: 1; }
         <div class="sc-form-group">
           <label class="sc-form-label"><span data-i18n="sc_label_dosen">Dosen Pembimbing</span> <span class="opt" data-i18n="sc_opt">opsional</span></label>
           <input class="sc-input" id="scfDosen" data-i18n-placeholder="sc_placeholder_dosen" placeholder="mis. Dr. Ir. Ahmad Fauzan, S.Kom., M.T.">
+          <div class="sc-form-hint" data-i18n="sc_hint_dosen">Pisahkan dengan titik koma kalau lebih dari satu dosen pembimbing.</div>
         </div>
 
         <div class="sc-form-section-title" data-i18n="sc_sec_konfirmasi">Konfirmasi</div>
@@ -1403,10 +1404,10 @@ const I18N = {
     header_info_aria: 'Tentang SIMPRODI',
     about_eyebrow: 'Tentang Aplikasi Ini',
     about_expand: 'Sistem Informasi Program Studi Teknik Informatika',
-    about_desc: 'Dikembangkan oleh Program Studi Teknik Informatika sebagai wadah informasi capaian akademik mahasiswa dan alat bantu pemilihan peminatan studi.',
+    about_desc: 'Dikembangkan oleh Program Studi Teknik Informatika sebagai wadah informasi capaian akademik mahasiswa, alat bantu pemilihan peminatan studi, dan galeri karya mahasiswa.',
     btn_tutup: 'Tutup',
     home_headline_l1: 'Pilih jalanmu.', home_headline_l2: 'Rekam jejakmu.',
-    home_sub: 'Pantau capaian akademikmu atau temukan peminatan yang paling sesuai denganmu.',
+    home_sub: 'Pantau capaian akademikmu, temukan peminatan yang sesuai, atau jelajahi karya mahasiswa lainnya.',
     illus_count_3: '3 keg.', illus_count_2: '2 keg.', illus_count_0: '0 keg.',
     home_card1_title: 'Portofolio Akademik',
     home_card1_desc: 'Cek prestasi, MBKM, dan sertifikasi yang sudah tercatat di program studi.',
@@ -1560,6 +1561,7 @@ const I18N = {
     sc_placeholder_semester: 'mis. Genap 2025/2026',
     sc_label_dosen: 'Dosen Pembimbing',
     sc_placeholder_dosen: 'mis. Dr. Ir. Ahmad Fauzan, S.Kom., M.T.',
+    sc_hint_dosen: 'Pisahkan dengan titik koma kalau lebih dari satu dosen pembimbing.',
     sc_label_kontak: 'Kontak Tim',
     sc_placeholder_kontak: 'Email / nomor WhatsApp / Instagram',
     sc_sec_konfirmasi: 'Konfirmasi',
@@ -1595,10 +1597,10 @@ const I18N = {
     header_info_aria: 'About SIMPRODI',
     about_eyebrow: 'About This App',
     about_expand: 'Information System of the Informatics Engineering Study Program',
-    about_desc: 'Developed by the Informatics Engineering Study Program as a hub for students’ academic achievement records and a specialization-track selection aid.',
+    about_desc: 'Developed by the Informatics Engineering Study Program as a hub for students’ academic achievement records, a specialization-track selection aid, and a gallery of student work.',
     btn_tutup: 'Close',
     home_headline_l1: 'Choose your path.', home_headline_l2: 'Record your journey.',
-    home_sub: 'Track your academic achievements or find the specialization track that fits you best.',
+    home_sub: 'Track your academic achievements, find the specialization track that fits you, or explore work by fellow students.',
     illus_count_3: '3 act.', illus_count_2: '2 act.', illus_count_0: '0 act.',
     home_card1_title: 'Academic Portfolio',
     home_card1_desc: 'Check the achievements, MBKM activities, and certifications recorded by the study program.',
@@ -1752,6 +1754,7 @@ const I18N = {
     sc_placeholder_semester: 'e.g. Even 2025/2026',
     sc_label_dosen: 'Supervisor',
     sc_placeholder_dosen: 'e.g. Dr. Ir. Ahmad Fauzan, S.Kom., M.T.',
+    sc_hint_dosen: 'Separate with a semicolon if there is more than one supervisor.',
     sc_label_kontak: 'Team Contact',
     sc_placeholder_kontak: 'Email / WhatsApp number / Instagram',
     sc_sec_konfirmasi: 'Confirmation',
