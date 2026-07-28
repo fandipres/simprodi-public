@@ -807,6 +807,7 @@ main { flex: 1; }
 .sc-form-section-title:first-child { margin-top: 14px; padding-top: 0; border-top: none; }
 .sc-creator-field { display: grid; grid-template-columns: 1fr 1.4fr auto; gap: 7px; margin-bottom: 7px; align-items: center; }
 @media (max-width: 420px) { .sc-creator-field { grid-template-columns: 1fr; } }
+.sc-single-field { display: grid; grid-template-columns: 1fr auto; gap: 7px; margin-bottom: 7px; align-items: center; }
 .sc-icon-btn { border: 1px solid var(--border); background: var(--card); width: 36px; height: 36px; border-radius: 8px; cursor: pointer; color: var(--muted); flex-shrink: 0; font-size: 0.9rem; }
 .sc-icon-btn:hover { border-color: #fecaca; color: #dc2626; }
 .sc-add-row-btn { display: inline-block; font-size: 0.78rem; font-weight: 700; color: var(--blue); background: var(--blue-soft); border: 1px dashed var(--blue-border); border-radius: 8px; padding: 7px 12px; cursor: pointer; font-family: var(--font); margin-top: 2px; }
@@ -1333,8 +1334,13 @@ main { flex: 1; }
         </div>
         <div class="sc-form-group">
           <label class="sc-form-label"><span data-i18n="sc_label_dosen">Dosen Pembimbing</span> <span class="opt" data-i18n="sc_opt">opsional</span></label>
-          <input class="sc-input" id="scfDosen" data-i18n-placeholder="sc_placeholder_dosen" placeholder="mis. Dr. Ir. Ahmad Fauzan, S.Kom., M.T.">
-          <div class="sc-form-hint" data-i18n="sc_hint_dosen">Pisahkan dengan titik koma kalau lebih dari satu dosen pembimbing.</div>
+          <div id="scfDosenFields">
+            <div class="sc-single-field">
+              <input class="sc-input scf-dosen-nama" data-i18n-placeholder="sc_placeholder_dosen" placeholder="mis. Dr. Ir. Ahmad Fauzan, S.Kom., M.T.">
+              <button type="button" class="sc-icon-btn" onclick="scRemoveDosenRow(this)" title="Hapus">&times;</button>
+            </div>
+          </div>
+          <button type="button" class="sc-add-row-btn" onclick="scAddDosenRow()" data-i18n="sc_btn_tambah_dosen">+ Tambah Dosen</button>
         </div>
 
         <div class="sc-form-section-title" data-i18n="sc_sec_konfirmasi">Konfirmasi</div>
@@ -1467,7 +1473,6 @@ const I18N = {
     home_card3_title: 'Showcase Mahasiswa',
     home_card3_desc: 'Lihat aplikasi, web, dan game hasil karya mahasiswa.',
     home_card3_btn: 'Jelajahi Karya',
-    sc_eyebrow: 'Showcase',
     sc_galeri_title: 'Karya Mahasiswa Teknik Informatika',
     sc_galeri_sub: 'Aplikasi, situs, dan game hasil tugas kuliah maupun tugas akhir mahasiswa. Jelajahi dan berikan dukungan lewat like.',
     sc_search_placeholder: 'Cari nama karya, kreator, atau teknologi...',
@@ -1530,6 +1535,7 @@ const I18N = {
     sc_placeholder_nim: 'NIM',
     sc_placeholder_nama: 'Nama lengkap',
     sc_btn_tambah_anggota: 'Tambah Anggota',
+    sc_btn_tambah_dosen: 'Tambah Dosen',
     sc_sec_tautan: 'Tautan',
     sc_label_status_deploy: 'Status Deploy',
     sc_opt_belum_deploy: 'Belum Deploy', sc_opt_sudah_deploy: 'Sudah Deploy',
@@ -1561,7 +1567,6 @@ const I18N = {
     sc_placeholder_semester: 'mis. Genap 2025/2026',
     sc_label_dosen: 'Dosen Pembimbing',
     sc_placeholder_dosen: 'mis. Dr. Ir. Ahmad Fauzan, S.Kom., M.T.',
-    sc_hint_dosen: 'Pisahkan dengan titik koma kalau lebih dari satu dosen pembimbing.',
     sc_label_kontak: 'Kontak Tim',
     sc_placeholder_kontak: 'Email / nomor WhatsApp / Instagram',
     sc_sec_konfirmasi: 'Konfirmasi',
@@ -1660,7 +1665,6 @@ const I18N = {
     home_card3_title: 'Student Showcase',
     home_card3_desc: 'See apps, websites, and games built by students.',
     home_card3_btn: 'Explore Works',
-    sc_eyebrow: 'Showcase',
     sc_galeri_title: 'Informatics Engineering Student Works',
     sc_galeri_sub: 'Apps, websites, and games made for coursework or final projects. Explore and show your support with a like.',
     sc_search_placeholder: 'Search by project name, creator, or technology...',
@@ -1723,6 +1727,7 @@ const I18N = {
     sc_placeholder_nim: 'NIM',
     sc_placeholder_nama: 'Full name',
     sc_btn_tambah_anggota: 'Add Member',
+    sc_btn_tambah_dosen: 'Add Supervisor',
     sc_sec_tautan: 'Links',
     sc_label_status_deploy: 'Deploy Status',
     sc_opt_belum_deploy: 'Not Deployed Yet', sc_opt_sudah_deploy: 'Deployed',
@@ -1754,7 +1759,6 @@ const I18N = {
     sc_placeholder_semester: 'e.g. Even 2025/2026',
     sc_label_dosen: 'Supervisor',
     sc_placeholder_dosen: 'e.g. Dr. Ir. Ahmad Fauzan, S.Kom., M.T.',
-    sc_hint_dosen: 'Separate with a semicolon if there is more than one supervisor.',
     sc_label_kontak: 'Team Contact',
     sc_placeholder_kontak: 'Email / WhatsApp number / Instagram',
     sc_sec_konfirmasi: 'Confirmation',
@@ -2675,7 +2679,7 @@ function scRenderDetail() {
     '<div class="sc-meta-grid">' +
       '<div><div class="sc-meta-k">' + t('sc_sumber_tugas_label') + '</div><div class="sc-meta-v">' + escHtml(sumberLabel) + '</div></div>' +
       '<div><div class="sc-meta-k">' + t('sc_semester_label') + '</div><div class="sc-meta-v">' + escHtml(item.semester) + '</div></div>' +
-      (item.dosenPembimbing ? '<div><div class="sc-meta-k">' + t('sc_dosen_label') + '</div><div class="sc-meta-v">' + escHtml(item.dosenPembimbing) + '</div></div>' : '') +
+      ((item.dosenPembimbing && item.dosenPembimbing.length) ? '<div><div class="sc-meta-k">' + t('sc_dosen_label') + '</div><div class="sc-meta-v">' + escHtml(item.dosenPembimbing.join(', ')) + '</div></div>' : '') +
       '<div><div class="sc-meta-k">' + t('sc_kontak_label') + '</div><div class="sc-meta-v">' + escHtml(item.kontakTim) + '</div></div>' +
     '</div>' +
     techHtml + actionsHtml +
@@ -2746,7 +2750,7 @@ function openShowcaseForm() {
 function scResetForm() {
   document.getElementById('scFormBody').style.display = 'block';
   document.getElementById('scFormSuccess').style.display = 'none';
-  ['scfNama','scfDeskripsi','scfTeknologi','scfKontak','scfDemo','scfSource','scfTrailer','scfScreenshot','scfMatkul','scfSemester','scfDosen'].forEach(function(id) {
+  ['scfNama','scfDeskripsi','scfTeknologi','scfKontak','scfDemo','scfSource','scfTrailer','scfScreenshot','scfMatkul','scfSemester'].forEach(function(id) {
     document.getElementById(id).value = '';
   });
   document.getElementById('scfConsent1').checked = false;
@@ -2756,6 +2760,11 @@ function scResetForm() {
       '<input class="sc-input scf-kreator-nim" placeholder="' + t('sc_placeholder_nim') + '">' +
       '<input class="sc-input scf-kreator-nama" placeholder="' + t('sc_placeholder_nama') + '">' +
       '<button type="button" class="sc-icon-btn" onclick="scRemoveKreatorRow(this)" title="Hapus">&times;</button>' +
+    '</div>';
+  document.getElementById('scfDosenFields').innerHTML =
+    '<div class="sc-single-field">' +
+      '<input class="sc-input scf-dosen-nama" placeholder="' + t('sc_placeholder_dosen') + '">' +
+      '<button type="button" class="sc-icon-btn" onclick="scRemoveDosenRow(this)" title="Hapus">&times;</button>' +
     '</div>';
   ['scfJenis', 'scfPeminatan', 'scfStatusDeploy', 'scfSumber'].forEach(function(id) {
     var wrap = document.getElementById(id);
@@ -2781,6 +2790,21 @@ function scAddKreatorRow() {
 function scRemoveKreatorRow(btn) {
   var wrap = document.getElementById('scfKreatorFields');
   if (wrap.children.length > 1) btn.closest('.sc-creator-field').remove();
+}
+
+function scAddDosenRow() {
+  var wrap = document.getElementById('scfDosenFields');
+  var row = document.createElement('div');
+  row.className = 'sc-single-field';
+  row.innerHTML =
+    '<input class="sc-input scf-dosen-nama" placeholder="' + t('sc_placeholder_dosen') + '">' +
+    '<button type="button" class="sc-icon-btn" onclick="scRemoveDosenRow(this)" title="Hapus">&times;</button>';
+  wrap.appendChild(row);
+}
+function scRemoveDosenRow(btn) {
+  var wrap = document.getElementById('scfDosenFields');
+  if (wrap.children.length > 1) btn.closest('.sc-single-field').remove();
+  else btn.closest('.sc-single-field').querySelector('.scf-dosen-nama').value = '';
 }
 
 function scSelectSeg(groupId, btn) {
@@ -2866,7 +2890,7 @@ async function submitShowcaseForm() {
     videoTrailer: document.getElementById('scfTrailer').value.trim(),
     screenshot: document.getElementById('scfScreenshot').value.split('\n').map(function(s) { return s.trim(); }).filter(Boolean),
     fiturUnggulan: { id: [], en: [] },
-    dosenPembimbing: document.getElementById('scfDosen').value.trim()
+    dosenPembimbing: Array.prototype.map.call(document.querySelectorAll('#scfDosenFields .scf-dosen-nama'), function(el) { return el.value.trim(); }).filter(Boolean)
   };
 
   var btn = document.getElementById('scfSubmitBtn');
