@@ -659,6 +659,7 @@ main { flex: 1; }
 
 .sc-card {
   background: var(--card); border: 1px solid var(--border);
+  box-shadow: 0 1px 4px rgba(15,23,42,.05);
   border-radius: var(--radius); padding: 14px 16px; margin-bottom: 10px;
 }
 .sc-input, .sc-textarea, .sc-select {
@@ -666,7 +667,7 @@ main { flex: 1; }
   padding: 10px 13px; font-size: 0.88rem; font-family: var(--font);
   color: var(--text); outline: none; transition: border-color .15s; background: var(--card);
 }
-.sc-input:focus, .sc-textarea:focus, .sc-select:focus { border-color: var(--blue); }
+.sc-input:focus, .sc-textarea:focus, .sc-select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-soft); }
 .sc-input::placeholder, .sc-textarea::placeholder { color: var(--subtle); }
 .sc-textarea { resize: vertical; min-height: 68px; }
 
@@ -675,6 +676,7 @@ main { flex: 1; }
   padding: 10px 18px; border: 1px solid transparent; cursor: pointer;
   display: inline-flex; align-items: center; justify-content: center; gap: 6px;
   transition: background .15s, border-color .15s, color .15s;
+  text-decoration: none;
 }
 .sc-btn-primary { background: var(--blue); color: #fff; }
 .sc-btn-primary:hover { background: #1d4ed8; }
@@ -744,21 +746,25 @@ main { flex: 1; }
 
 .sc-gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 @media (max-width: 480px) { .sc-gallery-grid { grid-template-columns: 1fr; } }
-.sc-gcard { padding: 0; overflow: hidden; display: flex; flex-direction: column; cursor: pointer; transition: border-color .15s; }
-.sc-gcard:hover { border-color: var(--blue-border); }
-.sc-gthumb { aspect-ratio: 16/10; background-size: cover; background-position: center; background-color: var(--bg); }
+.sc-gcard { padding: 0; overflow: hidden; display: flex; flex-direction: column; cursor: pointer; transition: border-color .18s, box-shadow .18s, transform .14s; }
+.sc-gcard:hover { border-color: var(--blue-border); box-shadow: 0 8px 24px rgba(37,99,235,.14); transform: translateY(-2px); }
+.sc-gthumb { aspect-ratio: 16/10; background-size: cover; background-position: center; background-color: var(--bg); transition: transform .3s; }
+.sc-gcard:hover .sc-gthumb { transform: scale(1.05); }
+.sc-gthumb-empty { display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--bg), var(--border)); }
+.sc-gthumb-empty svg { width: 30px; height: 30px; color: var(--subtle); opacity: .6; }
 .sc-gbody { padding: 11px 12px 12px; display: flex; flex-direction: column; gap: 6px; }
 .sc-gtitle { font-weight: 700; font-size: 0.88rem; line-height: 1.3; }
 .sc-gcreators { font-size: 0.74rem; color: var(--muted); }
 .sc-gfoot { display: flex; align-items: center; justify-content: space-between; margin-top: 4px; }
 .sc-likes { font-size: 0.78rem; color: var(--muted); }
 .sc-likes .heart { color: #dc2626; }
-.sc-empty { text-align: center; padding: 30px 0; color: var(--subtle); font-size: 0.86rem; font-style: italic; }
+.sc-empty { grid-column: 1 / -1; text-align: center; padding: 30px 0; color: var(--subtle); font-size: 0.86rem; font-style: italic; }
 
 /* Detail */
 .sc-hero-media {
   border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border);
   background: linear-gradient(135deg,#1e293b,#0f172a); aspect-ratio: 16/9;
+  box-shadow: 0 12px 32px rgba(15,23,42,.16);
   display: flex; align-items: center; justify-content: center; position: relative; cursor: pointer; margin-top: 12px;
 }
 .sc-hero-media .play { width: 52px; height: 52px; border-radius: 50%; background: rgba(255,255,255,.16); border: 1.5px solid rgba(255,255,255,.5); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.3rem; }
@@ -766,13 +772,12 @@ main { flex: 1; }
 .sc-shot { flex: 0 0 auto; width: 130px; aspect-ratio: 9/16; border-radius: 8px; border: 1px solid var(--border); background-size: cover; background-position: center; background-color: var(--bg); }
 .sc-detail-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-top: 14px; }
 .sc-detail-title { font-size: 1.14rem; font-weight: 800; }
-.sc-like-btn { display: flex; flex-direction: column; align-items: center; gap: 1px; border: 1px solid var(--border); background: var(--card); border-radius: 10px; padding: 7px 11px; cursor: pointer; font-family: var(--font); flex-shrink: 0; font-size: 1rem; color: var(--subtle); }
+.sc-like-btn { display: flex; flex-direction: column; align-items: center; gap: 1px; border: 1px solid var(--border); background: var(--card); border-radius: 10px; padding: 7px 11px; cursor: pointer; font-family: var(--font); flex-shrink: 0; font-size: 1rem; color: var(--subtle); transition: border-color .15s, transform .12s; }
+.sc-like-btn:hover { border-color: #fecaca; color: #dc2626; transform: scale(1.06); }
 .sc-like-btn.liked { color: #dc2626; border-color: #fecaca; background: #fef2f2; }
 .sc-like-btn span { font-size: 0.76rem; font-weight: 700; color: var(--text); }
-.sc-detail-desc { margin-top: 10px; font-size: 0.88rem; }
+.sc-detail-desc { margin-top: 10px; font-size: 0.88rem; white-space: pre-line; }
 .sc-section-label { font-size: 0.70rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-top: 18px; margin-bottom: 8px; }
-.sc-feat-item { font-size: 0.85rem; padding: 3px 0; }
-.sc-feat-item::before { content: '\2713'; color: var(--green); font-weight: 700; margin-right: 7px; }
 .sc-creator-row { padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
 .sc-creator-row:last-child { border-bottom: none; }
 .sc-creator-nim { color: var(--muted); font-size: 0.74rem; }
@@ -782,6 +787,29 @@ main { flex: 1; }
 .sc-meta-v { font-size: 0.85rem; margin-top: 2px; }
 .sc-tech-pills { display: flex; gap: 6px; flex-wrap: wrap; }
 .sc-tech-pill { font-size: 0.72rem; background: var(--bg); border: 1px solid var(--border); padding: 3px 9px; border-radius: 999px; }
+
+.sc-tag-input {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+  border: 1.5px solid var(--border); border-radius: 8px; padding: 6px 8px;
+  background: var(--card); cursor: text; transition: border-color .15s;
+}
+.sc-tag-input:focus-within { border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-soft); }
+.sc-tag-input #scfTeknologiChips { display: contents; }
+.sc-tag-input input {
+  flex: 1; min-width: 90px; border: none; outline: none; background: transparent;
+  color: var(--text); font-size: 0.88rem; font-family: var(--font); padding: 4px 2px;
+}
+.sc-tag-input input::placeholder { color: var(--subtle); }
+.sc-tag-chip {
+  display: inline-flex; align-items: center; gap: 3px; font-size: 0.78rem;
+  background: var(--bg); border: 1px solid var(--border); border-radius: 999px;
+  padding: 3px 4px 3px 10px; white-space: nowrap;
+}
+.sc-tag-chip button {
+  border: none; background: transparent; cursor: pointer; color: var(--muted);
+  font-size: 0.9rem; line-height: 1; padding: 2px 5px; font-family: var(--font);
+}
+.sc-tag-chip button:hover { color: #dc2626; }
 .sc-action-row { display: flex; gap: 9px; margin-top: 18px; flex-wrap: wrap; }
 .sc-action-row .sc-btn { flex: 1; min-width: 130px; }
 .sc-report-link { display: block; margin: 14px auto 0; border: none; background: none; color: var(--muted); font-family: var(--font); font-size: 0.78rem; font-weight: 600; cursor: pointer; text-align: center; width: 100%; }
@@ -790,7 +818,7 @@ main { flex: 1; }
 /* Modal (laporkan) */
 .sc-modal-overlay { position: fixed; inset: 0; background: rgba(15,23,42,.5); z-index: 100; display: none; align-items: center; justify-content: center; padding: 16px; }
 .sc-modal-overlay.open { display: flex; }
-.sc-modal-box { background: var(--card); border-radius: 14px; padding: 20px; width: 100%; max-width: 420px; max-height: 88vh; overflow-y: auto; }
+.sc-modal-box { background: var(--card); border-radius: 14px; box-shadow: 0 12px 40px rgba(0,0,0,.18); padding: 20px; width: 100%; max-width: 420px; max-height: 88vh; overflow-y: auto; }
 .sc-modal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
 .sc-modal-title { font-weight: 800; font-size: 1rem; }
 .sc-modal-close { border: none; background: none; font-size: 1.3rem; line-height: 1; color: var(--muted); cursor: pointer; padding: 4px; }
@@ -801,7 +829,8 @@ main { flex: 1; }
 .sc-form-label .opt { font-weight: 500; color: var(--subtle); font-size: 0.72rem; }
 .sc-form-hint { font-size: 0.72rem; color: var(--muted); margin-top: 5px; }
 .sc-seg { display: flex; gap: 6px; flex-wrap: wrap; }
-.sc-seg-btn { border: 1px solid var(--border); background: var(--card); color: var(--text); font-family: var(--font); font-size: 0.80rem; font-weight: 600; padding: 7px 12px; border-radius: 8px; cursor: pointer; }
+.sc-seg-btn { border: 1px solid var(--border); background: var(--card); color: var(--text); font-family: var(--font); font-size: 0.80rem; font-weight: 600; padding: 7px 12px; border-radius: 8px; cursor: pointer; transition: border-color .15s, background .15s, color .15s; }
+.sc-seg-btn:hover:not(.active) { border-color: var(--blue-border); background: var(--blue-soft); }
 .sc-seg-btn.active { border-color: var(--blue); background: var(--blue-soft); color: var(--blue); }
 .sc-form-section-title { font-weight: 800; font-size: 0.92rem; margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--border); }
 .sc-form-section-title:first-child { margin-top: 14px; padding-top: 0; border-top: none; }
@@ -810,7 +839,8 @@ main { flex: 1; }
 .sc-single-field { display: grid; grid-template-columns: 1fr auto; gap: 7px; margin-bottom: 7px; align-items: center; }
 .sc-icon-btn { border: 1px solid var(--border); background: var(--card); width: 36px; height: 36px; border-radius: 8px; cursor: pointer; color: var(--muted); flex-shrink: 0; font-size: 0.9rem; }
 .sc-icon-btn:hover { border-color: #fecaca; color: #dc2626; }
-.sc-add-row-btn { display: inline-block; font-size: 0.78rem; font-weight: 700; color: var(--blue); background: var(--blue-soft); border: 1px dashed var(--blue-border); border-radius: 8px; padding: 7px 12px; cursor: pointer; font-family: var(--font); margin-top: 2px; }
+.sc-add-row-btn { display: inline-block; font-size: 0.78rem; font-weight: 700; color: var(--blue); background: var(--blue-soft); border: 1px dashed var(--blue-border); border-radius: 8px; padding: 7px 12px; cursor: pointer; font-family: var(--font); margin-top: 2px; transition: background .15s, border-color .15s; }
+.sc-add-row-btn:hover { background: var(--blue-border); border-color: var(--blue); }
 .sc-callout { background: var(--blue-soft); border: 1px solid var(--blue-border); border-radius: 8px; padding: 10px 12px; margin-top: 8px; }
 .sc-callout-title { font-size: 0.76rem; font-weight: 700; color: var(--blue); margin-bottom: 3px; }
 .sc-callout ol { font-size: 0.76rem; padding-left: 16px; display: flex; flex-direction: column; gap: 2px; }
@@ -1249,17 +1279,20 @@ main { flex: 1; }
         </div>
         <div class="sc-form-group">
           <label class="sc-form-label" data-i18n="sc_label_deskripsi">Deskripsi</label>
-          <textarea class="sc-textarea" id="scfDeskripsi" data-i18n-placeholder="sc_placeholder_deskripsi" placeholder="Ceritakan singkat apa yang dilakukan aplikasi/karya ini..." maxlength="3000"></textarea>
+          <textarea class="sc-textarea" id="scfDeskripsi" style="min-height:130px;" data-i18n-placeholder="sc_placeholder_deskripsi" placeholder="Ceritakan singkat apa yang dilakukan aplikasi/karya ini..." maxlength="3000"></textarea>
         </div>
         <div class="sc-form-group">
-          <label class="sc-form-label"><span data-i18n="sc_label_teknologi">Teknologi</span> <span class="opt" data-i18n="sc_hint_koma">pisahkan dengan koma</span></label>
-          <input class="sc-input" id="scfTeknologi" data-i18n-placeholder="sc_placeholder_teknologi" placeholder="Flutter, TensorFlow Lite, Firebase">
+          <label class="sc-form-label"><span data-i18n="sc_label_teknologi">Teknologi</span> <span class="opt" data-i18n="sc_hint_koma">ketik lalu tekan koma atau Enter</span></label>
+          <div class="sc-tag-input" id="scfTeknologiWrap" onclick="document.getElementById('scfTeknologi').focus()">
+            <span id="scfTeknologiChips"></span>
+            <input id="scfTeknologi" data-i18n-placeholder="sc_placeholder_teknologi" placeholder="Flutter, TensorFlow Lite, Firebase" oninput="scTeknologiCommit_()" onkeydown="scTeknologiKeydown_(event)">
+          </div>
         </div>
 
         <div class="sc-form-section-title" data-i18n="sc_sec_kreator">Anggota Tim / Kreator</div>
         <div id="scfKreatorFields">
           <div class="sc-creator-field">
-            <input class="sc-input scf-kreator-nim" data-i18n-placeholder="sc_placeholder_nim" placeholder="NIM">
+            <input class="sc-input scf-kreator-nim" inputmode="numeric" pattern="[0-9]*" data-i18n-placeholder="sc_placeholder_nim" placeholder="NIM">
             <input class="sc-input scf-kreator-nama" data-i18n-placeholder="sc_placeholder_nama" placeholder="Nama lengkap">
             <button type="button" class="sc-icon-btn" onclick="scRemoveKreatorRow(this)" title="Hapus">&times;</button>
           </div>
@@ -1268,7 +1301,8 @@ main { flex: 1; }
 
         <div class="sc-form-group" style="margin-top:18px;">
           <label class="sc-form-label" data-i18n="sc_label_kontak">Kontak Tim</label>
-          <input class="sc-input" id="scfKontak" data-i18n-placeholder="sc_placeholder_kontak" placeholder="Email / nomor WhatsApp / Instagram">
+          <input class="sc-input" id="scfKontak" data-i18n-placeholder="sc_placeholder_kontak" placeholder="08123456789 / nama@email.com / @username">
+          <div class="sc-form-hint" data-i18n="sc_hint_kontak">Nomor WhatsApp aktif, alamat email, atau username Instagram (wajib diawali @, mis. @namamu) supaya jenis kontaknya otomatis terdeteksi.</div>
         </div>
 
         <div class="sc-form-section-title" data-i18n="sc_sec_tautan">Tautan</div>
@@ -1301,19 +1335,6 @@ main { flex: 1; }
               <li data-i18n="sc_tutorial_trailer_2">Buka videonya, klik tombol Share/Bagikan, salin link yang muncul</li>
               <li data-i18n="sc_tutorial_trailer_3">Tempel link tersebut di sini, nanti otomatis tampil sebagai video di halaman karyamu</li>
             </ol>
-          </div>
-        </div>
-        <div class="sc-form-group">
-          <label class="sc-form-label"><span data-i18n="sc_label_screenshot">Screenshot</span> <span class="opt" data-i18n="sc_hint_satu_per_baris">opsional, satu link per baris</span></label>
-          <textarea class="sc-textarea" id="scfScreenshot" placeholder="https://drive.google.com/...&#10;https://i.imgur.com/..."></textarea>
-          <div class="sc-callout">
-            <div class="sc-callout-title" data-i18n="sc_tutorial_shot_title">Cara mengambil link screenshot</div>
-            <ol>
-              <li data-i18n="sc_tutorial_shot_1">Upload gambar ke Google Drive, klik kanan file, Share/Bagikan</li>
-              <li data-i18n="sc_tutorial_shot_2">Ubah akses jadi "Siapa saja yang memiliki link" (Anyone with the link), Viewer</li>
-              <li data-i18n="sc_tutorial_shot_3">Salin link tersebut dan tempel di sini, satu link per baris untuk tiap gambar</li>
-            </ol>
-            <div class="sc-callout-alt" data-i18n="sc_tutorial_shot_alt">Alternatif lebih pasti tampil: upload ke Imgur/Postimages, lalu salin "direct image link" (biasanya berakhiran .jpg/.png).</div>
           </div>
         </div>
 
@@ -1502,12 +1523,11 @@ const I18N = {
     sc_back: 'Kembali',
     sc_creators_label: 'Dikerjakan Oleh',
     sc_academic_label: 'Informasi Akademik',
-    sc_sumber_tugas_label: 'Sumber Tugas',
+    sc_sumber_tugas_label: 'Mata Kuliah',
     sc_semester_label: 'Semester Dikerjakan',
     sc_dosen_label: 'Dosen Pembimbing',
     sc_kontak_label: 'Kontak Tim',
     sc_tech_label: 'Teknologi',
-    sc_feat_label: 'Fitur Unggulan',
     sc_btn_demo: 'Demo',
     sc_btn_source: 'Source Code',
     sc_report_link: 'Laporkan',
@@ -1535,7 +1555,7 @@ const I18N = {
     sc_placeholder_deskripsi: 'Ceritakan singkat apa yang dilakukan aplikasi/karya ini...',
     sc_label_teknologi: 'Teknologi',
     sc_placeholder_teknologi: 'Flutter, TensorFlow Lite, Firebase',
-    sc_hint_koma: 'pisahkan dengan koma',
+    sc_hint_koma: 'ketik lalu tekan koma atau Enter',
     sc_sec_kreator: 'Anggota Tim / Kreator',
     sc_placeholder_nim: 'NIM',
     sc_placeholder_nama: 'Nama lengkap',
@@ -1556,15 +1576,8 @@ const I18N = {
     sc_tutorial_trailer_1: 'Upload video ke YouTube (boleh diatur "Unlisted", tidak harus publik penuh)',
     sc_tutorial_trailer_2: 'Buka videonya, klik tombol Share/Bagikan, salin link yang muncul',
     sc_tutorial_trailer_3: 'Tempel link tersebut di sini, nanti otomatis tampil sebagai video di halaman karyamu',
-    sc_label_screenshot: 'Screenshot',
-    sc_hint_satu_per_baris: 'opsional, satu link per baris',
-    sc_tutorial_shot_title: 'Cara mengambil link screenshot',
-    sc_tutorial_shot_1: 'Upload gambar ke Google Drive, klik kanan file, Share/Bagikan',
-    sc_tutorial_shot_2: 'Ubah akses jadi "Siapa saja yang memiliki link" (Anyone with the link), Viewer',
-    sc_tutorial_shot_3: 'Salin link tersebut dan tempel di sini, satu link per baris untuk tiap gambar',
-    sc_tutorial_shot_alt: 'Alternatif lebih pasti tampil: upload ke Imgur/Postimages, lalu salin "direct image link" (biasanya berakhiran .jpg/.png).',
     sc_sec_akademik: 'Informasi Akademik',
-    sc_label_sumber: 'Sumber Tugas',
+    sc_label_sumber: 'Mata Kuliah',
     sc_opt_matkul: 'Mata Kuliah', sc_opt_ta: 'Tugas Akhir',
     sc_label_matkul: 'Nama Mata Kuliah',
     sc_placeholder_matkul: 'mis. Pemrograman Mobile',
@@ -1573,10 +1586,11 @@ const I18N = {
     sc_label_dosen: 'Dosen Pembimbing',
     sc_placeholder_dosen: 'mis. Dr. Ir. Ahmad Fauzan, S.Kom., M.T.',
     sc_label_kontak: 'Kontak Tim',
-    sc_placeholder_kontak: 'Email / nomor WhatsApp / Instagram',
+    sc_placeholder_kontak: '08123456789 / nama@email.com / @username',
+    sc_hint_kontak: 'Nomor WhatsApp aktif, alamat email, atau username Instagram (wajib diawali @, mis. @namamu) supaya jenis kontaknya otomatis terdeteksi.',
     sc_sec_konfirmasi: 'Konfirmasi',
     sc_consent1: 'Saya menyatakan karya ini benar dibuat oleh mahasiswa yang tercantum di atas.',
-    sc_consent2: 'Saya menyatakan seluruh data yang saya masukkan (nama, deskripsi, gambar, video) tidak mengandung unsur SARA (suku, agama, ras, dan antargolongan) atau konten yang menyinggung/melanggar hukum.',
+    sc_consent2: 'Saya menyatakan seluruh data yang saya masukkan (nama, deskripsi, video) tidak mengandung unsur SARA (suku, agama, ras, dan antargolongan) atau konten yang menyinggung/melanggar hukum.',
     sc_btn_submit: 'Kirim untuk Ditinjau',
     sc_submitting: 'Mengirim...',
     sc_success_title: 'Karya berhasil dikirim!',
@@ -1699,12 +1713,11 @@ const I18N = {
     sc_back: 'Back',
     sc_creators_label: 'Made By',
     sc_academic_label: 'Academic Information',
-    sc_sumber_tugas_label: 'Made For',
+    sc_sumber_tugas_label: 'Course',
     sc_semester_label: 'Semester Made',
     sc_dosen_label: 'Supervisor',
     sc_kontak_label: 'Team Contact',
     sc_tech_label: 'Technology',
-    sc_feat_label: 'Key Features',
     sc_btn_demo: 'Demo',
     sc_btn_source: 'Source Code',
     sc_report_link: 'Report',
@@ -1732,7 +1745,7 @@ const I18N = {
     sc_placeholder_deskripsi: 'Briefly describe what this app/work does...',
     sc_label_teknologi: 'Technology',
     sc_placeholder_teknologi: 'Flutter, TensorFlow Lite, Firebase',
-    sc_hint_koma: 'comma-separated',
+    sc_hint_koma: 'type then press comma or Enter',
     sc_sec_kreator: 'Team Members / Creators',
     sc_placeholder_nim: 'NIM',
     sc_placeholder_nama: 'Full name',
@@ -1753,15 +1766,8 @@ const I18N = {
     sc_tutorial_trailer_1: 'Upload the video to YouTube (it can be set to "Unlisted", it doesn\'t need to be fully public)',
     sc_tutorial_trailer_2: 'Open the video, click Share, copy the link that appears',
     sc_tutorial_trailer_3: 'Paste that link here, it will automatically show as a video on your work\'s page',
-    sc_label_screenshot: 'Screenshots',
-    sc_hint_satu_per_baris: 'optional, one link per line',
-    sc_tutorial_shot_title: 'How to get screenshot links',
-    sc_tutorial_shot_1: 'Upload the image to Google Drive, right-click the file, Share',
-    sc_tutorial_shot_2: 'Change access to "Anyone with the link", Viewer',
-    sc_tutorial_shot_3: 'Copy that link and paste it here, one link per line for each image',
-    sc_tutorial_shot_alt: 'For more reliable display: upload to Imgur/Postimages instead, then copy the "direct image link" (usually ending in .jpg/.png).',
     sc_sec_akademik: 'Academic Information',
-    sc_label_sumber: 'Made For',
+    sc_label_sumber: 'Course',
     sc_opt_matkul: 'Course', sc_opt_ta: 'Final Project',
     sc_label_matkul: 'Course Name',
     sc_placeholder_matkul: 'e.g. Mobile Programming',
@@ -1770,10 +1776,11 @@ const I18N = {
     sc_label_dosen: 'Supervisor',
     sc_placeholder_dosen: 'e.g. Dr. Ir. Ahmad Fauzan, S.Kom., M.T.',
     sc_label_kontak: 'Team Contact',
-    sc_placeholder_kontak: 'Email / WhatsApp number / Instagram',
+    sc_placeholder_kontak: '08123456789 / name@email.com / @username',
+    sc_hint_kontak: 'Active WhatsApp number, email address, or Instagram username (must start with @, e.g. @yourname) so the contact type can be auto-detected.',
     sc_sec_konfirmasi: 'Confirmation',
     sc_consent1: 'I confirm that this work was genuinely made by the students listed above.',
-    sc_consent2: 'I confirm that everything I entered (name, description, images, video) contains no SARA content (ethnicity, religion, race, and inter-group issues) or content that is offensive/unlawful.',
+    sc_consent2: 'I confirm that everything I entered (name, description, video) contains no SARA content (ethnicity, religion, race, and inter-group issues) or content that is offensive/unlawful.',
     sc_btn_submit: 'Submit for Review',
     sc_submitting: 'Submitting...',
     sc_success_title: 'Work submitted successfully!',
@@ -2274,8 +2281,8 @@ function escHtml(s) {
     .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-// Lapis pertahanan tambahan di klien untuk URL user (link demo/source/video/
-// screenshot) sebelum dipasang ke href="..." atau CSS url('...'). Backend
+// Lapis pertahanan tambahan di klien untuk URL user (link demo/source/video
+// trailer) sebelum dipasang ke href="..." atau CSS url('...'). Backend
 // (sanitizeUrl_ di Code.gs) sudah menolak skema selain http(s) dan tanda
 // kutip saat submit, tapi ini mencegah data lama/tidak terduga tetap lolos
 // sebagai javascript: URI atau CSS-injection saat dirender.
@@ -2503,18 +2510,35 @@ function scHideAllViews_() {
   });
 }
 
+// Placeholder ikon untuk kartu galeri yang belum punya trailer YouTube.
+// Dipakai ganti kotak abu polos supaya kartu tanpa preview tetap terlihat
+// tertata, bukan seperti kosong/rusak.
+var SC_ICON_NOPREVIEW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>';
+
 function scYoutubeId_(url) {
   var m = String(url || '').match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([a-zA-Z0-9_-]{11})/);
   return m ? m[1] : null;
 }
-function scDriveFileId_(url) {
-  var s = String(url || '');
-  var m = s.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/) || s.match(/[?&]id=([a-zA-Z0-9_-]+)/);
-  return m ? m[1] : null;
-}
-function scImageUrl_(url) {
-  var driveId = scDriveFileId_(url);
-  return driveId ? 'https://lh3.googleusercontent.com/d/' + driveId : url;
+
+// Deteksi otomatis jenis Kontak Tim (WA/Instagram/Email) dari format yang
+// ditulis mahasiswa, supaya pengunjung tahu cara menghubungi tanpa perlu
+// field terpisah. Instagram wajib diawali @ (dikonfirmasi lewat hint di
+// form) karena username polos tidak bisa dibedakan dari teks bebas lainnya.
+function scRenderKontak_(kontak) {
+  var s = String(kontak || '').trim();
+  if (!s) return '';
+  if (/^@[a-zA-Z0-9_.]{2,30}$/.test(s)) {
+    return '<a href="https://instagram.com/' + encodeURIComponent(s.slice(1)) + '" target="_blank" rel="noopener">Instagram: ' + escHtml(s) + '</a>';
+  }
+  if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s)) {
+    return '<a href="mailto:' + encodeURIComponent(s) + '">Email: ' + escHtml(s) + '</a>';
+  }
+  var digitsOnly = s.replace(/[\s-]/g, '');
+  if (/^(\+?62|0)8[0-9]{7,13}$/.test(digitsOnly)) {
+    var waNum = digitsOnly.replace(/^\+/, '').replace(/^0/, '62');
+    return '<a href="https://wa.me/' + waNum + '" target="_blank" rel="noopener">WhatsApp: ' + escHtml(s) + '</a>';
+  }
+  return escHtml(s);
 }
 
 // ---- Galeri ----
@@ -2577,6 +2601,14 @@ document.addEventListener('click', function(e) {
   if (menu && menu.style.display !== 'none' && !e.target.closest('.sc-sort-wrap')) menu.style.display = 'none';
 });
 
+// NIM cuma boleh angka, berlaku untuk semua baris kreator (statis, ditambah
+// dinamis, maupun hasil scPopulateForm_ saat resubmit) lewat event delegation.
+document.addEventListener('input', function(e) {
+  if (e.target.classList.contains('scf-kreator-nim')) {
+    e.target.value = e.target.value.replace(/\D/g, '');
+  }
+});
+
 function scSetSort(key) {
   _scSort = key;
   document.querySelectorAll('.sc-sort-option').forEach(function(o) { o.classList.toggle('active', o.dataset.sort === key); });
@@ -2608,19 +2640,21 @@ function scRenderGaleri() {
   if (!list.length) { grid.innerHTML = '<div class="sc-empty">' + t('sc_empty') + '</div>'; return; }
 
   grid.innerHTML = list.map(function(item) {
-    var thumb = (item.screenshot && item.screenshot.length) ? scImageUrl_(item.screenshot[0]) : '';
+    var thumbYt = scYoutubeId_(item.videoTrailer);
+    var thumb = thumbYt ? ('https://img.youtube.com/vi/' + thumbYt + '/hqdefault.jpg') : '';
     var thumbStyle = thumb ? ' style="background-image:url(\'' + safeUrl_(thumb) + '\')"' : '';
+    var thumbHtml = thumb ? ('<div class="sc-gthumb"' + thumbStyle + '></div>') : ('<div class="sc-gthumb sc-gthumb-empty">' + SC_ICON_NOPREVIEW + '</div>');
     var creators = item.kreator.length
       ? escHtml(item.kreator[0].nama) + (item.kreator.length > 1 ? ' ' + t('sc_creator_more', { n: item.kreator.length - 1 }) : '')
       : '';
-    var pemLabel = item.peminatan === 'Tanpa Peminatan' ? t('sc_peminatan_tanpa') : item.peminatan;
-    var pemTag = item.peminatan === 'SSD' ? 'sc-tag-ssd' : (item.peminatan === 'AISD' ? 'sc-tag-aisd' : 'sc-tag-none');
+    var pemBadge = item.peminatan === 'Tanpa Peminatan' ? '' :
+      '<span class="sc-tag ' + (item.peminatan === 'SSD' ? 'sc-tag-ssd' : 'sc-tag-aisd') + '">' + escHtml(item.peminatan) + '</span>';
     var statusTag = item.statusDeploy === 'Sudah Deploy' ? 'sc-tag-live' : 'sc-tag-dev';
     var statusLabel = item.statusDeploy === 'Sudah Deploy' ? t('sc_status_sudah') : t('sc_status_belum');
     return '<div class="sc-card sc-gcard" onclick="openShowcaseDetail(\'' + item.kode + '\')">' +
-      '<div class="sc-gthumb"' + thumbStyle + '></div>' +
+      thumbHtml +
       '<div class="sc-gbody">' +
-        '<div class="sc-tags"><span class="sc-tag sc-tag-jenis">' + escHtml(item.jenis) + '</span><span class="sc-tag ' + pemTag + '">' + escHtml(pemLabel) + '</span></div>' +
+        '<div class="sc-tags"><span class="sc-tag sc-tag-jenis">' + escHtml(item.jenis) + '</span>' + pemBadge + '</div>' +
         '<div class="sc-gtitle">' + escHtml(item.namaProgram) + '</div>' +
         '<div class="sc-gcreators">' + creators + '</div>' +
         '<div class="sc-gfoot"><span class="sc-tag ' + statusTag + '">' + statusLabel + '</span><span class="sc-likes"><span class="heart">&hearts;</span> ' + item.likes + '</span></div>' +
@@ -2664,25 +2698,14 @@ function scBuildDetailBodyHtml_(item, opts) {
   } else if (item.videoTrailer) {
     mediaHtml = '<a class="sc-hero-media" href="' + safeUrl_(item.videoTrailer) + '" target="_blank" rel="noopener"><span class="play">&#9654;</span></a>';
   }
-  var shotsHtml = (item.screenshot && item.screenshot.length)
-    ? '<div class="sc-shot-strip">' + item.screenshot.map(function(s) {
-        return '<div class="sc-shot" style="background-image:url(\'' + safeUrl_(scImageUrl_(s)) + '\')"></div>';
-      }).join('') + '</div>'
-    : '';
-
-  var pemLabel = item.peminatan === 'Tanpa Peminatan' ? t('sc_peminatan_tanpa') : item.peminatan;
-  var pemTag = item.peminatan === 'SSD' ? 'sc-tag-ssd' : (item.peminatan === 'AISD' ? 'sc-tag-aisd' : 'sc-tag-none');
+  var pemBadge = item.peminatan === 'Tanpa Peminatan' ? '' :
+    '<span class="sc-tag ' + (item.peminatan === 'SSD' ? 'sc-tag-ssd' : 'sc-tag-aisd') + '">' + escHtml(item.peminatan) + '</span>';
   var statusTag = item.statusDeploy === 'Sudah Deploy' ? 'sc-tag-live' : 'sc-tag-dev';
   var statusLabel = item.statusDeploy === 'Sudah Deploy' ? t('sc_status_sudah') : t('sc_status_belum');
 
   var creatorsHtml = item.kreator.map(function(k) {
-    return '<div class="sc-creator-row"><b>' + escHtml(k.nama) + '</b><div class="sc-creator-nim">' + escHtml(k.nim) + '</div></div>';
+    return '<div class="sc-creator-row"><b>' + escHtml(k.nama) + '</b><div class="sc-creator-nim">NIM. ' + escHtml(k.nim) + '</div></div>';
   }).join('');
-
-  var featList = pick(item.fiturUnggulan) || [];
-  var featHtml = featList.length
-    ? '<div class="sc-section-label">' + t('sc_feat_label') + '</div>' + featList.map(function(f) { return '<div class="sc-feat-item">' + escHtml(f) + '</div>'; }).join('')
-    : '';
 
   var sumberLabel = item.sumberTugas === 'Mata Kuliah' ? (item.mataKuliah || t('sc_opt_matkul')) : t('sc_opt_ta');
 
@@ -2703,14 +2726,13 @@ function scBuildDetailBodyHtml_(item, opts) {
     ? '<button class="sc-report-link" onclick="openScReportModal(\'' + item.kode + '\')">' + t('sc_report_link') + '</button>'
     : '';
 
-  return mediaHtml + shotsHtml +
+  return mediaHtml +
     '<div class="sc-detail-head">' +
-      '<div><div class="sc-tags"><span class="sc-tag sc-tag-jenis">' + escHtml(item.jenis) + '</span><span class="sc-tag ' + pemTag + '">' + escHtml(pemLabel) + '</span><span class="sc-tag ' + statusTag + '">' + statusLabel + '</span></div>' +
+      '<div><div class="sc-tags"><span class="sc-tag sc-tag-jenis">' + escHtml(item.jenis) + '</span>' + pemBadge + '<span class="sc-tag ' + statusTag + '">' + statusLabel + '</span></div>' +
       '<div class="sc-detail-title">' + escHtml(item.namaProgram) + '</div></div>' +
       likeHtml +
     '</div>' +
     '<p class="sc-detail-desc">' + escHtml(pick(item.deskripsi)) + '</p>' +
-    featHtml +
     '<div class="sc-section-label">' + t('sc_creators_label') + '</div>' +
     '<div class="sc-card" style="padding:2px 14px;">' + creatorsHtml + '</div>' +
     '<div class="sc-section-label">' + t('sc_academic_label') + '</div>' +
@@ -2718,7 +2740,7 @@ function scBuildDetailBodyHtml_(item, opts) {
       '<div><div class="sc-meta-k">' + t('sc_sumber_tugas_label') + '</div><div class="sc-meta-v">' + escHtml(sumberLabel) + '</div></div>' +
       '<div><div class="sc-meta-k">' + t('sc_semester_label') + '</div><div class="sc-meta-v">' + escHtml(item.semester) + '</div></div>' +
       ((item.dosenPembimbing && item.dosenPembimbing.length) ? '<div><div class="sc-meta-k">' + t('sc_dosen_label') + '</div><div class="sc-meta-v">' + escHtml(item.dosenPembimbing.join(', ')) + '</div></div>' : '') +
-      '<div><div class="sc-meta-k">' + t('sc_kontak_label') + '</div><div class="sc-meta-v">' + escHtml(item.kontakTim) + '</div></div>' +
+      '<div><div class="sc-meta-k">' + t('sc_kontak_label') + '</div><div class="sc-meta-v">' + scRenderKontak_(item.kontakTim) + '</div></div>' +
     '</div>' +
     techHtml + actionsHtml + reportHtml;
 }
@@ -2738,7 +2760,7 @@ async function scDoLike(kode) {
   document.getElementById('scLikeBtn').classList.add('liked');
   localStorage.setItem(likedKey, '1');
   try {
-    var res = await gasGet({ action: 'showcase_like', kode: kode });
+    var res = await gasGet({ action: 'showcase_like', kode: kode, lang: currentLang });
     if (res && res.ok) document.getElementById('scLikeCount').textContent = res.likes;
   } catch (e) {}
 }
@@ -2794,14 +2816,15 @@ function openShowcaseForm() {
 function scResetForm() {
   document.getElementById('scFormBody').style.display = 'block';
   document.getElementById('scFormSuccess').style.display = 'none';
-  ['scfNama','scfDeskripsi','scfTeknologi','scfKontak','scfDemo','scfSource','scfTrailer','scfScreenshot','scfMatkul','scfSemester'].forEach(function(id) {
+  ['scfNama','scfDeskripsi','scfTeknologi','scfKontak','scfDemo','scfSource','scfTrailer','scfMatkul','scfSemester'].forEach(function(id) {
     document.getElementById(id).value = '';
   });
+  document.getElementById('scfTeknologiChips').innerHTML = '';
   document.getElementById('scfConsent1').checked = false;
   document.getElementById('scfConsent2').checked = false;
   document.getElementById('scfKreatorFields').innerHTML =
     '<div class="sc-creator-field">' +
-      '<input class="sc-input scf-kreator-nim" placeholder="' + t('sc_placeholder_nim') + '">' +
+      '<input class="sc-input scf-kreator-nim" inputmode="numeric" pattern="[0-9]*" placeholder="' + t('sc_placeholder_nim') + '">' +
       '<input class="sc-input scf-kreator-nama" placeholder="' + t('sc_placeholder_nama') + '">' +
       '<button type="button" class="sc-icon-btn" onclick="scRemoveKreatorRow(this)" title="Hapus">&times;</button>' +
     '</div>';
@@ -2826,7 +2849,7 @@ function scAddKreatorRow() {
   var row = document.createElement('div');
   row.className = 'sc-creator-field';
   row.innerHTML =
-    '<input class="sc-input scf-kreator-nim" placeholder="' + t('sc_placeholder_nim') + '">' +
+    '<input class="sc-input scf-kreator-nim" inputmode="numeric" pattern="[0-9]*" placeholder="' + t('sc_placeholder_nim') + '">' +
     '<input class="sc-input scf-kreator-nama" placeholder="' + t('sc_placeholder_nama') + '">' +
     '<button type="button" class="sc-icon-btn" onclick="scRemoveKreatorRow(this)" title="Hapus">&times;</button>';
   wrap.appendChild(row);
@@ -2849,6 +2872,47 @@ function scRemoveDosenRow(btn) {
   var wrap = document.getElementById('scfDosenFields');
   if (wrap.children.length > 1) btn.closest('.sc-single-field').remove();
   else btn.closest('.sc-single-field').querySelector('.scf-dosen-nama').value = '';
+}
+
+// Tag-input Teknologi: ketik teks, koma atau Enter langsung mengubahnya jadi
+// chip supaya keyword yang sudah selesai diketik terlihat jelas terpisah,
+// bukan cuma teks polos dipisah koma.
+function scAddTechChip_(text) {
+  var val = String(text || '').trim();
+  if (!val) return;
+  var chips = document.getElementById('scfTeknologiChips');
+  var chip = document.createElement('span');
+  chip.className = 'sc-tag-chip';
+  chip.dataset.val = val;
+  chip.innerHTML = escHtml(val) + '<button type="button" tabindex="-1" onclick="scRemoveTechChip(this)">&times;</button>';
+  chips.appendChild(chip);
+}
+function scRemoveTechChip(btn) {
+  btn.closest('.sc-tag-chip').remove();
+}
+function scTeknologiCommit_() {
+  var input = document.getElementById('scfTeknologi');
+  if (input.value.indexOf(',') === -1) return;
+  var parts = input.value.split(',');
+  var last = parts.pop();
+  parts.forEach(function(p) { scAddTechChip_(p); });
+  input.value = last;
+}
+function scTeknologiKeydown_(e) {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    scAddTechChip_(e.target.value);
+    e.target.value = '';
+  } else if (e.key === 'Backspace' && !e.target.value) {
+    var chips = document.getElementById('scfTeknologiChips');
+    if (chips.lastElementChild) chips.lastElementChild.remove();
+  }
+}
+function scGetTechValues_() {
+  var vals = Array.prototype.map.call(document.querySelectorAll('#scfTeknologiChips .sc-tag-chip'), function(el) { return el.dataset.val; });
+  var trailing = document.getElementById('scfTeknologi').value.trim();
+  if (trailing) vals.push(trailing);
+  return vals;
 }
 
 function scSelectSeg(groupId, btn) {
@@ -2887,12 +2951,13 @@ var _scResubmitKode = null;
 function scPopulateForm_(item) {
   document.getElementById('scfNama').value = item.namaProgram;
   document.getElementById('scfDeskripsi').value = item.deskripsi.id;
-  document.getElementById('scfTeknologi').value = item.teknologi.join(', ');
+  document.getElementById('scfTeknologiChips').innerHTML = '';
+  document.getElementById('scfTeknologi').value = '';
+  (item.teknologi || []).forEach(function(x) { scAddTechChip_(x); });
   document.getElementById('scfKontak').value = item.kontakTim;
   document.getElementById('scfDemo').value = item.linkDemo;
   document.getElementById('scfSource').value = item.linkSourceCode;
   document.getElementById('scfTrailer').value = item.videoTrailer;
-  document.getElementById('scfScreenshot').value = item.screenshot.join('\n');
   document.getElementById('scfMatkul').value = item.mataKuliah;
   document.getElementById('scfSemester').value = item.semester;
 
@@ -2903,7 +2968,7 @@ function scPopulateForm_(item) {
 
   document.getElementById('scfKreatorFields').innerHTML = item.kreator.map(function(k) {
     return '<div class="sc-creator-field">' +
-      '<input class="sc-input scf-kreator-nim" value="' + escHtml(k.nim) + '">' +
+      '<input class="sc-input scf-kreator-nim" inputmode="numeric" pattern="[0-9]*" value="' + escHtml(k.nim) + '">' +
       '<input class="sc-input scf-kreator-nama" value="' + escHtml(k.nama) + '">' +
       '<button type="button" class="sc-icon-btn" onclick="scRemoveKreatorRow(this)" title="Hapus">&times;</button>' +
     '</div>';
@@ -3005,14 +3070,12 @@ async function submitShowcaseForm() {
     sumberTugas: sumberTugas,
     mataKuliah: mataKuliah,
     semester: semester,
-    teknologi: document.getElementById('scfTeknologi').value.split(',').map(function(s) { return s.trim(); }).filter(Boolean),
+    teknologi: scGetTechValues_(),
     kontakTim: kontakTim,
     statusDeploy: statusDeploy,
     linkDemo: linkDemo,
     linkSourceCode: document.getElementById('scfSource').value.trim(),
     videoTrailer: document.getElementById('scfTrailer').value.trim(),
-    screenshot: document.getElementById('scfScreenshot').value.split('\n').map(function(s) { return s.trim(); }).filter(Boolean),
-    fiturUnggulan: { id: [], en: [] },
     dosenPembimbing: Array.prototype.map.call(document.querySelectorAll('#scfDosenFields .scf-dosen-nama'), function(el) { return el.value.trim(); }).filter(Boolean)
   };
 
