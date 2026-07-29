@@ -1200,6 +1200,7 @@ main { flex: 1; }
             <button class="sc-fchip" data-val="Belum Deploy" onclick="scSetFilter('status','Belum Deploy',this)" data-i18n="sc_status_belum">Belum Deploy</button>
           </div>
         </div>
+        <button class="sc-btn sc-btn-primary sc-btn-sm sc-btn-block" onclick="scCloseFilterPanel()" data-i18n="sc_btn_terapkan">Terapkan</button>
       </div>
 
       <div class="sc-gallery-grid" id="scGaleriGrid"></div>
@@ -1214,11 +1215,12 @@ main { flex: 1; }
     <!-- Showcase: Form Submit -->
     <div id="scFormView">
       <button class="back-btn" onclick="openShowcaseGaleri()"><span class="arr">&#8592;</span> <span data-i18n="sc_back">Kembali</span></button>
-      <div class="home-headline" style="font-size:1.05rem;margin-bottom:4px;" data-i18n="sc_form_title">Tambahkan Karyamu ke Showcase</div>
+      <div id="scFormTitle" class="home-headline" style="font-size:1.05rem;margin-bottom:4px;" data-i18n="sc_form_title">Tambahkan Karyamu ke Showcase</div>
       <div class="home-sub" style="margin-bottom:0;" data-i18n="sc_form_sub">Isi form di bawah untuk menampilkan aplikasi, web, atau game buatanmu ke galeri publik.</div>
 
       <div class="sc-intro-note" data-i18n="sc_form_intro">Karya kamu akan ditinjau admin sebelum tayang. Setelah mengirim, kamu akan mendapat kode unik. Simpan baik-baik karena kode ini dipakai untuk mengecek status, dan nantinya jadi tautan tetap karyamu.</div>
 
+      <p id="scFormLoading" class="msg-center" style="display:none;"></p>
       <div id="scFormBody">
         <div class="sc-form-section-title" data-i18n="sc_sec_info">Informasi Program</div>
 
@@ -1359,7 +1361,7 @@ main { flex: 1; }
 
       <div id="scFormSuccess" class="sc-card sc-success-card" style="display:none;">
         <div class="sc-success-icon">&#10003;</div>
-        <div style="font-weight:800;font-size:1.05rem;" data-i18n="sc_success_title">Karya berhasil dikirim!</div>
+        <div id="scFormSuccessTitle" style="font-weight:800;font-size:1.05rem;" data-i18n="sc_success_title">Karya berhasil dikirim!</div>
         <p class="home-sub" style="margin-top:4px;" data-i18n="sc_success_sub">Simpan kode ini untuk mengecek status peninjauan.</p>
         <div class="sc-code-box" id="scFormSuccessCode"></div>
         <div><span class="sc-status-pill sc-status-menunggu" data-i18n="sc_success_status">Menunggu Peninjauan</span></div>
@@ -1378,6 +1380,7 @@ main { flex: 1; }
       </div>
 
       <div id="scStatusResult" style="margin-top:16px;"></div>
+      <div id="scOwnDetailBody" style="margin-top:12px;display:none;"></div>
     </div>
 
   </div>
@@ -1485,6 +1488,7 @@ const I18N = {
     sc_filter_semua_jenis: 'Semua Jenis',
     sc_filter_semua_peminatan: 'Semua Peminatan',
     sc_filter_semua_status: 'Semua Status',
+    sc_btn_terapkan: 'Terapkan',
     sc_peminatan_tanpa: 'Tanpa Peminatan',
     sc_status_sudah: 'Sudah Deploy', sc_status_belum: 'Belum Deploy',
     sc_sort_label: 'Urutkan',
@@ -1520,6 +1524,7 @@ const I18N = {
     sc_report_reason_short: 'Alasan laporan terlalu pendek (minimal 10 karakter).',
 
     sc_form_title: 'Tambahkan Karyamu ke Showcase',
+    sc_resubmit_title: 'Edit & Kirim Ulang Karya',
     sc_form_sub: 'Isi form di bawah untuk menampilkan aplikasi, web, atau game buatanmu ke galeri publik.',
     sc_form_intro: 'Karya kamu akan ditinjau admin sebelum tayang. Setelah mengirim, kamu akan mendapat kode unik. Simpan baik-baik karena kode ini dipakai untuk mengecek status, dan nantinya jadi tautan tetap karyamu.',
     sc_sec_info: 'Informasi Program',
@@ -1575,6 +1580,7 @@ const I18N = {
     sc_btn_submit: 'Kirim untuk Ditinjau',
     sc_submitting: 'Mengirim...',
     sc_success_title: 'Karya berhasil dikirim!',
+    sc_resubmit_success_title: 'Karya berhasil dikirim ulang!',
     sc_success_sub: 'Simpan kode ini untuk mengecek status peninjauan.',
     sc_success_status: 'Menunggu Peninjauan',
     sc_err_nama: 'Nama program wajib diisi.',
@@ -1595,6 +1601,8 @@ const I18N = {
     sc_status_ditolak: 'Ditolak',
     sc_status_alasan_label: 'Alasan',
     sc_btn_lihat_galeri: 'Lihat Karya di Galeri',
+    sc_btn_lihat_detail: 'Lihat Detail',
+    sc_btn_edit_kirim_ulang: 'Edit & Kirim Ulang',
     sc_status_not_found: 'Kode tidak ditemukan. Periksa kembali kode yang kamu masukkan.',
     sc_status_kosong: 'Masukkan kode pengajuan terlebih dahulu.'
   },
@@ -1677,6 +1685,7 @@ const I18N = {
     sc_filter_semua_jenis: 'All Types',
     sc_filter_semua_peminatan: 'All Tracks',
     sc_filter_semua_status: 'All Statuses',
+    sc_btn_terapkan: 'Apply',
     sc_peminatan_tanpa: 'No Specialization',
     sc_status_sudah: 'Deployed', sc_status_belum: 'Not Deployed Yet',
     sc_sort_label: 'Sort',
@@ -1712,6 +1721,7 @@ const I18N = {
     sc_report_reason_short: 'Report reason is too short (minimum 10 characters).',
 
     sc_form_title: 'Add Your Work to the Showcase',
+    sc_resubmit_title: 'Edit & Resubmit Work',
     sc_form_sub: 'Fill out the form below to feature your app, website, or game in the public gallery.',
     sc_form_intro: 'Your work will be reviewed by an admin before it goes live. After submitting, you\'ll get a unique code. Save it carefully as it\'s used to check the review status and will later become your work\'s permanent link.',
     sc_sec_info: 'Project Information',
@@ -1767,6 +1777,7 @@ const I18N = {
     sc_btn_submit: 'Submit for Review',
     sc_submitting: 'Submitting...',
     sc_success_title: 'Work submitted successfully!',
+    sc_resubmit_success_title: 'Work resubmitted successfully!',
     sc_success_sub: "Save this code to check the review status.",
     sc_success_status: 'Awaiting Review',
     sc_err_nama: 'Project name is required.',
@@ -1787,6 +1798,8 @@ const I18N = {
     sc_status_ditolak: 'Rejected',
     sc_status_alasan_label: 'Reason',
     sc_btn_lihat_galeri: 'View Work in Gallery',
+    sc_btn_lihat_detail: 'View Details',
+    sc_btn_edit_kirim_ulang: 'Edit & Resubmit',
     sc_status_not_found: 'Code not found. Please check the code you entered.',
     sc_status_kosong: 'Enter a submission code first.'
   }
@@ -2261,6 +2274,18 @@ function escHtml(s) {
     .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
+// Lapis pertahanan tambahan di klien untuk URL user (link demo/source/video/
+// screenshot) sebelum dipasang ke href="..." atau CSS url('...'). Backend
+// (sanitizeUrl_ di Code.gs) sudah menolak skema selain http(s) dan tanda
+// kutip saat submit, tapi ini mencegah data lama/tidak terduga tetap lolos
+// sebagai javascript: URI atau CSS-injection saat dirender.
+function safeUrl_(url) {
+  var s = String(url || '').trim();
+  if (!/^https?:\/\//i.test(s)) return '';
+  if (s.indexOf("'") !== -1 || s.indexOf('"') !== -1 || s.indexOf('<') !== -1 || s.indexOf('>') !== -1) return '';
+  return encodeURI(s);
+}
+
 function updateCharCounter(textareaId, counterId, min) {
   var len = document.getElementById(textareaId).value.trim().length;
   var el  = document.getElementById(counterId);
@@ -2526,6 +2551,11 @@ function scToggleFilterPanel() {
   btn.classList.toggle('active', open);
 }
 
+function scCloseFilterPanel() {
+  document.getElementById('scFilterPanel').style.display = 'none';
+  document.getElementById('scFilterToggleBtn').classList.remove('active');
+}
+
 function scSetFilter(group, val, btn) {
   _scFilters[group] = val;
   var bar = btn.parentElement;
@@ -2579,7 +2609,7 @@ function scRenderGaleri() {
 
   grid.innerHTML = list.map(function(item) {
     var thumb = (item.screenshot && item.screenshot.length) ? scImageUrl_(item.screenshot[0]) : '';
-    var thumbStyle = thumb ? ' style="background-image:url(\'' + encodeURI(thumb) + '\')"' : '';
+    var thumbStyle = thumb ? ' style="background-image:url(\'' + safeUrl_(thumb) + '\')"' : '';
     var creators = item.kreator.length
       ? escHtml(item.kreator[0].nama) + (item.kreator.length > 1 ? ' ' + t('sc_creator_more', { n: item.kreator.length - 1 }) : '')
       : '';
@@ -2620,21 +2650,23 @@ async function openShowcaseDetail(kode) {
   }
 }
 
-function scRenderDetail() {
-  var item = _scCurrentDetail;
-  if (!item) return;
-
+// Dipakai bersama oleh halaman Detail Karya publik (karya Disetujui) dan
+// tampilan "Lihat Detail" milik sendiri di Cek Status (berapa pun statusnya).
+// opts.showLike/opts.showReport mengatur elemen yang cuma relevan untuk
+// karya yang sudah tayang publik.
+function scBuildDetailBodyHtml_(item, opts) {
+  opts = opts || {};
   var yt = scYoutubeId_(item.videoTrailer);
   var mediaHtml = '';
   if (yt) {
     mediaHtml = '<div class="sc-hero-media" style="cursor:default;">' +
       '<iframe style="position:absolute;inset:0;width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/' + yt + '" allowfullscreen loading="lazy"></iframe></div>';
   } else if (item.videoTrailer) {
-    mediaHtml = '<a class="sc-hero-media" href="' + encodeURI(item.videoTrailer) + '" target="_blank" rel="noopener"><span class="play">&#9654;</span></a>';
+    mediaHtml = '<a class="sc-hero-media" href="' + safeUrl_(item.videoTrailer) + '" target="_blank" rel="noopener"><span class="play">&#9654;</span></a>';
   }
   var shotsHtml = (item.screenshot && item.screenshot.length)
     ? '<div class="sc-shot-strip">' + item.screenshot.map(function(s) {
-        return '<div class="sc-shot" style="background-image:url(\'' + encodeURI(scImageUrl_(s)) + '\')"></div>';
+        return '<div class="sc-shot" style="background-image:url(\'' + safeUrl_(scImageUrl_(s)) + '\')"></div>';
       }).join('') + '</div>'
     : '';
 
@@ -2660,16 +2692,22 @@ function scRenderDetail() {
     : '';
 
   var actionsHtml = '<div class="sc-action-row">' +
-    (item.linkDemo ? '<a class="sc-btn sc-btn-primary" href="' + encodeURI(item.linkDemo) + '" target="_blank" rel="noopener">' + t('sc_btn_demo') + '</a>' : '') +
-    (item.linkSourceCode ? '<a class="sc-btn sc-btn-outline" href="' + encodeURI(item.linkSourceCode) + '" target="_blank" rel="noopener">' + t('sc_btn_source') + '</a>' : '') +
+    (item.linkDemo ? '<a class="sc-btn sc-btn-primary" href="' + safeUrl_(item.linkDemo) + '" target="_blank" rel="noopener">' + t('sc_btn_demo') + '</a>' : '') +
+    (item.linkSourceCode ? '<a class="sc-btn sc-btn-outline" href="' + safeUrl_(item.linkSourceCode) + '" target="_blank" rel="noopener">' + t('sc_btn_source') + '</a>' : '') +
     '</div>';
 
-  document.getElementById('scDetailBody').innerHTML =
-    mediaHtml + shotsHtml +
+  var likeHtml = opts.showLike
+    ? '<button class="sc-like-btn" id="scLikeBtn" onclick="scDoLike(\'' + item.kode + '\')"><span id="scLikeHeart">&hearts;</span><span id="scLikeCount">' + item.likes + '</span></button>'
+    : '';
+  var reportHtml = opts.showReport
+    ? '<button class="sc-report-link" onclick="openScReportModal(\'' + item.kode + '\')">' + t('sc_report_link') + '</button>'
+    : '';
+
+  return mediaHtml + shotsHtml +
     '<div class="sc-detail-head">' +
       '<div><div class="sc-tags"><span class="sc-tag sc-tag-jenis">' + escHtml(item.jenis) + '</span><span class="sc-tag ' + pemTag + '">' + escHtml(pemLabel) + '</span><span class="sc-tag ' + statusTag + '">' + statusLabel + '</span></div>' +
       '<div class="sc-detail-title">' + escHtml(item.namaProgram) + '</div></div>' +
-      '<button class="sc-like-btn" id="scLikeBtn" onclick="scDoLike(\'' + item.kode + '\')"><span id="scLikeHeart">&hearts;</span><span id="scLikeCount">' + item.likes + '</span></button>' +
+      likeHtml +
     '</div>' +
     '<p class="sc-detail-desc">' + escHtml(pick(item.deskripsi)) + '</p>' +
     featHtml +
@@ -2682,9 +2720,13 @@ function scRenderDetail() {
       ((item.dosenPembimbing && item.dosenPembimbing.length) ? '<div><div class="sc-meta-k">' + t('sc_dosen_label') + '</div><div class="sc-meta-v">' + escHtml(item.dosenPembimbing.join(', ')) + '</div></div>' : '') +
       '<div><div class="sc-meta-k">' + t('sc_kontak_label') + '</div><div class="sc-meta-v">' + escHtml(item.kontakTim) + '</div></div>' +
     '</div>' +
-    techHtml + actionsHtml +
-    '<button class="sc-report-link" onclick="openScReportModal(\'' + item.kode + '\')">' + t('sc_report_link') + '</button>';
+    techHtml + actionsHtml + reportHtml;
+}
 
+function scRenderDetail() {
+  var item = _scCurrentDetail;
+  if (!item) return;
+  document.getElementById('scDetailBody').innerHTML = scBuildDetailBodyHtml_(item, { showLike: true, showReport: true });
   if (localStorage.getItem('sc_liked_' + item.kode)) {
     document.getElementById('scLikeBtn').classList.add('liked');
   }
@@ -2743,6 +2785,8 @@ async function submitScReport() {
 function openShowcaseForm() {
   scHideAllViews_();
   document.getElementById('scFormView').style.display = 'block';
+  _scResubmitKode = null;
+  document.getElementById('scFormTitle').textContent = t('sc_form_title');
   scResetForm();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -2811,6 +2855,10 @@ function scSelectSeg(groupId, btn) {
   var wrap = document.getElementById(groupId);
   wrap.querySelectorAll('.sc-seg-btn').forEach(function(b) { b.classList.remove('active'); });
   btn.classList.add('active');
+  scApplySegSideEffects_(groupId, btn);
+}
+
+function scApplySegSideEffects_(groupId, btn) {
   if (groupId === 'scfStatusDeploy') {
     var sudah = btn.dataset.val === 'Sudah Deploy';
     document.getElementById('scfDemoGroup').style.display = sudah ? 'block' : 'none';
@@ -2818,6 +2866,81 @@ function scSelectSeg(groupId, btn) {
   }
   if (groupId === 'scfSumber') {
     document.getElementById('scfMatkulGroup').style.display = (btn.dataset.val === 'Mata Kuliah') ? 'block' : 'none';
+  }
+}
+
+// Set nilai seg tanpa event klik (dipakai saat mengisi ulang form untuk Edit & Kirim Ulang).
+function scSetSegValue_(groupId, val) {
+  var wrap = document.getElementById(groupId);
+  var matched = null;
+  wrap.querySelectorAll('.sc-seg-btn').forEach(function(b) {
+    var isMatch = b.dataset.val === val;
+    b.classList.toggle('active', isMatch);
+    if (isMatch) matched = b;
+  });
+  if (matched) scApplySegSideEffects_(groupId, matched);
+}
+
+// ---- Edit & Kirim Ulang (karya berstatus Ditolak) ----
+var _scResubmitKode = null;
+
+function scPopulateForm_(item) {
+  document.getElementById('scfNama').value = item.namaProgram;
+  document.getElementById('scfDeskripsi').value = item.deskripsi.id;
+  document.getElementById('scfTeknologi').value = item.teknologi.join(', ');
+  document.getElementById('scfKontak').value = item.kontakTim;
+  document.getElementById('scfDemo').value = item.linkDemo;
+  document.getElementById('scfSource').value = item.linkSourceCode;
+  document.getElementById('scfTrailer').value = item.videoTrailer;
+  document.getElementById('scfScreenshot').value = item.screenshot.join('\n');
+  document.getElementById('scfMatkul').value = item.mataKuliah;
+  document.getElementById('scfSemester').value = item.semester;
+
+  scSetSegValue_('scfJenis', item.jenis);
+  scSetSegValue_('scfPeminatan', item.peminatan);
+  scSetSegValue_('scfSumber', item.sumberTugas);
+  scSetSegValue_('scfStatusDeploy', item.statusDeploy);
+
+  document.getElementById('scfKreatorFields').innerHTML = item.kreator.map(function(k) {
+    return '<div class="sc-creator-field">' +
+      '<input class="sc-input scf-kreator-nim" value="' + escHtml(k.nim) + '">' +
+      '<input class="sc-input scf-kreator-nama" value="' + escHtml(k.nama) + '">' +
+      '<button type="button" class="sc-icon-btn" onclick="scRemoveKreatorRow(this)" title="Hapus">&times;</button>' +
+    '</div>';
+  }).join('');
+
+  if (item.dosenPembimbing && item.dosenPembimbing.length) {
+    document.getElementById('scfDosenFields').innerHTML = item.dosenPembimbing.map(function(nm) {
+      return '<div class="sc-single-field">' +
+        '<input class="sc-input scf-dosen-nama" value="' + escHtml(nm) + '">' +
+        '<button type="button" class="sc-icon-btn" onclick="scRemoveDosenRow(this)" title="Hapus">&times;</button>' +
+      '</div>';
+    }).join('');
+  }
+}
+
+async function scOpenResubmit(kode) {
+  scHideAllViews_();
+  document.getElementById('scFormView').style.display = 'block';
+  document.getElementById('scFormTitle').textContent = t('sc_resubmit_title');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  scResetForm();
+  document.getElementById('scFormBody').style.display = 'none';
+  document.getElementById('scfSubmitBtn').style.display = 'none';
+  var loadingEl = document.getElementById('scFormLoading');
+  loadingEl.textContent = t('sc_loading');
+  loadingEl.style.display = 'block';
+  try {
+    var res = await gasGet({ action: 'showcase_mine', kode: kode, lang: currentLang });
+    if (!res || !res.ok) { scFormError_((res && res.message) || t('sc_error')); return; }
+    scPopulateForm_(res.item);
+    _scResubmitKode = kode;
+  } catch (e) {
+    scFormError_(t('sc_error'));
+  } finally {
+    loadingEl.style.display = 'none';
+    document.getElementById('scFormBody').style.display = '';
+    document.getElementById('scfSubmitBtn').style.display = '';
   }
 }
 
@@ -2896,11 +3019,16 @@ async function submitShowcaseForm() {
   var btn = document.getElementById('scfSubmitBtn');
   btn.disabled = true; btn.textContent = t('sc_submitting');
   try {
-    var res = await gasGet({ action: 'showcase_submit', data: JSON.stringify(payload), lang: currentLang });
+    var params = _scResubmitKode
+      ? { action: 'showcase_resubmit', kode: _scResubmitKode, data: JSON.stringify(payload), lang: currentLang }
+      : { action: 'showcase_submit', data: JSON.stringify(payload), lang: currentLang };
+    var res = await gasGet(params);
     if (res && res.ok) {
       document.getElementById('scFormBody').style.display = 'none';
       document.getElementById('scFormSuccess').style.display = 'block';
+      document.getElementById('scFormSuccessTitle').textContent = _scResubmitKode ? t('sc_resubmit_success_title') : t('sc_success_title');
       document.getElementById('scFormSuccessCode').textContent = res.kode;
+      _scResubmitKode = null;
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       btn.disabled = false; btn.textContent = t('sc_btn_submit');
@@ -2918,6 +3046,8 @@ function openShowcaseStatus() {
   document.getElementById('scStatusView').style.display = 'block';
   document.getElementById('scStatusResult').innerHTML = '';
   document.getElementById('scStatusInput').value = '';
+  document.getElementById('scOwnDetailBody').innerHTML = '';
+  document.getElementById('scOwnDetailBody').style.display = 'none';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -2941,13 +3071,31 @@ async function cekShowcaseStatus() {
       '</div>';
     if (res.statusModerasi === 'Disetujui') {
       html += '<button class="sc-btn sc-btn-outline sc-btn-sm" onclick="openShowcaseDetail(\'' + res.kode + '\')">' + t('sc_btn_lihat_galeri') + '</button>';
-    } else if (res.statusModerasi === 'Ditolak' && res.alasanDitolak) {
-      html += '<div class="sc-reject-reason"><b>' + t('sc_status_alasan_label') + ':</b> ' + escHtml(res.alasanDitolak) + '</div>';
+    } else if (res.statusModerasi === 'Ditolak') {
+      if (res.alasanDitolak) html += '<div class="sc-reject-reason"><b>' + t('sc_status_alasan_label') + ':</b> ' + escHtml(res.alasanDitolak) + '</div>';
+      html += '<div class="sc-action-row"><button class="sc-btn sc-btn-primary sc-btn-sm" onclick="scOpenResubmit(\'' + res.kode + '\')">' + t('sc_btn_edit_kirim_ulang') + '</button></div>';
+    } else {
+      html += '<div class="sc-action-row"><button class="sc-btn sc-btn-outline sc-btn-sm" onclick="scViewOwnDetail(\'' + res.kode + '\')">' + t('sc_btn_lihat_detail') + '</button></div>';
     }
     html += '</div>';
     resultEl.innerHTML = html;
+    document.getElementById('scOwnDetailBody').innerHTML = '';
+    document.getElementById('scOwnDetailBody').style.display = 'none';
   } catch (e) {
     resultEl.innerHTML = '<p class="msg-error">' + t('sc_error') + '</p>';
+  }
+}
+
+async function scViewOwnDetail(kode) {
+  var box = document.getElementById('scOwnDetailBody');
+  box.style.display = 'block';
+  box.innerHTML = '<p class="msg-center">' + t('sc_loading') + '</p>';
+  try {
+    var res = await gasGet({ action: 'showcase_mine', kode: kode, lang: currentLang });
+    if (!res || !res.ok) { box.innerHTML = '<p class="msg-error">' + ((res && res.message) || t('sc_error')) + '</p>'; return; }
+    box.innerHTML = '<div class="sc-card">' + scBuildDetailBodyHtml_(res.item, { showLike: false, showReport: false }) + '</div>';
+  } catch (e) {
+    box.innerHTML = '<p class="msg-error">' + t('sc_error') + '</p>';
   }
 }
 </script>
