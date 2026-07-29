@@ -827,6 +827,7 @@ main { flex: 1; }
 .sc-form-group { margin-top: 14px; }
 .sc-form-label { font-size: 0.80rem; font-weight: 700; margin-bottom: 6px; display: block; }
 .sc-form-label .opt { font-weight: 500; color: var(--subtle); font-size: 0.72rem; }
+.sc-req { color: #dc2626; }
 .sc-form-hint { font-size: 0.72rem; color: var(--muted); margin-top: 5px; }
 .sc-seg { display: flex; gap: 6px; flex-wrap: wrap; }
 .sc-seg-btn { border: 1px solid var(--border); background: var(--card); color: var(--text); font-family: var(--font); font-size: 0.80rem; font-weight: 600; padding: 7px 12px; border-radius: 8px; cursor: pointer; transition: border-color .15s, background .15s, color .15s; }
@@ -1249,13 +1250,14 @@ main { flex: 1; }
       <div class="home-sub" style="margin-bottom:0;" data-i18n="sc_form_sub">Isi form di bawah untuk menampilkan aplikasi, web, atau game buatanmu ke galeri publik.</div>
 
       <div class="sc-intro-note" data-i18n="sc_form_intro">Karya kamu akan ditinjau admin sebelum tayang. Setelah mengirim, kamu akan mendapat kode unik. Simpan baik-baik karena kode ini dipakai untuk mengecek status, dan nantinya jadi tautan tetap karyamu.</div>
+      <div class="sc-form-hint" style="margin-top:6px;"><span class="sc-req">*</span> <span data-i18n="sc_req_legend">wajib diisi, sisanya opsional</span></div>
 
       <p id="scFormLoading" class="msg-center" style="display:none;"></p>
       <div id="scFormBody">
         <div class="sc-form-section-title" data-i18n="sc_sec_info">Informasi Program</div>
 
         <div class="sc-form-group">
-          <label class="sc-form-label" data-i18n="sc_label_nama">Nama Program</label>
+          <label class="sc-form-label"><span data-i18n="sc_label_nama">Nama Program</span> <span class="sc-req">*</span></label>
           <input class="sc-input" id="scfNama" maxlength="150">
         </div>
         <div class="sc-form-group">
@@ -1278,18 +1280,18 @@ main { flex: 1; }
           </div>
         </div>
         <div class="sc-form-group">
-          <label class="sc-form-label" data-i18n="sc_label_deskripsi">Deskripsi</label>
+          <label class="sc-form-label"><span data-i18n="sc_label_deskripsi">Deskripsi</span> <span class="sc-req">*</span></label>
           <textarea class="sc-textarea" id="scfDeskripsi" style="min-height:130px;" data-i18n-placeholder="sc_placeholder_deskripsi" placeholder="Ceritakan singkat apa yang dilakukan aplikasi/karya ini..." maxlength="3000"></textarea>
         </div>
         <div class="sc-form-group">
-          <label class="sc-form-label"><span data-i18n="sc_label_teknologi">Teknologi</span> <span class="opt" data-i18n="sc_hint_koma">ketik lalu tekan koma atau Enter</span></label>
+          <label class="sc-form-label"><span data-i18n="sc_label_teknologi">Teknologi</span> <span class="opt" data-i18n="sc_hint_koma">ketik lalu tekan koma atau Enter, opsional</span></label>
           <div class="sc-tag-input" id="scfTeknologiWrap" onclick="document.getElementById('scfTeknologi').focus()">
             <span id="scfTeknologiChips"></span>
             <input id="scfTeknologi" data-i18n-placeholder="sc_placeholder_teknologi" placeholder="Flutter, TensorFlow Lite, Firebase" oninput="scTeknologiCommit_()" onkeydown="scTeknologiKeydown_(event)">
           </div>
         </div>
 
-        <div class="sc-form-section-title" data-i18n="sc_sec_kreator">Anggota Tim / Kreator</div>
+        <div class="sc-form-section-title"><span data-i18n="sc_sec_kreator">Anggota Tim / Kreator</span> <span class="sc-req">*</span></div>
         <div id="scfKreatorFields">
           <div class="sc-creator-field">
             <input class="sc-input scf-kreator-nim" inputmode="numeric" pattern="[0-9]*" data-i18n-placeholder="sc_placeholder_nim" placeholder="NIM">
@@ -1300,9 +1302,9 @@ main { flex: 1; }
         <button type="button" class="sc-add-row-btn" onclick="scAddKreatorRow()" data-i18n="sc_btn_tambah_anggota">+ Tambah Anggota</button>
 
         <div class="sc-form-group" style="margin-top:18px;">
-          <label class="sc-form-label" data-i18n="sc_label_kontak">Kontak Tim</label>
-          <input class="sc-input" id="scfKontak" data-i18n-placeholder="sc_placeholder_kontak" placeholder="08123456789 / nama@email.com / @username">
-          <div class="sc-form-hint" data-i18n="sc_hint_kontak">Nomor WhatsApp aktif, alamat email, atau username Instagram (wajib diawali @, mis. @namamu) supaya jenis kontaknya otomatis terdeteksi.</div>
+          <label class="sc-form-label"><span data-i18n="sc_label_kontak">Kontak Tim</span> <span class="sc-req">*</span></label>
+          <input class="sc-input" id="scfKontak" type="email" data-i18n-placeholder="sc_placeholder_kontak" placeholder="nama@email.com">
+          <div class="sc-form-hint" data-i18n="sc_hint_kontak">Gunakan alamat email aktif tim, supaya pengunjung bisa menghubungi lewat link yang muncul di halaman detail.</div>
         </div>
 
         <div class="sc-form-section-title" data-i18n="sc_sec_tautan">Tautan</div>
@@ -1315,7 +1317,7 @@ main { flex: 1; }
           </div>
         </div>
         <div class="sc-form-group" id="scfDemoGroup" style="display:none;">
-          <label class="sc-form-label" data-i18n="sc_label_demo">Link Demo</label>
+          <label class="sc-form-label"><span data-i18n="sc_label_demo">Link Demo</span> <span class="sc-req">*</span></label>
           <input class="sc-input" id="scfDemo" data-i18n-placeholder="sc_placeholder_demo" placeholder="https://play.google.com/... atau link uji coba lainnya">
         </div>
         <div class="sc-form-group" id="scfDemoNote">
@@ -1343,16 +1345,17 @@ main { flex: 1; }
         <div class="sc-form-group">
           <label class="sc-form-label" data-i18n="sc_label_sumber">Sumber Tugas</label>
           <div class="sc-seg" id="scfSumber">
+            <button type="button" class="sc-seg-btn" data-val="Kompetisi" data-i18n="sc_opt_kompetisi" onclick="scSelectSeg('scfSumber',this)">Kompetisi</button>
             <button type="button" class="sc-seg-btn active" data-val="Mata Kuliah" data-i18n="sc_opt_matkul" onclick="scSelectSeg('scfSumber',this)">Mata Kuliah</button>
             <button type="button" class="sc-seg-btn" data-val="Tugas Akhir" data-i18n="sc_opt_ta" onclick="scSelectSeg('scfSumber',this)">Tugas Akhir</button>
           </div>
         </div>
         <div class="sc-form-group" id="scfMatkulGroup">
-          <label class="sc-form-label" data-i18n="sc_label_matkul">Nama Mata Kuliah</label>
-          <input class="sc-input" id="scfMatkul" data-i18n-placeholder="sc_placeholder_matkul" placeholder="mis. Pemrograman Mobile">
+          <label class="sc-form-label" id="scfMatkulLabel"><span data-i18n="sc_label_matkul">Nama Mata Kuliah</span> <span class="sc-req">*</span></label>
+          <input class="sc-input" id="scfMatkul" placeholder="mis. Pemrograman Mobile">
         </div>
         <div class="sc-form-group">
-          <label class="sc-form-label" data-i18n="sc_label_semester">Semester Dikerjakan</label>
+          <label class="sc-form-label"><span data-i18n="sc_label_semester">Semester Dikerjakan</span> <span class="sc-req">*</span></label>
           <input class="sc-input" id="scfSemester" data-i18n-placeholder="sc_placeholder_semester" placeholder="mis. Genap 2025/2026">
         </div>
         <div class="sc-form-group">
@@ -1523,7 +1526,7 @@ const I18N = {
     sc_back: 'Kembali',
     sc_creators_label: 'Dikerjakan Oleh',
     sc_academic_label: 'Informasi Akademik',
-    sc_sumber_tugas_label: 'Mata Kuliah',
+    sc_sumber_tugas_label: 'Sumber Karya',
     sc_semester_label: 'Semester Dikerjakan',
     sc_dosen_label: 'Dosen Pembimbing',
     sc_kontak_label: 'Kontak Tim',
@@ -1548,6 +1551,7 @@ const I18N = {
     sc_form_sub: 'Isi form di bawah untuk menampilkan aplikasi, web, atau game buatanmu ke galeri publik.',
     sc_form_intro: 'Karya kamu akan ditinjau admin sebelum tayang. Setelah mengirim, kamu akan mendapat kode unik. Simpan baik-baik karena kode ini dipakai untuk mengecek status, dan nantinya jadi tautan tetap karyamu.',
     sc_sec_info: 'Informasi Program',
+    sc_req_legend: 'wajib diisi, sisanya opsional',
     sc_label_nama: 'Nama Program',
     sc_label_jenis: 'Jenis',
     sc_label_peminatan: 'Peminatan',
@@ -1555,7 +1559,7 @@ const I18N = {
     sc_placeholder_deskripsi: 'Ceritakan singkat apa yang dilakukan aplikasi/karya ini...',
     sc_label_teknologi: 'Teknologi',
     sc_placeholder_teknologi: 'Flutter, TensorFlow Lite, Firebase',
-    sc_hint_koma: 'ketik lalu tekan koma atau Enter',
+    sc_hint_koma: 'ketik lalu tekan koma atau Enter, opsional',
     sc_sec_kreator: 'Anggota Tim / Kreator',
     sc_placeholder_nim: 'NIM',
     sc_placeholder_nama: 'Nama lengkap',
@@ -1577,17 +1581,19 @@ const I18N = {
     sc_tutorial_trailer_2: 'Buka videonya, klik tombol Share/Bagikan, salin link yang muncul',
     sc_tutorial_trailer_3: 'Tempel link tersebut di sini, nanti otomatis tampil sebagai video di halaman karyamu',
     sc_sec_akademik: 'Informasi Akademik',
-    sc_label_sumber: 'Mata Kuliah',
-    sc_opt_matkul: 'Mata Kuliah', sc_opt_ta: 'Tugas Akhir',
+    sc_label_sumber: 'Sumber Karya',
+    sc_opt_matkul: 'Mata Kuliah', sc_opt_ta: 'Tugas Akhir', sc_opt_kompetisi: 'Kompetisi',
     sc_label_matkul: 'Nama Mata Kuliah',
+    sc_label_kompetisi: 'Nama Kompetisi',
     sc_placeholder_matkul: 'mis. Pemrograman Mobile',
+    sc_placeholder_kompetisi: 'mis. Gemastik 2026',
     sc_label_semester: 'Semester Dikerjakan',
     sc_placeholder_semester: 'mis. Genap 2025/2026',
     sc_label_dosen: 'Dosen Pembimbing',
     sc_placeholder_dosen: 'mis. Dr. Ir. Ahmad Fauzan, S.Kom., M.T.',
     sc_label_kontak: 'Kontak Tim',
-    sc_placeholder_kontak: '08123456789 / nama@email.com / @username',
-    sc_hint_kontak: 'Nomor WhatsApp aktif, alamat email, atau username Instagram (wajib diawali @, mis. @namamu) supaya jenis kontaknya otomatis terdeteksi.',
+    sc_placeholder_kontak: 'nama@email.com',
+    sc_hint_kontak: 'Gunakan alamat email aktif tim, supaya pengunjung bisa menghubungi lewat link yang muncul di halaman detail.',
     sc_sec_konfirmasi: 'Konfirmasi',
     sc_consent1: 'Saya menyatakan karya ini benar dibuat oleh mahasiswa yang tercantum di atas.',
     sc_consent2: 'Saya menyatakan seluruh data yang saya masukkan (nama, deskripsi, video) tidak mengandung unsur SARA (suku, agama, ras, dan antargolongan) atau konten yang menyinggung/melanggar hukum.',
@@ -1601,8 +1607,10 @@ const I18N = {
     sc_err_deskripsi: 'Deskripsi wajib diisi.',
     sc_err_kreator: 'Minimal 1 kreator (NIM dan nama) wajib diisi.',
     sc_err_matkul: 'Nama mata kuliah wajib diisi.',
+    sc_err_kompetisi: 'Nama kompetisi wajib diisi.',
     sc_err_semester: 'Semester dikerjakan wajib diisi.',
     sc_err_kontak: 'Kontak tim wajib diisi.',
+    sc_err_kontak_email: 'Kontak tim harus berupa alamat email yang valid.',
     sc_err_demo: 'Link demo wajib diisi untuk status Sudah Deploy.',
     sc_err_consent: 'Centang kedua kotak konfirmasi sebelum mengirim.',
 
@@ -1713,7 +1721,7 @@ const I18N = {
     sc_back: 'Back',
     sc_creators_label: 'Made By',
     sc_academic_label: 'Academic Information',
-    sc_sumber_tugas_label: 'Course',
+    sc_sumber_tugas_label: 'Work Source',
     sc_semester_label: 'Semester Made',
     sc_dosen_label: 'Supervisor',
     sc_kontak_label: 'Team Contact',
@@ -1738,6 +1746,7 @@ const I18N = {
     sc_form_sub: 'Fill out the form below to feature your app, website, or game in the public gallery.',
     sc_form_intro: 'Your work will be reviewed by an admin before it goes live. After submitting, you\'ll get a unique code. Save it carefully as it\'s used to check the review status and will later become your work\'s permanent link.',
     sc_sec_info: 'Project Information',
+    sc_req_legend: 'required, everything else is optional',
     sc_label_nama: 'Project Name',
     sc_label_jenis: 'Type',
     sc_label_peminatan: 'Track',
@@ -1745,7 +1754,7 @@ const I18N = {
     sc_placeholder_deskripsi: 'Briefly describe what this app/work does...',
     sc_label_teknologi: 'Technology',
     sc_placeholder_teknologi: 'Flutter, TensorFlow Lite, Firebase',
-    sc_hint_koma: 'type then press comma or Enter',
+    sc_hint_koma: 'type then press comma or Enter, optional',
     sc_sec_kreator: 'Team Members / Creators',
     sc_placeholder_nim: 'NIM',
     sc_placeholder_nama: 'Full name',
@@ -1767,17 +1776,19 @@ const I18N = {
     sc_tutorial_trailer_2: 'Open the video, click Share, copy the link that appears',
     sc_tutorial_trailer_3: 'Paste that link here, it will automatically show as a video on your work\'s page',
     sc_sec_akademik: 'Academic Information',
-    sc_label_sumber: 'Course',
-    sc_opt_matkul: 'Course', sc_opt_ta: 'Final Project',
+    sc_label_sumber: 'Work Source',
+    sc_opt_matkul: 'Course', sc_opt_ta: 'Final Project', sc_opt_kompetisi: 'Competition',
     sc_label_matkul: 'Course Name',
+    sc_label_kompetisi: 'Competition Name',
     sc_placeholder_matkul: 'e.g. Mobile Programming',
+    sc_placeholder_kompetisi: 'e.g. Gemastik 2026',
     sc_label_semester: 'Semester Made',
     sc_placeholder_semester: 'e.g. Even 2025/2026',
     sc_label_dosen: 'Supervisor',
     sc_placeholder_dosen: 'e.g. Dr. Ir. Ahmad Fauzan, S.Kom., M.T.',
     sc_label_kontak: 'Team Contact',
-    sc_placeholder_kontak: '08123456789 / name@email.com / @username',
-    sc_hint_kontak: 'Active WhatsApp number, email address, or Instagram username (must start with @, e.g. @yourname) so the contact type can be auto-detected.',
+    sc_placeholder_kontak: 'name@email.com',
+    sc_hint_kontak: 'Use an active team email address, so visitors can reach you via the link shown on the detail page.',
     sc_sec_konfirmasi: 'Confirmation',
     sc_consent1: 'I confirm that this work was genuinely made by the students listed above.',
     sc_consent2: 'I confirm that everything I entered (name, description, video) contains no SARA content (ethnicity, religion, race, and inter-group issues) or content that is offensive/unlawful.',
@@ -1791,8 +1802,10 @@ const I18N = {
     sc_err_deskripsi: 'Description is required.',
     sc_err_kreator: 'At least 1 creator (NIM and name) is required.',
     sc_err_matkul: 'Course name is required.',
+    sc_err_kompetisi: 'Competition name is required.',
     sc_err_semester: 'The semester it was made in is required.',
     sc_err_kontak: 'Team contact is required.',
+    sc_err_kontak_email: 'Team contact must be a valid email address.',
     sc_err_demo: 'Demo link is required when status is Deployed.',
     sc_err_consent: 'Check both confirmation boxes before submitting.',
 
@@ -2515,28 +2528,22 @@ function scHideAllViews_() {
 // tertata, bukan seperti kosong/rusak.
 var SC_ICON_NOPREVIEW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>';
 
+// Kontak Tim ditetapkan email saja, dipakai baik saat validasi form maupun render detail.
+var SC_EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 function scYoutubeId_(url) {
   var m = String(url || '').match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([a-zA-Z0-9_-]{11})/);
   return m ? m[1] : null;
 }
 
-// Deteksi otomatis jenis Kontak Tim (WA/Instagram/Email) dari format yang
-// ditulis mahasiswa, supaya pengunjung tahu cara menghubungi tanpa perlu
-// field terpisah. Instagram wajib diawali @ (dikonfirmasi lewat hint di
-// form) karena username polos tidak bisa dibedakan dari teks bebas lainnya.
+// Kontak Tim ditetapkan email saja (lihat sc_email_regex_) supaya tidak perlu
+// menebak jenis kontak dari format teks. Dirender langsung sebagai link
+// mailto: tanpa label tambahan.
 function scRenderKontak_(kontak) {
   var s = String(kontak || '').trim();
   if (!s) return '';
-  if (/^@[a-zA-Z0-9_.]{2,30}$/.test(s)) {
-    return '<a href="https://instagram.com/' + encodeURIComponent(s.slice(1)) + '" target="_blank" rel="noopener">Instagram: ' + escHtml(s) + '</a>';
-  }
-  if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s)) {
-    return '<a href="mailto:' + encodeURIComponent(s) + '">Email: ' + escHtml(s) + '</a>';
-  }
-  var digitsOnly = s.replace(/[\s-]/g, '');
-  if (/^(\+?62|0)8[0-9]{7,13}$/.test(digitsOnly)) {
-    var waNum = digitsOnly.replace(/^\+/, '').replace(/^0/, '62');
-    return '<a href="https://wa.me/' + waNum + '" target="_blank" rel="noopener">WhatsApp: ' + escHtml(s) + '</a>';
+  if (SC_EMAIL_REGEX.test(s)) {
+    return '<a href="mailto:' + encodeURIComponent(s) + '">' + escHtml(s) + '</a>';
   }
   return escHtml(s);
 }
@@ -2624,7 +2631,7 @@ function scRenderGaleri() {
     if (_scFilters.peminatan && item.peminatan !== _scFilters.peminatan) return false;
     if (_scFilters.status && item.statusDeploy !== _scFilters.status) return false;
     if (q) {
-      var hay = [item.namaProgram, item.teknologi.join(' '), item.kreator.map(function(k) { return k.nama; }).join(' ')].join(' ').toLowerCase();
+      var hay = [item.namaProgram, item.namaProgramEn, item.teknologi.join(' '), item.kreator.map(function(k) { return k.nama; }).join(' ')].join(' ').toLowerCase();
       if (hay.indexOf(q) === -1) return false;
     }
     return true;
@@ -2655,7 +2662,7 @@ function scRenderGaleri() {
       thumbHtml +
       '<div class="sc-gbody">' +
         '<div class="sc-tags"><span class="sc-tag sc-tag-jenis">' + escHtml(item.jenis) + '</span>' + pemBadge + '</div>' +
-        '<div class="sc-gtitle">' + escHtml(item.namaProgram) + '</div>' +
+        '<div class="sc-gtitle">' + escHtml((currentLang === 'en' && item.namaProgramEn) ? item.namaProgramEn : item.namaProgram) + '</div>' +
         '<div class="sc-gcreators">' + creators + '</div>' +
         '<div class="sc-gfoot"><span class="sc-tag ' + statusTag + '">' + statusLabel + '</span><span class="sc-likes"><span class="heart">&hearts;</span> ' + item.likes + '</span></div>' +
       '</div>' +
@@ -2707,7 +2714,11 @@ function scBuildDetailBodyHtml_(item, opts) {
     return '<div class="sc-creator-row"><b>' + escHtml(k.nama) + '</b><div class="sc-creator-nim">NIM. ' + escHtml(k.nim) + '</div></div>';
   }).join('');
 
-  var sumberLabel = item.sumberTugas === 'Mata Kuliah' ? (item.mataKuliah || t('sc_opt_matkul')) : t('sc_opt_ta');
+  var mataKuliahDisplay = (currentLang === 'en' && item.mataKuliahEn) ? item.mataKuliahEn : item.mataKuliah;
+  var sumberLabel = (item.sumberTugas === 'Mata Kuliah' || item.sumberTugas === 'Kompetisi')
+    ? (mataKuliahDisplay || t(item.sumberTugas === 'Kompetisi' ? 'sc_opt_kompetisi' : 'sc_opt_matkul'))
+    : t('sc_opt_ta');
+  var namaProgramDisplay = (currentLang === 'en' && item.namaProgramEn) ? item.namaProgramEn : item.namaProgram;
 
   var techHtml = (item.teknologi && item.teknologi.length)
     ? '<div class="sc-section-label">' + t('sc_tech_label') + '</div><div class="sc-tech-pills">' +
@@ -2729,7 +2740,7 @@ function scBuildDetailBodyHtml_(item, opts) {
   return mediaHtml +
     '<div class="sc-detail-head">' +
       '<div><div class="sc-tags"><span class="sc-tag sc-tag-jenis">' + escHtml(item.jenis) + '</span>' + pemBadge + '<span class="sc-tag ' + statusTag + '">' + statusLabel + '</span></div>' +
-      '<div class="sc-detail-title">' + escHtml(item.namaProgram) + '</div></div>' +
+      '<div class="sc-detail-title">' + escHtml(namaProgramDisplay) + '</div></div>' +
       likeHtml +
     '</div>' +
     '<p class="sc-detail-desc">' + escHtml(pick(item.deskripsi)) + '</p>' +
@@ -2833,13 +2844,13 @@ function scResetForm() {
       '<input class="sc-input scf-dosen-nama" placeholder="' + t('sc_placeholder_dosen') + '">' +
       '<button type="button" class="sc-icon-btn" onclick="scRemoveDosenRow(this)" title="Hapus">&times;</button>' +
     '</div>';
-  ['scfJenis', 'scfPeminatan', 'scfStatusDeploy', 'scfSumber'].forEach(function(id) {
+  ['scfJenis', 'scfPeminatan', 'scfStatusDeploy'].forEach(function(id) {
     var wrap = document.getElementById(id);
     wrap.querySelectorAll('.sc-seg-btn').forEach(function(b, i) { b.classList.toggle('active', i === 0); });
   });
   document.getElementById('scfDemoGroup').style.display = 'none';
   document.getElementById('scfDemoNote').style.display  = 'block';
-  document.getElementById('scfMatkulGroup').style.display = 'block';
+  scSetSegValue_('scfSumber', 'Mata Kuliah');
   document.getElementById('scfMsg').style.display = 'none';
   scRefreshSubmitState();
 }
@@ -2929,7 +2940,12 @@ function scApplySegSideEffects_(groupId, btn) {
     document.getElementById('scfDemoNote').style.display  = sudah ? 'none'  : 'block';
   }
   if (groupId === 'scfSumber') {
-    document.getElementById('scfMatkulGroup').style.display = (btn.dataset.val === 'Mata Kuliah') ? 'block' : 'none';
+    var val = btn.dataset.val;
+    document.getElementById('scfMatkulGroup').style.display = (val === 'Mata Kuliah' || val === 'Kompetisi') ? 'block' : 'none';
+    var key = val === 'Kompetisi' ? 'sc_label_kompetisi' : 'sc_label_matkul';
+    var placeholderKey = val === 'Kompetisi' ? 'sc_placeholder_kompetisi' : 'sc_placeholder_matkul';
+    document.getElementById('scfMatkulLabel').innerHTML = '<span data-i18n="' + key + '">' + t(key) + '</span> <span class="sc-req">*</span>';
+    document.getElementById('scfMatkul').placeholder = t(placeholderKey);
   }
 }
 
@@ -3046,12 +3062,14 @@ async function submitShowcaseForm() {
   var sumberTugas = scGetSegVal_('scfSumber');
   var mataKuliah  = document.getElementById('scfMatkul').value.trim();
   if (sumberTugas === 'Mata Kuliah' && !mataKuliah) return scFormError_(t('sc_err_matkul'));
+  if (sumberTugas === 'Kompetisi' && !mataKuliah) return scFormError_(t('sc_err_kompetisi'));
 
   var semester = document.getElementById('scfSemester').value.trim();
   if (!semester) return scFormError_(t('sc_err_semester'));
 
   var kontakTim = document.getElementById('scfKontak').value.trim();
   if (!kontakTim) return scFormError_(t('sc_err_kontak'));
+  if (!SC_EMAIL_REGEX.test(kontakTim)) return scFormError_(t('sc_err_kontak_email'));
 
   var statusDeploy = scGetSegVal_('scfStatusDeploy');
   var linkDemo = document.getElementById('scfDemo').value.trim();
@@ -3062,7 +3080,7 @@ async function submitShowcaseForm() {
   }
 
   var payload = {
-    namaProgram: namaProgram,
+    namaProgram: { id: namaProgram, en: '' },
     deskripsi: { id: deskripsiId, en: '' },
     kreator: kreator,
     jenis: scGetSegVal_('scfJenis'),
