@@ -2745,13 +2745,20 @@ function scRenderGaleri() {
 // ---- Detail Karya ----
 var _scCurrentDetail = null;
 
+// Kode yang sedang diminta paling baru. Dipakai untuk cegah race condition:
+// kalau user pindah ke detail lain sebelum request sebelumnya selesai, respons
+// yang datang belakangan (basi) tidak boleh menimpa detail yang sedang tampil.
+var _scDetailReqKode = null;
+
 async function openShowcaseDetail(kode) {
   scHideAllViews_();
   document.getElementById('scDetailView').style.display = 'block';
   document.getElementById('scDetailBody').innerHTML = '<p class="msg-center">' + t('sc_loading') + '</p>';
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  _scDetailReqKode = kode;
   try {
     var res = await gasGet({ action: 'showcase_detail', kode: kode });
+    if (_scDetailReqKode !== kode) return;
     if (!res || !res.ok) {
       document.getElementById('scDetailBody').innerHTML = '<p class="msg-error">' + ((res && res.message) || t('sc_detail_not_found')) + '</p>';
       return;
@@ -2760,6 +2767,7 @@ async function openShowcaseDetail(kode) {
     scRenderDetail();
     updateUrlParam_('kode', res.item.kode);
   } catch (e) {
+    if (_scDetailReqKode !== kode) return;
     document.getElementById('scDetailBody').innerHTML = '<p class="msg-error">' + t('sc_error') + '</p>';
   }
 }
