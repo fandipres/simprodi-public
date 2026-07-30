@@ -1894,10 +1894,24 @@ function fetchQuizConfig() {
   return quizConfigPromise;
 }
 
+// Set URL jadi "?key=value" (dan bersihkan param lain) supaya halaman detail
+// yang sedang dibuka bisa langsung disalin dari address bar dan dibagikan.
+// Panggil tanpa argumen untuk membersihkan kembali ke URL bersih (mis. saat
+// kembali ke daftar/galeri). Pakai replaceState, bukan pushState, supaya
+// tidak menambah riwayat browser untuk setiap detail yang dibuka.
+function updateUrlParam_(key, value) {
+  var url = new URL(location.href);
+  url.search = '';
+  if (key && value) url.searchParams.set(key, value);
+  history.replaceState(null, '', url.toString());
+}
+
 window.addEventListener('DOMContentLoaded', () => {
   applyI18n();
   const nim = new URLSearchParams(location.search).get('nim');
   if (nim) { openPortofolio(); searchInput.value = nim; doSearch(true); }
+  const kode = new URLSearchParams(location.search).get('kode');
+  if (kode) { openShowcaseDetail(kode); }
 });
 
 // ------ SEARCH ------
@@ -2026,6 +2040,7 @@ function showList() {
   document.getElementById('searchSection').style.display = 'block';
   document.getElementById('listView').style.display      = 'block';
   setStatus('');
+  updateUrlParam_();
 }
 
 // ------ DETAIL ------
@@ -2066,6 +2081,7 @@ function openDetail(idx) {
   document.getElementById('searchSection').style.display = 'none';
   document.getElementById('detailView').style.display    = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  updateUrlParam_('nim', s.nim);
 }
 
 // ------ ACCORDION ------
@@ -2318,6 +2334,7 @@ function showHome() {
   scHideAllViews_();
   document.getElementById('homeView').style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  updateUrlParam_();
 }
 
 function openPortofolio() {
@@ -2558,6 +2575,7 @@ async function openShowcaseGaleri() {
   scHideAllViews_();
   document.getElementById('scGaleriView').style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  updateUrlParam_();
   await scEnsureGaleriLoaded();
   scRenderGaleri();
 }
@@ -2686,6 +2704,7 @@ async function openShowcaseDetail(kode) {
     }
     _scCurrentDetail = res.item;
     scRenderDetail();
+    updateUrlParam_('kode', res.item.kode);
   } catch (e) {
     document.getElementById('scDetailBody').innerHTML = '<p class="msg-error">' + t('sc_error') + '</p>';
   }
