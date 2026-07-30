@@ -2852,12 +2852,24 @@ function scRenderDetail() {
 async function scDoLike(kode) {
   var likedKey = 'sc_liked_' + kode;
   if (localStorage.getItem(likedKey)) return;
-  document.getElementById('scLikeBtn').classList.add('liked');
-  localStorage.setItem(likedKey, '1');
+  var btn = document.getElementById('scLikeBtn');
+  if (btn.disabled) return; // request sebelumnya masih diproses, cegah klik ganda
+  btn.disabled = true;
   try {
     var res = await gasGet({ action: 'showcase_like', kode: kode, lang: currentLang });
-    if (res && res.ok) document.getElementById('scLikeCount').textContent = res.likes;
-  } catch (e) {}
+    // Cuma tandai "sudah like" (localStorage + UI) SETELAH server konfirmasi
+    // berhasil. Kalau ditandai duluan lalu request gagal, tombol jadi terkunci
+    // permanen (early-return di atas) padahal counter di server tidak pernah
+    // bertambah — itu penyebab bug "sudah dilike tapi tidak terhitung".
+    if (res && res.ok) {
+      localStorage.setItem(likedKey, '1');
+      btn.classList.add('liked');
+      document.getElementById('scLikeCount').textContent = res.likes;
+    }
+  } catch (e) {
+  } finally {
+    btn.disabled = false;
+  }
 }
 
 // ---- Laporkan Karya ----
