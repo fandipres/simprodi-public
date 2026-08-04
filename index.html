@@ -2863,8 +2863,14 @@ async function scDoLike(kode) {
     // bertambah — itu penyebab bug "sudah dilike tapi tidak terhitung".
     if (res && res.ok) {
       localStorage.setItem(likedKey, '1');
-      btn.classList.add('liked');
-      document.getElementById('scLikeCount').textContent = res.likes;
+      // Kalau user sudah pindah ke detail lain sebelum respons ini datang,
+      // jangan timpa scLikeCount/scLikeBtn milik detail yang sedang tampil
+      // sekarang dengan data dari kode yang berbeda (scLikeCount di-lookup
+      // ulang di sini, bukan elemen yang sama dengan btn di atas).
+      if (_scCurrentDetail && _scCurrentDetail.kode === kode) {
+        btn.classList.add('liked');
+        document.getElementById('scLikeCount').textContent = res.likes;
+      }
     }
   } catch (e) {
   } finally {
