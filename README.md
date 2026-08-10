@@ -1,6 +1,6 @@
 # 🎓 SIMPRODI (Study Program Information System)
 
-A bilingual (Indonesian/English) public portal for an Informatics Engineering study program. Students can look up their academic achievements, take a specialization-track quiz, and browse a gallery of student-built projects - all from a single, no-login static site.
+SIMPRODI is an academic portal built on Google Apps Script to support the needs of an academic study program. It brings together student achievements and project showcases, offers an interest test to help students find their study direction, and presents study program meeting minutes (BA) recap data in one easily accessible place.
 
 ## ✨ Key Features
 
