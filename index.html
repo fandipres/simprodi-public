@@ -3,6 +3,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SIMPRODI</title>
+<script>
+// Terapkan pilihan tema tersimpan SEBELUM CSS digambar, supaya tidak ada
+// kedipan warna terang sesaat sebelum berpindah ke gelap (atau sebaliknya).
+(function() {
+  try {
+    var saved = localStorage.getItem('simprodi_theme');
+    if (saved === 'light' || saved === 'dark') document.documentElement.setAttribute('data-theme', saved);
+  } catch (e) {}
+})();
+</script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -19,6 +29,9 @@
   --orange:      #ea580c;
   --orange-soft: #fff7ed;
   --orange-border:#fed7aa;
+  --red:         #dc2626;
+  --red-soft:    #fef2f2;
+  --red-border:  #fecaca;
   --bg:          #f1f5f9;
   --card:        #ffffff;
   --border:      #e2e8f0;
@@ -27,6 +40,58 @@
   --subtle:      #94a3b8;
   --radius:      10px;
   --font: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Mode gelap: menimpa palet di atas. Dipicu otomatis mengikuti preferensi
+   sistem (prefers-color-scheme), atau override manual lewat atribut
+   data-theme di <html> saat pengguna memilih sendiri lewat tombol toggle. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --blue:        #3b82f6;
+    --blue-soft:   #17233d;
+    --blue-border: #1e3a6f;
+    --green:       #22c55e;
+    --green-soft:  #142e1e;
+    --green-border:#1b4a2e;
+    --purple:      #a78bfa;
+    --purple-soft: #241a3d;
+    --purple-border:#3f2a6b;
+    --orange:      #fb923c;
+    --orange-soft: #3a2210;
+    --orange-border:#6b3a10;
+    --red:         #f87171;
+    --red-soft:    #3a1616;
+    --red-border:  #6b2323;
+    --bg:          #0f172a;
+    --card:        #1e293b;
+    --border:      #334155;
+    --text:        #f1f5f9;
+    --muted:       #94a3b8;
+    --subtle:      #64748b;
+  }
+}
+:root[data-theme="dark"] {
+  --blue:        #3b82f6;
+  --blue-soft:   #17233d;
+  --blue-border: #1e3a6f;
+  --green:       #22c55e;
+  --green-soft:  #142e1e;
+  --green-border:#1b4a2e;
+  --purple:      #a78bfa;
+  --purple-soft: #241a3d;
+  --purple-border:#3f2a6b;
+  --orange:      #fb923c;
+  --orange-soft: #3a2210;
+  --orange-border:#6b3a10;
+  --red:         #f87171;
+  --red-soft:    #3a1616;
+  --red-border:  #6b2323;
+  --bg:          #0f172a;
+  --card:        #1e293b;
+  --border:      #334155;
+  --text:        #f1f5f9;
+  --muted:       #94a3b8;
+  --subtle:      #64748b;
 }
 
 body {
@@ -144,7 +209,7 @@ main { flex: 1; }
 
 /* ---- STATUS ---- */
 .msg-center { text-align: center; padding: 20px 0; font-size: 0.87rem; color: var(--muted); }
-.msg-error  { text-align: center; padding: 20px 0; font-size: 0.87rem; color: #dc2626; }
+.msg-error  { text-align: center; padding: 20px 0; font-size: 0.87rem; color: var(--red); }
 
 /* ---- RESULT INFO ---- */
 .result-info {
@@ -328,8 +393,8 @@ main { flex: 1; }
   margin-top: 10px; padding: 10px 13px; border-radius: 8px;
   font-size: 0.83rem; line-height: 1.5;
 }
-.alert-ok  { background: var(--green-soft); color: #15803d; border: 1px solid var(--green-border); }
-.alert-err { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+.alert-ok  { background: var(--green-soft); color: var(--green); border: 1px solid var(--green-border); }
+.alert-err { background: var(--red-soft); color: var(--red); border: 1px solid var(--red-border); }
 
 /* ---- DETAIL TOPBAR ---- */
 .detail-topbar {
@@ -698,7 +763,7 @@ main { flex: 1; }
 .sc-status-pill { font-size: 0.74rem; font-weight: 700; padding: 4px 11px; border-radius: 12px; display: inline-block; }
 .sc-status-menunggu  { background: var(--orange-soft); color: var(--orange); }
 .sc-status-disetujui { background: var(--green-soft);  color: var(--green); }
-.sc-status-ditolak   { background: #fef2f2; color: #dc2626; }
+.sc-status-ditolak   { background: var(--red-soft); color: var(--red); }
 
 /* Galeri */
 .sc-toolbar-top { margin-bottom: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
@@ -757,7 +822,7 @@ main { flex: 1; }
 .sc-gcreators { font-size: 0.74rem; color: var(--muted); }
 .sc-gfoot { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 4px; }
 .sc-likes { font-size: 0.78rem; color: var(--muted); }
-.sc-likes .heart { color: #dc2626; }
+.sc-likes .heart { color: var(--red); }
 .sc-empty { grid-column: 1 / -1; text-align: center; padding: 30px 0; color: var(--subtle); font-size: 0.86rem; font-style: italic; }
 
 /* Detail */
@@ -775,8 +840,8 @@ main { flex: 1; }
 .sc-detail-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-top: 14px; }
 .sc-detail-title { font-size: 1.14rem; font-weight: 800; }
 .sc-like-btn { display: flex; flex-direction: column; align-items: center; gap: 1px; border: 1px solid var(--border); background: var(--card); border-radius: 10px; padding: 7px 11px; cursor: pointer; font-family: var(--font); flex-shrink: 0; font-size: 1rem; color: var(--subtle); transition: border-color .15s, transform .12s; }
-.sc-like-btn:hover { border-color: #fecaca; color: #dc2626; transform: scale(1.06); }
-.sc-like-btn.liked { color: #dc2626; border-color: #fecaca; background: #fef2f2; }
+.sc-like-btn:hover { border-color: var(--red-border); color: var(--red); transform: scale(1.06); }
+.sc-like-btn.liked { color: var(--red); border-color: var(--red-border); background: var(--red-soft); }
 .sc-like-btn span { font-size: 0.76rem; font-weight: 700; color: var(--text); }
 .sc-detail-desc { margin-top: 10px; font-size: 0.88rem; white-space: pre-line; }
 .sc-section-label { font-size: 0.70rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-top: 18px; margin-bottom: 8px; }
@@ -814,11 +879,11 @@ main { flex: 1; }
   border: none; background: transparent; cursor: pointer; color: var(--muted);
   font-size: 0.9rem; line-height: 1; padding: 2px 5px; font-family: var(--font);
 }
-.sc-tag-chip button:hover { color: #dc2626; }
+.sc-tag-chip button:hover { color: var(--red); }
 .sc-action-row { display: flex; gap: 9px; margin-top: 18px; flex-wrap: wrap; }
 .sc-action-row .sc-btn { flex: 1; min-width: 130px; }
 .sc-report-link { display: block; margin: 14px auto 0; border: none; background: none; color: var(--muted); font-family: var(--font); font-size: 0.78rem; font-weight: 600; cursor: pointer; text-align: center; width: 100%; }
-.sc-report-link:hover { color: #dc2626; }
+.sc-report-link:hover { color: var(--red); }
 
 /* Modal (laporkan) */
 .sc-modal-overlay { position: fixed; inset: 0; background: rgba(15,23,42,.5); z-index: 100; display: none; align-items: center; justify-content: center; padding: 16px; }
@@ -832,7 +897,7 @@ main { flex: 1; }
 .sc-form-group { margin-top: 14px; }
 .sc-form-label { font-size: 0.80rem; font-weight: 700; margin-bottom: 6px; display: block; }
 .sc-form-label .opt { font-weight: 500; color: var(--subtle); font-size: 0.72rem; }
-.sc-req { color: #dc2626; }
+.sc-req { color: var(--red); }
 .sc-form-hint { font-size: 0.72rem; color: var(--muted); margin-top: 5px; }
 .sc-seg { display: flex; gap: 6px; flex-wrap: wrap; }
 .sc-seg-btn { border: 1px solid var(--border); background: var(--card); color: var(--text); font-family: var(--font); font-size: 0.80rem; font-weight: 600; padding: 7px 12px; border-radius: 8px; cursor: pointer; transition: border-color .15s, background .15s, color .15s; }
@@ -844,7 +909,7 @@ main { flex: 1; }
 @media (max-width: 420px) { .sc-creator-field { grid-template-columns: 1fr; } }
 .sc-single-field { display: grid; grid-template-columns: 1fr auto; gap: 7px; margin-bottom: 7px; align-items: center; }
 .sc-icon-btn { border: 1px solid var(--border); background: var(--card); width: 36px; height: 36px; border-radius: 8px; cursor: pointer; color: var(--muted); flex-shrink: 0; font-size: 0.9rem; }
-.sc-icon-btn:hover { border-color: #fecaca; color: #dc2626; }
+.sc-icon-btn:hover { border-color: var(--red-border); color: var(--red); }
 .sc-add-row-btn { display: inline-block; font-size: 0.78rem; font-weight: 700; color: var(--blue); background: var(--blue-soft); border: 1px dashed var(--blue-border); border-radius: 8px; padding: 7px 12px; cursor: pointer; font-family: var(--font); margin-top: 2px; transition: background .15s, border-color .15s; }
 .sc-add-row-btn:hover { background: var(--blue-border); border-color: var(--blue); }
 .sc-callout { background: var(--blue-soft); border: 1px solid var(--blue-border); border-radius: 8px; padding: 10px 12px; margin-top: 8px; }
@@ -865,7 +930,7 @@ main { flex: 1; }
 .sc-status-card-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 6px; }
 .sc-status-name { font-weight: 700; font-size: 0.88rem; }
 .sc-status-code { font-family: monospace; font-size: 0.78rem; color: var(--muted); }
-.sc-reject-reason { background: #fef2f2; border: 1px solid #fecaca; border-radius: 7px; padding: 8px 10px; font-size: 0.78rem; margin-top: 8px; }
+.sc-reject-reason { background: var(--red-soft); border: 1px solid var(--red-border); border-radius: 7px; padding: 8px 10px; font-size: 0.78rem; margin-top: 8px; }
 </style>
 </head>
 <body>
@@ -878,6 +943,10 @@ main { flex: 1; }
         <button type="button" id="langBtnID" class="lang-btn" onclick="setLang('id')">ID</button>
         <button type="button" id="langBtnEN" class="lang-btn" onclick="setLang('en')">EN</button>
       </div>
+      <button type="button" class="header-info-btn" id="themeToggleBtn" onclick="toggleTheme()" data-i18n-aria-label="theme_toggle_aria" aria-label="Ganti tema terang/gelap">
+        <svg id="themeIconMoon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        <svg id="themeIconSun" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+      </button>
       <button class="header-info-btn" onclick="openAboutModal()" data-i18n-aria-label="header_info_aria" aria-label="Tentang SIMPRODI">i</button>
     </div>
   </div>
@@ -1449,6 +1518,7 @@ const GAS_URL = 'https://script.google.com/macros/s/AKfycbydy_-RvqxTSt7-MRQ8e84Q
 const I18N = {
   id: {
     header_info_aria: 'Tentang SIMPRODI',
+    theme_toggle_aria: 'Ganti tema terang/gelap',
     about_eyebrow: 'Tentang Aplikasi Ini',
     about_expand: 'Sistem Informasi Program Studi Teknik Informatika',
     about_desc: 'Dikembangkan oleh Program Studi Teknik Informatika sebagai wadah informasi capaian akademik mahasiswa, alat bantu pemilihan peminatan studi, dan galeri karya mahasiswa.',
@@ -1647,6 +1717,7 @@ const I18N = {
   },
   en: {
     header_info_aria: 'About SIMPRODI',
+    theme_toggle_aria: 'Toggle light/dark theme',
     about_eyebrow: 'About This App',
     about_expand: 'Information System of the Informatics Engineering Study Program',
     about_desc: 'Developed by the Informatics Engineering Study Program as a hub for students’ academic achievement records, a specialization-track selection aid, and a gallery of student work.',
@@ -1876,6 +1947,30 @@ function setLang(lang) {
   rerenderActiveView();
 }
 
+// ------ TEMA TERANG/GELAP ------
+// Default-nya ikut preferensi sistem (prefers-color-scheme, diatur di CSS).
+// data-theme di <html> cuma diisi kalau pengguna memilih sendiri lewat
+// tombol toggle, menimpa preferensi sistem untuk kunjungan berikutnya.
+function isDarkActive_() {
+  var explicit = document.documentElement.getAttribute('data-theme');
+  if (explicit === 'dark') return true;
+  if (explicit === 'light') return false;
+  return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+
+function applyThemeIcon_() {
+  var dark = isDarkActive_();
+  document.getElementById('themeIconMoon').style.display = dark ? 'none' : 'block';
+  document.getElementById('themeIconSun').style.display  = dark ? 'block' : 'none';
+}
+
+function toggleTheme() {
+  var next = isDarkActive_() ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('simprodi_theme', next);
+  applyThemeIcon_();
+}
+
 function rerenderActiveView() {
   if (document.getElementById('detailView').style.display !== 'none' && currentStudent) {
     const s = currentStudent;
@@ -1930,6 +2025,7 @@ function updateUrlParam_(key, value) {
 
 window.addEventListener('DOMContentLoaded', () => {
   applyI18n();
+  applyThemeIcon_();
   const nim = new URLSearchParams(location.search).get('nim');
   if (nim) { openPortofolio(); searchInput.value = nim; doSearch(true); }
   const kode = new URLSearchParams(location.search).get('kode');
@@ -2009,17 +2105,17 @@ function renderList() {
         '<div id="notFoundLaporForm" class="lapor-form">' +
           '<div style="display:flex;flex-direction:column;gap:10px;margin-bottom:10px;">' +
             '<div>' +
-              '<label class="form-label" for="notFoundNim">' + t('notfound_nim_label') + ' <span style="color:#dc2626;">*</span></label>' +
+              '<label class="form-label" for="notFoundNim">' + t('notfound_nim_label') + ' <span style="color:var(--red);">*</span></label>' +
               '<input class="text-input" type="tel" id="notFoundNim" placeholder="' + t('notfound_nim_placeholder') + '" maxlength="9"' +
               ' inputmode="numeric" oninput="this.value=this.value.replace(/[^0-9]/g,\'\')"' +
               ' value="' + (isNimLike ? escHtml(lastQuery) : '') + '">' +
             '</div>' +
             '<div>' +
-              '<label class="form-label" for="notFoundNama">' + t('notfound_nama_label') + ' <span style="color:#dc2626;">*</span></label>' +
+              '<label class="form-label" for="notFoundNama">' + t('notfound_nama_label') + ' <span style="color:var(--red);">*</span></label>' +
               '<input class="text-input" type="text" id="notFoundNama" placeholder="' + t('notfound_nama_placeholder') + '" maxlength="100">' +
             '</div>' +
             '<div>' +
-              '<label class="form-label" for="notFoundPesan">' + t('notfound_ket_label') + ' <span style="color:#dc2626;">*</span></label>' +
+              '<label class="form-label" for="notFoundPesan">' + t('notfound_ket_label') + ' <span style="color:var(--red);">*</span></label>' +
               '<textarea class="form-textarea" id="notFoundPesan" oninput="updateCharCounter(\'notFoundPesan\',\'notFoundPesanCount\',10)"' +
               ' placeholder="' + t('notfound_ket_placeholder') + '"></textarea>' +
               '<div class="char-counter" id="notFoundPesanCount">0/10</div>' +
