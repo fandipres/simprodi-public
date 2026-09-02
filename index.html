@@ -2152,14 +2152,24 @@ function groupBySem(data, key) {
 }
 
 // ------ FILL PANELS ------
+// Urutkan entri dalam satu grup semester berdasarkan teks yang sedang jadi
+// judul utama (bukan urutan baris di sheet, yang tidak stabil setelah
+// re-import). keyFn menerima satu baris data, kembalikan teks pembanding.
+function sortByPrimaryText_(rows, keyFn) {
+  return rows.slice().sort((a, b) =>
+    String(keyFn(a) || '').localeCompare(String(keyFn(b) || ''), undefined, { sensitivity: 'base' })
+  );
+}
+
 function fillMbkm(data) {
   const el = document.getElementById('panel-mbkm');
   if (!data.length) { el.innerHTML = '<p class="acc-empty">' + t('mbkm_empty') + '</p>'; return; }
   const { order, map } = groupBySem(data, 'semester');
+  const primaryOf = r => currentLang === 'en' ? (r.gabung_en || r.gabung_id) : r.gabung_id;
   el.innerHTML = order.map(sem =>
     '<div class="sem-group"><div class="sem-group-label">' + escHtml(translateSemesterLabel_(sem)) + '</div>'
-    + map[sem].map(r => {
-      const primary   = currentLang === 'en' ? (r.gabung_en || r.gabung_id) : r.gabung_id;
+    + sortByPrimaryText_(map[sem], primaryOf).map(r => {
+      const primary   = primaryOf(r);
       const secondary = currentLang === 'en' ? r.gabung_id : r.gabung_en;
       return '<div class="data-row">'
         + '<div class="row-main">' + escHtml(primary || '-') + '</div>'
@@ -2175,7 +2185,7 @@ function fillPrestasi(data) {
   const { order, map } = groupBySem(data, 'semester');
   el.innerHTML = order.map(sem =>
     '<div class="sem-group"><div class="sem-group-label">' + escHtml(translateSemesterLabel_(sem)) + '</div>'
-    + map[sem].map(r =>
+    + sortByPrimaryText_(map[sem], r => r.gabung).map(r =>
       '<div class="data-row"><div class="row-main">' + escHtml(r.gabung || '-') + '</div></div>'
     ).join('') + '</div>'
   ).join('');
@@ -2185,10 +2195,11 @@ function fillSertifikasi(data) {
   const el = document.getElementById('panel-sertifikasi');
   if (!data.length) { el.innerHTML = '<p class="acc-empty">' + t('sertifikasi_empty') + '</p>'; return; }
   const { order, map } = groupBySem(data, 'semester');
+  const primaryOf = r => currentLang === 'en' ? (r.inggris || r.indonesia) : r.indonesia;
   el.innerHTML = order.map(sem =>
     '<div class="sem-group"><div class="sem-group-label">' + escHtml(translateSemesterLabel_(sem)) + '</div>'
-    + map[sem].map(r => {
-      const primary   = currentLang === 'en' ? (r.inggris || r.indonesia) : r.indonesia;
+    + sortByPrimaryText_(map[sem], primaryOf).map(r => {
+      const primary   = primaryOf(r);
       const secondary = currentLang === 'en' ? r.indonesia : r.inggris;
       return '<div class="data-row">'
         + (r.kategori ? '<div class="row-meta"><span class="kat-tag">' + escHtml(r.kategori) + '</span></div>' : '')
