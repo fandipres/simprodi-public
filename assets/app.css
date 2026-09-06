@@ -219,6 +219,7 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; }
   #quizView, #quizResultView { max-width: 1140px; }
   #quizView .home-hero-inner { max-width: 1140px; }
   #statistikView { max-width: 1140px; }
+  #statistikView .home-hero-inner { max-width: 1140px; }
 }
 
 /* ---- SEARCH ---- */
