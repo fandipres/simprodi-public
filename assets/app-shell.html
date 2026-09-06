@@ -1,7 +1,10 @@
 
 <header class="site-header">
   <div class="header-inner">
-    <span class="header-brand" onclick="showHome()" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')showHome()">SIM<span>PRODI</span></span>
+    <div class="header-brand" onclick="showHome()" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')showHome()">
+      <span class="header-brand-mark">S</span>
+      <span class="header-brand-text">SIM<span>PRODI</span></span>
+    </div>
     <div style="display:flex;align-items:center;gap:8px;">
       <div class="lang-toggle" role="group" aria-label="Language">
         <button type="button" id="langBtnID" class="lang-btn" onclick="setLang('id')">ID</button>
@@ -61,6 +64,7 @@
     <div id="homeView">
       <div class="home-hero">
         <div class="home-hero-inner">
+          <div class="eyebrow"><span class="eyebrow-dot"></span><span data-i18n="home_eyebrow">Program Studi Teknik Informatika</span></div>
           <div class="home-headline"><span data-i18n="home_headline_l1">Pilih jalanmu.</span><br><span data-i18n="home_headline_l2">Rekam jejakmu.</span></div>
           <div class="home-sub" data-i18n="home_sub">Pantau capaian akademikmu, temukan peminatan yang sesuai, atau jelajahi karya mahasiswa lainnya.</div>
         </div>
@@ -147,7 +151,7 @@
       <div class="acc-wrap">
         <button class="acc-btn is-open" id="trg-mbkm" onclick="toggleAcc('mbkm')">
           <span class="acc-lhs">
-            <span class="acc-dot dot-blue"></span>
+            <span class="acc-cat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 5-9 5-9-5 9-5z"></path><path d="M3 12l9 5 9-5"></path><path d="M3 17l9 5 9-5"></path></svg></span>
             <span class="acc-label" data-i18n="label_mbkm">MBKM</span>
             <span class="acc-count c-blue" id="cnt-mbkm">0</span>
           </span>
@@ -163,7 +167,7 @@
       <div class="acc-wrap">
         <button class="acc-btn is-open" id="trg-prestasi" onclick="toggleAcc('prestasi')">
           <span class="acc-lhs">
-            <span class="acc-dot dot-blue"></span>
+            <span class="acc-cat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"></circle><path d="M8.5 12.5L6 22l6-3 6 3-2.5-9.5"></path></svg></span>
             <span class="acc-label" data-i18n="label_prestasi">Prestasi</span>
             <span class="acc-count c-blue" id="cnt-prestasi">0</span>
           </span>
@@ -179,7 +183,7 @@
       <div class="acc-wrap">
         <button class="acc-btn is-open" id="trg-sertifikasi" onclick="toggleAcc('sertifikasi')">
           <span class="acc-lhs">
-            <span class="acc-dot dot-blue"></span>
+            <span class="acc-cat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="15" rx="2"></rect><path d="M3 9.5h18"></path><path d="M7.5 14.5h5"></path></svg></span>
             <span class="acc-label" data-i18n="label_sertifikasi">Sertifikasi</span>
             <span class="acc-count c-blue" id="cnt-sertifikasi">0</span>
           </span>

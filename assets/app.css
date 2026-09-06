@@ -26,7 +26,7 @@
   --muted:       #64748b;
   --subtle:      #94a3b8;
   --radius:      10px;
-  --font: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 }
 
 /* Mode gelap: menimpa palet di atas. Dipicu otomatis mengikuti preferensi
@@ -111,11 +111,16 @@ main { flex: 1; }
   padding: 0 16px; height: 48px;
   display: flex; align-items: center; justify-content: space-between;
 }
-.header-brand {
-  font-size: 0.92rem; font-weight: 800; color: #fff;
-  letter-spacing: -0.02em; cursor: pointer;
+.header-brand { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.header-brand-mark {
+  width: 26px; height: 26px; border-radius: 7px; background: #fff;
+  color: var(--blue); font-weight: 800; font-size: 12px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
-.header-brand span { color: rgba(255,255,255,.62); }
+.header-brand-text {
+  font-size: 0.92rem; font-weight: 800; color: #fff; letter-spacing: -0.02em;
+}
+.header-brand-text span { color: rgba(255,255,255,.62); }
 .header-info-btn {
   width: 24px; height: 24px; border-radius: 50%;
   border: 1.5px solid rgba(255,255,255,.3); background: rgba(255,255,255,.1);
@@ -295,10 +300,11 @@ main { flex: 1; }
 .acc-btn.is-open { border-radius: var(--radius) var(--radius) 0 0; }
 
 .acc-lhs   { display: flex; align-items: center; gap: 10px; }
-.acc-dot   { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-.dot-blue  { background: var(--blue); }
-.dot-green { background: var(--green); }
-.dot-purple{ background: var(--purple); }
+.acc-cat-icon {
+  width: 30px; height: 30px; border-radius: 9px; flex-shrink: 0;
+  background: var(--blue-soft); color: var(--blue);
+  display: flex; align-items: center; justify-content: center;
+}
 .acc-label { font-size: 0.88rem; font-weight: 600; color: var(--text); }
 .acc-count { font-size: 0.70rem; font-weight: 700; padding: 2px 7px; border-radius: 20px; }
 .c-blue    { background: var(--blue-soft);   color: var(--blue);   }
@@ -524,6 +530,12 @@ main { flex: 1; }
 .home-hero .home-headline { color: #fff; }
 .home-sub { font-size: 0.84rem; color: var(--muted); line-height: 1.65; }
 .home-hero .home-sub { color: rgba(255,255,255,.7); }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(255,255,255,.12); border-radius: 999px; padding: 6px 14px;
+  font-size: 0.72rem; font-weight: 700; color: rgba(255,255,255,.85); margin-bottom: 14px;
+}
+.eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: #fff; flex-shrink: 0; }
 
 .home-cards {
   display: grid; grid-template-columns: 1fr 1fr;
