@@ -84,23 +84,13 @@ const I18N = {
     stat_title: 'Capaian Kolektif Program Studi',
     stat_subtitle: 'Ratusan kegiatan, prestasi, dan karya lahir dari mahasiswa kami, dirangkum dalam angka.',
     stat_disclaimer_title: 'Data masih bersifat sementara',
-    stat_disclaimer_desc: 'Angka di atas dihimpun dari data yang sudah tercatat di sistem kami dan mungkin belum mencakup seluruh capaian mahasiswa. Kalau ada capaian kamu (atau temanmu) yang belum tercantum atau datanya kurang sesuai, yuk laporkan lewat formulir di bawah.',
+    stat_disclaimer_desc: 'Angka di atas dihimpun dari data yang sudah tercatat di sistem kami dan terus bertambah seiring data baru diimpor admin, jadi mungkin belum mencakup seluruh capaian mahasiswa. Kalau ada capaianmu (atau temanmu) yang belum tercantum atau datanya kurang sesuai, laporkan lewat halaman Portofolio Akademik.',
     stat_label_mahasiswa: 'Mahasiswa Tercatat',
     stat_label_mbkm: 'Kegiatan MBKM',
     stat_label_prestasi: 'Kegiatan Prestasi',
     stat_label_sertifikasi: 'Sertifikasi Profesional',
     stat_label_showcase: 'Karya Showcase',
     stat_error: 'Gagal memuat statistik. Coba lagi beberapa saat.',
-    stat_lapor_title: 'Ada capaian yang belum tercantum?',
-    stat_lapor_desc: 'Bantu kami melengkapi data dengan melaporkan capaian yang belum masuk ke sistem.',
-    stat_nim_label: 'NIM', stat_nim_placeholder: 'NIM (mis. 123456789)',
-    stat_nama_label: 'Nama', stat_nama_placeholder: 'Nama lengkap',
-    stat_pesan_label: 'Jelaskan capaian yang belum tercantum/tidak sesuai',
-    stat_pesan_placeholder: 'Contoh: saya juara 2 lomba X tahun 2025 tapi belum masuk data prestasi.',
-    stat_nim_required: 'NIM tidak boleh kosong.', stat_nim_invalid: 'Format NIM tidak valid.',
-    stat_nama_required: 'Nama tidak boleh kosong.',
-    stat_pesan_too_short: 'Tuliskan penjelasan yang lebih lengkap agar bisa kami tindaklanjuti.',
-    stat_success_msg: 'Laporan berhasil dikirim. Terima kasih sudah membantu melengkapi data kami.',
     sc_galeri_title: 'Karya Mahasiswa Teknik Informatika',
     sc_galeri_sub: 'Aplikasi, situs, dan game hasil tugas kuliah maupun tugas akhir mahasiswa. Jelajahi dan berikan dukungan lewat like.',
     sc_search_placeholder: 'Cari nama karya, kreator, atau teknologi...',
@@ -306,23 +296,13 @@ const I18N = {
     stat_title: 'Our Collective Achievements',
     stat_subtitle: 'Hundreds of activities, awards, and projects from our students, summed up in numbers.',
     stat_disclaimer_title: 'Data is still provisional',
-    stat_disclaimer_desc: 'The numbers above are drawn from data already recorded in our system and may not yet cover every student achievement. If your (or a friend\'s) achievement is missing or looks incorrect, please report it using the form below.',
+    stat_disclaimer_desc: 'The numbers above are drawn from data already recorded in our system and keep growing as admins import new data, so they may not yet cover every student achievement. If your (or a friend\'s) achievement is missing or looks incorrect, please report it from the Academic Portfolio page.',
     stat_label_mahasiswa: 'Students Recorded',
     stat_label_mbkm: 'MBKM Activities',
     stat_label_prestasi: 'Achievement Activities',
     stat_label_sertifikasi: 'Professional Certifications',
     stat_label_showcase: 'Showcase Projects',
     stat_error: 'Failed to load statistics. Please try again shortly.',
-    stat_lapor_title: 'Is there an achievement not yet listed?',
-    stat_lapor_desc: 'Help us complete our data by reporting an achievement that is not yet in the system.',
-    stat_nim_label: 'NIM', stat_nim_placeholder: 'Student ID (e.g. 123456789)',
-    stat_nama_label: 'Name', stat_nama_placeholder: 'Full name',
-    stat_pesan_label: 'Describe the achievement that is missing or incorrect',
-    stat_pesan_placeholder: 'Example: I won 2nd place in competition X in 2025 but it is not in the achievement data yet.',
-    stat_nim_required: 'NIM must not be empty.', stat_nim_invalid: 'Invalid NIM format.',
-    stat_nama_required: 'Name must not be empty.',
-    stat_pesan_too_short: 'Please write a more detailed explanation so we can follow up.',
-    stat_success_msg: 'Report submitted. Thanks for helping us complete our data.',
     sc_galeri_title: 'Informatics Engineering Student Works',
     sc_galeri_sub: 'Apps, websites, and games made for coursework or final projects. Explore and show your support with a like.',
     sc_search_placeholder: 'Search by project name, creator, or technology...',
@@ -732,6 +712,7 @@ function showList() {
   document.getElementById('detailView').style.display    = 'none';
   document.getElementById('searchSection').style.display = 'block';
   document.getElementById('listView').style.display      = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
   setStatus('');
   updateUrlParam_();
 }
@@ -995,59 +976,6 @@ async function doLaporNotFound() {
   }
 }
 
-// ------ LAPORAN DATA STATISTIK ------
-function toggleStatLapor() {
-  document.getElementById('statLaporForm').classList.toggle('open');
-}
-
-async function doLaporStatistik() {
-  const nim   = document.getElementById('statNim').value.trim();
-  const nama  = document.getElementById('statNama').value.trim();
-  const pesan = document.getElementById('statPesan').value.trim();
-  const msgEl = document.getElementById('statLaporMsg');
-
-  if (!nim) {
-    msgEl.innerHTML = '<div class="alert alert-err">' + t('stat_nim_required') + '</div>'; return;
-  }
-  if (!/^\d{9}$/.test(nim)) {
-    msgEl.innerHTML = '<div class="alert alert-err">' + t('stat_nim_invalid') + '</div>'; return;
-  }
-  if (!nama) {
-    msgEl.innerHTML = '<div class="alert alert-err">' + t('stat_nama_required') + '</div>'; return;
-  }
-  if (pesan.length < 10) {
-    msgEl.innerHTML = '<div class="alert alert-err">' + t('stat_pesan_too_short') + '</div>'; return;
-  }
-
-  const btn = document.getElementById('statLaporBtn');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span>' + t('lapor_send_loading');
-  msgEl.innerHTML = '';
-
-  try {
-    const res = await gasGet({
-      action: 'laporan',
-      nim,
-      nama,
-      pesan: '[STATISTIK] ' + pesan,
-      lang: currentLang
-    });
-    btn.disabled = false; btn.textContent = t('btn_kirim_laporan');
-    if (res.ok) {
-      msgEl.innerHTML = '<div class="alert alert-ok">' + t('stat_success_msg') + '</div>';
-      document.getElementById('statNim').value   = '';
-      document.getElementById('statNama').value  = '';
-      document.getElementById('statPesan').value = '';
-      updateCharCounter('statPesan', 'statPesanCount', 10);
-    } else {
-      msgEl.innerHTML = '<div class="alert alert-err">' + escHtml(res.message) + '</div>';
-    }
-  } catch {
-    btn.disabled = false; btn.textContent = t('btn_kirim_laporan');
-    msgEl.innerHTML = '<div class="alert alert-err">' + t('lapor_fail_generic') + '</div>';
-  }
-}
-
 // ------ HELPERS ------
 async function gasGet(params) {
   const url = GAS_URL + '?' + Object.entries(params)
@@ -1102,6 +1030,7 @@ function showHome() {
 function openPortofolio() {
   scHideAllViews_();
   document.getElementById('searchSection').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
   setTimeout(function() { searchInput.focus(); }, 80);
   setCleanPath_('/portofolio/');
 }

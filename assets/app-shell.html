@@ -2,7 +2,7 @@
 <header class="site-header">
   <div class="header-inner">
     <div class="header-brand" onclick="showHome()" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')showHome()">
-      <span class="header-brand-mark">S</span>
+      <span class="header-brand-mark">IF</span>
       <span class="header-brand-text">SIM<span>PRODI</span></span>
     </div>
     <div style="display:flex;align-items:center;gap:8px;">
@@ -111,9 +111,13 @@
 
     <!-- Portofolio Akademik -->
     <div id="searchSection" style="display:none;">
-      <button class="back-btn" onclick="showHome()" style="margin-bottom:4px;">
-        <span class="arr">&#8592;</span> <span data-i18n="btn_beranda">Beranda</span>
-      </button>
+      <div class="home-hero">
+        <div class="home-hero-inner">
+          <button class="back-btn" onclick="showHome()"><span class="arr">&#8592;</span> <span data-i18n="btn_beranda">Beranda</span></button>
+          <div class="home-headline" style="font-size:1.05rem;margin-bottom:4px;" data-i18n="home_card1_title">Portofolio Akademik</div>
+          <div class="home-sub" style="margin-bottom:0;" data-i18n="home_card1_desc">Cek prestasi, MBKM, dan sertifikasi yang sudah tercatat di program studi.</div>
+        </div>
+      </div>
       <div class="search-card">
         <div class="search-row">
           <input class="search-input" type="text" id="searchInput"
@@ -223,9 +227,13 @@
 
     <!-- Kuis Peminatan -->
     <div id="quizView" style="display:none;">
-      <button class="back-btn" onclick="showHome()">
-        <span class="arr">&#8592;</span> <span data-i18n="btn_beranda">Beranda</span>
-      </button>
+      <div class="home-hero">
+        <div class="home-hero-inner">
+          <button class="back-btn" onclick="showHome()"><span class="arr">&#8592;</span> <span data-i18n="btn_beranda">Beranda</span></button>
+          <div class="home-headline" style="font-size:1.05rem;margin-bottom:4px;" data-i18n="home_card2_title">Tes Peminatan</div>
+          <div class="home-sub" style="margin-bottom:0;" data-i18n="home_card2_desc">Jawab 7 pertanyaan singkat untuk tahu apakah kamu lebih cocok ke SSD atau AISD.</div>
+        </div>
+      </div>
       <div class="quiz-progress-row">
         <div id="quizSteps" class="quiz-steps"></div>
         <span id="quizStepLabel" class="quiz-step-label">Pertanyaan 1 dari 7</span>
@@ -538,7 +546,7 @@
 
       <div class="stat-disclaimer">
         <div class="stat-disclaimer-title" data-i18n="stat_disclaimer_title">Data masih bersifat sementara</div>
-        <div class="stat-disclaimer-desc" data-i18n="stat_disclaimer_desc">Angka di atas dihimpun dari data yang sudah tercatat di sistem kami dan mungkin belum mencakup seluruh capaian mahasiswa. Kalau ada capaian kamu (atau temanmu) yang belum tercantum atau datanya kurang sesuai, yuk laporkan lewat formulir di bawah.</div>
+        <div class="stat-disclaimer-desc" data-i18n="stat_disclaimer_desc">Angka di atas dihimpun dari data yang sudah tercatat di sistem kami dan terus bertambah seiring data baru diimpor admin, jadi mungkin belum mencakup seluruh capaian mahasiswa. Kalau ada capaianmu (atau temanmu) yang belum tercantum atau datanya kurang sesuai, laporkan lewat halaman Portofolio Akademik.</div>
       </div>
 
       <div id="statMsg"></div>
@@ -571,37 +579,6 @@
         </div>
       </div>
 
-      <div class="lapor-card">
-        <div class="lapor-header">
-          <div>
-            <div class="lapor-title" data-i18n="stat_lapor_title">Ada capaian yang belum tercantum?</div>
-            <div class="lapor-desc" data-i18n="stat_lapor_desc">Bantu kami melengkapi data dengan melaporkan capaian yang belum masuk ke sistem.</div>
-          </div>
-          <button class="btn-lapor" onclick="toggleStatLapor()" data-i18n="btn_lapor_kesalahan">Laporkan Kesalahan</button>
-        </div>
-        <div id="statLaporForm" class="lapor-form">
-          <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:10px;">
-            <div>
-              <label class="form-label" for="statNim" data-i18n="stat_nim_label">NIM</label>
-              <input class="text-input" type="tel" id="statNim" data-i18n-placeholder="stat_nim_placeholder" placeholder="NIM (mis. 123456789)" maxlength="9"
-              inputmode="numeric" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
-            </div>
-            <div>
-              <label class="form-label" for="statNama" data-i18n="stat_nama_label">Nama</label>
-              <input class="text-input" type="text" id="statNama" data-i18n-placeholder="stat_nama_placeholder" placeholder="Nama lengkap" maxlength="100">
-            </div>
-            <div>
-              <label class="form-label" for="statPesan" data-i18n="stat_pesan_label">Jelaskan capaian yang belum tercantum/tidak sesuai</label>
-              <textarea class="form-textarea" id="statPesan" oninput="updateCharCounter('statPesan','statPesanCount',10)"
-              data-i18n-placeholder="stat_pesan_placeholder" placeholder="Contoh: saya juara 2 lomba X tahun 2025 tapi belum masuk data prestasi."></textarea>
-              <div class="char-counter" id="statPesanCount">0/10</div>
-            </div>
-          </div>
-          <div class="lapor-note" data-i18n="lapor_note">Tindak lanjut laporan akan disampaikan melalui nomor yang tercatat di MIKA kamu. Pastikan nomor tersebut sudah diperbarui sebelum mengirim.</div>
-          <button class="btn-send" id="statLaporBtn" onclick="doLaporStatistik()" data-i18n="btn_kirim_laporan">Kirim Laporan</button>
-          <div id="statLaporMsg"></div>
-        </div>
-      </div>
     </div>
 
   </div>
