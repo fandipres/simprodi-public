@@ -1,9 +1,12 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --blue:        #2563eb;
-  --blue-soft:   #eff6ff;
-  --blue-border: #bfdbfe;
+  --blue:        #1e1e44;
+  --blue-soft:   #eeeff5;
+  --blue-border: #d7d9e6;
+  --slate:       #5b6b8c;
+  --slate-soft:  #eef1f5;
+  --slate-border:#d7ddE6;
   --green:       #16a34a;
   --green-soft:  #f0fdf4;
   --green-border:#bbf7d0;
@@ -31,9 +34,12 @@
    data-theme di <html> saat pengguna memilih sendiri lewat tombol toggle. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --blue:        #3b82f6;
-    --blue-soft:   #17233d;
-    --blue-border: #1e3a6f;
+    --blue:        #4a4a7e;
+    --blue-soft:   #23233f;
+    --blue-border: #3a3a5e;
+    --slate:       #8a94ad;
+    --slate-soft:  #232733;
+    --slate-border:#3a4050;
     --green:       #22c55e;
     --green-soft:  #142e1e;
     --green-border:#1b4a2e;
@@ -55,9 +61,12 @@
   }
 }
 :root[data-theme="dark"] {
-  --blue:        #3b82f6;
-  --blue-soft:   #17233d;
-  --blue-border: #1e3a6f;
+  --blue:        #4a4a7e;
+  --blue-soft:   #23233f;
+  --blue-border: #3a3a5e;
+  --slate:       #8a94ad;
+  --slate-soft:  #232733;
+  --slate-border:#3a4050;
   --green:       #22c55e;
   --green-soft:  #142e1e;
   --green-border:#1b4a2e;
@@ -87,10 +96,13 @@ body {
 }
 main { flex: 1; }
 
-/* ---- HEADER ---- */
+/* ---- HEADER ----
+   Latar navy tetap, terlepas dari tema terang/gelap situs - header
+   berperan sebagai "identitas" yang selalu gelap, jadi semua warna teks
+   di dalamnya di-override manual ke putih/terang, bukan ikut var(--text). */
 .site-header {
-  background: var(--card);
-  box-shadow: 0 1px 6px rgba(0,0,0,.07);
+  background: var(--blue);
+  box-shadow: 0 1px 6px rgba(0,0,0,.16);
   position: sticky; top: 0; z-index: 100;
 }
 .header-inner {
@@ -99,30 +111,30 @@ main { flex: 1; }
   display: flex; align-items: center; justify-content: space-between;
 }
 .header-brand {
-  font-size: 0.92rem; font-weight: 800; color: var(--text);
+  font-size: 0.92rem; font-weight: 800; color: #fff;
   letter-spacing: -0.02em; cursor: pointer;
 }
-.header-brand span { color: var(--blue); }
+.header-brand span { color: rgba(255,255,255,.62); }
 .header-info-btn {
   width: 24px; height: 24px; border-radius: 50%;
-  border: 1.5px solid var(--border); background: var(--card);
+  border: 1.5px solid rgba(255,255,255,.3); background: rgba(255,255,255,.1);
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; font-size: 0.68rem; font-weight: 700;
-  color: var(--subtle); font-family: Georgia, serif;
+  color: #fff; font-family: Georgia, serif;
   transition: border-color .15s, color .15s, background .15s;
   flex-shrink: 0; line-height: 1;
 }
-.header-info-btn:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-soft); }
+.header-info-btn:hover { border-color: #fff; background: rgba(255,255,255,.2); color: #fff; }
 .lang-toggle {
-  display: flex; border: 1.5px solid var(--border); border-radius: 20px;
+  display: flex; border: 1.5px solid rgba(255,255,255,.3); border-radius: 20px;
   overflow: hidden; flex-shrink: 0;
 }
 .lang-btn {
-  border: none; background: var(--card); color: var(--subtle);
+  border: none; background: transparent; color: rgba(255,255,255,.6);
   font-family: var(--font); font-size: 0.66rem; font-weight: 700;
   padding: 4px 9px; cursor: pointer; transition: background .15s, color .15s;
 }
-.lang-btn.active { background: var(--blue); color: #fff; }
+.lang-btn.active { background: #fff; color: var(--blue); }
 
 /* ---- MODAL ABOUT ---- */
 .about-overlay {
@@ -498,88 +510,22 @@ main { flex: 1; }
   .home-headline { font-size: 1.32rem; }
 }
 .home-card {
-  background: var(--card); border: 1.5px solid var(--border);
-  border-radius: 16px; overflow: hidden; cursor: pointer;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 16px; cursor: pointer;
+  box-shadow: 0 2px 10px rgba(15,23,42,.04);
   transition: border-color .18s, box-shadow .18s, transform .14s;
   -webkit-tap-highlight-color: transparent; outline: none;
   display: flex; flex-direction: column;
 }
-.home-card-1:hover, .home-card-1:focus-visible {
+.home-card:hover, .home-card:focus-visible {
   border-color: var(--blue);
-  box-shadow: 0 8px 28px rgba(37,99,235,.15);
+  box-shadow: 0 8px 24px rgba(30,30,68,.12);
   transform: translateY(-2px);
 }
-.home-card-2:hover, .home-card-2:focus-visible {
-  border-color: var(--purple);
-  box-shadow: 0 8px 28px rgba(124,58,237,.15);
-  transform: translateY(-2px);
-}
-.home-card-illus {
-  height: 118px; position: relative; overflow: hidden;
-  display: flex; align-items: flex-end; padding: 0 18px 16px;
-}
-.home-card-illus::before {
-  content: ''; position: absolute; right: -18px; top: -18px;
-  width: 76px; height: 76px; border-radius: 50%; background: rgba(255,255,255,.09);
-}
-.home-card-illus::after {
-  content: ''; position: absolute; right: 38px; top: 12px;
-  width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,.06);
-}
-.illus-blue   { background: linear-gradient(140deg, #1D4ED8 0%, #2563EB 55%, #4F46E5 100%); }
-
-/* Ilustrasi Portofolio Akademik - list kategori */
-.illus-list { display: flex; flex-direction: column; gap: 8px; width: 100%; }
-.illus-list-row { display: flex; align-items: center; gap: 8px; }
-.illus-list-dot {
-  width: 7px; height: 7px; border-radius: 50%;
-  background: rgba(255,255,255,.9); flex-shrink: 0;
-}
-.illus-list-dot.dim { background: rgba(255,255,255,.35); }
-.illus-list-label {
-  font-size: 0.68rem; font-weight: 700; color: rgba(255,255,255,.9); flex: 1;
-}
-.illus-list-label.dim { color: rgba(255,255,255,.38); }
-.illus-list-badge {
-  font-size: 0.58rem; font-weight: 700;
-  background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.22);
-  border-radius: 20px; padding: 1px 7px; color: rgba(255,255,255,.8);
-}
-.illus-list-badge.dim { opacity: 0.35; }
-
-/* Ilustrasi Tes Peminatan - komparasi SSD vs AISD */
-.illus-vs-wrap {
-  display: flex; width: 100%; height: 100%;
-  position: absolute; inset: 0;
-}
-.illus-vs-side {
-  flex: 1; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 6px;
-  position: relative;
-}
-.illus-vs-left  { background: linear-gradient(160deg, #1D4ED8, #3B82F6); }
-.illus-vs-right { background: linear-gradient(160deg, #7C3AED, #A21CAF); }
-.illus-vs-label {
-  font-size: 0.75rem; font-weight: 800; letter-spacing: 0.05em;
-  color: rgba(255,255,255,.95);
-}
-.illus-vs-dots { display: flex; gap: 4px; }
-.illus-vs-dot {
-  width: 5px; height: 5px; border-radius: 50%;
-  background: rgba(255,255,255,.3);
-}
-.illus-vs-dot.on { background: rgba(255,255,255,.88); }
-.illus-vs-badge {
-  position: absolute; top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 26px; height: 26px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.52rem; font-weight: 800; letter-spacing: 0.03em;
-  color: rgba(255,255,255,.75);
-  background: rgba(255,255,255,.12);
-  border: 1px solid rgba(255,255,255,.22);
-  border-radius: 50%;
-  z-index: 1;
+.home-card-icon {
+  width: 44px; height: 44px; border-radius: 12px; background: var(--blue-soft);
+  color: var(--blue); display: flex; align-items: center; justify-content: center;
+  margin: 18px 18px 0;
 }
 
 .home-card-body { padding: 15px 18px 18px; flex: 1; display: flex; flex-direction: column; }
@@ -599,54 +545,57 @@ main { flex: 1; }
 }
 
 /* ---- KUIS PEMINATAN ---- */
-.quiz-topbar {
-  display: flex; align-items: center; gap: 10px; margin-bottom: 4px;
-}
-.quiz-progress-bar {
-  flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden;
-}
-.quiz-progress-fill {
-  height: 100%; background: var(--purple); border-radius: 2px;
-  transition: width .35s ease;
-}
-.quiz-step-label { font-size: 0.75rem; color: var(--muted); white-space: nowrap; }
+.quiz-progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+.quiz-steps { display: flex; gap: 5px; flex: 1; }
+.quiz-step { flex: 1; height: 5px; border-radius: 3px; background: var(--border); }
+.quiz-step.done { background: var(--blue); }
+.quiz-step-label { font-size: 0.75rem; color: var(--muted); font-weight: 600; white-space: nowrap; }
 .quiz-card {
-  background: var(--card); border: 1px solid var(--border);
+  background: var(--card); border: 1.5px solid var(--blue);
   border-radius: var(--radius); padding: 20px 18px; margin-top: 12px;
 }
 .quiz-q {
-  font-size: 0.95rem; font-weight: 600; color: var(--text);
+  font-size: 0.95rem; font-weight: 700; color: var(--text);
   line-height: 1.6; margin-bottom: 16px;
 }
 .quiz-options { display: flex; flex-direction: column; gap: 10px; }
 .quiz-option {
   width: 100%; text-align: left; border: 1.5px solid var(--border);
-  border-radius: 10px; padding: 13px 16px;
+  border-radius: 10px; padding: 12px 15px;
+  display: flex; align-items: center; gap: 12px;
   font-size: 0.87rem; font-family: var(--font); color: var(--text);
   background: var(--card); cursor: pointer; line-height: 1.55;
   transition: border-color .15s, background .15s;
   -webkit-tap-highlight-color: transparent;
 }
-.quiz-option:hover { border-color: var(--purple); background: var(--purple-soft); }
+.quiz-option:hover { border-color: var(--blue); background: var(--blue-soft); }
+.quiz-opt-mark {
+  width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+  border: 1.5px solid var(--border); color: var(--subtle);
+  font-weight: 800; font-size: 0.72rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color .15s, color .15s;
+}
+.quiz-option:hover .quiz-opt-mark { border-color: var(--blue); color: var(--blue); }
 .quiz-prev-btn {
   display: flex; align-items: center; gap: 6px; margin-top: 16px;
   background: none; border: none; cursor: pointer; padding: 4px 0;
   font-size: 0.82rem; font-weight: 600; color: var(--muted);
   font-family: var(--font); transition: color .15s;
 }
-.quiz-prev-btn:hover { color: var(--purple); }
+.quiz-prev-btn:hover { color: var(--blue); }
 
 /* ---- HASIL KUIS ---- */
 .result-hero {
-  background: var(--card); border: 1px solid var(--border);
+  background: var(--card); border: 1.5px solid var(--blue);
   border-radius: var(--radius); padding: 22px 20px; text-align: center; margin-bottom: 12px;
 }
 .result-chip {
   display: inline-block; font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
   letter-spacing: 0.5px; padding: 3px 10px; border-radius: 20px; margin-bottom: 10px;
 }
-.chip-ssd  { background: var(--blue-soft);   color: var(--blue);   }
-.chip-aisd { background: var(--purple-soft); color: var(--purple); }
+.chip-ssd  { background: var(--blue-soft);  color: var(--blue);  }
+.chip-aisd { background: var(--slate-soft); color: var(--slate); }
 .result-pem-name { font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 5px; line-height: 1.4; }
 .result-score-line { font-size: 0.82rem; color: var(--muted); margin-bottom: 16px; }
 .score-bars { display: flex; flex-direction: column; gap: 8px; text-align: left; }
@@ -654,11 +603,11 @@ main { flex: 1; }
   display: flex; justify-content: space-between;
   font-size: 0.74rem; font-weight: 700; margin-bottom: 4px;
 }
-.score-row-label.ssd  { color: var(--blue);   }
-.score-row-label.aisd { color: var(--purple); }
+.score-row-label.ssd  { color: var(--blue);  }
+.score-row-label.aisd { color: var(--slate); }
 .score-track { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
-.score-fill-ssd  { height: 100%; background: var(--blue);   border-radius: 3px; transition: width .5s ease; }
-.score-fill-aisd { height: 100%; background: var(--purple); border-radius: 3px; transition: width .5s ease; }
+.score-fill-ssd  { height: 100%; background: var(--blue);  border-radius: 3px; transition: width .5s ease; }
+.score-fill-aisd { height: 100%; background: var(--slate); border-radius: 3px; transition: width .5s ease; }
 .result-desc-card {
   background: var(--card); border: 1px solid var(--border);
   border-radius: var(--radius); padding: 16px; margin-bottom: 12px;
@@ -696,25 +645,6 @@ main { flex: 1; }
 /* ---- SHOWCASE MAHASISWA ---- */
 #scGaleriView, #scDetailView, #scFormView, #scStatusView { display: none; }
 
-.illus-showcase { background: linear-gradient(140deg, #7C3AED 0%, #A855F7 55%, #2563EB 100%); }
-.illus-gallery { display: flex; gap: 8px; }
-.illus-gallery-tile { width: 30px; height: 30px; border-radius: 8px; background: rgba(255,255,255,.16); }
-.illus-gallery-tile:nth-child(2) { background: rgba(255,255,255,.26); }
-.illus-gallery-tile:nth-child(3) { background: rgba(255,255,255,.36); }
-.home-card-featured { grid-column: 1 / -1; }
-.home-card-featured .home-card-illus { padding: 0 18px; align-items: center; }
-.home-card-4:hover, .home-card-4:focus-visible {
-  border-color: var(--green);
-  box-shadow: 0 8px 28px rgba(22,163,74,.15);
-  transform: translateY(-2px);
-}
-
-/* Ilustrasi Statistik Program Studi - bar chart sederhana */
-.illus-stats { background: linear-gradient(140deg, #15803d 0%, #16a34a 55%, #22c55e 100%); }
-.illus-bars { display: flex; align-items: flex-end; gap: 6px; width: 100%; height: 100%; }
-.illus-bar { flex: 1; border-radius: 4px 4px 0 0; background: rgba(255,255,255,.4); }
-.illus-bar:last-child { background: rgba(255,255,255,.95); }
-
 /* ---- STATISTIK PROGRAM STUDI ---- */
 .stat-disclaimer {
   background: var(--orange-soft); border: 1px solid var(--orange-border);
@@ -730,7 +660,7 @@ main { flex: 1; }
   background: var(--card); border: 1px solid var(--border);
   border-radius: var(--radius); padding: 18px 14px; text-align: center;
 }
-.stat-icon { width: 34px; height: 34px; margin: 0 auto 10px; color: var(--green); }
+.stat-icon { width: 34px; height: 34px; margin: 0 auto 10px; color: var(--blue); }
 .stat-icon svg { width: 100%; height: 100%; }
 .stat-value { font-size: 1.6rem; font-weight: 800; color: var(--text); line-height: 1.15; margin-bottom: 4px; }
 .stat-label { font-size: 0.74rem; color: var(--muted); line-height: 1.4; }
@@ -766,8 +696,8 @@ main { flex: 1; }
 
 .sc-tag { font-size: 0.68rem; font-weight: 700; padding: 3px 9px; border-radius: 12px; border: 1px solid; display: inline-block; }
 .sc-tag-jenis { background: var(--bg); color: var(--muted); border-color: var(--border); }
-.sc-tag-ssd  { background: var(--blue-soft);   color: var(--blue);   border-color: var(--blue-border); }
-.sc-tag-aisd { background: var(--purple-soft); color: var(--purple); border-color: var(--purple-border); }
+.sc-tag-ssd  { background: var(--blue-soft);  color: var(--blue);  border-color: var(--blue-border); }
+.sc-tag-aisd { background: var(--slate-soft); color: var(--slate); border-color: var(--slate-border); }
 .sc-tag-none { background: var(--bg); color: var(--subtle); border-color: var(--border); }
 .sc-tag-live { background: var(--green-soft);  color: var(--green);  border-color: var(--green-border); }
 .sc-tag-dev  { background: var(--orange-soft); color: var(--orange); border-color: var(--orange-border); }

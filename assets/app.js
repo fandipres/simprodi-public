@@ -18,7 +18,6 @@ const I18N = {
     btn_tutup: 'Tutup',
     home_headline_l1: 'Pilih jalanmu.', home_headline_l2: 'Rekam jejakmu.',
     home_sub: 'Pantau capaian akademikmu, temukan peminatan yang sesuai, atau jelajahi karya mahasiswa lainnya.',
-    illus_count_3: '3 keg.', illus_count_2: '2 keg.', illus_count_0: '0 keg.',
     home_card1_title: 'Portofolio Akademik',
     home_card1_desc: 'Cek prestasi, MBKM, dan sertifikasi yang sudah tercatat di program studi.',
     home_card1_btn: 'Cek Sekarang',
@@ -240,7 +239,6 @@ const I18N = {
     btn_tutup: 'Close',
     home_headline_l1: 'Choose your path.', home_headline_l2: 'Record your journey.',
     home_sub: 'Track your academic achievements, find the specialization track that fits you, or explore work by fellow students.',
-    illus_count_3: '3 act.', illus_count_2: '2 act.', illus_count_0: '0 act.',
     home_card1_title: 'Academic Portfolio',
     home_card1_desc: 'Check the achievements, MBKM activities, and certifications recorded by the study program.',
     home_card1_btn: 'Check Now',
@@ -1252,13 +1250,17 @@ function startQuiz() {
 }
 
 function renderQuizQuestion() {
-  var q   = quizSession[quizCurrent];
-  var pct = Math.round(quizCurrent / quizSession.length * 100);
-  document.getElementById('quizStepLabel').textContent    = t('quiz_step_label', { n: quizCurrent + 1, total: quizSession.length });
-  document.getElementById('quizProgressFill').style.width = pct + '%';
+  var q = quizSession[quizCurrent];
+  document.getElementById('quizStepLabel').textContent = t('quiz_step_label', { n: quizCurrent + 1, total: quizSession.length });
+  document.getElementById('quizSteps').innerHTML = quizSession.map(function(_, i) {
+    return '<div class="quiz-step' + (i <= quizCurrent ? ' done' : '') + '"></div>';
+  }).join('');
   document.getElementById('quizQ').textContent = pick(q.q);
-  document.getElementById('quizOpts').innerHTML = q.opts.map(function(opt) {
-    return '<button class="quiz-option" onclick="selectAnswer(\'' + opt.pem + '\')">' + escHtml(pick(opt.text)) + '</button>';
+  document.getElementById('quizOpts').innerHTML = q.opts.map(function(opt, i) {
+    return '<button class="quiz-option" onclick="selectAnswer(\'' + opt.pem + '\')">' +
+      '<span class="quiz-opt-mark">' + String.fromCharCode(65 + i) + '</span>' +
+      '<span class="quiz-opt-text">' + escHtml(pick(opt.text)) + '</span>' +
+    '</button>';
   }).join('');
   document.getElementById('quizPrevBtn').style.display = quizCurrent > 0 ? 'flex' : 'none';
 }
