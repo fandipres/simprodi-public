@@ -372,9 +372,13 @@
 
     <!-- Showcase: Form Submit -->
     <div id="scFormView">
-      <button class="back-btn" onclick="openShowcaseGaleri()"><span class="arr">&#8592;</span> <span data-i18n="sc_back">Kembali</span></button>
-      <div id="scFormTitle" class="home-headline" style="font-size:1.05rem;margin-bottom:4px;" data-i18n="sc_form_title">Tambahkan Karyamu ke Showcase</div>
-      <div class="home-sub" style="margin-bottom:0;" data-i18n="sc_form_sub">Isi form di bawah untuk menampilkan aplikasi, web, atau game buatanmu ke galeri publik.</div>
+      <div class="home-hero">
+        <div class="home-hero-inner">
+          <button class="back-btn" onclick="openShowcaseGaleri()"><span class="arr">&#8592;</span> <span data-i18n="sc_back">Kembali</span></button>
+          <div id="scFormTitle" class="home-headline" style="font-size:1.05rem;margin-bottom:4px;" data-i18n="sc_form_title">Tambahkan Karyamu ke Showcase</div>
+          <div class="home-sub" style="margin-bottom:0;" data-i18n="sc_form_sub">Isi form di bawah untuk menampilkan aplikasi, web, atau game buatanmu ke galeri publik.</div>
+        </div>
+      </div>
 
       <div class="sc-intro-note" data-i18n="sc_form_intro">Karya kamu akan ditinjau admin sebelum tayang. Setelah mengirim, kamu akan mendapat kode unik. Simpan baik-baik karena kode ini dipakai untuk mengecek status, dan nantinya jadi tautan tetap karyamu.</div>
       <div class="sc-form-hint" style="margin-top:6px;"><span class="sc-req">*</span> <span data-i18n="sc_req_legend">wajib diisi, sisanya opsional</span></div>
@@ -521,9 +525,13 @@
 
     <!-- Showcase: Cek Status -->
     <div id="scStatusView">
-      <button class="back-btn" onclick="openShowcaseGaleri()"><span class="arr">&#8592;</span> <span data-i18n="sc_back">Kembali</span></button>
-      <div class="home-headline" style="font-size:1.05rem;margin-bottom:4px;" data-i18n="sc_status_title">Cek Status Pengajuan Karya</div>
-      <div class="home-sub" style="margin-bottom:0;" data-i18n="sc_status_sub">Masukkan kode yang kamu dapat setelah mengirim karya untuk melihat progres peninjauannya.</div>
+      <div class="home-hero">
+        <div class="home-hero-inner">
+          <button class="back-btn" onclick="openShowcaseGaleri()"><span class="arr">&#8592;</span> <span data-i18n="sc_back">Kembali</span></button>
+          <div class="home-headline" style="font-size:1.05rem;margin-bottom:4px;" data-i18n="sc_status_title">Cek Status Pengajuan Karya</div>
+          <div class="home-sub" style="margin-bottom:0;" data-i18n="sc_status_sub">Masukkan kode yang kamu dapat setelah mengirim karya untuk melihat progres peninjauannya.</div>
+        </div>
+      </div>
 
       <div class="sc-status-search">
         <input class="sc-input" id="scStatusInput" data-i18n-placeholder="sc_status_placeholder" placeholder="mis. SC-7K2M9">
@@ -542,11 +550,6 @@
           <div class="home-headline" data-i18n="stat_title">Capaian Kolektif Program Studi</div>
           <div class="home-sub" data-i18n="stat_subtitle">Ratusan kegiatan, prestasi, dan karya lahir dari mahasiswa kami, dirangkum dalam angka.</div>
         </div>
-      </div>
-
-      <div class="stat-disclaimer">
-        <div class="stat-disclaimer-title" data-i18n="stat_disclaimer_title">Data masih bersifat sementara</div>
-        <div class="stat-disclaimer-desc" data-i18n="stat_disclaimer_desc">Angka di atas dihimpun dari data yang sudah tercatat di sistem kami dan terus bertambah seiring data baru diimpor admin, jadi mungkin belum mencakup seluruh capaian mahasiswa. Kalau ada capaianmu (atau temanmu) yang belum tercantum atau datanya kurang sesuai, laporkan lewat halaman Portofolio Akademik.</div>
       </div>
 
       <div id="statMsg"></div>
@@ -577,6 +580,11 @@
           <div class="stat-value" id="statShowcase">-</div>
           <div class="stat-label" data-i18n="stat_label_showcase">Karya Showcase</div>
         </div>
+      </div>
+
+      <div class="stat-disclaimer">
+        <div class="stat-disclaimer-title" data-i18n="stat_disclaimer_title">Data masih bersifat sementara</div>
+        <div class="stat-disclaimer-desc" data-i18n="stat_disclaimer_desc">Angka di atas dihimpun dari data yang sudah tercatat di sistem kami dan terus bertambah seiring data baru diimpor admin, jadi mungkin belum mencakup seluruh capaian mahasiswa. Kalau ada capaianmu (atau temanmu) yang belum tercantum atau datanya kurang sesuai, laporkan lewat halaman Portofolio Akademik.</div>
       </div>
 
     </div>

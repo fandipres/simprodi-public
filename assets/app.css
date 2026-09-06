@@ -97,6 +97,15 @@ body {
 }
 main { flex: 1; }
 
+/* ---- CUSTOM SCROLLBAR ---- theme-aware (uses --blue-border, which
+   already has its own light/dark values), so it follows the navy
+   identity instead of the browser's default gray scrollbar. */
+html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; }
+::-webkit-scrollbar { width: 9px; height: 9px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--blue-border); border-radius: 5px; border: 2px solid transparent; background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover { background: var(--blue); background-clip: padding-box; }
+
 /* ---- HEADER ----
    Latar navy tetap, terlepas dari tema terang/gelap situs - header
    berperan sebagai "identitas" yang selalu gelap, jadi semua warna teks
