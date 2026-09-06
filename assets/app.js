@@ -78,7 +78,7 @@ const I18N = {
     home_card3_title: 'Showcase Mahasiswa',
     home_card3_desc: 'Lihat aplikasi, web, dan game hasil karya mahasiswa.',
     home_card3_btn: 'Jelajahi Karya',
-    home_card4_title: 'Statistik Program Studi',
+    home_card4_title: 'Statistik Prodi',
     home_card4_desc: 'Lihat sekilas capaian kolektif mahasiswa kami dalam angka.',
     home_card4_btn: 'Lihat Statistik',
     stat_title: 'Capaian Kolektif Program Studi',
