@@ -100,7 +100,11 @@ main { flex: 1; }
 /* ---- CUSTOM SCROLLBAR ---- theme-aware (uses --blue-border, which
    already has its own light/dark values), so it follows the navy
    identity instead of the browser's default gray scrollbar. */
-html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; }
+/* scrollbar-gutter menjaga lebar area konten tetap sama baik saat
+   scrollbar vertikal muncul (halaman panjang) maupun tidak (halaman
+   pendek) - tanpa ini, header/.page-wrap yang di-center akan tampak
+   bergeser beberapa pixel setiap kali berpindah fitur. */
+html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; scrollbar-gutter: stable; }
 ::-webkit-scrollbar { width: 9px; height: 9px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--blue-border); border-radius: 5px; border: 2px solid transparent; background-clip: padding-box; }
@@ -199,11 +203,12 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; }
    dibatasi lebih sempit supaya tetap nyaman dibaca meski .page-wrap sudah
    melebar jadi 900px. */
 #searchSection, #detailView { max-width: 700px; margin-left: auto; margin-right: auto; }
-#searchSection .home-hero-inner { max-width: 700px; }
+#searchSection .home-hero-inner, #detailView .home-hero-inner { max-width: 700px; }
 #scGaleriView { max-width: 780px; margin-left: auto; margin-right: auto; }
 #scDetailView, #scFormView, #scStatusView { max-width: 780px; margin-left: auto; margin-right: auto; }
+#scDetailView .home-hero-inner { max-width: 780px; }
 #quizView, #quizResultView { max-width: 560px; margin-left: auto; margin-right: auto; }
-#quizView .home-hero-inner { max-width: 560px; }
+#quizView .home-hero-inner, #quizResultView .home-hero-inner { max-width: 560px; }
 #statistikView { max-width: 780px; margin-left: auto; margin-right: auto; }
 
 /* Laptop/desktop saja: semua fitur dilebarkan ke lebar yang sama agar
@@ -213,11 +218,11 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; }
   .page-wrap { max-width: 1140px; }
   .header-inner { max-width: 1140px; }
   #searchSection, #detailView { max-width: 1140px; }
-  #searchSection .home-hero-inner { max-width: 1140px; }
+  #searchSection .home-hero-inner, #detailView .home-hero-inner { max-width: 1140px; }
   #scGaleriView, #scDetailView, #scFormView, #scStatusView { max-width: 1140px; }
-  #scGaleriView .home-hero-inner { max-width: 1140px; }
+  #scGaleriView .home-hero-inner, #scDetailView .home-hero-inner { max-width: 1140px; }
   #quizView, #quizResultView { max-width: 1140px; }
-  #quizView .home-hero-inner { max-width: 1140px; }
+  #quizView .home-hero-inner, #quizResultView .home-hero-inner { max-width: 1140px; }
   #statistikView { max-width: 1140px; }
   #statistikView .home-hero-inner { max-width: 1140px; }
 }
@@ -436,11 +441,6 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; }
 .alert-ok  { background: var(--green-soft); color: var(--green); border: 1px solid var(--green-border); }
 .alert-err { background: var(--red-soft); color: var(--red); border: 1px solid var(--red-border); }
 
-/* ---- DETAIL TOPBAR ---- */
-.detail-topbar {
-  display: flex; justify-content: space-between; align-items: center;
-  margin-bottom: 16px;
-}
 /* ---- TOAST ---- */
 .toast {
   position: fixed; bottom: 24px; left: 50%;
@@ -547,9 +547,14 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; }
 .home-hero {
   background: var(--blue);
   width: 100vw; position: relative; left: 50%; margin-left: -50vw;
-  padding: 26px 16px 24px; margin-top: -20px; margin-bottom: 22px;
+  padding: 26px 0 24px; margin-top: -20px; margin-bottom: 22px;
 }
-.home-hero-inner { max-width: 780px; margin: 0 auto; }
+/* Padding horizontal 16px sengaja ditaruh di .home-hero-inner (bukan di
+   .home-hero) supaya perhitungannya sama persis dengan .page-wrap dan
+   .header-inner (satu lapis padding pada elemen yang di-max-width+center),
+   sehingga tombol/teks di header sejajar dengan batas nav dan konten di
+   bawahnya, bukan tergeser 16px lebih ke kiri. */
+.home-hero-inner { max-width: 780px; margin: 0 auto; padding: 0 16px; }
 #homeView .home-hero-inner { max-width: none; text-align: center; }
 .home-headline {
   font-size: 1.6rem; font-weight: 800; line-height: 1.2;
@@ -571,6 +576,9 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; }
 .home-cards {
   display: grid; grid-template-columns: 1fr 1fr;
   gap: 18px; margin-bottom: 24px;
+}
+@media (min-width: 1024px) {
+  .home-cards { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 400px) {
   .home-cards { grid-template-columns: 1fr; }
@@ -820,6 +828,7 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; }
 .sc-fchip.active { background: var(--blue); border-color: var(--blue); color: #fff; }
 
 .sc-gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (min-width: 1024px) { .sc-gallery-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 480px) { .sc-gallery-grid { grid-template-columns: 1fr; } }
 .sc-gcard { padding: 0; overflow: hidden; display: flex; flex-direction: column; cursor: pointer; transition: border-color .18s, box-shadow .18s, transform .14s; }
 .sc-gcard:hover { border-color: var(--blue-border); box-shadow: 0 8px 24px rgba(37,99,235,.14); transform: translateY(-2px); }

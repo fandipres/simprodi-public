@@ -137,11 +137,15 @@
     <!-- Detail Mahasiswa -->
     <div id="detailView">
 
-      <div class="detail-topbar">
-        <button class="back-btn" onclick="showList()">
-          <span class="arr">&#8592;</span>
-          <span data-i18n="btn_kembali">Kembali</span>
-        </button>
+      <div class="home-hero">
+        <div class="home-hero-inner">
+          <button class="back-btn" onclick="showList()">
+            <span class="arr">&#8592;</span>
+            <span data-i18n="btn_kembali">Kembali</span>
+          </button>
+          <div class="home-headline" style="font-size:1.05rem;margin-bottom:4px;" data-i18n="detail_title">Detail Portofolio Mahasiswa</div>
+          <div class="home-sub" style="margin-bottom:0;" data-i18n="detail_sub">Rincian prestasi, MBKM, dan sertifikasi yang tercatat untuk mahasiswa ini.</div>
+        </div>
       </div>
 
       <div class="detail-header">
@@ -249,9 +253,15 @@
 
     <!-- Hasil Kuis Peminatan -->
     <div id="quizResultView" style="display:none;">
-      <button class="back-btn" onclick="showHome()">
-        <span class="arr">&#8592;</span> <span data-i18n="btn_beranda">Beranda</span>
-      </button>
+      <div class="home-hero">
+        <div class="home-hero-inner">
+          <button class="back-btn" onclick="showHome()">
+            <span class="arr">&#8592;</span> <span data-i18n="btn_beranda">Beranda</span>
+          </button>
+          <div class="home-headline" style="font-size:1.05rem;margin-bottom:4px;" data-i18n="quiz_result_title">Hasil Tes Peminatan</div>
+          <div class="home-sub" style="margin-bottom:0;" data-i18n="quiz_result_sub">Rekomendasi peminatan berdasarkan jawabanmu.</div>
+        </div>
+      </div>
       <div class="result-hero">
         <div id="resultChip" class="result-chip"></div>
         <div id="resultPemName" class="result-pem-name"></div>
@@ -366,7 +376,13 @@
 
     <!-- Showcase: Detail Karya -->
     <div id="scDetailView">
-      <button class="back-btn" onclick="openShowcaseGaleri()"><span class="arr">&#8592;</span> <span data-i18n="sc_back">Kembali</span></button>
+      <div class="home-hero">
+        <div class="home-hero-inner">
+          <button class="back-btn" onclick="openShowcaseGaleri()"><span class="arr">&#8592;</span> <span data-i18n="sc_back">Kembali</span></button>
+          <div class="home-headline" style="font-size:1.05rem;margin-bottom:4px;" data-i18n="sc_detail_title">Detail Karya Showcase</div>
+          <div class="home-sub" style="margin-bottom:0;" data-i18n="sc_detail_sub">Info lengkap, tautan, dan dukungan untuk karya mahasiswa ini.</div>
+        </div>
+      </div>
       <div id="scDetailBody"></div>
     </div>
 
