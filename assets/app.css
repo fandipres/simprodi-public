@@ -200,10 +200,24 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; }
    melebar jadi 900px. */
 #searchSection, #detailView { max-width: 700px; margin-left: auto; margin-right: auto; }
 #searchSection .home-hero-inner { max-width: 700px; }
-#scGaleriView, #scDetailView, #scFormView, #scStatusView { max-width: 780px; margin-left: auto; margin-right: auto; }
+#scGaleriView { max-width: 780px; margin-left: auto; margin-right: auto; }
+#scDetailView, #scFormView, #scStatusView { max-width: 780px; margin-left: auto; margin-right: auto; }
 #quizView, #quizResultView { max-width: 560px; margin-left: auto; margin-right: auto; }
 #quizView .home-hero-inner { max-width: 560px; }
 #statistikView { max-width: 780px; margin-left: auto; margin-right: auto; }
+
+/* Laptop/desktop saja: beranda & galeri showcase dilebarkan agar tidak
+   terlalu banyak ruang kosong di kanan-kiri pada layar lebar. Fitur lain
+   (portofolio, tes peminatan, statistik, dan sub-halaman showcase selain
+   galeri) sengaja tetap di lebar semula karena isinya berbasis teks/form
+   yang lebih nyaman dibaca sempit. Mobile/tablet tidak disentuh sama
+   sekali (di bawah breakpoint ini). */
+@media (min-width: 1024px) {
+  .page-wrap { max-width: 1140px; }
+  .header-inner { max-width: 1140px; }
+  #scGaleriView { max-width: 1140px; }
+  #scGaleriView .home-hero-inner { max-width: 1140px; }
+}
 
 /* ---- SEARCH ---- */
 .search-card {
