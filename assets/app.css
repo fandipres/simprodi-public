@@ -1,4 +1,4 @@
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
 :root {
   --blue:        #1e1e44;
@@ -220,7 +220,7 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; s
   #searchSection, #detailView { max-width: 1140px; }
   #searchSection .home-hero-inner, #detailView .home-hero-inner { max-width: 1140px; }
   #scGaleriView, #scDetailView, #scFormView, #scStatusView { max-width: 1140px; }
-  #scGaleriView .home-hero-inner, #scDetailView .home-hero-inner { max-width: 1140px; }
+  #scGaleriView .home-hero-inner, #scDetailView .home-hero-inner, #scFormView .home-hero-inner, #scStatusView .home-hero-inner { max-width: 1140px; }
   #quizView, #quizResultView { max-width: 1140px; }
   #quizView .home-hero-inner, #quizResultView .home-hero-inner { max-width: 1140px; }
   #statistikView { max-width: 1140px; }
