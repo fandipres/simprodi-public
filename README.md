@@ -8,7 +8,10 @@ A bilingual (Indonesian/English) public portal for an Informatics Engineering st
 * **Data Correction Report:** Students can flag achievement records that look incorrect directly from the search results.
 * **Specialization Quiz:** An interactive quiz that recommends a specialization track (SSD or AISD) based on the student's answers.
 * **Student Project Showcase:** A public gallery of apps, websites, games, and other student projects, with a full submit → moderation → publish flow, likes, content reporting, submission-status lookup, and edit-and-resubmit for rejected entries.
+* **Program Statistics:** A public dashboard of aggregate achievement counts (students, MBKM activities, achievement activities, certifications, showcase projects), with a disclaimer that the numbers are provisional and a report form for anything missing.
 * **Bilingual UI:** Every page, including dynamically rendered content, is available in Indonesian and English.
+* **Light/Dark Theme:** A manual toggle between light and dark mode, remembered per device.
+* **Shareable Clean URLs:** Each main section (`/portofolio/`, `/showcase/`, `/specialization/`, `/statistic/`) is a real, directly linkable page, on top of the existing per-record deep links (`?nim=`, `?kode=`).
 
 ## 💻 Application Preview
 
@@ -51,16 +54,14 @@ This site is auto-published from a private main repository whenever its `docs/` 
 
 2.  **Run the application:**
 
-    Simply open the `index.html` file in your web browser.
+    The pages load their shared markup/styles/script from `assets/` at runtime via `fetch()`, so they need to be served over `http://`, not opened directly as a `file://` path.
     ```bash
-    # On Windows
-    start index.html
-
-    # On macOS
-    open index.html
+    # Any static file server works, for example:
+    python -m http.server 8000
+    # then open http://localhost:8000/ in your browser
     ```
 
-3.  The static UI will load, but features that fetch or submit data (achievement lookup, the showcase, etc.) require a valid Google Apps Script backend URL configured in `index.html`, which is not part of this repository.
+3.  The static UI will load, but features that fetch or submit data (achievement lookup, the showcase, etc.) require a valid Google Apps Script backend URL configured in `assets/app.js`, which is not part of this repository.
 
 ## 🔗 Links
 

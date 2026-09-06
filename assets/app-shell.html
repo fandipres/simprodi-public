@@ -1,0 +1,663 @@
+
+<header class="site-header">
+  <div class="header-inner">
+    <span class="header-brand" onclick="showHome()" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')showHome()">SIM<span>PRODI</span></span>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" id="langBtnID" class="lang-btn" onclick="setLang('id')">ID</button>
+        <button type="button" id="langBtnEN" class="lang-btn" onclick="setLang('en')">EN</button>
+      </div>
+      <button type="button" class="header-info-btn" id="themeToggleBtn" onclick="toggleTheme()" data-i18n-aria-label="theme_toggle_aria" aria-label="Ganti tema terang/gelap">
+        <svg id="themeIconMoon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        <svg id="themeIconSun" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+      </button>
+      <button class="header-info-btn" onclick="openAboutModal()" data-i18n-aria-label="header_info_aria" aria-label="Tentang SIMPRODI">i</button>
+    </div>
+  </div>
+</header>
+
+<!-- Modal: Tentang SIMPRODI -->
+<div class="about-overlay" id="aboutOverlay" onclick="if(event.target===this)closeAboutModal()">
+  <div class="about-modal">
+    <div class="about-eyebrow" data-i18n="about_eyebrow">Tentang Aplikasi Ini</div>
+    <div class="about-brand">SIM<b>PRODI</b></div>
+    <div class="about-expand" data-i18n="about_expand">Sistem Informasi Program Studi Teknik Informatika</div>
+    <div class="about-desc" data-i18n="about_desc">Dikembangkan oleh Program Studi Teknik Informatika sebagai wadah informasi capaian akademik mahasiswa, alat bantu pemilihan peminatan studi, dan galeri karya mahasiswa.</div>
+    <button class="about-close" onclick="closeAboutModal()" data-i18n="btn_tutup">Tutup</button>
+  </div>
+</div>
+
+<!-- Modal: Laporkan Karya Showcase -->
+<div class="sc-modal-overlay" id="scReportOverlay" onclick="if(event.target===this)closeScReportModal()">
+  <div class="sc-modal-box">
+    <div class="sc-modal-head">
+      <div class="sc-modal-title" data-i18n="sc_report_modal_title">Laporkan Karya</div>
+      <button class="sc-modal-close" onclick="closeScReportModal()">&times;</button>
+    </div>
+    <div id="scReportForm">
+      <p class="home-sub" id="scReportDesc" style="margin:6px 0 12px;"></p>
+      <div class="sc-form-group" style="margin-top:0;">
+        <label class="sc-form-label" data-i18n="sc_report_reason_label">Alasan Laporan</label>
+        <textarea class="sc-textarea" id="scReportReason" data-i18n-placeholder="sc_report_reason_placeholder" placeholder="Jelaskan singkat apa yang menurutmu bermasalah..." maxlength="1000"></textarea>
+      </div>
+      <div class="sc-form-group">
+        <label class="sc-form-label"><span data-i18n="sc_report_contact_label">Kontak Kamu</span> <span class="opt" data-i18n="sc_opt">opsional</span></label>
+        <input class="sc-input" id="scReportContact" data-i18n-placeholder="sc_report_contact_placeholder" placeholder="Email / nomor WhatsApp, kalau perlu ditindaklanjuti">
+      </div>
+      <p id="scReportMsg" class="msg-error" style="display:none;"></p>
+      <button class="sc-btn sc-btn-primary sc-btn-block" style="margin-top:6px;" onclick="submitScReport()" data-i18n="sc_report_submit">Kirim Laporan</button>
+    </div>
+    <div id="scReportSuccess" class="sc-success-card" style="display:none;padding:20px 6px 4px;">
+      <div class="sc-success-icon">&#10003;</div>
+      <div style="font-weight:800;" data-i18n="sc_report_success">Laporan terkirim. Terima kasih, admin akan meninjau karya ini.</div>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="page-wrap">
+
+    <!-- Beranda -->
+    <div id="homeView">
+      <div class="home-hero">
+        <div class="home-headline"><span data-i18n="home_headline_l1">Pilih jalanmu.</span><br><span data-i18n="home_headline_l2">Rekam jejakmu.</span></div>
+        <div class="home-sub" data-i18n="home_sub">Pantau capaian akademikmu, temukan peminatan yang sesuai, atau jelajahi karya mahasiswa lainnya.</div>
+      </div>
+      <div class="home-cards">
+        <div class="home-card home-card-1 home-card-featured" onclick="openPortofolio()" role="button" tabindex="0"
+             onkeydown="if(event.key==='Enter'||event.key===' ')openPortofolio()">
+          <div class="home-card-illus illus-blue">
+            <div class="illus-list">
+              <div class="illus-list-row">
+                <div class="illus-list-dot"></div>
+                <div class="illus-list-label">MBKM</div>
+                <div class="illus-list-badge" data-i18n="illus_count_3">3 keg.</div>
+              </div>
+              <div class="illus-list-row">
+                <div class="illus-list-dot"></div>
+                <div class="illus-list-label">Prestasi</div>
+                <div class="illus-list-badge" data-i18n="illus_count_2">2 keg.</div>
+              </div>
+              <div class="illus-list-row">
+                <div class="illus-list-dot dim"></div>
+                <div class="illus-list-label dim">Sertifikasi</div>
+                <div class="illus-list-badge dim" data-i18n="illus_count_0">0 keg.</div>
+              </div>
+            </div>
+          </div>
+          <div class="home-card-body">
+            <div class="home-card-title" data-i18n="home_card1_title">Portofolio Akademik</div>
+            <div class="home-card-desc" data-i18n="home_card1_desc">Cek prestasi, MBKM, dan sertifikasi yang sudah tercatat di program studi.</div>
+            <div class="home-card-btn" data-i18n="home_card1_btn">Cek Sekarang</div>
+          </div>
+        </div>
+        <div class="home-card home-card-3" onclick="openShowcaseGaleri()" role="button" tabindex="0"
+             onkeydown="if(event.key==='Enter'||event.key===' ')openShowcaseGaleri()">
+          <div class="home-card-illus illus-showcase">
+            <div class="illus-gallery">
+              <div class="illus-gallery-tile"></div>
+              <div class="illus-gallery-tile"></div>
+              <div class="illus-gallery-tile"></div>
+            </div>
+          </div>
+          <div class="home-card-body">
+            <div class="home-card-title" data-i18n="home_card3_title">Showcase Mahasiswa</div>
+            <div class="home-card-desc" data-i18n="home_card3_desc">Lihat aplikasi, web, dan game hasil karya mahasiswa.</div>
+            <div class="home-card-btn" data-i18n="home_card3_btn">Jelajahi Karya</div>
+          </div>
+        </div>
+        <div class="home-card home-card-2" onclick="openQuiz()" role="button" tabindex="0"
+             onkeydown="if(event.key==='Enter'||event.key===' ')openQuiz()">
+          <div class="home-card-illus" style="padding:0;position:relative;">
+            <div class="illus-vs-wrap">
+              <div class="illus-vs-side illus-vs-left">
+                <div class="illus-vs-label">SSD</div>
+                <div class="illus-vs-dots">
+                  <div class="illus-vs-dot on"></div>
+                  <div class="illus-vs-dot on"></div>
+                  <div class="illus-vs-dot"></div>
+                </div>
+              </div>
+              <div class="illus-vs-side illus-vs-right">
+                <div class="illus-vs-label">AISD</div>
+                <div class="illus-vs-dots">
+                  <div class="illus-vs-dot"></div>
+                  <div class="illus-vs-dot on"></div>
+                  <div class="illus-vs-dot on"></div>
+                </div>
+              </div>
+              <div class="illus-vs-badge">vs</div>
+            </div>
+          </div>
+          <div class="home-card-body">
+            <div class="home-card-title" data-i18n="home_card2_title">Tes Peminatan</div>
+            <div class="home-card-desc" data-i18n="home_card2_desc">Jawab 7 pertanyaan singkat untuk tahu apakah kamu lebih cocok ke SSD atau AISD.</div>
+            <div class="home-card-btn" data-i18n="home_card2_btn">Mulai Tes</div>
+          </div>
+        </div>
+        <div class="home-card home-card-4 home-card-featured" onclick="openStatistik()" role="button" tabindex="0"
+             onkeydown="if(event.key==='Enter'||event.key===' ')openStatistik()">
+          <div class="home-card-illus illus-stats">
+            <div class="illus-bars">
+              <div class="illus-bar" style="height:38%"></div>
+              <div class="illus-bar" style="height:62%"></div>
+              <div class="illus-bar" style="height:48%"></div>
+              <div class="illus-bar" style="height:82%"></div>
+              <div class="illus-bar" style="height:100%"></div>
+            </div>
+          </div>
+          <div class="home-card-body">
+            <div class="home-card-title" data-i18n="home_card4_title">Statistik Program Studi</div>
+            <div class="home-card-desc" data-i18n="home_card4_desc">Lihat sekilas capaian kolektif mahasiswa kami dalam angka.</div>
+            <div class="home-card-btn" data-i18n="home_card4_btn">Lihat Statistik</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Portofolio Akademik -->
+    <div id="searchSection" style="display:none;">
+      <button class="back-btn" onclick="showHome()" style="margin-bottom:4px;">
+        <span class="arr">&#8592;</span> <span data-i18n="btn_beranda">Beranda</span>
+      </button>
+      <div class="search-card">
+        <div class="search-row">
+          <input class="search-input" type="text" id="searchInput"
+                 data-i18n-placeholder="search_placeholder"
+                 placeholder="Cari berdasarkan NIM atau nama..." maxlength="100"
+                 autocomplete="off" autocorrect="off" spellcheck="false">
+          <button class="search-btn" id="searchBtn" onclick="doSearch()" data-i18n="search_btn">Cari</button>
+        </div>
+        <p class="search-hint" data-i18n="search_hint">Masukkan NIM lengkap atau sebagian nama mahasiswa (minimal 3 karakter).</p>
+      </div>
+
+      <p id="statusMsg" class="msg-center"></p>
+
+      <div id="listView"></div>
+    </div>
+
+    <!-- Detail Mahasiswa -->
+    <div id="detailView">
+
+      <div class="detail-topbar">
+        <button class="back-btn" onclick="showList()">
+          <span class="arr">&#8592;</span>
+          <span data-i18n="btn_kembali">Kembali</span>
+        </button>
+      </div>
+
+      <div class="detail-header">
+        <div style="min-width:0;flex:1;">
+          <div class="d-name" id="dNama"></div>
+          <div class="d-nim"  id="dNim"></div>
+        </div>
+      </div>
+
+      <!-- Accordion: MBKM -->
+      <div class="acc-wrap">
+        <button class="acc-btn is-open" id="trg-mbkm" onclick="toggleAcc('mbkm')">
+          <span class="acc-lhs">
+            <span class="acc-dot dot-green"></span>
+            <span class="acc-label" data-i18n="label_mbkm">MBKM</span>
+            <span class="acc-count c-green" id="cnt-mbkm">0</span>
+          </span>
+          <span style="display:flex;align-items:center;gap:8px;">
+            <span class="info-btn" role="button" tabindex="0" onclick="showInfo('mbkm'); event.stopPropagation();" onkeydown="if(event.key==='Enter'||event.key===' '){showInfo('mbkm');event.stopPropagation();}" data-i18n-title="info_title_mbkm" title="Apa itu MBKM?">i</span>
+            <span class="acc-icon open" id="ico-mbkm"></span>
+          </span>
+        </button>
+        <div class="acc-body open" id="panel-mbkm"></div>
+      </div>
+
+      <!-- Accordion: Prestasi -->
+      <div class="acc-wrap">
+        <button class="acc-btn is-open" id="trg-prestasi" onclick="toggleAcc('prestasi')">
+          <span class="acc-lhs">
+            <span class="acc-dot dot-blue"></span>
+            <span class="acc-label" data-i18n="label_prestasi">Prestasi</span>
+            <span class="acc-count c-blue" id="cnt-prestasi">0</span>
+          </span>
+          <span style="display:flex;align-items:center;gap:8px;">
+            <span class="info-btn" role="button" tabindex="0" onclick="showInfo('prestasi'); event.stopPropagation();" onkeydown="if(event.key==='Enter'||event.key===' '){showInfo('prestasi');event.stopPropagation();}" data-i18n-title="info_title_prestasi" title="Apa itu Prestasi?">i</span>
+            <span class="acc-icon open" id="ico-prestasi"></span>
+          </span>
+        </button>
+        <div class="acc-body open" id="panel-prestasi"></div>
+      </div>
+
+      <!-- Accordion: Sertifikasi -->
+      <div class="acc-wrap">
+        <button class="acc-btn is-open" id="trg-sertifikasi" onclick="toggleAcc('sertifikasi')">
+          <span class="acc-lhs">
+            <span class="acc-dot dot-purple"></span>
+            <span class="acc-label" data-i18n="label_sertifikasi">Sertifikasi</span>
+            <span class="acc-count c-purple" id="cnt-sertifikasi">0</span>
+          </span>
+          <span style="display:flex;align-items:center;gap:8px;">
+            <span class="info-btn" role="button" tabindex="0" onclick="showInfo('sertifikasi'); event.stopPropagation();" onkeydown="if(event.key==='Enter'||event.key===' '){showInfo('sertifikasi');event.stopPropagation();}" data-i18n-title="info_title_sertifikasi" title="Apa itu Sertifikasi?">i</span>
+            <span class="acc-icon open" id="ico-sertifikasi"></span>
+          </span>
+        </button>
+        <div class="acc-body open" id="panel-sertifikasi"></div>
+      </div>
+
+      <!-- Laporan -->
+      <div class="lapor-card">
+        <div class="lapor-header">
+          <div>
+            <div class="lapor-title" data-i18n="lapor_title">Ada data yang perlu dikoreksi?</div>
+            <div class="lapor-desc" data-i18n="lapor_desc">Sampaikan ke program studi agar bisa segera diperbaiki.</div>
+          </div>
+          <button class="btn-lapor" onclick="toggleLapor()" data-i18n="btn_lapor_kesalahan">Laporkan Kesalahan</button>
+        </div>
+        <div id="laporForm" class="lapor-form">
+          <label class="form-label" for="laporPesan" data-i18n="lapor_pesan_label">Jelaskan data yang perlu dikoreksi</label>
+          <textarea class="form-textarea" id="laporPesan" oninput="updateCharCounter('laporPesan','laporPesanCount',10)"
+            data-i18n-placeholder="lapor_pesan_placeholder"
+            placeholder="Contoh: pada semester Ganjil 2025/2026, kegiatan saya seharusnya Juara 2, bukan Peserta."></textarea>
+          <div class="char-counter" id="laporPesanCount">0/10</div>
+          <div class="lapor-note" data-i18n="lapor_note">
+            Tindak lanjut laporan akan disampaikan melalui nomor yang tercatat di MIKA kamu.
+            Pastikan nomor tersebut sudah diperbarui sebelum mengirim.
+          </div>
+          <button class="btn-send" id="laporBtn" onclick="doLapor()" data-i18n="btn_kirim_laporan">Kirim Laporan</button>
+          <div id="laporMsg"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Kuis Peminatan -->
+    <div id="quizView" style="display:none;">
+      <button class="back-btn" onclick="showHome()">
+        <span class="arr">&#8592;</span> <span data-i18n="btn_beranda">Beranda</span>
+      </button>
+      <div class="quiz-topbar">
+        <span id="quizStepLabel" class="quiz-step-label">Pertanyaan 1 dari 7</span>
+        <div class="quiz-progress-bar">
+          <div id="quizProgressFill" class="quiz-progress-fill" style="width:0%"></div>
+        </div>
+      </div>
+      <div class="quiz-card">
+        <div id="quizQ" class="quiz-q"></div>
+        <div id="quizOpts" class="quiz-options"></div>
+        <button id="quizPrevBtn" class="quiz-prev-btn" onclick="goToPreviousQuestion()" style="display:none;">
+          <span data-i18n="btn_pertanyaan_sebelumnya">Sebelumnya</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Hasil Kuis Peminatan -->
+    <div id="quizResultView" style="display:none;">
+      <button class="back-btn" onclick="showHome()">
+        <span class="arr">&#8592;</span> <span data-i18n="btn_beranda">Beranda</span>
+      </button>
+      <div class="result-hero">
+        <div id="resultChip" class="result-chip"></div>
+        <div id="resultPemName" class="result-pem-name"></div>
+        <div id="resultScoreLine" class="result-score-line"></div>
+        <div class="score-bars">
+          <div>
+            <div id="ssdScoreLabel" class="score-row-label ssd"></div>
+            <div class="score-track"><div id="ssdFill" class="score-fill-ssd" style="width:0%"></div></div>
+          </div>
+          <div>
+            <div id="aisdScoreLabel" class="score-row-label aisd"></div>
+            <div class="score-track"><div id="aisdFill" class="score-fill-aisd" style="width:0%"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="result-desc-card">
+        <div id="resultDescTitle" class="result-desc-title"></div>
+        <div id="resultDescBody" class="result-desc-body"></div>
+      </div>
+      <div class="result-note" data-i18n="quiz_disclaimer">
+        Hasil ini berdasarkan preferensi yang kamu pilih dan bersifat indikatif. Konsultasikan dengan dosen wali atau pembimbing akademik untuk keputusan final pemilihan peminatan.
+      </div>
+      <div class="result-actions">
+        <button class="btn-full-primary" onclick="restartQuiz()" data-i18n="btn_ulangi_tes">Ulangi Tes</button>
+      </div>
+    </div>
+
+    <!-- Showcase: Galeri -->
+    <div id="scGaleriView">
+      <button class="back-btn" onclick="showHome()"><span class="arr">&#8592;</span> <span data-i18n="btn_beranda">Beranda</span></button>
+      <div class="home-headline" style="font-size:1.05rem;margin-bottom:4px;" data-i18n="sc_galeri_title">Karya Mahasiswa Teknik Informatika</div>
+      <div class="home-sub" style="margin-bottom:0;" data-i18n="sc_galeri_sub">Aplikasi, situs, dan game hasil tugas kuliah maupun tugas akhir mahasiswa. Jelajahi dan berikan dukungan lewat like.</div>
+
+      <div class="sc-toolbar-top">
+        <button class="sc-btn sc-btn-outline sc-btn-sm" onclick="openShowcaseForm()" data-i18n="sc_add_btn">Kirim Karya</button>
+        <button class="sc-btn sc-btn-outline sc-btn-sm" onclick="openShowcaseStatus()" data-i18n="sc_status_link">Cek Status Pengajuan</button>
+      </div>
+
+      <div class="sc-search-bar">
+        <input class="sc-input" id="scSearchInput" data-i18n-placeholder="sc_search_placeholder" placeholder="Cari nama karya, kreator, atau teknologi..." oninput="scRenderGaleri()">
+      </div>
+
+      <div class="sc-toolbar">
+        <div class="sc-toolbar-left">
+          <button class="sc-filter-toggle-btn" id="scFilterToggleBtn" onclick="scToggleFilterPanel()">
+            <span data-i18n="sc_filter_btn">Filter</span>
+            <span class="sc-filter-badge" id="scFilterBadge" style="display:none;"></span>
+          </button>
+          <div class="sc-result-count" id="scResultCount"></div>
+        </div>
+        <div class="sc-sort-wrap">
+          <button class="sc-sort-btn" id="scSortBtn" onclick="scToggleSortMenu()">
+            <span data-i18n="sc_sort_label">Urutkan</span>: <span id="scSortBtnLabel" data-i18n="sc_sort_baru">Baru Ditambahkan</span>
+            <span class="s-chevron" style="margin:0;"></span>
+          </button>
+          <div class="sc-sort-menu" id="scSortMenu" style="display:none;">
+            <button class="sc-sort-option" data-sort="abjad" onclick="scSetSort('abjad')" data-i18n="sc_sort_abjad">Abjad (A-Z)</button>
+            <button class="sc-sort-option" data-sort="populer" onclick="scSetSort('populer')" data-i18n="sc_sort_populer">Terpopuler</button>
+            <button class="sc-sort-option active" data-sort="baru" onclick="scSetSort('baru')" data-i18n="sc_sort_baru">Baru Ditambahkan</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="sc-filter-panel" id="scFilterPanel" style="display:none;">
+        <div class="sc-filter-row">
+          <div class="sc-filter-row-label" data-i18n="sc_filter_jenis_label">Jenis</div>
+          <div class="sc-chipbar" id="scChipJenis">
+            <button class="sc-fchip active" data-val="" onclick="scSetFilter('jenis','',this)" data-i18n="sc_filter_semua_jenis">Semua Jenis</button>
+            <button class="sc-fchip" data-val="Mobile" onclick="scSetFilter('jenis','Mobile',this)">Mobile</button>
+            <button class="sc-fchip" data-val="Web" onclick="scSetFilter('jenis','Web',this)">Web</button>
+            <button class="sc-fchip" data-val="Game" onclick="scSetFilter('jenis','Game',this)">Game</button>
+            <button class="sc-fchip" data-val="Console" onclick="scSetFilter('jenis','Console',this)">Console</button>
+            <button class="sc-fchip" data-val="Desktop" onclick="scSetFilter('jenis','Desktop',this)">Desktop</button>
+            <button class="sc-fchip" data-val="AI" onclick="scSetFilter('jenis','AI',this)">AI</button>
+          </div>
+        </div>
+        <div class="sc-filter-row">
+          <div class="sc-filter-row-label" data-i18n="sc_filter_peminatan_label">Peminatan</div>
+          <div class="sc-chipbar" id="scChipPeminatan">
+            <button class="sc-fchip active" data-val="" onclick="scSetFilter('peminatan','',this)" data-i18n="sc_filter_semua_peminatan">Semua Peminatan</button>
+            <button class="sc-fchip" data-val="Tanpa Peminatan" onclick="scSetFilter('peminatan','Tanpa Peminatan',this)" data-i18n="sc_peminatan_tanpa">Tanpa Peminatan</button>
+            <button class="sc-fchip" data-val="SSD" onclick="scSetFilter('peminatan','SSD',this)">SSD</button>
+            <button class="sc-fchip" data-val="AISD" onclick="scSetFilter('peminatan','AISD',this)">AISD</button>
+          </div>
+        </div>
+        <div class="sc-filter-row">
+          <div class="sc-filter-row-label" data-i18n="sc_filter_status_label">Status</div>
+          <div class="sc-chipbar" id="scChipStatus">
+            <button class="sc-fchip active" data-val="" onclick="scSetFilter('status','',this)" data-i18n="sc_filter_semua_status">Semua Status</button>
+            <button class="sc-fchip" data-val="Sudah Deploy" onclick="scSetFilter('status','Sudah Deploy',this)" data-i18n="sc_status_sudah">Sudah Deploy</button>
+            <button class="sc-fchip" data-val="Belum Deploy" onclick="scSetFilter('status','Belum Deploy',this)" data-i18n="sc_status_belum">Belum Deploy</button>
+          </div>
+        </div>
+        <div class="sc-filter-row">
+          <div class="sc-filter-row-label" data-i18n="sc_filter_sumber_label">Sumber Karya</div>
+          <div class="sc-chipbar" id="scChipSumber">
+            <button class="sc-fchip active" data-val="" onclick="scSetFilter('sumber','',this)" data-i18n="sc_filter_semua_sumber">Semua Sumber</button>
+            <button class="sc-fchip" data-val="Kompetisi" onclick="scSetFilter('sumber','Kompetisi',this)" data-i18n="sc_opt_kompetisi">Kompetisi</button>
+            <button class="sc-fchip" data-val="Mata Kuliah" onclick="scSetFilter('sumber','Mata Kuliah',this)" data-i18n="sc_opt_matkul">Mata Kuliah</button>
+            <button class="sc-fchip" data-val="Tugas Akhir" onclick="scSetFilter('sumber','Tugas Akhir',this)" data-i18n="sc_opt_ta">Tugas Akhir</button>
+          </div>
+        </div>
+        <button class="sc-btn sc-btn-primary sc-btn-sm sc-btn-block" onclick="scCloseFilterPanel()" data-i18n="sc_btn_terapkan">Terapkan</button>
+      </div>
+
+      <div class="sc-gallery-grid" id="scGaleriGrid"></div>
+    </div>
+
+    <!-- Showcase: Detail Karya -->
+    <div id="scDetailView">
+      <button class="back-btn" onclick="openShowcaseGaleri()"><span class="arr">&#8592;</span> <span data-i18n="sc_back">Kembali</span></button>
+      <div id="scDetailBody"></div>
+    </div>
+
+    <!-- Showcase: Form Submit -->
+    <div id="scFormView">
+      <button class="back-btn" onclick="openShowcaseGaleri()"><span class="arr">&#8592;</span> <span data-i18n="sc_back">Kembali</span></button>
+      <div id="scFormTitle" class="home-headline" style="font-size:1.05rem;margin-bottom:4px;" data-i18n="sc_form_title">Tambahkan Karyamu ke Showcase</div>
+      <div class="home-sub" style="margin-bottom:0;" data-i18n="sc_form_sub">Isi form di bawah untuk menampilkan aplikasi, web, atau game buatanmu ke galeri publik.</div>
+
+      <div class="sc-intro-note" data-i18n="sc_form_intro">Karya kamu akan ditinjau admin sebelum tayang. Setelah mengirim, kamu akan mendapat kode unik. Simpan baik-baik karena kode ini dipakai untuk mengecek status, dan nantinya jadi tautan tetap karyamu.</div>
+      <div class="sc-form-hint" style="margin-top:6px;"><span class="sc-req">*</span> <span data-i18n="sc_req_legend">wajib diisi, sisanya opsional</span></div>
+
+      <p id="scFormLoading" class="msg-center" style="display:none;"></p>
+      <div id="scFormBody">
+        <div class="sc-form-section-title" data-i18n="sc_sec_info">Informasi Program</div>
+
+        <div class="sc-form-group">
+          <label class="sc-form-label"><span data-i18n="sc_label_nama">Nama Program</span> <span class="sc-req">*</span></label>
+          <input class="sc-input" id="scfNama" maxlength="150">
+        </div>
+        <div class="sc-form-group">
+          <label class="sc-form-label" data-i18n="sc_label_jenis">Jenis</label>
+          <div class="sc-seg" id="scfJenis">
+            <button type="button" class="sc-seg-btn active" data-val="Mobile" onclick="scSelectSeg('scfJenis',this)">Mobile</button>
+            <button type="button" class="sc-seg-btn" data-val="Web" onclick="scSelectSeg('scfJenis',this)">Web</button>
+            <button type="button" class="sc-seg-btn" data-val="Game" onclick="scSelectSeg('scfJenis',this)">Game</button>
+            <button type="button" class="sc-seg-btn" data-val="Console" onclick="scSelectSeg('scfJenis',this)">Console</button>
+            <button type="button" class="sc-seg-btn" data-val="Desktop" onclick="scSelectSeg('scfJenis',this)">Desktop</button>
+            <button type="button" class="sc-seg-btn" data-val="AI" onclick="scSelectSeg('scfJenis',this)">AI</button>
+          </div>
+        </div>
+        <div class="sc-form-group">
+          <label class="sc-form-label" data-i18n="sc_label_peminatan">Peminatan</label>
+          <div class="sc-seg" id="scfPeminatan">
+            <button type="button" class="sc-seg-btn active" data-val="Tanpa Peminatan" data-i18n="sc_peminatan_tanpa" onclick="scSelectSeg('scfPeminatan',this)">Tanpa Peminatan</button>
+            <button type="button" class="sc-seg-btn" data-val="SSD" onclick="scSelectSeg('scfPeminatan',this)">SSD</button>
+            <button type="button" class="sc-seg-btn" data-val="AISD" onclick="scSelectSeg('scfPeminatan',this)">AISD</button>
+          </div>
+        </div>
+        <div class="sc-form-group">
+          <label class="sc-form-label"><span data-i18n="sc_label_deskripsi">Deskripsi</span> <span class="sc-req">*</span></label>
+          <textarea class="sc-textarea" id="scfDeskripsi" style="min-height:130px;" data-i18n-placeholder="sc_placeholder_deskripsi" placeholder="Ceritakan singkat apa yang dilakukan aplikasi/karya ini..." maxlength="3000"></textarea>
+        </div>
+        <div class="sc-form-group">
+          <label class="sc-form-label"><span data-i18n="sc_label_teknologi">Teknologi</span> <span class="opt" data-i18n="sc_hint_koma">ketik lalu tekan koma atau Enter, opsional</span></label>
+          <div class="sc-tag-input" id="scfTeknologiWrap" onclick="document.getElementById('scfTeknologi').focus()">
+            <span id="scfTeknologiChips"></span>
+            <input id="scfTeknologi" data-i18n-placeholder="sc_placeholder_teknologi" placeholder="Flutter, TensorFlow Lite, Firebase" oninput="scTeknologiCommit_()" onkeydown="scTeknologiKeydown_(event)">
+          </div>
+        </div>
+
+        <div class="sc-form-section-title"><span data-i18n="sc_sec_kreator">Anggota Tim / Kreator</span> <span class="sc-req">*</span></div>
+        <div id="scfKreatorFields">
+          <div class="sc-creator-field">
+            <input class="sc-input scf-kreator-nim" inputmode="numeric" pattern="[0-9]*" data-i18n-placeholder="sc_placeholder_nim" placeholder="NIM">
+            <input class="sc-input scf-kreator-nama" data-i18n-placeholder="sc_placeholder_nama" placeholder="Nama lengkap">
+            <button type="button" class="sc-icon-btn" onclick="scRemoveKreatorRow(this)" title="Hapus">&times;</button>
+          </div>
+        </div>
+        <button type="button" class="sc-add-row-btn" onclick="scAddKreatorRow()" data-i18n="sc_btn_tambah_anggota">+ Tambah Anggota</button>
+
+        <div class="sc-form-group" style="margin-top:18px;">
+          <label class="sc-form-label"><span data-i18n="sc_label_kontak">Kontak Tim</span> <span class="sc-req">*</span></label>
+          <input class="sc-input" id="scfKontak" type="email" data-i18n-placeholder="sc_placeholder_kontak" placeholder="nama@email.com">
+          <div class="sc-form-hint" data-i18n="sc_hint_kontak">Gunakan alamat email aktif tim, supaya pengunjung bisa menghubungi lewat link yang muncul di halaman detail.</div>
+        </div>
+
+        <div class="sc-form-section-title" data-i18n="sc_sec_tautan">Tautan</div>
+
+        <div class="sc-form-group">
+          <label class="sc-form-label" data-i18n="sc_label_status_deploy">Status Deploy</label>
+          <div class="sc-seg" id="scfStatusDeploy">
+            <button type="button" class="sc-seg-btn active" data-val="Belum Deploy" data-i18n="sc_opt_belum_deploy" onclick="scSelectSeg('scfStatusDeploy',this)">Belum Deploy</button>
+            <button type="button" class="sc-seg-btn" data-val="Sudah Deploy" data-i18n="sc_opt_sudah_deploy" onclick="scSelectSeg('scfStatusDeploy',this)">Sudah Deploy</button>
+          </div>
+        </div>
+        <div class="sc-form-group" id="scfDemoGroup" style="display:none;">
+          <label class="sc-form-label"><span data-i18n="sc_label_demo">Link Demo</span> <span class="sc-req">*</span></label>
+          <input class="sc-input" id="scfDemo" data-i18n-placeholder="sc_placeholder_demo" placeholder="https://play.google.com/... atau link uji coba lainnya">
+        </div>
+        <div class="sc-form-group" id="scfDemoNote">
+          <div class="sc-form-hint" data-i18n="sc_hint_demo">Link demo bisa diisi setelah status diubah menjadi "Sudah Deploy" di atas.</div>
+        </div>
+        <div class="sc-form-group">
+          <label class="sc-form-label"><span data-i18n="sc_label_source">Link Source Code</span> <span class="opt" data-i18n="sc_opt">opsional</span></label>
+          <input class="sc-input" id="scfSource" data-i18n-placeholder="sc_placeholder_source" placeholder="https://github.com/username/repo">
+        </div>
+        <div class="sc-form-group">
+          <label class="sc-form-label"><span data-i18n="sc_label_trailer">Video Trailer</span> <span class="opt" data-i18n="sc_opt">opsional</span></label>
+          <input class="sc-input" id="scfTrailer" data-i18n-placeholder="sc_placeholder_trailer" placeholder="https://youtu.be/... atau https://www.youtube.com/watch?v=...">
+          <div class="sc-callout">
+            <div class="sc-callout-title" data-i18n="sc_tutorial_trailer_title">Cara mengambil link trailer</div>
+            <ol>
+              <li data-i18n="sc_tutorial_trailer_1">Upload video ke YouTube (boleh diatur "Unlisted", tidak harus publik penuh)</li>
+              <li data-i18n="sc_tutorial_trailer_2">Buka videonya, klik tombol Share/Bagikan, salin link yang muncul</li>
+              <li data-i18n="sc_tutorial_trailer_3">Tempel link tersebut di sini, nanti otomatis tampil sebagai video di halaman karyamu</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="sc-form-section-title" data-i18n="sc_sec_akademik">Informasi Akademik</div>
+
+        <div class="sc-form-group">
+          <label class="sc-form-label" data-i18n="sc_label_sumber">Sumber Tugas</label>
+          <div class="sc-seg" id="scfSumber">
+            <button type="button" class="sc-seg-btn" data-val="Kompetisi" data-i18n="sc_opt_kompetisi" onclick="scSelectSeg('scfSumber',this)">Kompetisi</button>
+            <button type="button" class="sc-seg-btn active" data-val="Mata Kuliah" data-i18n="sc_opt_matkul" onclick="scSelectSeg('scfSumber',this)">Mata Kuliah</button>
+            <button type="button" class="sc-seg-btn" data-val="Tugas Akhir" data-i18n="sc_opt_ta" onclick="scSelectSeg('scfSumber',this)">Tugas Akhir</button>
+          </div>
+        </div>
+        <div class="sc-form-group" id="scfMatkulGroup">
+          <label class="sc-form-label" id="scfMatkulLabel"><span data-i18n="sc_label_matkul">Nama Mata Kuliah</span> <span class="sc-req">*</span></label>
+          <input class="sc-input" id="scfMatkul" placeholder="mis. Pemrograman Mobile">
+        </div>
+        <div class="sc-form-group">
+          <label class="sc-form-label"><span data-i18n="sc_label_semester">Semester Dikerjakan</span> <span class="sc-req">*</span></label>
+          <input class="sc-input" id="scfSemester" data-i18n-placeholder="sc_placeholder_semester" placeholder="mis. Genap 2025/2026">
+        </div>
+        <div class="sc-form-group">
+          <label class="sc-form-label"><span data-i18n="sc_label_dosen">Dosen Pembimbing</span> <span class="opt" data-i18n="sc_opt">opsional</span></label>
+          <div id="scfDosenFields">
+            <div class="sc-single-field">
+              <input class="sc-input scf-dosen-nama" data-i18n-placeholder="sc_placeholder_dosen" placeholder="mis. Dr. Ir. Ahmad Fauzan, S.Kom., M.T.">
+              <button type="button" class="sc-icon-btn" onclick="scRemoveDosenRow(this)" title="Hapus">&times;</button>
+            </div>
+          </div>
+          <button type="button" class="sc-add-row-btn" onclick="scAddDosenRow()" data-i18n="sc_btn_tambah_dosen">+ Tambah Dosen</button>
+        </div>
+
+        <div class="sc-form-section-title" data-i18n="sc_sec_konfirmasi">Konfirmasi</div>
+        <label class="sc-consent-row">
+          <input type="checkbox" id="scfConsent1" onchange="scRefreshSubmitState()">
+          <span data-i18n="sc_consent1">Saya menyatakan karya ini benar dibuat oleh mahasiswa yang tercantum di atas.</span>
+        </label>
+        <label class="sc-consent-row">
+          <input type="checkbox" id="scfConsent2" onchange="scRefreshSubmitState()">
+          <span data-i18n="sc_consent2">Saya menyatakan seluruh data yang saya masukkan (nama, deskripsi, gambar, video) tidak mengandung unsur SARA (suku, agama, ras, dan antargolongan) atau konten yang menyinggung/melanggar hukum.</span>
+        </label>
+
+        <p id="scfMsg" class="msg-error" style="display:none;"></p>
+        <button class="sc-btn sc-btn-primary sc-btn-block" id="scfSubmitBtn" style="margin-top:16px;" disabled onclick="submitShowcaseForm()" data-i18n="sc_btn_submit">Kirim untuk Ditinjau</button>
+      </div>
+
+      <div id="scFormSuccess" class="sc-card sc-success-card" style="display:none;">
+        <div class="sc-success-icon">&#10003;</div>
+        <div id="scFormSuccessTitle" style="font-weight:800;font-size:1.05rem;" data-i18n="sc_success_title">Karya berhasil dikirim!</div>
+        <p class="home-sub" style="margin-top:4px;" data-i18n="sc_success_sub">Simpan kode ini untuk mengecek status peninjauan.</p>
+        <div class="sc-code-box" id="scFormSuccessCode"></div>
+        <div><span class="sc-status-pill sc-status-menunggu" data-i18n="sc_success_status">Menunggu Peninjauan</span></div>
+      </div>
+    </div>
+
+    <!-- Showcase: Cek Status -->
+    <div id="scStatusView">
+      <button class="back-btn" onclick="openShowcaseGaleri()"><span class="arr">&#8592;</span> <span data-i18n="sc_back">Kembali</span></button>
+      <div class="home-headline" style="font-size:1.05rem;margin-bottom:4px;" data-i18n="sc_status_title">Cek Status Pengajuan Karya</div>
+      <div class="home-sub" style="margin-bottom:0;" data-i18n="sc_status_sub">Masukkan kode yang kamu dapat setelah mengirim karya untuk melihat progres peninjauannya.</div>
+
+      <div class="sc-status-search">
+        <input class="sc-input" id="scStatusInput" data-i18n-placeholder="sc_status_placeholder" placeholder="mis. SC-7K2M9">
+        <button class="sc-btn sc-btn-primary" onclick="cekShowcaseStatus()" data-i18n="sc_btn_cek">Cek</button>
+      </div>
+
+      <div id="scStatusResult" style="margin-top:16px;"></div>
+      <div id="scOwnDetailBody" style="margin-top:12px;display:none;"></div>
+    </div>
+
+    <!-- Statistik Program Studi -->
+    <div id="statistikView" style="display:none;">
+      <button class="back-btn" onclick="showHome()"><span class="arr">&#8592;</span> <span data-i18n="btn_beranda">Beranda</span></button>
+
+      <div class="home-hero" style="margin-top:6px;">
+        <div class="home-headline" data-i18n="stat_title">Capaian Kolektif Program Studi</div>
+        <div class="home-sub" data-i18n="stat_subtitle">Ratusan kegiatan, prestasi, dan karya lahir dari mahasiswa kami, dirangkum dalam angka.</div>
+      </div>
+
+      <div class="stat-disclaimer">
+        <div class="stat-disclaimer-title" data-i18n="stat_disclaimer_title">Data masih bersifat sementara</div>
+        <div class="stat-disclaimer-desc" data-i18n="stat_disclaimer_desc">Angka di atas dihimpun dari data yang sudah tercatat di sistem kami dan mungkin belum mencakup seluruh capaian mahasiswa. Kalau ada capaian kamu (atau temanmu) yang belum tercantum atau datanya kurang sesuai, yuk laporkan lewat formulir di bawah.</div>
+      </div>
+
+      <div id="statMsg"></div>
+
+      <div class="stat-grid" id="statGrid">
+        <div class="stat-card">
+          <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2"></path><circle cx="10" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 00-3-3.87"></path><path d="M16 3.13a4 4 0 010 7.75"></path></svg></div>
+          <div class="stat-value" id="statMahasiswa">-</div>
+          <div class="stat-label" data-i18n="stat_label_mahasiswa">Mahasiswa Tercatat</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 5-9 5-9-5 9-5z"></path><path d="M3 12l9 5 9-5"></path><path d="M3 17l9 5 9-5"></path></svg></div>
+          <div class="stat-value" id="statMbkm">-</div>
+          <div class="stat-label" data-i18n="stat_label_mbkm">Kegiatan MBKM</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"></circle><path d="M8.5 12.5L6 22l6-3 6 3-2.5-9.5"></path></svg></div>
+          <div class="stat-value" id="statPrestasi">-</div>
+          <div class="stat-label" data-i18n="stat_label_prestasi">Prestasi &amp; Kompetisi</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="15" rx="2"></rect><path d="M3 9.5h18"></path><path d="M7.5 14.5h5"></path></svg></div>
+          <div class="stat-value" id="statSertifikasi">-</div>
+          <div class="stat-label" data-i18n="stat_label_sertifikasi">Sertifikasi Profesional</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg></div>
+          <div class="stat-value" id="statShowcase">-</div>
+          <div class="stat-label" data-i18n="stat_label_showcase">Karya Showcase</div>
+        </div>
+      </div>
+
+      <div class="lapor-card">
+        <div class="lapor-header">
+          <div>
+            <div class="lapor-title" data-i18n="stat_lapor_title">Ada capaian yang belum tercantum?</div>
+            <div class="lapor-desc" data-i18n="stat_lapor_desc">Bantu kami melengkapi data dengan melaporkan capaian yang belum masuk ke sistem.</div>
+          </div>
+          <button class="btn-lapor" onclick="toggleStatLapor()" data-i18n="btn_lapor_kesalahan">Laporkan Kesalahan</button>
+        </div>
+        <div id="statLaporForm" class="lapor-form">
+          <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:10px;">
+            <div>
+              <label class="form-label" for="statNim" data-i18n="stat_nim_label">NIM</label>
+              <input class="text-input" type="tel" id="statNim" data-i18n-placeholder="stat_nim_placeholder" placeholder="NIM (mis. 123456789)" maxlength="9"
+              inputmode="numeric" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+            </div>
+            <div>
+              <label class="form-label" for="statNama" data-i18n="stat_nama_label">Nama</label>
+              <input class="text-input" type="text" id="statNama" data-i18n-placeholder="stat_nama_placeholder" placeholder="Nama lengkap" maxlength="100">
+            </div>
+            <div>
+              <label class="form-label" for="statPesan" data-i18n="stat_pesan_label">Jelaskan capaian yang belum tercantum/tidak sesuai</label>
+              <textarea class="form-textarea" id="statPesan" oninput="updateCharCounter('statPesan','statPesanCount',10)"
+              data-i18n-placeholder="stat_pesan_placeholder" placeholder="Contoh: saya juara 2 lomba X tahun 2025 tapi belum masuk data prestasi."></textarea>
+              <div class="char-counter" id="statPesanCount">0/10</div>
+            </div>
+          </div>
+          <div class="lapor-note" data-i18n="lapor_note">Tindak lanjut laporan akan disampaikan melalui nomor yang tercatat di MIKA kamu. Pastikan nomor tersebut sudah diperbarui sebelum mengirim.</div>
+          <button class="btn-send" id="statLaporBtn" onclick="doLaporStatistik()" data-i18n="btn_kirim_laporan">Kirim Laporan</button>
+          <div id="statLaporMsg"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+<div id="toast" class="toast"></div>
+</main>
+
+<!-- Info Modal -->
+<div id="infoModal" class="info-overlay" onclick="closeInfo()">
+  <div class="info-box" onclick="event.stopPropagation()">
+    <button class="info-close" onclick="closeInfo()">&#10005;</button>
+    <div class="info-cat" id="infoCat"></div>
+    <div class="info-title" id="infoTitle"></div>
+    <p class="info-body" id="infoBody"></p>
+  </div>
+</div>
+
