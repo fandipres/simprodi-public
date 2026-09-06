@@ -60,8 +60,10 @@
     <!-- Beranda -->
     <div id="homeView">
       <div class="home-hero">
-        <div class="home-headline"><span data-i18n="home_headline_l1">Pilih jalanmu.</span><br><span data-i18n="home_headline_l2">Rekam jejakmu.</span></div>
-        <div class="home-sub" data-i18n="home_sub">Pantau capaian akademikmu, temukan peminatan yang sesuai, atau jelajahi karya mahasiswa lainnya.</div>
+        <div class="home-hero-inner">
+          <div class="home-headline"><span data-i18n="home_headline_l1">Pilih jalanmu.</span><br><span data-i18n="home_headline_l2">Rekam jejakmu.</span></div>
+          <div class="home-sub" data-i18n="home_sub">Pantau capaian akademikmu, temukan peminatan yang sesuai, atau jelajahi karya mahasiswa lainnya.</div>
+        </div>
       </div>
       <div class="home-cards">
         <div class="home-card" onclick="openPortofolio()" role="button" tabindex="0"
@@ -267,9 +269,13 @@
 
     <!-- Showcase: Galeri -->
     <div id="scGaleriView">
-      <button class="back-btn" onclick="showHome()"><span class="arr">&#8592;</span> <span data-i18n="btn_beranda">Beranda</span></button>
-      <div class="home-headline" style="font-size:1.05rem;margin-bottom:4px;" data-i18n="sc_galeri_title">Karya Mahasiswa Teknik Informatika</div>
-      <div class="home-sub" style="margin-bottom:0;" data-i18n="sc_galeri_sub">Aplikasi, situs, dan game hasil tugas kuliah maupun tugas akhir mahasiswa. Jelajahi dan berikan dukungan lewat like.</div>
+      <div class="home-hero">
+        <div class="home-hero-inner">
+          <button class="back-btn" onclick="showHome()"><span class="arr">&#8592;</span> <span data-i18n="btn_beranda">Beranda</span></button>
+          <div class="home-headline" style="font-size:1.05rem;margin-bottom:4px;" data-i18n="sc_galeri_title">Karya Mahasiswa Teknik Informatika</div>
+          <div class="home-sub" style="margin-bottom:0;" data-i18n="sc_galeri_sub">Aplikasi, situs, dan game hasil tugas kuliah maupun tugas akhir mahasiswa. Jelajahi dan berikan dukungan lewat like.</div>
+        </div>
+      </div>
 
       <div class="sc-toolbar-top">
         <button class="sc-btn sc-btn-outline sc-btn-sm" onclick="openShowcaseForm()" data-i18n="sc_add_btn">Kirim Karya</button>
@@ -518,11 +524,12 @@
 
     <!-- Statistik Program Studi -->
     <div id="statistikView" style="display:none;">
-      <button class="back-btn" onclick="showHome()"><span class="arr">&#8592;</span> <span data-i18n="btn_beranda">Beranda</span></button>
-
-      <div class="home-hero" style="margin-top:6px;">
-        <div class="home-headline" data-i18n="stat_title">Capaian Kolektif Program Studi</div>
-        <div class="home-sub" data-i18n="stat_subtitle">Ratusan kegiatan, prestasi, dan karya lahir dari mahasiswa kami, dirangkum dalam angka.</div>
+      <div class="home-hero">
+        <div class="home-hero-inner">
+          <button class="back-btn" onclick="showHome()"><span class="arr">&#8592;</span> <span data-i18n="btn_beranda">Beranda</span></button>
+          <div class="home-headline" data-i18n="stat_title">Capaian Kolektif Program Studi</div>
+          <div class="home-sub" data-i18n="stat_subtitle">Ratusan kegiatan, prestasi, dan karya lahir dari mahasiswa kami, dirangkum dalam angka.</div>
+        </div>
       </div>
 
       <div class="stat-disclaimer">
