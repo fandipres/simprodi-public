@@ -1379,10 +1379,7 @@ function scThumbFallback_(img) {
 // YouTube), jadi yang disembunyikan/dimunculkan itu WRAPPER-nya, bukan
 // <img>-nya sendiri.
 function scHeroThumbFallback_(img) {
-  // .sc-hero-wrap (bukan .sc-hero-media sendiri) yang disembunyikan -
-  // wrapper itu juga membungkus .sc-hero-backdrop (lihat scBuildDetailBodyHtml_),
-  // jadi keduanya ikut hilang bersamaan saat gagal dimuat.
-  var wrap = img.closest('.sc-hero-wrap');
+  var wrap = img.closest('.sc-hero-media');
   if (!wrap) return;
   wrap.style.display = 'none';
   if (wrap.nextElementSibling) wrap.nextElementSibling.style.display = '';
@@ -1608,23 +1605,10 @@ function scBuildDetailBodyHtml_(item, opts) {
         t('sc_btn_trailer') +
       '</a>'
     : '';
-  // .sc-hero-wrap cuma berpengaruh di desktop (lihat app.css) - .sc-hero-
-  // media di dalamnya dibatasi max-width:700px supaya tidak terlalu besar/
-  // dominan begitu isinya foto sungguhan, tapi itu menyisakan ruang kosong
-  // di kiri-kanan kalau dibiarkan begitu saja (konten di bawahnya tetap
-  // selebar 1140px). .sc-hero-backdrop mengisi ruang itu dengan foto yang
-  // sama, diperbesar & diblur, sebagai latar penuh di belakang thumbnail
-  // yang tajam (pola umum ala Spotify/Apple Music) - jadi tidak ada blank
-  // space, tanpa perlu mengubah rasio/ukuran thumbnail utamanya sendiri.
-  // Fallback (yt-embed/link-trailer/ikon) SENGAJA tidak ikut dapat
-  // perlakuan ini - tidak ada foto utk diblur, dan itu kasus langka (cuma
-  // muncul kalau file PNG-nya belum/gagal terupload).
-  var backdropHtml = '<div class="sc-hero-backdrop" style="background-image:url(\'' + safeUrl_(thumbUrl) + '\')"></div>';
-  mediaHtml = '<div class="sc-hero-wrap">' + backdropHtml +
-    '<div class="sc-hero-media" style="cursor:default;">' +
+  mediaHtml = '<div class="sc-hero-media" style="cursor:default;">' +
     '<img src="' + safeUrl_(thumbUrl) + '" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" onerror="scHeroThumbFallback_(this)">' +
     trailerBadgeHtml +
-    '</div></div>' +
+    '</div>' +
     fallbackMediaHtml;
   var screenshotButtonHtml = item.linkScreenshot
     ? '<a class="sc-btn sc-btn-outline" href="' + safeUrl_(item.linkScreenshot) + '" target="_blank" rel="noopener">' + t('sc_btn_screenshot') + '</a>'

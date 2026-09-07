@@ -886,46 +886,14 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; s
   border: 1px solid rgba(255,255,255,.2);
 }
 .sc-trailer-badge svg { width: 15px; height: 15px; }
-/* .sc-hero-wrap/.sc-hero-backdrop cuma aktif di desktop (lihat media query
-   di bawah) - di mobile/tablet keduanya tidak berpengaruh apa-apa, .sc-hero-
-   media tampil polos selebar penuh seperti sebelumnya. position:relative
-   dipasang di base (bukan cuma di dalam media query) supaya .sc-hero-
-   backdrop yang absolute-positioned selalu punya acuan yang benar begitu
-   breakpoint desktop aktif, tidak perlu effort tambahan mengurus urutan. */
-.sc-hero-wrap { position: relative; }
-.sc-hero-backdrop { display: none; }
 /* Sengaja dibatasi lebih sempit dari #scDetailView di desktop (yang melebar
    sampai 1140px) - dibiarkan selebar itu, hero foto jadi terlalu besar
    (~640px tinggi di 16:9) begitu isinya foto sungguhan (linkThumbnail),
    beda dari dulu waktu isinya cuma ikon/placeholder kosong. Konten teks di
    bawahnya (kartu tim, info akademik, deskripsi) tetap selebar 1140px
-   seperti semula - cuma hero-nya yang diciutkan & dipusatkan. Itu sendiri
-   menyisakan ruang kosong kiri-kanan kalau dibiarkan begitu saja, makanya
-   .sc-hero-backdrop mengisinya dengan foto yang sama (diperbesar & diblur)
-   sebagai latar penuh di belakang thumbnail yang tajam - tidak ada blank
-   space, ukuran/rasio thumbnail utamanya sendiri tidak berubah. */
+   seperti semula - cuma hero-nya yang diciutkan & dipusatkan. */
 @media (min-width: 1024px) {
-  /* .sc-hero-media tetap dibiarkan sebagai block biasa (BUKAN flex child
-     .sc-hero-wrap) - max-width + margin:auto saja sudah cukup buat
-     memusatkannya secara horizontal, sama seperti sebelum .sc-hero-wrap
-     ada. Sempat dicoba pakai display:flex+align/justify-content:center di
-     .sc-hero-wrap utk sekalian menengahkan vertikal, ternyata itu bikin
-     .sc-hero-media (isinya cuma <img>+badge yang position:absolute, tidak
-     ada in-flow content sama sekali) kolaps ke ukuran nyaris nol sebagai
-     flex item tanpa intrinsic size - aspect-ratio-nya tidak lagi cukup
-     buat menentukan ukurannya dalam konteks flex begini. Tidak perlu
-     vertical-centering eksplisit lagi karena tinggi .sc-hero-wrap memang
-     sengaja disamakan persis dengan tinggi .sc-hero-media sendiri. */
   .sc-hero-media { max-width: 700px; margin-left: auto; margin-right: auto; }
-  .sc-hero-wrap .sc-hero-media { margin-top: 0; }
-  .sc-hero-wrap {
-    height: calc(700px * 9 / 16); margin-top: 12px; border-radius: 16px; overflow: hidden;
-  }
-  .sc-hero-backdrop {
-    display: block; position: absolute; inset: -20px;
-    background-size: cover; background-position: center;
-    filter: blur(32px) brightness(.65) saturate(1.1);
-  }
 }
 .sc-hero-fallback { cursor: default; }
 .sc-hero-fallback svg { width: 56px; height: 56px; color: rgba(255,255,255,.5); }
