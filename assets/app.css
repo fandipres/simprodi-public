@@ -877,15 +877,6 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; s
   display: flex; align-items: center; justify-content: center; position: relative; cursor: pointer; margin-top: 12px;
 }
 .sc-hero-media .play { width: 52px; height: 52px; border-radius: 50%; background: rgba(255,255,255,.16); border: 1.5px solid rgba(255,255,255,.5); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.3rem; }
-/* Overlay di pojok kanan-bawah thumbnail, bukan tombol terpisah di bawah -
-   sesuai mockup Showcase Detail Redesign (lihat komentar di scBuildDetailBodyHtml_). */
-.sc-trailer-badge {
-  position: absolute; right: 14px; bottom: 14px; display: inline-flex; align-items: center; gap: 7px;
-  background: rgba(15,23,42,.55); backdrop-filter: blur(8px); color: #fff;
-  padding: 9px 15px; border-radius: 999px; font-size: 0.8rem; font-weight: 700;
-  border: 1px solid rgba(255,255,255,.2);
-}
-.sc-trailer-badge svg { width: 15px; height: 15px; }
 /* Sengaja dibatasi lebih sempit dari #scDetailView di desktop (yang melebar
    sampai 1140px) - dibiarkan selebar itu, hero foto jadi terlalu besar
    (~640px tinggi di 16:9) begitu isinya foto sungguhan (linkThumbnail),
@@ -918,7 +909,11 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; s
 .sc-creator-nim { color: var(--muted); font-size: 0.74rem; margin-top: 1px; }
 /* Kartu info ber-ikon - menggantikan grid teks polos lama (.sc-meta-grid). */
 .sc-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-@media (max-width: 420px) { .sc-info-grid { grid-template-columns: 1fr; } }
+/* 420px dulu cukup, tapi iPhone 16 Pro Max dkk (viewport CSS 430px) sudah
+   lebih lebar dari itu - 2 kolom di situ jadi terlalu sempit per kartu
+   (ikon + teks kepepet, overflow). Naik ke 480px supaya ponsel besar
+   modern juga jatuh ke 1 kolom. */
+@media (max-width: 480px) { .sc-info-grid { grid-template-columns: 1fr; } }
 .sc-info-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 13px; display: flex; align-items: flex-start; gap: 10px; }
 .sc-info-icon { width: 30px; height: 30px; border-radius: 9px; background: var(--blue-soft); color: var(--blue); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .sc-info-icon svg { width: 15px; height: 15px; }
@@ -992,7 +987,10 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; s
 .sc-form-card-step { font-size: 0.68rem; font-weight: 700; color: var(--subtle); text-transform: uppercase; letter-spacing: .04em; }
 .sc-form-card .sc-form-group:first-child { margin-top: 0; }
 .sc-creator-field { display: grid; grid-template-columns: 1fr 1.4fr auto; gap: 7px; margin-bottom: 7px; align-items: center; }
-@media (max-width: 420px) { .sc-creator-field { grid-template-columns: 1fr; } }
+/* Sama seperti .sc-info-grid di atas - 420px ketinggalan buat ponsel besar
+   modern (iPhone 16 Pro Max dkk, viewport CSS 430px), 3 kolom di situ
+   kepepet. Naik ke 480px. */
+@media (max-width: 480px) { .sc-creator-field { grid-template-columns: 1fr; } }
 .sc-single-field { display: grid; grid-template-columns: 1fr auto; gap: 7px; margin-bottom: 7px; align-items: center; }
 .sc-icon-btn { border: 1px solid var(--border); background: var(--card); width: 36px; height: 36px; border-radius: 8px; cursor: pointer; color: var(--muted); flex-shrink: 0; font-size: 0.9rem; }
 .sc-icon-btn:hover { border-color: var(--red-border); color: var(--red); }

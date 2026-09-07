@@ -136,7 +136,7 @@ const I18N = {
     sc_btn_demo: 'Demo',
     sc_btn_download: 'Unduh',
     sc_btn_source: 'Source Code',
-    sc_btn_trailer: 'Tonton Trailer',
+    sc_btn_trailer: 'Trailer',
     sc_btn_screenshot: 'Lihat Screenshot',
     sc_report_link: 'Laporkan',
     sc_detail_not_found: 'Karya tidak ditemukan atau belum disetujui.',
@@ -371,7 +371,7 @@ const I18N = {
     sc_btn_demo: 'Demo',
     sc_btn_download: 'Download',
     sc_btn_source: 'Source Code',
-    sc_btn_trailer: 'Watch Trailer',
+    sc_btn_trailer: 'Trailer',
     sc_btn_screenshot: 'View Screenshots',
     sc_report_link: 'Report',
     sc_detail_not_found: 'Work not found or not yet approved.',
@@ -1592,24 +1592,18 @@ function scBuildDetailBodyHtml_(item, opts) {
   } else {
     fallbackMediaHtml = '<div class="sc-hero-media sc-hero-fallback" style="display:none;">' + (SC_ICON_JENIS[item.jenis] || SC_ICON_JENIS_DEFAULT) + '</div>';
   }
-  // Trailer di-overlay langsung di atas thumbnail (bukan tombol terpisah di
-  // bawah) - sesuai mockup "Showcase Detail Redesign": ini salah satu nilai
-  // jual utama sebuah karya, jadi harus langsung terlihat begitu halaman
-  // dibuka, bukan tersembunyi di antara tombol lain. Cuma dipasang di dalam
-  // wrapper thumbnail utama (bukan di fallbackMediaHtml) - kalau thumbnail-
-  // nya gagal dimuat dan turun ke yt-embed/link-trailer, video itu sendiri
-  // SUDAH jadi kontrol utamanya, tidak perlu badge overlay lagi di atasnya.
-  var trailerBadgeHtml = item.videoTrailer
-    ? '<a class="sc-trailer-badge" href="' + safeUrl_(item.videoTrailer) + '" target="_blank" rel="noopener">' +
-        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 8.5l6 3.5-6 3.5z"/></svg> ' +
-        t('sc_btn_trailer') +
-      '</a>'
-    : '';
   mediaHtml = '<div class="sc-hero-media" style="cursor:default;">' +
     '<img src="' + safeUrl_(thumbUrl) + '" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" onerror="scHeroThumbFallback_(this)">' +
-    trailerBadgeHtml +
     '</div>' +
     fallbackMediaHtml;
+  // Trailer sempat di-overlay di atas thumbnail (sesuai mockup "Showcase
+  // Detail Redesign"), tapi user minta dipisah lagi dari thumbnail -
+  // dikembalikan jadi tombol biasa di sc-action-row, sama seperti Demo/
+  // Download/Source Code/Screenshot lainnya (lihat CLAUDE.md, sudah tried
+  // & reverted sekali).
+  var trailerButtonHtml = item.videoTrailer
+    ? '<a class="sc-btn sc-btn-outline" href="' + safeUrl_(item.videoTrailer) + '" target="_blank" rel="noopener">' + t('sc_btn_trailer') + '</a>'
+    : '';
   var screenshotButtonHtml = item.linkScreenshot
     ? '<a class="sc-btn sc-btn-outline" href="' + safeUrl_(item.linkScreenshot) + '" target="_blank" rel="noopener">' + t('sc_btn_screenshot') + '</a>'
     : '';
@@ -1644,6 +1638,7 @@ function scBuildDetailBodyHtml_(item, opts) {
     (item.linkDownload ? '<a class="sc-btn sc-btn-primary" href="' + safeUrl_(item.linkDownload) + '" target="_blank" rel="noopener">' + t('sc_btn_download') + '</a>' : '') +
     (item.linkSourceCode ? '<a class="sc-btn sc-btn-outline" href="' + safeUrl_(item.linkSourceCode) + '" target="_blank" rel="noopener">' + t('sc_btn_source') + '</a>' : '') +
     screenshotButtonHtml +
+    trailerButtonHtml +
     '</div>';
 
   var likeHtml = opts.showLike
