@@ -1633,13 +1633,24 @@ function scBuildDetailBodyHtml_(item, opts) {
       item.teknologi.map(function(x) { return '<span class="sc-tech-pill">' + escHtml(x) + '</span>'; }).join('') + '</div>'
     : '';
 
-  var actionsHtml = '<div class="sc-action-row">' +
+  // Screenshot dan Trailer dikelompokkan terpisah dari Demo/Download/Source
+  // Code - keduanya materi PREVIEW (bukan tautan akses), sama seperti
+  // pengelompokan "Tampilan Karya" vs "Tautan" yang sudah dipakai di form
+  // Kirim Karya & modal edit admin (lihat CLAUDE.md). Menyatukan semuanya
+  // dalam satu baris tombol dulu terasa aneh - Trailer/Screenshot bukan
+  // cara "mendapatkan karyanya", beda kategori dari Demo/Download/Source.
+  var previewLinksHtml = (screenshotButtonHtml || trailerButtonHtml)
+    ? '<div class="sc-section-label">' + t('sc_sec_tampilan') + '</div>' +
+      '<div class="sc-action-row">' + screenshotButtonHtml + trailerButtonHtml + '</div>'
+    : '';
+
+  var linkButtonsHtml =
     (item.linkDemo ? '<a class="sc-btn sc-btn-primary" href="' + safeUrl_(item.linkDemo) + '" target="_blank" rel="noopener">' + t('sc_btn_demo') + '</a>' : '') +
     (item.linkDownload ? '<a class="sc-btn sc-btn-primary" href="' + safeUrl_(item.linkDownload) + '" target="_blank" rel="noopener">' + t('sc_btn_download') + '</a>' : '') +
-    (item.linkSourceCode ? '<a class="sc-btn sc-btn-outline" href="' + safeUrl_(item.linkSourceCode) + '" target="_blank" rel="noopener">' + t('sc_btn_source') + '</a>' : '') +
-    screenshotButtonHtml +
-    trailerButtonHtml +
-    '</div>';
+    (item.linkSourceCode ? '<a class="sc-btn sc-btn-outline" href="' + safeUrl_(item.linkSourceCode) + '" target="_blank" rel="noopener">' + t('sc_btn_source') + '</a>' : '');
+  var actionsHtml = linkButtonsHtml
+    ? '<div class="sc-section-label">' + t('sc_sec_tautan') + '</div><div class="sc-action-row">' + linkButtonsHtml + '</div>'
+    : '';
 
   var likeHtml = opts.showLike
     ? '<button class="sc-like-btn" id="scLikeBtn" onclick="scDoLike(\'' + escHtml(item.kode) + '\')"><span id="scLikeHeart">&hearts;</span><span id="scLikeCount">' + item.likes + '</span></button>'
@@ -1664,7 +1675,7 @@ function scBuildDetailBodyHtml_(item, opts) {
       ((item.dosenPembimbing && item.dosenPembimbing.length) ? '<div class="sc-info-card"><div class="sc-info-icon">' + SC_ICON_DOSEN + '</div><div><div class="sc-info-k">' + t('sc_dosen_label') + '</div><div class="sc-info-v">' + escHtml(item.dosenPembimbing.join(', ')) + '</div></div></div>' : '') +
       '<div class="sc-info-card"><div class="sc-info-icon">' + SC_ICON_KONTAK + '</div><div><div class="sc-info-k">' + t('sc_kontak_label') + '</div><div class="sc-info-v">' + scRenderKontak_(item.kontakTim) + '</div></div></div>' +
     '</div>' +
-    techHtml + actionsHtml + reportHtml;
+    techHtml + previewLinksHtml + actionsHtml + reportHtml;
 }
 
 function scRenderDetail() {
