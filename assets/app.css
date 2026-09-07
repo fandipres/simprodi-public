@@ -871,9 +871,9 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; s
 
 /* Detail */
 .sc-hero-media {
-  border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border);
+  border-radius: 16px; overflow: hidden; border: 1px solid var(--border);
   background: linear-gradient(135deg,#1e293b,#0f172a); aspect-ratio: 16/9;
-  box-shadow: 0 12px 32px rgba(15,23,42,.16);
+  box-shadow: 0 16px 36px -10px rgba(15,23,42,.28);
   display: flex; align-items: center; justify-content: center; position: relative; cursor: pointer; margin-top: 12px;
 }
 .sc-hero-media .play { width: 52px; height: 52px; border-radius: 50%; background: rgba(255,255,255,.16); border: 1.5px solid rgba(255,255,255,.5); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.3rem; }
@@ -882,23 +882,30 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; s
 .sc-shot-strip { display: flex; gap: 8px; margin-top: 10px; overflow-x: auto; padding-bottom: 4px; }
 .sc-shot { flex: 0 0 auto; width: 130px; aspect-ratio: 9/16; border-radius: 8px; border: 1px solid var(--border); background-size: cover; background-position: center; background-color: var(--bg); }
 .sc-detail-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-top: 14px; }
-.sc-detail-title { font-size: 1.14rem; font-weight: 800; }
+.sc-detail-head-main { min-width: 0; flex: 1; }
+/* Judul 1 baris saja, dipangkas dengan ellipsis kalau kepanjangan -
+   konsisten dengan keputusan yang sama di mockup Showcase Detail Redesign. */
+.sc-detail-title { font-size: 1.32rem; font-weight: 800; letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .sc-like-btn { display: flex; flex-direction: column; align-items: center; gap: 1px; border: 1px solid var(--border); background: var(--card); border-radius: 10px; padding: 7px 11px; cursor: pointer; font-family: var(--font); flex-shrink: 0; font-size: 1rem; color: var(--subtle); transition: border-color .15s, transform .12s; }
 .sc-like-btn:hover { border-color: var(--red-border); color: var(--red); transform: scale(1.06); }
 .sc-like-btn.liked { color: var(--red); border-color: var(--red-border); background: var(--red-soft); }
 .sc-like-btn span { font-size: 0.76rem; font-weight: 700; color: var(--text); }
 .sc-detail-desc { margin-top: 10px; font-size: 0.88rem; white-space: pre-line; }
 .sc-section-label { font-size: 0.70rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-top: 18px; margin-bottom: 8px; }
-.sc-creator-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
-.sc-creator-row:last-child { border-bottom: none; }
-.sc-creator-avatar { flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--blue-soft); color: var(--blue); border: 1px solid var(--blue-border); display: flex; align-items: center; justify-content: center; font-size: 0.76rem; font-weight: 800; }
-.sc-creator-nim { color: var(--muted); font-size: 0.74rem; }
-.sc-meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 14px; }
-.sc-meta-k { display: flex; align-items: center; gap: 5px; }
-.sc-meta-k svg { width: 12px; height: 12px; flex-shrink: 0; }
-@media (max-width: 420px) { .sc-meta-grid { grid-template-columns: 1fr; } }
-.sc-meta-k { font-size: 0.66rem; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; font-weight: 700; }
-.sc-meta-v { font-size: 0.85rem; margin-top: 2px; }
+/* Kartu tim - avatar + nama + NIM per anggota, menggantikan daftar baris
+   polos lama (.sc-creator-row), sama dengan treatment di mockup. */
+.sc-team-card { display: flex; flex-wrap: wrap; gap: 10px; }
+.sc-team-member { display: flex; align-items: center; gap: 10px; flex: 1 1 200px; }
+.sc-creator-avatar { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--blue-soft); color: var(--blue); border: 1.5px solid var(--blue-border); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 800; }
+.sc-creator-nim { color: var(--muted); font-size: 0.74rem; margin-top: 1px; }
+/* Kartu info ber-ikon - menggantikan grid teks polos lama (.sc-meta-grid). */
+.sc-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (max-width: 420px) { .sc-info-grid { grid-template-columns: 1fr; } }
+.sc-info-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 13px; display: flex; align-items: flex-start; gap: 10px; }
+.sc-info-icon { width: 30px; height: 30px; border-radius: 9px; background: var(--blue-soft); color: var(--blue); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.sc-info-icon svg { width: 15px; height: 15px; }
+.sc-info-k { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--subtle); }
+.sc-info-v { font-size: 0.83rem; font-weight: 600; margin-top: 2px; line-height: 1.3; }
 .sc-tech-pills { display: flex; gap: 6px; flex-wrap: wrap; }
 .sc-tech-pill { font-size: 0.72rem; background: var(--bg); border: 1px solid var(--border); padding: 3px 9px; border-radius: 999px; }
 
@@ -947,8 +954,25 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; s
 .sc-seg-btn { border: 1px solid var(--border); background: var(--card); color: var(--text); font-family: var(--font); font-size: 0.80rem; font-weight: 600; padding: 7px 12px; border-radius: 8px; cursor: pointer; transition: border-color .15s, background .15s, color .15s; }
 .sc-seg-btn:hover:not(.active) { border-color: var(--blue-border); background: var(--blue-soft); }
 .sc-seg-btn.active { border-color: var(--blue); background: var(--blue-soft); color: var(--blue); }
-.sc-form-section-title { font-weight: 800; font-size: 0.92rem; margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--border); }
-.sc-form-section-title:first-child { margin-top: 14px; padding-top: 0; border-top: none; }
+/* Setiap bagian form Kirim Karya jadi kartu tersendiri dengan chip ikon +
+   judul di atasnya (menggantikan .sc-form-section-title, garis pemisah
+   tipis lama) - kontras satu sama lain supaya form yang panjang lebih
+   gampang "dipetakan" jadi beberapa langkah. Sama dengan treatment di
+   mockup Showcase Detail Redesign (form Kirim Karya). */
+.sc-form-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+  padding: 18px; margin-top: 18px; box-shadow: 0 1px 4px rgba(15,23,42,.05);
+}
+.sc-form-card:first-child { margin-top: 14px; }
+.sc-form-card-head { display: flex; align-items: center; gap: 11px; margin-bottom: 16px; }
+.sc-form-card-icon {
+  width: 34px; height: 34px; border-radius: 10px; background: var(--blue-soft); color: var(--blue);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.sc-form-card-icon svg { width: 17px; height: 17px; }
+.sc-form-card-title { font-weight: 800; font-size: 0.95rem; }
+.sc-form-card-step { font-size: 0.68rem; font-weight: 700; color: var(--subtle); text-transform: uppercase; letter-spacing: .04em; }
+.sc-form-card .sc-form-group:first-child { margin-top: 0; }
 .sc-creator-field { display: grid; grid-template-columns: 1fr 1.4fr auto; gap: 7px; margin-bottom: 7px; align-items: center; }
 @media (max-width: 420px) { .sc-creator-field { grid-template-columns: 1fr; } }
 .sc-single-field { display: grid; grid-template-columns: 1fr auto; gap: 7px; margin-bottom: 7px; align-items: center; }

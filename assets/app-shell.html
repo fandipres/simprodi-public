@@ -415,7 +415,11 @@
 
       <p id="scFormLoading" class="msg-center" style="display:none;"></p>
       <div id="scFormBody">
-        <div class="sc-form-section-title" data-i18n="sc_sec_info">Informasi Program</div>
+        <div class="sc-form-card">
+        <div class="sc-form-card-head">
+          <div class="sc-form-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6M9 9h1"/></svg></div>
+          <div><div class="sc-form-card-step">Bagian 1</div><div class="sc-form-card-title" data-i18n="sc_sec_info">Informasi Program</div></div>
+        </div>
 
         <div class="sc-form-group">
           <label class="sc-form-label"><span data-i18n="sc_label_nama">Nama Program</span> <span class="sc-req">*</span></label>
@@ -452,7 +456,13 @@
           </div>
         </div>
 
-        <div class="sc-form-section-title"><span data-i18n="sc_sec_kreator">Anggota Tim / Kreator</span> <span class="sc-req">*</span></div>
+        </div>
+
+        <div class="sc-form-card">
+        <div class="sc-form-card-head">
+          <div class="sc-form-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a5 5 0 015-5h4a5 5 0 015 5v2"/><path d="M17 3.6a4 4 0 010 7.8M23 21v-2a5 5 0 00-3.5-4.8"/></svg></div>
+          <div><div class="sc-form-card-step">Bagian 2</div><div class="sc-form-card-title"><span data-i18n="sc_sec_kreator">Anggota Tim / Kreator</span> <span class="sc-req">*</span></div></div>
+        </div>
         <div id="scfKreatorFields">
           <div class="sc-creator-field">
             <input class="sc-input scf-kreator-nim" inputmode="numeric" pattern="[0-9]*" data-i18n-placeholder="sc_placeholder_nim" placeholder="NIM">
@@ -468,7 +478,13 @@
           <div class="sc-form-hint" data-i18n="sc_hint_kontak">Gunakan alamat email aktif tim, supaya pengunjung bisa menghubungi lewat link yang muncul di halaman detail.</div>
         </div>
 
-        <div class="sc-form-section-title" data-i18n="sc_sec_tampilan">Tampilan Karya</div>
+        </div>
+
+        <div class="sc-form-card">
+        <div class="sc-form-card-head">
+          <div class="sc-form-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+          <div><div class="sc-form-card-step">Bagian 3</div><div class="sc-form-card-title" data-i18n="sc_sec_tampilan">Tampilan Karya</div></div>
+        </div>
 
         <div class="sc-form-group" id="scfScreenshotGroup">
           <label class="sc-form-label"><span data-i18n="sc_label_ss">Link Folder Screenshot</span> <span class="sc-req">*</span></label>
@@ -488,7 +504,13 @@
           </div>
         </div>
 
-        <div class="sc-form-section-title" data-i18n="sc_sec_tautan">Tautan</div>
+        </div>
+
+        <div class="sc-form-card">
+        <div class="sc-form-card-head">
+          <div class="sc-form-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0L5 12.93a5 5 0 007.07 7.07L13.5 18.5"/></svg></div>
+          <div><div class="sc-form-card-step">Bagian 4</div><div class="sc-form-card-title" data-i18n="sc_sec_tautan">Tautan</div></div>
+        </div>
 
         <div class="sc-form-group">
           <label class="sc-form-label" data-i18n="sc_label_status_deploy">Status Deploy</label>
@@ -521,7 +543,13 @@
           <input class="sc-input" id="scfSource" data-i18n-placeholder="sc_placeholder_source" placeholder="https://github.com/username/repo">
         </div>
 
-        <div class="sc-form-section-title" data-i18n="sc_sec_akademik">Informasi Akademik</div>
+        </div>
+
+        <div class="sc-form-card">
+        <div class="sc-form-card-head">
+          <div class="sc-form-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12.5V17c0 1.66 2.69 3 6 3s6-1.34 6-3v-4.5"/><path d="M2 10v5"/></svg></div>
+          <div><div class="sc-form-card-step">Bagian 5</div><div class="sc-form-card-title" data-i18n="sc_sec_akademik">Informasi Akademik</div></div>
+        </div>
 
         <div class="sc-form-group">
           <label class="sc-form-label" data-i18n="sc_label_sumber">Sumber Tugas</label>
@@ -550,7 +578,13 @@
           <button type="button" class="sc-add-row-btn" onclick="scAddDosenRow()" data-i18n="sc_btn_tambah_dosen">+ Tambah Dosen</button>
         </div>
 
-        <div class="sc-form-section-title" data-i18n="sc_sec_konfirmasi">Konfirmasi</div>
+        </div>
+
+        <div class="sc-form-card">
+        <div class="sc-form-card-head">
+          <div class="sc-form-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <div><div class="sc-form-card-step">Bagian 6</div><div class="sc-form-card-title" data-i18n="sc_sec_konfirmasi">Konfirmasi</div></div>
+        </div>
         <label class="sc-consent-row">
           <input type="checkbox" id="scfConsent1" onchange="scRefreshSubmitState()">
           <span data-i18n="sc_consent1">Saya menyatakan karya ini benar dibuat oleh mahasiswa yang tercantum di atas.</span>
@@ -559,6 +593,7 @@
           <input type="checkbox" id="scfConsent2" onchange="scRefreshSubmitState()">
           <span data-i18n="sc_consent2">Saya menyatakan seluruh data yang saya masukkan (nama, deskripsi, gambar, video) tidak mengandung unsur SARA (suku, agama, ras, dan antargolongan) atau konten yang menyinggung/melanggar hukum.</span>
         </label>
+        </div>
 
         <p id="scfMsg" class="msg-error" style="display:none;"></p>
         <button class="sc-btn sc-btn-primary sc-btn-block" id="scfSubmitBtn" style="margin-top:16px;" disabled onclick="submitShowcaseForm()" data-i18n="sc_btn_submit">Kirim untuk Ditinjau</button>

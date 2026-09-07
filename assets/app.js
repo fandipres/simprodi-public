@@ -1553,7 +1553,7 @@ function scBuildDetailBodyHtml_(item, opts) {
 
   var creatorsHtml = item.kreator.map(function(k) {
     var initial = escHtml((String(k.nama || '').trim().charAt(0) || '?').toUpperCase());
-    return '<div class="sc-creator-row"><div class="sc-creator-avatar">' + initial + '</div><div><b>' + escHtml(k.nama) + '</b><div class="sc-creator-nim">NIM. ' + escHtml(k.nim) + '</div></div></div>';
+    return '<div class="sc-team-member"><div class="sc-creator-avatar">' + initial + '</div><div><b>' + escHtml(k.nama) + '</b><div class="sc-creator-nim">NIM. ' + escHtml(k.nim) + '</div></div></div>';
   }).join('');
 
   var mataKuliahDisplay = (currentLang === 'en' && item.mataKuliahEn) ? item.mataKuliahEn : item.mataKuliah;
@@ -1584,19 +1584,19 @@ function scBuildDetailBodyHtml_(item, opts) {
 
   return mediaHtml +
     '<div class="sc-detail-head">' +
-      '<div><div class="sc-tags"><span class="sc-tag sc-tag-jenis">' + escHtml(item.jenis) + '</span>' + pemBadge + '<span class="sc-tag ' + statusTag + '">' + statusLabel + '</span>' + publishBadge + '</div>' +
+      '<div class="sc-detail-head-main"><div class="sc-tags"><span class="sc-tag sc-tag-jenis">' + escHtml(item.jenis) + '</span>' + pemBadge + '<span class="sc-tag ' + statusTag + '">' + statusLabel + '</span>' + publishBadge + '</div>' +
       '<div class="sc-detail-title">' + escHtml(namaProgramDisplay) + '</div></div>' +
       likeHtml +
     '</div>' +
     '<p class="sc-detail-desc">' + escHtml(pick(item.deskripsi)) + '</p>' +
     '<div class="sc-section-label">' + t('sc_creators_label') + '</div>' +
-    '<div class="sc-card" style="padding:2px 14px;">' + creatorsHtml + '</div>' +
+    '<div class="sc-card sc-team-card">' + creatorsHtml + '</div>' +
     '<div class="sc-section-label">' + t('sc_academic_label') + '</div>' +
-    '<div class="sc-meta-grid">' +
-      '<div><div class="sc-meta-k">' + SC_ICON_SUMBER + '<span>' + t('sc_sumber_tugas_label') + '</span></div><div class="sc-meta-v">' + escHtml(sumberLabel) + '</div></div>' +
-      '<div><div class="sc-meta-k">' + SC_ICON_SEMESTER + '<span>' + t('sc_semester_label') + '</span></div><div class="sc-meta-v">' + escHtml(translateSemesterLabel_(item.semester)) + '</div></div>' +
-      ((item.dosenPembimbing && item.dosenPembimbing.length) ? '<div><div class="sc-meta-k">' + SC_ICON_DOSEN + '<span>' + t('sc_dosen_label') + '</span></div><div class="sc-meta-v">' + escHtml(item.dosenPembimbing.join(', ')) + '</div></div>' : '') +
-      '<div><div class="sc-meta-k">' + SC_ICON_KONTAK + '<span>' + t('sc_kontak_label') + '</span></div><div class="sc-meta-v">' + scRenderKontak_(item.kontakTim) + '</div></div>' +
+    '<div class="sc-info-grid">' +
+      '<div class="sc-info-card"><div class="sc-info-icon">' + SC_ICON_SUMBER + '</div><div><div class="sc-info-k">' + t('sc_sumber_tugas_label') + '</div><div class="sc-info-v">' + escHtml(sumberLabel) + '</div></div></div>' +
+      '<div class="sc-info-card"><div class="sc-info-icon">' + SC_ICON_SEMESTER + '</div><div><div class="sc-info-k">' + t('sc_semester_label') + '</div><div class="sc-info-v">' + escHtml(translateSemesterLabel_(item.semester)) + '</div></div></div>' +
+      ((item.dosenPembimbing && item.dosenPembimbing.length) ? '<div class="sc-info-card"><div class="sc-info-icon">' + SC_ICON_DOSEN + '</div><div><div class="sc-info-k">' + t('sc_dosen_label') + '</div><div class="sc-info-v">' + escHtml(item.dosenPembimbing.join(', ')) + '</div></div></div>' : '') +
+      '<div class="sc-info-card"><div class="sc-info-icon">' + SC_ICON_KONTAK + '</div><div><div class="sc-info-k">' + t('sc_kontak_label') + '</div><div class="sc-info-v">' + scRenderKontak_(item.kontakTim) + '</div></div></div>' +
     '</div>' +
     techHtml + actionsHtml + reportHtml;
 }
