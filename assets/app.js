@@ -1397,6 +1397,66 @@ function scHeroCarouselScroll_(track) {
   dots.forEach(function(d, i) { d.classList.toggle('active', i === index); });
 }
 
+// Auto-geser antara slide thumbnail <-> trailer terus-menerus, berhenti
+// HANYA saat trailernya (kalau YouTube) benar-benar diputar - bukan cuma
+// berhenti begitu slide trailer tampil, harus menunggu play sungguhan
+// lewat YT IFrame API (postMessage), makanya slide2Html di atas menambah
+// enablejsapi=1 pada iframe-nya. Klik titik/swipe manual TIDAK menghentikan
+// auto-geser (sesuai diminta - cuma play yang menghentikan).
+var _scHeroAutoTimer = null;
+function scHeroCarouselStopAuto_() {
+  if (_scHeroAutoTimer) { clearInterval(_scHeroAutoTimer); _scHeroAutoTimer = null; }
+}
+function scHeroCarouselAutoAdvance_(track) {
+  // isConnected jadi jaring pengaman kalau timer lama belum sempat
+  // dibersihkan tapi pengguna sudah pindah halaman (DOM lama sudah lepas) -
+  // daripada nge-scroll elemen yang sudah tidak ada di layar, matikan saja.
+  if (!track || !track.isConnected) { scHeroCarouselStopAuto_(); return; }
+  var current = Math.round(track.scrollLeft / track.clientWidth);
+  track.scrollTo({ left: track.clientWidth * (current === 0 ? 1 : 0), behavior: 'smooth' });
+}
+// Dipanggil sekali setiap detail karya selesai dirender (lihat scRenderDetail
+// & scViewOwnDetail) - selalu menghentikan timer lama dulu (kalau ada karya
+// sebelumnya juga carousel) sebelum mulai yang baru, supaya tidak ada 2 timer
+// jalan bareng saat berpindah-pindah antar karya.
+function scHeroCarouselInit_() {
+  scHeroCarouselStopAuto_();
+  var carousel = document.querySelector('.sc-hero-carousel');
+  if (!carousel) return;
+  var track = carousel.querySelector('.sc-hero-track');
+  _scHeroAutoTimer = setInterval(function() { scHeroCarouselAutoAdvance_(track); }, 4500);
+  if (carousel.querySelector('#scHeroYtFrame')) scEnsureYtApi_(scHeroSetupYtWatcher_);
+}
+
+// YT IFrame API dimuat sekali saja (bukan per-render) - callback yang
+// menunggu ditumpuk di _scYtApiCallbacks kalau skripnya belum selesai load
+// saat dibutuhkan lagi (mis. pindah ke karya lain sebelum API siap).
+var _scYtApiLoading = false;
+var _scYtApiCallbacks = [];
+function scEnsureYtApi_(callback) {
+  if (window.YT && window.YT.Player) { callback(); return; }
+  _scYtApiCallbacks.push(callback);
+  if (_scYtApiLoading) return;
+  _scYtApiLoading = true;
+  var tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(tag);
+  window.onYouTubeIframeAPIReady = function() {
+    _scYtApiCallbacks.forEach(function(cb) { cb(); });
+    _scYtApiCallbacks = [];
+  };
+}
+function scHeroSetupYtWatcher_() {
+  if (!document.getElementById('scHeroYtFrame')) return;
+  new YT.Player('scHeroYtFrame', {
+    events: {
+      onStateChange: function(e) {
+        if (e.data === YT.PlayerState.PLAYING) scHeroCarouselStopAuto_();
+      }
+    }
+  });
+}
+
 // Kontak Tim ditetapkan email saja (lihat sc_email_regex_) supaya tidak perlu
 // menebak jenis kontak dari format teks. Dirender langsung sebagai link
 // mailto: tanpa label tambahan.
@@ -1606,8 +1666,11 @@ function scBuildDetailBodyHtml_(item, opts) {
   // "Trailer" yang berdiri sendiri jadi dihapus (lihat previewLinksHtml di
   // bawah) supaya tidak ada 2 jalan ke konten yang sama.
   if (item.videoTrailer) {
+    // enablejsapi=1 + id tetap "scHeroYtFrame" (cuma satu detail view aktif
+    // dalam satu waktu, SPA) supaya scHeroCarouselInit_ bisa membungkusnya
+    // dengan YT.Player dan mendeteksi kapan videonya benar-benar diputar.
     var slide2Html = yt
-      ? '<div class="sc-hero-media" style="cursor:default;"><iframe style="position:absolute;inset:0;width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/' + yt + '" allowfullscreen loading="lazy"></iframe></div>'
+      ? '<div class="sc-hero-media" style="cursor:default;"><iframe id="scHeroYtFrame" style="position:absolute;inset:0;width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/' + yt + '?enablejsapi=1&origin=' + encodeURIComponent(location.origin) + '" allowfullscreen loading="lazy"></iframe></div>'
       : '<a class="sc-hero-media" href="' + safeUrl_(item.videoTrailer) + '" target="_blank" rel="noopener"><span class="play">&#9654;</span></a>';
     mediaHtml = '<div class="sc-hero-carousel">' +
       '<div class="sc-hero-track" onscroll="scHeroCarouselScroll_(this)">' +
@@ -1703,6 +1766,7 @@ function scRenderDetail() {
   if (localStorage.getItem('sc_liked_' + item.kode)) {
     document.getElementById('scLikeBtn').classList.add('liked');
   }
+  scHeroCarouselInit_();
 }
 
 async function scDoLike(kode) {
@@ -2168,6 +2232,7 @@ async function scViewOwnDetail(kode) {
     var res = await gasGet({ action: 'showcase_mine', kode: kode, lang: currentLang });
     if (!res || !res.ok) { box.innerHTML = '<p class="msg-error">' + escHtml((res && res.message) || t('sc_error')) + '</p>'; return; }
     box.innerHTML = '<div class="sc-card">' + scBuildDetailBodyHtml_(res.item, { showLike: false, showReport: false }) + '</div>';
+    scHeroCarouselInit_();
   } catch (e) {
     box.innerHTML = '<p class="msg-error">' + t('sc_error') + '</p>';
   }
