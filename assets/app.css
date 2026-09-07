@@ -910,7 +910,7 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; s
 .sc-detail-head-main { min-width: 0; flex: 1; }
 /* Judul 1 baris saja, dipangkas dengan ellipsis kalau kepanjangan -
    konsisten dengan keputusan yang sama di mockup Showcase Detail Redesign. */
-.sc-detail-title { font-size: 1.32rem; font-weight: 800; letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sc-detail-title { font-size: 1.32rem; font-weight: 800; letter-spacing: -0.01em; }
 .sc-like-btn { display: flex; flex-direction: column; align-items: center; gap: 1px; border: 1px solid var(--border); background: var(--card); border-radius: 10px; padding: 7px 11px; cursor: pointer; font-family: var(--font); flex-shrink: 0; font-size: 1rem; color: var(--subtle); transition: border-color .15s, transform .12s; }
 .sc-like-btn:hover { border-color: var(--red-border); color: var(--red); transform: scale(1.06); }
 .sc-like-btn.liked { color: var(--red); border-color: var(--red-border); background: var(--red-soft); }
