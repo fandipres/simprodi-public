@@ -1461,10 +1461,11 @@ function scRenderGaleri() {
 
   grid.innerHTML = list.map(function(item) {
     // linkScreenshot adalah link folder, bukan link gambar langsung, jadi
-    // tidak bisa dipakai sebagai thumbnail - thumbnail tetap dari
-    // YouTube (kalau ada trailer) atau ikon fallback per Jenis.
+    // tidak bisa dipakai sebagai thumbnail. Urutan prioritas: linkThumbnail
+    // (gambar hasil kurasi admin lewat tool Buat Thumbnail, kalau diisi) ->
+    // thumbnail YouTube (kalau ada trailer) -> ikon fallback per Jenis.
     var thumbYt = scYoutubeId_(item.videoTrailer);
-    var thumb = thumbYt ? ('https://img.youtube.com/vi/' + thumbYt + '/hqdefault.jpg') : '';
+    var thumb = item.linkThumbnail || (thumbYt ? ('https://img.youtube.com/vi/' + thumbYt + '/hqdefault.jpg') : '');
     var thumbStyle = thumb ? ' style="background-image:url(\'' + safeUrl_(thumb) + '\')"' : '';
     var thumbHtml = thumb ? ('<div class="sc-gthumb"' + thumbStyle + '></div>') : ('<div class="sc-gthumb sc-gthumb-empty">' + SC_ICON_NOPREVIEW + '</div>');
     var creators = item.kreator.length
@@ -1527,11 +1528,16 @@ function scBuildDetailBodyHtml_(item, opts) {
   var mediaHtml = '';
   var trailerButtonHtml = '';
   // linkScreenshot adalah link FOLDER (mis. Google Drive), bukan link
-  // gambar langsung - tidak bisa dipasang sebagai <img>/background-image.
-  // Jadi hero media tetap pakai video/ikon fallback seperti semula, dan
-  // folder screenshot ditawarkan sebagai tombol terpisah ("Lihat
-  // Screenshot") di actionsHtml, sama seperti trailer.
-  if (yt) {
+  // gambar langsung - tidak bisa dipasang sebagai <img>/background-image,
+  // jadi folder screenshot tetap ditawarkan sebagai tombol terpisah ("Lihat
+  // Screenshot") di actionsHtml, bukan hero media. linkThumbnail (gambar
+  // hasil kurasi admin lewat tool Buat Thumbnail, hotlink langsung) jadi
+  // prioritas pertama utk hero media kalau diisi; trailer YouTube jadi
+  // tombol sekunder pada kondisi ini (lihat trailerButtonHtml di bawah).
+  if (item.linkThumbnail) {
+    mediaHtml = '<div class="sc-hero-media" style="cursor:default;">' +
+      '<img src="' + safeUrl_(item.linkThumbnail) + '" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>';
+  } else if (yt) {
     mediaHtml = '<div class="sc-hero-media" style="cursor:default;">' +
       '<iframe style="position:absolute;inset:0;width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/' + yt + '" allowfullscreen loading="lazy"></iframe></div>';
   } else if (item.videoTrailer) {
@@ -1557,8 +1563,12 @@ function scBuildDetailBodyHtml_(item, opts) {
   }).join('');
 
   var mataKuliahDisplay = (currentLang === 'en' && item.mataKuliahEn) ? item.mataKuliahEn : item.mataKuliah;
+  // Penanda sumber karya ditaruh di depan nama mata kuliah/kompetisi supaya
+  // jelas keduanya, mis. "Kompetisi GEMASTIK 2026" / "Competition GEMASTIK
+  // 2026" (nama lombanya sendiri tidak diterjemahkan, cuma penandanya).
+  var sumberTugasLabel = t(item.sumberTugas === 'Kompetisi' ? 'sc_opt_kompetisi' : 'sc_opt_matkul');
   var sumberLabel = (item.sumberTugas === 'Mata Kuliah' || item.sumberTugas === 'Kompetisi')
-    ? (mataKuliahDisplay || t(item.sumberTugas === 'Kompetisi' ? 'sc_opt_kompetisi' : 'sc_opt_matkul'))
+    ? (mataKuliahDisplay ? (sumberTugasLabel + ' ' + mataKuliahDisplay) : sumberTugasLabel)
     : t('sc_opt_ta');
   var namaProgramDisplay = (currentLang === 'en' && item.namaProgramEn) ? item.namaProgramEn : item.namaProgram;
 
