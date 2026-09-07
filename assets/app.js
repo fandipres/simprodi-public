@@ -1346,6 +1346,45 @@ function scYoutubeId_(url) {
   return m ? m[1] : null;
 }
 
+// linkThumbnail cuma dipakai sebagai OVERRIDE eksplisit sekarang - kalau
+// admin tidak isi field itu, situs publik langsung coba path konvensi ini
+// (lihat docs/assets/thumbnails/README.md - staf upload PNG-nya lewat
+// GitHub dengan nama file KODE.png, tanpa perlu tempel link sama sekali).
+// location.origin (bukan domain di-hardcode) supaya tetap benar diakses
+// lewat domain apapun situs ini disajikan (custom domain, staging, atau
+// server lokal saat testing) - hasilnya http(s):// penuh supaya lolos
+// validasi safeUrl_ yang sama seperti link lain di halaman ini.
+function scDerivedThumbUrl_(kode) {
+  return location.origin + '/assets/thumbnails/' + kode + '.png';
+}
+
+// Dipasang sebagai onerror pada <img class="sc-gthumb">/<img> hero detail -
+// coba data-fallback (thumbnail YouTube kalau ada trailer) dulu sekali,
+// baru kalau itu juga gagal (atau memang tidak ada trailer sama sekali)
+// sembunyikan gambarnya dan tampilkan elemen sibling berikutnya (ikon
+// fallback / markup pengganti lain, tergantung konteks pemanggilnya).
+function scThumbFallback_(img) {
+  var fb = img.getAttribute('data-fallback');
+  if (fb) {
+    img.removeAttribute('data-fallback');
+    img.src = fb;
+  } else {
+    img.style.display = 'none';
+    if (img.nextElementSibling) img.nextElementSibling.style.display = '';
+  }
+}
+
+// Sama idenya, tapi utk hero halaman detail - gambarnya dibungkus
+// .sc-hero-media (posisi absolut di dalamnya, sama pola dgn iframe
+// YouTube), jadi yang disembunyikan/dimunculkan itu WRAPPER-nya, bukan
+// <img>-nya sendiri.
+function scHeroThumbFallback_(img) {
+  var wrap = img.closest('.sc-hero-media');
+  if (!wrap) return;
+  wrap.style.display = 'none';
+  if (wrap.nextElementSibling) wrap.nextElementSibling.style.display = '';
+}
+
 // Kontak Tim ditetapkan email saja (lihat sc_email_regex_) supaya tidak perlu
 // menebak jenis kontak dari format teks. Dirender langsung sebagai link
 // mailto: tanpa label tambahan.
@@ -1462,12 +1501,19 @@ function scRenderGaleri() {
   grid.innerHTML = list.map(function(item) {
     // linkScreenshot adalah link folder, bukan link gambar langsung, jadi
     // tidak bisa dipakai sebagai thumbnail. Urutan prioritas: linkThumbnail
-    // (gambar hasil kurasi admin lewat tool Buat Thumbnail, kalau diisi) ->
-    // thumbnail YouTube (kalau ada trailer) -> ikon fallback per Jenis.
+    // (override eksplisit admin, kalau diisi) -> path konvensi
+    // /assets/thumbnails/KODE.png (coba duluan, tanpa perlu admin isi
+    // apa-apa - lihat scDerivedThumbUrl_) -> kalau itu 404 juga, thumbnail
+    // YouTube (kalau ada trailer) -> ikon fallback per Jenis. Pakai <img>
+    // + onerror (scThumbFallback_), bukan background-image, supaya bisa
+    // rantai fallback begini.
     var thumbYt = scYoutubeId_(item.videoTrailer);
-    var thumb = item.linkThumbnail || (thumbYt ? ('https://img.youtube.com/vi/' + thumbYt + '/hqdefault.jpg') : '');
-    var thumbStyle = thumb ? ' style="background-image:url(\'' + safeUrl_(thumb) + '\')"' : '';
-    var thumbHtml = thumb ? ('<div class="sc-gthumb"' + thumbStyle + '></div>') : ('<div class="sc-gthumb sc-gthumb-empty">' + SC_ICON_NOPREVIEW + '</div>');
+    var thumbYtUrl = thumbYt ? ('https://img.youtube.com/vi/' + thumbYt + '/hqdefault.jpg') : '';
+    var thumbPrimary = item.linkThumbnail || scDerivedThumbUrl_(item.kode);
+    var thumbHtml = '<img class="sc-gthumb" src="' + safeUrl_(thumbPrimary) + '" alt="" loading="lazy"' +
+        (thumbYtUrl ? ' data-fallback="' + safeUrl_(thumbYtUrl) + '"' : '') +
+        ' onerror="scThumbFallback_(this)">' +
+      '<div class="sc-gthumb sc-gthumb-empty" style="display:none;">' + SC_ICON_NOPREVIEW + '</div>';
     var creators = item.kreator.length
       ? escHtml(item.kreator[0].nama) + (item.kreator.length > 1 ? ' ' + t('sc_creator_more', { n: item.kreator.length - 1 }) : '')
       : '';
@@ -1526,28 +1572,44 @@ function scBuildDetailBodyHtml_(item, opts) {
   opts = opts || {};
   var yt = scYoutubeId_(item.videoTrailer);
   var mediaHtml = '';
-  var trailerButtonHtml = '';
   // linkScreenshot adalah link FOLDER (mis. Google Drive), bukan link
   // gambar langsung - tidak bisa dipasang sebagai <img>/background-image,
   // jadi folder screenshot tetap ditawarkan sebagai tombol terpisah ("Lihat
-  // Screenshot") di actionsHtml, bukan hero media. linkThumbnail (gambar
-  // hasil kurasi admin lewat tool Buat Thumbnail, hotlink langsung) jadi
-  // prioritas pertama utk hero media kalau diisi; trailer YouTube jadi
-  // tombol sekunder pada kondisi ini (lihat trailerButtonHtml di bawah).
-  if (item.linkThumbnail) {
-    mediaHtml = '<div class="sc-hero-media" style="cursor:default;">' +
-      '<img src="' + safeUrl_(item.linkThumbnail) + '" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>';
-  } else if (yt) {
-    mediaHtml = '<div class="sc-hero-media" style="cursor:default;">' +
+  // Screenshot") di actionsHtml, bukan hero media. Hero media SELALU coba
+  // thumbnail dulu (linkThumbnail kalau admin isi override-nya, atau kalau
+  // tidak, path konvensi dari scDerivedThumbUrl_ - lihat komentar di
+  // definisinya) - fallbackMediaHtml (yt-embed/tombol trailer/ikon, sama
+  // seperti sebelum linkThumbnail ada) cuma dipasang tersembunyi, baru
+  // dimunculkan lewat scHeroThumbFallback_ kalau <img>-nya gagal dimuat
+  // (404 - berarti PNG-nya belum diupload).
+  var thumbUrl = item.linkThumbnail || scDerivedThumbUrl_(item.kode);
+  var fallbackMediaHtml;
+  if (yt) {
+    fallbackMediaHtml = '<div class="sc-hero-media" style="cursor:default;display:none;">' +
       '<iframe style="position:absolute;inset:0;width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/' + yt + '" allowfullscreen loading="lazy"></iframe></div>';
   } else if (item.videoTrailer) {
-    mediaHtml = '<a class="sc-hero-media" href="' + safeUrl_(item.videoTrailer) + '" target="_blank" rel="noopener"><span class="play">&#9654;</span></a>';
+    fallbackMediaHtml = '<a class="sc-hero-media" href="' + safeUrl_(item.videoTrailer) + '" target="_blank" rel="noopener" style="display:none;"><span class="play">&#9654;</span></a>';
   } else {
-    mediaHtml = '<div class="sc-hero-media sc-hero-fallback">' + (SC_ICON_JENIS[item.jenis] || SC_ICON_JENIS_DEFAULT) + '</div>';
+    fallbackMediaHtml = '<div class="sc-hero-media sc-hero-fallback" style="display:none;">' + (SC_ICON_JENIS[item.jenis] || SC_ICON_JENIS_DEFAULT) + '</div>';
   }
-  if (item.videoTrailer) {
-    trailerButtonHtml = '<a class="sc-btn sc-btn-outline" href="' + safeUrl_(item.videoTrailer) + '" target="_blank" rel="noopener">' + t('sc_btn_trailer') + '</a>';
-  }
+  // Trailer di-overlay langsung di atas thumbnail (bukan tombol terpisah di
+  // bawah) - sesuai mockup "Showcase Detail Redesign": ini salah satu nilai
+  // jual utama sebuah karya, jadi harus langsung terlihat begitu halaman
+  // dibuka, bukan tersembunyi di antara tombol lain. Cuma dipasang di dalam
+  // wrapper thumbnail utama (bukan di fallbackMediaHtml) - kalau thumbnail-
+  // nya gagal dimuat dan turun ke yt-embed/link-trailer, video itu sendiri
+  // SUDAH jadi kontrol utamanya, tidak perlu badge overlay lagi di atasnya.
+  var trailerBadgeHtml = item.videoTrailer
+    ? '<a class="sc-trailer-badge" href="' + safeUrl_(item.videoTrailer) + '" target="_blank" rel="noopener">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 8.5l6 3.5-6 3.5z"/></svg> ' +
+        t('sc_btn_trailer') +
+      '</a>'
+    : '';
+  mediaHtml = '<div class="sc-hero-media" style="cursor:default;">' +
+    '<img src="' + safeUrl_(thumbUrl) + '" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" onerror="scHeroThumbFallback_(this)">' +
+    trailerBadgeHtml +
+    '</div>' +
+    fallbackMediaHtml;
   var screenshotButtonHtml = item.linkScreenshot
     ? '<a class="sc-btn sc-btn-outline" href="' + safeUrl_(item.linkScreenshot) + '" target="_blank" rel="noopener">' + t('sc_btn_screenshot') + '</a>'
     : '';
@@ -1582,7 +1644,6 @@ function scBuildDetailBodyHtml_(item, opts) {
     (item.linkDownload ? '<a class="sc-btn sc-btn-primary" href="' + safeUrl_(item.linkDownload) + '" target="_blank" rel="noopener">' + t('sc_btn_download') + '</a>' : '') +
     (item.linkSourceCode ? '<a class="sc-btn sc-btn-outline" href="' + safeUrl_(item.linkSourceCode) + '" target="_blank" rel="noopener">' + t('sc_btn_source') + '</a>' : '') +
     screenshotButtonHtml +
-    trailerButtonHtml +
     '</div>';
 
   var likeHtml = opts.showLike
