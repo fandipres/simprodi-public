@@ -136,7 +136,6 @@ const I18N = {
     sc_btn_demo: 'Demo',
     sc_btn_download: 'Unduh',
     sc_btn_source: 'Source Code',
-    sc_btn_trailer: 'Trailer',
     sc_btn_screenshot: 'Lihat Screenshot',
     sc_report_link: 'Laporkan',
     sc_detail_not_found: 'Karya tidak ditemukan atau belum disetujui.',
@@ -371,7 +370,6 @@ const I18N = {
     sc_btn_demo: 'Demo',
     sc_btn_download: 'Download',
     sc_btn_source: 'Source Code',
-    sc_btn_trailer: 'Trailer',
     sc_btn_screenshot: 'View Screenshots',
     sc_report_link: 'Report',
     sc_detail_not_found: 'Work not found or not yet approved.',
@@ -1385,6 +1383,20 @@ function scHeroThumbFallback_(img) {
   if (wrap.nextElementSibling) wrap.nextElementSibling.style.display = '';
 }
 
+// Carousel hero (thumbnail + trailer, 2 slide tetap) - .sc-hero-track pakai
+// scroll-snap native (lihat app.css) jadi swipe di HP sudah otomatis
+// berfungsi tanpa JS sama sekali; kedua fungsi ini cuma buat sinkronisasi
+// titik indikator dgn slide yang sedang tampil, dan navigasi klik titiknya.
+function scHeroCarouselGo_(dotEl, index) {
+  var track = dotEl.closest('.sc-hero-carousel').querySelector('.sc-hero-track');
+  track.scrollTo({ left: track.clientWidth * index, behavior: 'smooth' });
+}
+function scHeroCarouselScroll_(track) {
+  var index = Math.round(track.scrollLeft / track.clientWidth);
+  var dots = track.parentElement.querySelectorAll('.sc-hero-dot');
+  dots.forEach(function(d, i) { d.classList.toggle('active', i === index); });
+}
+
 // Kontak Tim ditetapkan email saja (lihat sc_email_regex_) supaya tidak perlu
 // menebak jenis kontak dari format teks. Dirender langsung sebagai link
 // mailto: tanpa label tambahan.
@@ -1575,35 +1587,41 @@ function scBuildDetailBodyHtml_(item, opts) {
   // linkScreenshot adalah link FOLDER (mis. Google Drive), bukan link
   // gambar langsung - tidak bisa dipasang sebagai <img>/background-image,
   // jadi folder screenshot tetap ditawarkan sebagai tombol terpisah ("Lihat
-  // Screenshot") di actionsHtml, bukan hero media. Hero media SELALU coba
-  // thumbnail dulu (linkThumbnail kalau admin isi override-nya, atau kalau
-  // tidak, path konvensi dari scDerivedThumbUrl_ - lihat komentar di
-  // definisinya) - fallbackMediaHtml (yt-embed/tombol trailer/ikon, sama
-  // seperti sebelum linkThumbnail ada) cuma dipasang tersembunyi, baru
-  // dimunculkan lewat scHeroThumbFallback_ kalau <img>-nya gagal dimuat
+  // Screenshot") di actionsHtml, bukan hero media. Slide 1 (thumbnail)
+  // SELALU coba thumbnail dulu (linkThumbnail kalau admin isi override-nya,
+  // atau kalau tidak, path konvensi dari scDerivedThumbUrl_ - lihat komentar
+  // di definisinya) - fallback-nya (ikon per Jenis) cuma dipasang tersembunyi,
+  // baru dimunculkan lewat scHeroThumbFallback_ kalau <img>-nya gagal dimuat
   // (404 - berarti PNG-nya belum diupload).
   var thumbUrl = item.linkThumbnail || scDerivedThumbUrl_(item.kode);
-  var fallbackMediaHtml;
-  if (yt) {
-    fallbackMediaHtml = '<div class="sc-hero-media" style="cursor:default;display:none;">' +
-      '<iframe style="position:absolute;inset:0;width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/' + yt + '" allowfullscreen loading="lazy"></iframe></div>';
-  } else if (item.videoTrailer) {
-    fallbackMediaHtml = '<a class="sc-hero-media" href="' + safeUrl_(item.videoTrailer) + '" target="_blank" rel="noopener" style="display:none;"><span class="play">&#9654;</span></a>';
-  } else {
-    fallbackMediaHtml = '<div class="sc-hero-media sc-hero-fallback" style="display:none;">' + (SC_ICON_JENIS[item.jenis] || SC_ICON_JENIS_DEFAULT) + '</div>';
-  }
-  mediaHtml = '<div class="sc-hero-media" style="cursor:default;">' +
+  var slide1Html = '<div class="sc-hero-media" style="cursor:default;">' +
     '<img src="' + safeUrl_(thumbUrl) + '" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" onerror="scHeroThumbFallback_(this)">' +
     '</div>' +
-    fallbackMediaHtml;
-  // Trailer sempat di-overlay di atas thumbnail (sesuai mockup "Showcase
-  // Detail Redesign"), tapi user minta dipisah lagi dari thumbnail -
-  // dikembalikan jadi tombol biasa di sc-action-row, sama seperti Demo/
-  // Download/Source Code/Screenshot lainnya (lihat CLAUDE.md, sudah tried
-  // & reverted sekali).
-  var trailerButtonHtml = item.videoTrailer
-    ? '<a class="sc-btn sc-btn-outline" href="' + safeUrl_(item.videoTrailer) + '" target="_blank" rel="noopener">' + t('sc_btn_trailer') + '</a>'
-    : '';
+    '<div class="sc-hero-media sc-hero-fallback" style="display:none;">' + (SC_ICON_JENIS[item.jenis] || SC_ICON_JENIS_DEFAULT) + '</div>';
+  // Kalau ada trailer, hero-nya jadi carousel 2 slide (thumbnail lalu
+  // trailer) - dulu trailer cuma jadi tombol terpisah di sc-action-row,
+  // user minta ini juga diakses langsung dari hero-nya, tapi bukan overlay
+  // di atas thumbnail (yang sudah pernah dicoba & ditolak) - carousel-nya
+  // slide yang jelas terpisah, bukan menyatu di gambar yang sama. Tombol
+  // "Trailer" yang berdiri sendiri jadi dihapus (lihat previewLinksHtml di
+  // bawah) supaya tidak ada 2 jalan ke konten yang sama.
+  if (item.videoTrailer) {
+    var slide2Html = yt
+      ? '<div class="sc-hero-media" style="cursor:default;"><iframe style="position:absolute;inset:0;width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/' + yt + '" allowfullscreen loading="lazy"></iframe></div>'
+      : '<a class="sc-hero-media" href="' + safeUrl_(item.videoTrailer) + '" target="_blank" rel="noopener"><span class="play">&#9654;</span></a>';
+    mediaHtml = '<div class="sc-hero-carousel">' +
+      '<div class="sc-hero-track" onscroll="scHeroCarouselScroll_(this)">' +
+        '<div class="sc-hero-slide">' + slide1Html + '</div>' +
+        '<div class="sc-hero-slide">' + slide2Html + '</div>' +
+      '</div>' +
+      '<div class="sc-hero-dots">' +
+        '<button class="sc-hero-dot active" aria-label="1" onclick="scHeroCarouselGo_(this,0)"></button>' +
+        '<button class="sc-hero-dot" aria-label="2" onclick="scHeroCarouselGo_(this,1)"></button>' +
+      '</div>' +
+    '</div>';
+  } else {
+    mediaHtml = slide1Html;
+  }
   var screenshotButtonHtml = item.linkScreenshot
     ? '<a class="sc-btn sc-btn-outline" href="' + safeUrl_(item.linkScreenshot) + '" target="_blank" rel="noopener">' + t('sc_btn_screenshot') + '</a>'
     : '';
@@ -1633,15 +1651,15 @@ function scBuildDetailBodyHtml_(item, opts) {
       item.teknologi.map(function(x) { return '<span class="sc-tech-pill">' + escHtml(x) + '</span>'; }).join('') + '</div>'
     : '';
 
-  // Screenshot dan Trailer dikelompokkan terpisah dari Demo/Download/Source
-  // Code - keduanya materi PREVIEW (bukan tautan akses), sama seperti
-  // pengelompokan "Tampilan Karya" vs "Tautan" yang sudah dipakai di form
-  // Kirim Karya & modal edit admin (lihat CLAUDE.md). Menyatukan semuanya
-  // dalam satu baris tombol dulu terasa aneh - Trailer/Screenshot bukan
-  // cara "mendapatkan karyanya", beda kategori dari Demo/Download/Source.
-  var previewLinksHtml = (screenshotButtonHtml || trailerButtonHtml)
+  // Screenshot dikelompokkan terpisah dari Demo/Download/Source Code -
+  // materi PREVIEW (bukan tautan akses), sama seperti pengelompokan
+  // "Tampilan Karya" vs "Tautan" yang sudah dipakai di form Kirim Karya &
+  // modal edit admin (lihat CLAUDE.md). Trailer TIDAK ada di sini lagi -
+  // sekarang jadi slide carousel di hero (lihat mediaHtml di atas), bukan
+  // tombol terpisah, supaya tidak ada 2 jalan ke konten yang sama.
+  var previewLinksHtml = screenshotButtonHtml
     ? '<div class="sc-section-label">' + t('sc_sec_tampilan') + '</div>' +
-      '<div class="sc-action-row">' + screenshotButtonHtml + trailerButtonHtml + '</div>'
+      '<div class="sc-action-row">' + screenshotButtonHtml + '</div>'
     : '';
 
   var linkButtonsHtml =

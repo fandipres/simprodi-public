@@ -888,6 +888,22 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; s
 }
 .sc-hero-fallback { cursor: default; }
 .sc-hero-fallback svg { width: 56px; height: 56px; color: rgba(255,255,255,.5); }
+/* Carousel hero (thumbnail + trailer, cuma dipasang kalau ada trailer -
+   lihat scBuildDetailBodyHtml_) - scroll-snap NATIVE, bukan library, jadi
+   swipe di HP otomatis jalan tanpa JS. .sc-hero-media di dalam tiap slide
+   dipakai APA ADANYA (termasuk max-width:700px yg dipusatkan di desktop
+   di atas) - konsisten dgn hero non-carousel, cuma sekarang tiap slide
+   dapat perlakuan yang sama. */
+.sc-hero-carousel { position: relative; }
+.sc-hero-track {
+  display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch; scrollbar-width: none;
+}
+.sc-hero-track::-webkit-scrollbar { display: none; }
+.sc-hero-slide { flex: 0 0 100%; min-width: 0; scroll-snap-align: start; }
+.sc-hero-dots { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
+.sc-hero-dot { width: 7px; height: 7px; padding: 0; border: none; border-radius: 50%; background: var(--border); cursor: pointer; transition: background .15s, transform .15s; }
+.sc-hero-dot.active { background: var(--blue); transform: scale(1.35); }
 .sc-shot-strip { display: flex; gap: 8px; margin-top: 10px; overflow-x: auto; padding-bottom: 4px; }
 .sc-shot { flex: 0 0 auto; width: 130px; aspect-ratio: 9/16; border-radius: 8px; border: 1px solid var(--border); background-size: cover; background-position: center; background-color: var(--bg); }
 .sc-detail-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-top: 14px; }
