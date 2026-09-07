@@ -104,14 +104,17 @@ const I18N = {
     sc_filter_jenis_label: 'Jenis',
     sc_filter_peminatan_label: 'Peminatan',
     sc_filter_status_label: 'Status',
+    sc_filter_status_publish_label: 'Status Publish',
     sc_filter_sumber_label: 'Sumber Karya',
     sc_filter_semua_jenis: 'Semua Jenis',
     sc_filter_semua_peminatan: 'Semua Peminatan',
     sc_filter_semua_status: 'Semua Status',
+    sc_filter_semua_status_publish: 'Semua',
     sc_filter_semua_sumber: 'Semua Sumber',
     sc_btn_terapkan: 'Terapkan',
     sc_peminatan_tanpa: 'Tanpa Peminatan',
     sc_status_sudah: 'Sudah Deploy', sc_status_belum: 'Belum Deploy',
+    sc_status_publish_sudah: 'Sudah Publish',
     sc_sort_label: 'Urutkan',
     sc_sort_abjad: 'Abjad (A-Z)', sc_sort_populer: 'Terpopuler', sc_sort_baru: 'Baru Ditambahkan',
     sc_result_count: '{n} karya ditemukan',
@@ -131,7 +134,10 @@ const I18N = {
     sc_kontak_label: 'Kontak Tim',
     sc_tech_label: 'Teknologi',
     sc_btn_demo: 'Demo',
+    sc_btn_download: 'Unduh',
     sc_btn_source: 'Source Code',
+    sc_btn_trailer: 'Tonton Trailer',
+    sc_btn_screenshot: 'Lihat Screenshot',
     sc_report_link: 'Laporkan',
     sc_detail_not_found: 'Karya tidak ditemukan atau belum disetujui.',
 
@@ -170,6 +176,11 @@ const I18N = {
     sc_label_demo: 'Link Demo',
     sc_placeholder_demo: 'https://play.google.com/... atau link uji coba lainnya',
     sc_hint_demo: 'Link demo bisa diisi setelah status diubah menjadi "Sudah Deploy" di atas.',
+    sc_label_status_publish: 'Status Publish',
+    sc_opt_belum_publish: 'Belum Publish', sc_opt_sudah_publish: 'Sudah Publish',
+    sc_hint_status_publish: '"Sudah Publish" artinya karya sudah listing/tersedia di Play Store, App Store, atau tempat resmi lainnya (beda dari Status Deploy di atas, yang artinya sudah bisa dicoba lewat demo).',
+    sc_label_download: 'Link Download',
+    sc_placeholder_download: 'https://play.google.com/store/apps/... atau link toko resmi lainnya',
     sc_label_source: 'Link Source Code',
     sc_placeholder_source: 'https://github.com/username/repo',
     sc_opt: 'opsional',
@@ -179,6 +190,10 @@ const I18N = {
     sc_tutorial_trailer_1: 'Upload video ke YouTube (boleh diatur "Unlisted", tidak harus publik penuh)',
     sc_tutorial_trailer_2: 'Buka videonya, klik tombol Share/Bagikan, salin link yang muncul',
     sc_tutorial_trailer_3: 'Tempel link tersebut di sini, nanti otomatis tampil sebagai video di halaman karyamu',
+    sc_sec_tampilan: 'Tampilan Karya',
+    sc_label_ss: 'Link Folder Screenshot',
+    sc_placeholder_ss: 'https://drive.google.com/drive/folders/...',
+    sc_hint_ss: 'Buat folder (mis. di Google Drive) berisi screenshot karyamu, atur akses jadi "siapa saja yang punya link dapat melihat", lalu tempel link foldernya di sini. Minimal 1 gambar untuk Jenis selain Mobile, minimal 2 gambar (1 tampilan Home, 1 fitur terbaik) untuk Jenis Mobile.',
     sc_sec_akademik: 'Informasi Akademik',
     sc_label_sumber: 'Sumber Karya',
     sc_opt_matkul: 'Mata Kuliah', sc_opt_ta: 'Tugas Akhir', sc_opt_kompetisi: 'Kompetisi',
@@ -211,6 +226,8 @@ const I18N = {
     sc_err_kontak: 'Kontak tim wajib diisi.',
     sc_err_kontak_email: 'Kontak tim harus berupa alamat email yang valid.',
     sc_err_demo: 'Link demo wajib diisi untuk status Sudah Deploy.',
+    sc_err_download: 'Link download wajib diisi untuk status Sudah Publish.',
+    sc_err_ss: 'Link folder screenshot wajib diisi.',
     sc_err_consent: 'Centang kedua kotak konfirmasi sebelum mengirim.',
 
     sc_status_title: 'Cek Status Pengajuan Karya',
@@ -322,14 +339,17 @@ const I18N = {
     sc_filter_jenis_label: 'Type',
     sc_filter_peminatan_label: 'Track',
     sc_filter_status_label: 'Status',
+    sc_filter_status_publish_label: 'Publish Status',
     sc_filter_sumber_label: 'Work Source',
     sc_filter_semua_jenis: 'All Types',
     sc_filter_semua_peminatan: 'All Tracks',
     sc_filter_semua_status: 'All Statuses',
+    sc_filter_semua_status_publish: 'All',
     sc_filter_semua_sumber: 'All Sources',
     sc_btn_terapkan: 'Apply',
     sc_peminatan_tanpa: 'No Specialization',
     sc_status_sudah: 'Deployed', sc_status_belum: 'Not Deployed Yet',
+    sc_status_publish_sudah: 'Published',
     sc_sort_label: 'Sort',
     sc_sort_abjad: 'Alphabetical (A-Z)', sc_sort_populer: 'Most Popular', sc_sort_baru: 'Newest',
     sc_result_count: '{n} works found',
@@ -349,7 +369,10 @@ const I18N = {
     sc_kontak_label: 'Team Contact',
     sc_tech_label: 'Technology',
     sc_btn_demo: 'Demo',
+    sc_btn_download: 'Download',
     sc_btn_source: 'Source Code',
+    sc_btn_trailer: 'Watch Trailer',
+    sc_btn_screenshot: 'View Screenshots',
     sc_report_link: 'Report',
     sc_detail_not_found: 'Work not found or not yet approved.',
 
@@ -388,6 +411,11 @@ const I18N = {
     sc_label_demo: 'Demo Link',
     sc_placeholder_demo: 'https://play.google.com/... or another trial link',
     sc_hint_demo: 'The demo link can be filled in once the status above is changed to "Deployed".',
+    sc_label_status_publish: 'Publish Status',
+    sc_opt_belum_publish: 'Not Published Yet', sc_opt_sudah_publish: 'Published',
+    sc_hint_status_publish: '"Published" means the work is already listed/available on the Play Store, App Store, or another official store (different from Deploy Status above, which means it can already be tried via a demo).',
+    sc_label_download: 'Download Link',
+    sc_placeholder_download: 'https://play.google.com/store/apps/... or another official store link',
     sc_label_source: 'Source Code Link',
     sc_placeholder_source: 'https://github.com/username/repo',
     sc_opt: 'optional',
@@ -397,6 +425,10 @@ const I18N = {
     sc_tutorial_trailer_1: 'Upload the video to YouTube (it can be set to "Unlisted", it doesn\'t need to be fully public)',
     sc_tutorial_trailer_2: 'Open the video, click Share, copy the link that appears',
     sc_tutorial_trailer_3: 'Paste that link here, it will automatically show as a video on your work\'s page',
+    sc_sec_tampilan: 'Work Preview',
+    sc_label_ss: 'Screenshot Folder Link',
+    sc_placeholder_ss: 'https://drive.google.com/drive/folders/...',
+    sc_hint_ss: 'Create a folder (e.g. on Google Drive) with your work\'s screenshots, set access to "anyone with the link can view", then paste the folder link here. At least 1 image for types other than Mobile, at least 2 images (1 home screen, 1 best feature) for Mobile.',
     sc_sec_akademik: 'Academic Information',
     sc_label_sumber: 'Work Source',
     sc_opt_matkul: 'Course', sc_opt_ta: 'Final Project', sc_opt_kompetisi: 'Competition',
@@ -429,6 +461,8 @@ const I18N = {
     sc_err_kontak: 'Team contact is required.',
     sc_err_kontak_email: 'Team contact must be a valid email address.',
     sc_err_demo: 'Demo link is required when status is Deployed.',
+    sc_err_download: 'Download link is required when status is Published.',
+    sc_err_ss: 'A screenshot folder link is required.',
     sc_err_consent: 'Check both confirmation boxes before submitting.',
 
     sc_status_title: 'Check Submission Status',
@@ -1327,7 +1361,7 @@ function scRenderKontak_(kontak) {
 // ---- Galeri ----
 var _scItems   = [];
 var _scLoaded  = false;
-var _scFilters = { jenis: '', peminatan: '', status: '', sumber: '' };
+var _scFilters = { jenis: '', peminatan: '', status: '', statusPublish: '', sumber: '' };
 var _scSort    = 'baru';
 
 async function openShowcaseGaleri() {
@@ -1352,15 +1386,15 @@ async function scEnsureGaleriLoaded() {
 }
 
 function scToggleFilterPanel() {
-  var panel = document.getElementById('scFilterPanel');
-  var btn   = document.getElementById('scFilterToggleBtn');
-  var open  = panel.style.display === 'none';
-  panel.style.display = open ? 'flex' : 'none';
+  var overlay = document.getElementById('scFilterOverlay');
+  var btn     = document.getElementById('scFilterToggleBtn');
+  var open    = !overlay.classList.contains('open');
+  overlay.classList.toggle('open', open);
   btn.classList.toggle('active', open);
 }
 
 function scCloseFilterPanel() {
-  document.getElementById('scFilterPanel').style.display = 'none';
+  document.getElementById('scFilterOverlay').classList.remove('open');
   document.getElementById('scFilterToggleBtn').classList.remove('active');
 }
 
@@ -1407,6 +1441,7 @@ function scRenderGaleri() {
     if (_scFilters.jenis && item.jenis !== _scFilters.jenis) return false;
     if (_scFilters.peminatan && item.peminatan !== _scFilters.peminatan) return false;
     if (_scFilters.status && item.statusDeploy !== _scFilters.status) return false;
+    if (_scFilters.statusPublish && item.statusPublish !== _scFilters.statusPublish) return false;
     if (_scFilters.sumber && item.sumberTugas !== _scFilters.sumber) return false;
     if (q) {
       var hay = [item.namaProgram, item.namaProgramEn, item.teknologi.join(' '), item.kreator.map(function(k) { return k.nama; }).join(' ')].join(' ').toLowerCase();
@@ -1425,6 +1460,9 @@ function scRenderGaleri() {
   if (!list.length) { grid.innerHTML = '<div class="sc-empty">' + t('sc_empty') + '</div>'; return; }
 
   grid.innerHTML = list.map(function(item) {
+    // linkScreenshot adalah link folder, bukan link gambar langsung, jadi
+    // tidak bisa dipakai sebagai thumbnail - thumbnail tetap dari
+    // YouTube (kalau ada trailer) atau ikon fallback per Jenis.
     var thumbYt = scYoutubeId_(item.videoTrailer);
     var thumb = thumbYt ? ('https://img.youtube.com/vi/' + thumbYt + '/hqdefault.jpg') : '';
     var thumbStyle = thumb ? ' style="background-image:url(\'' + safeUrl_(thumb) + '\')"' : '';
@@ -1434,12 +1472,13 @@ function scRenderGaleri() {
       : '';
     var pemBadge = item.peminatan === 'Tanpa Peminatan' ? '' :
       '<span class="sc-tag ' + (item.peminatan === 'SSD' ? 'sc-tag-ssd' : 'sc-tag-aisd') + '">' + escHtml(item.peminatan) + '</span>';
+    var publishBadge = item.statusPublish === 'Sudah Publish' ? '<span class="sc-tag sc-tag-live">' + t('sc_status_publish_sudah') + '</span>' : '';
     var statusTag = item.statusDeploy === 'Sudah Deploy' ? 'sc-tag-live' : 'sc-tag-dev';
     var statusLabel = item.statusDeploy === 'Sudah Deploy' ? t('sc_status_sudah') : t('sc_status_belum');
     return '<div class="sc-card sc-gcard" onclick="openShowcaseDetail(\'' + escHtml(item.kode) + '\')">' +
       thumbHtml +
       '<div class="sc-gbody">' +
-        '<div class="sc-tags"><span class="sc-tag sc-tag-jenis">' + escHtml(item.jenis) + '</span>' + pemBadge + '</div>' +
+        '<div class="sc-tags"><span class="sc-tag sc-tag-jenis">' + escHtml(item.jenis) + '</span>' + pemBadge + publishBadge + '</div>' +
         '<div class="sc-gtitle">' + escHtml((currentLang === 'en' && item.namaProgramEn) ? item.namaProgramEn : item.namaProgram) + '</div>' +
         '<div class="sc-gcreators">' + creators + '</div>' +
         '<div class="sc-gfoot"><span class="sc-tag ' + statusTag + '">' + statusLabel + '</span><span class="sc-likes"><span class="heart">&hearts;</span> ' + item.likes + '</span></div>' +
@@ -1486,6 +1525,12 @@ function scBuildDetailBodyHtml_(item, opts) {
   opts = opts || {};
   var yt = scYoutubeId_(item.videoTrailer);
   var mediaHtml = '';
+  var trailerButtonHtml = '';
+  // linkScreenshot adalah link FOLDER (mis. Google Drive), bukan link
+  // gambar langsung - tidak bisa dipasang sebagai <img>/background-image.
+  // Jadi hero media tetap pakai video/ikon fallback seperti semula, dan
+  // folder screenshot ditawarkan sebagai tombol terpisah ("Lihat
+  // Screenshot") di actionsHtml, sama seperti trailer.
   if (yt) {
     mediaHtml = '<div class="sc-hero-media" style="cursor:default;">' +
       '<iframe style="position:absolute;inset:0;width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/' + yt + '" allowfullscreen loading="lazy"></iframe></div>';
@@ -1494,8 +1539,15 @@ function scBuildDetailBodyHtml_(item, opts) {
   } else {
     mediaHtml = '<div class="sc-hero-media sc-hero-fallback">' + (SC_ICON_JENIS[item.jenis] || SC_ICON_JENIS_DEFAULT) + '</div>';
   }
+  if (item.videoTrailer) {
+    trailerButtonHtml = '<a class="sc-btn sc-btn-outline" href="' + safeUrl_(item.videoTrailer) + '" target="_blank" rel="noopener">' + t('sc_btn_trailer') + '</a>';
+  }
+  var screenshotButtonHtml = item.linkScreenshot
+    ? '<a class="sc-btn sc-btn-outline" href="' + safeUrl_(item.linkScreenshot) + '" target="_blank" rel="noopener">' + t('sc_btn_screenshot') + '</a>'
+    : '';
   var pemBadge = item.peminatan === 'Tanpa Peminatan' ? '' :
     '<span class="sc-tag ' + (item.peminatan === 'SSD' ? 'sc-tag-ssd' : 'sc-tag-aisd') + '">' + escHtml(item.peminatan) + '</span>';
+  var publishBadge = item.statusPublish === 'Sudah Publish' ? '<span class="sc-tag sc-tag-live">' + t('sc_status_publish_sudah') + '</span>' : '';
   var statusTag = item.statusDeploy === 'Sudah Deploy' ? 'sc-tag-live' : 'sc-tag-dev';
   var statusLabel = item.statusDeploy === 'Sudah Deploy' ? t('sc_status_sudah') : t('sc_status_belum');
 
@@ -1517,7 +1569,10 @@ function scBuildDetailBodyHtml_(item, opts) {
 
   var actionsHtml = '<div class="sc-action-row">' +
     (item.linkDemo ? '<a class="sc-btn sc-btn-primary" href="' + safeUrl_(item.linkDemo) + '" target="_blank" rel="noopener">' + t('sc_btn_demo') + '</a>' : '') +
+    (item.linkDownload ? '<a class="sc-btn sc-btn-primary" href="' + safeUrl_(item.linkDownload) + '" target="_blank" rel="noopener">' + t('sc_btn_download') + '</a>' : '') +
     (item.linkSourceCode ? '<a class="sc-btn sc-btn-outline" href="' + safeUrl_(item.linkSourceCode) + '" target="_blank" rel="noopener">' + t('sc_btn_source') + '</a>' : '') +
+    screenshotButtonHtml +
+    trailerButtonHtml +
     '</div>';
 
   var likeHtml = opts.showLike
@@ -1529,7 +1584,7 @@ function scBuildDetailBodyHtml_(item, opts) {
 
   return mediaHtml +
     '<div class="sc-detail-head">' +
-      '<div><div class="sc-tags"><span class="sc-tag sc-tag-jenis">' + escHtml(item.jenis) + '</span>' + pemBadge + '<span class="sc-tag ' + statusTag + '">' + statusLabel + '</span></div>' +
+      '<div><div class="sc-tags"><span class="sc-tag sc-tag-jenis">' + escHtml(item.jenis) + '</span>' + pemBadge + '<span class="sc-tag ' + statusTag + '">' + statusLabel + '</span>' + publishBadge + '</div>' +
       '<div class="sc-detail-title">' + escHtml(namaProgramDisplay) + '</div></div>' +
       likeHtml +
     '</div>' +
@@ -1635,7 +1690,7 @@ function openShowcaseForm() {
 function scResetForm() {
   document.getElementById('scFormBody').style.display = 'block';
   document.getElementById('scFormSuccess').style.display = 'none';
-  ['scfNama','scfDeskripsi','scfTeknologi','scfKontak','scfDemo','scfSource','scfTrailer','scfMatkul','scfSemester'].forEach(function(id) {
+  ['scfNama','scfDeskripsi','scfTeknologi','scfKontak','scfDemo','scfDownload','scfSource','scfTrailer','scfScreenshot','scfMatkul','scfSemester'].forEach(function(id) {
     document.getElementById(id).value = '';
   });
   document.getElementById('scfTeknologiChips').innerHTML = '';
@@ -1652,12 +1707,14 @@ function scResetForm() {
       '<input class="sc-input scf-dosen-nama" placeholder="' + t('sc_placeholder_dosen') + '">' +
       '<button type="button" class="sc-icon-btn" onclick="scRemoveDosenRow(this)" title="Hapus">&times;</button>' +
     '</div>';
-  ['scfJenis', 'scfPeminatan', 'scfStatusDeploy'].forEach(function(id) {
+  ['scfJenis', 'scfPeminatan', 'scfStatusDeploy', 'scfStatusPublish'].forEach(function(id) {
     var wrap = document.getElementById(id);
     wrap.querySelectorAll('.sc-seg-btn').forEach(function(b, i) { b.classList.toggle('active', i === 0); });
   });
   document.getElementById('scfDemoGroup').style.display = 'none';
   document.getElementById('scfDemoNote').style.display  = 'block';
+  document.getElementById('scfDownloadGroup').style.display = 'none';
+  scApplyScreenshotFieldsForJenis_(document.querySelector('#scfJenis .sc-seg-btn.active').dataset.val);
   scSetSegValue_('scfSumber', 'Mata Kuliah');
   document.getElementById('scfMsg').style.display = 'none';
   scRefreshSubmitState();
@@ -1747,6 +1804,13 @@ function scApplySegSideEffects_(groupId, btn) {
     document.getElementById('scfDemoGroup').style.display = sudah ? 'block' : 'none';
     document.getElementById('scfDemoNote').style.display  = sudah ? 'none'  : 'block';
   }
+  if (groupId === 'scfStatusPublish') {
+    var sudahPublish = btn.dataset.val === 'Sudah Publish';
+    document.getElementById('scfDownloadGroup').style.display = sudahPublish ? 'block' : 'none';
+  }
+  if (groupId === 'scfJenis') {
+    scApplyScreenshotFieldsForJenis_(btn.dataset.val);
+  }
   if (groupId === 'scfSumber') {
     var val = btn.dataset.val;
     document.getElementById('scfMatkulGroup').style.display = (val === 'Mata Kuliah' || val === 'Kompetisi') ? 'block' : 'none';
@@ -1755,6 +1819,18 @@ function scApplySegSideEffects_(groupId, btn) {
     document.getElementById('scfMatkulLabel').innerHTML = '<span data-i18n="' + key + '">' + t(key) + '</span> <span class="sc-req">*</span>';
     document.getElementById('scfMatkul').placeholder = t(placeholderKey);
   }
+}
+
+// Screenshot yang diminta beda per Jenis, supaya preview di galeri/detail
+// punya konsep seragam: AI tidak butuh screenshot sama sekali (dipakaikan
+// ilustrasi template), Mobile butuh 2 (Home/Login + Fitur Terbaik) karena
+// ditampilkan berdampingan, Jenis lain cukup 1 (Home).
+// Satu field screenshot (link folder) yang cuma disembunyikan utk Jenis AI
+// (tidak butuh screenshot sama sekali). Berapa banyak gambar yang harus
+// ada di dalam foldernya (1 utk Jenis lain, 2 utk Mobile) sudah dijelaskan
+// di teks bantuan statis field-nya, tidak perlu berubah per Jenis lagi.
+function scApplyScreenshotFieldsForJenis_(jenis) {
+  document.getElementById('scfScreenshotGroup').style.display = jenis === 'AI' ? 'none' : 'block';
 }
 
 // Set nilai seg tanpa event klik (dipakai saat mengisi ulang form untuk Edit & Kirim Ulang).
@@ -1780,8 +1856,10 @@ function scPopulateForm_(item) {
   (item.teknologi || []).forEach(function(x) { scAddTechChip_(x); });
   document.getElementById('scfKontak').value = item.kontakTim;
   document.getElementById('scfDemo').value = item.linkDemo;
+  document.getElementById('scfDownload').value = item.linkDownload || '';
   document.getElementById('scfSource').value = item.linkSourceCode;
   document.getElementById('scfTrailer').value = item.videoTrailer;
+  document.getElementById('scfScreenshot').value = item.linkScreenshot || '';
   document.getElementById('scfMatkul').value = item.mataKuliah;
   document.getElementById('scfSemester').value = item.semester;
 
@@ -1789,6 +1867,7 @@ function scPopulateForm_(item) {
   scSetSegValue_('scfPeminatan', item.peminatan);
   scSetSegValue_('scfSumber', item.sumberTugas);
   scSetSegValue_('scfStatusDeploy', item.statusDeploy);
+  scSetSegValue_('scfStatusPublish', item.statusPublish || 'Belum Publish');
 
   document.getElementById('scfKreatorFields').innerHTML = item.kreator.map(function(k) {
     return '<div class="sc-creator-field">' +
@@ -1883,6 +1962,14 @@ async function submitShowcaseForm() {
   var linkDemo = document.getElementById('scfDemo').value.trim();
   if (statusDeploy === 'Sudah Deploy' && !linkDemo) return scFormError_(t('sc_err_demo'));
 
+  var statusPublish = scGetSegVal_('scfStatusPublish');
+  var linkDownload = document.getElementById('scfDownload').value.trim();
+  if (statusPublish === 'Sudah Publish' && !linkDownload) return scFormError_(t('sc_err_download'));
+
+  var jenis = scGetSegVal_('scfJenis');
+  var linkScreenshot = document.getElementById('scfScreenshot').value.trim();
+  if (jenis !== 'AI' && !linkScreenshot) return scFormError_(t('sc_err_ss'));
+
   if (!document.getElementById('scfConsent1').checked || !document.getElementById('scfConsent2').checked) {
     return scFormError_(t('sc_err_consent'));
   }
@@ -1891,7 +1978,7 @@ async function submitShowcaseForm() {
     namaProgram: { id: namaProgram, en: '' },
     deskripsi: { id: deskripsiId, en: '' },
     kreator: kreator,
-    jenis: scGetSegVal_('scfJenis'),
+    jenis: jenis,
     peminatan: scGetSegVal_('scfPeminatan'),
     sumberTugas: sumberTugas,
     mataKuliah: mataKuliah,
@@ -1900,8 +1987,11 @@ async function submitShowcaseForm() {
     kontakTim: kontakTim,
     statusDeploy: statusDeploy,
     linkDemo: linkDemo,
+    statusPublish: statusPublish,
+    linkDownload: linkDownload,
     linkSourceCode: document.getElementById('scfSource').value.trim(),
     videoTrailer: document.getElementById('scfTrailer').value.trim(),
+    linkScreenshot: linkScreenshot,
     dosenPembimbing: Array.prototype.map.call(document.querySelectorAll('#scfDosenFields .scf-dosen-nama'), function(el) { return el.value.trim(); }).filter(Boolean)
   };
 

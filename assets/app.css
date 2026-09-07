@@ -816,7 +816,32 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; s
 .sc-sort-option:hover { background: var(--bg); }
 .sc-sort-option.active { color: var(--blue); font-weight: 700; background: var(--blue-soft); }
 
-.sc-filter-panel { margin-bottom: 12px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; }
+/* Filter jadi popup (bottom-sheet modal), sama polanya dengan
+   .about-overlay/.about-modal - bukan panel yang mendorong konten di
+   bawahnya turun/naik seperti sebelumnya. */
+.sc-filter-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(15,23,42,.35); z-index: 300;
+  align-items: flex-end; justify-content: center;
+  padding: 0 16px 24px;
+}
+.sc-filter-overlay.open { display: flex; }
+.sc-filter-panel {
+  background: var(--card); border-radius: 16px;
+  padding: 18px 16px 16px; width: 100%; max-width: 480px;
+  max-height: 78vh; overflow-y: auto;
+  box-shadow: 0 12px 40px rgba(0,0,0,.18);
+  animation: slideUp .18s ease;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.sc-filter-panel-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px; }
+.sc-filter-panel-title { font-weight: 800; font-size: 0.95rem; }
+.sc-filter-panel-close {
+  width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--border);
+  background: var(--bg); color: var(--muted); font-size: 1rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.sc-filter-panel-close:hover { border-color: var(--blue); color: var(--blue); }
 .sc-filter-row { display: flex; flex-direction: column; gap: 7px; }
 .sc-filter-row-label { font-size: 0.66rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
 .sc-chipbar { display: flex; gap: 6px; flex-wrap: wrap; }

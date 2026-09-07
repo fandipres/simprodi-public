@@ -329,7 +329,12 @@
         </div>
       </div>
 
-      <div class="sc-filter-panel" id="scFilterPanel" style="display:none;">
+      <div class="sc-filter-overlay" id="scFilterOverlay" onclick="if(event.target===this)scCloseFilterPanel()">
+      <div class="sc-filter-panel" id="scFilterPanel">
+        <div class="sc-filter-panel-head">
+          <div class="sc-filter-panel-title" data-i18n="sc_filter_btn">Filter</div>
+          <button class="sc-filter-panel-close" onclick="scCloseFilterPanel()" title="Tutup">&times;</button>
+        </div>
         <div class="sc-filter-row">
           <div class="sc-filter-row-label" data-i18n="sc_filter_jenis_label">Jenis</div>
           <div class="sc-chipbar" id="scChipJenis">
@@ -360,6 +365,14 @@
           </div>
         </div>
         <div class="sc-filter-row">
+          <div class="sc-filter-row-label" data-i18n="sc_filter_status_publish_label">Status Publish</div>
+          <div class="sc-chipbar" id="scChipStatusPublish">
+            <button class="sc-fchip active" data-val="" onclick="scSetFilter('statusPublish','',this)" data-i18n="sc_filter_semua_status_publish">Semua</button>
+            <button class="sc-fchip" data-val="Sudah Publish" onclick="scSetFilter('statusPublish','Sudah Publish',this)" data-i18n="sc_opt_sudah_publish">Sudah Publish</button>
+            <button class="sc-fchip" data-val="Belum Publish" onclick="scSetFilter('statusPublish','Belum Publish',this)" data-i18n="sc_opt_belum_publish">Belum Publish</button>
+          </div>
+        </div>
+        <div class="sc-filter-row">
           <div class="sc-filter-row-label" data-i18n="sc_filter_sumber_label">Sumber Karya</div>
           <div class="sc-chipbar" id="scChipSumber">
             <button class="sc-fchip active" data-val="" onclick="scSetFilter('sumber','',this)" data-i18n="sc_filter_semua_sumber">Semua Sumber</button>
@@ -369,6 +382,7 @@
           </div>
         </div>
         <button class="sc-btn sc-btn-primary sc-btn-sm sc-btn-block" onclick="scCloseFilterPanel()" data-i18n="sc_btn_terapkan">Terapkan</button>
+      </div>
       </div>
 
       <div class="sc-gallery-grid" id="scGaleriGrid"></div>
@@ -454,6 +468,26 @@
           <div class="sc-form-hint" data-i18n="sc_hint_kontak">Gunakan alamat email aktif tim, supaya pengunjung bisa menghubungi lewat link yang muncul di halaman detail.</div>
         </div>
 
+        <div class="sc-form-section-title" data-i18n="sc_sec_tampilan">Tampilan Karya</div>
+
+        <div class="sc-form-group" id="scfScreenshotGroup">
+          <label class="sc-form-label"><span data-i18n="sc_label_ss">Link Folder Screenshot</span> <span class="sc-req">*</span></label>
+          <input class="sc-input" id="scfScreenshot" data-i18n-placeholder="sc_placeholder_ss" placeholder="https://drive.google.com/drive/folders/...">
+          <div class="sc-form-hint" data-i18n="sc_hint_ss">Buat folder (mis. di Google Drive) berisi screenshot karyamu, atur akses jadi "siapa saja yang punya link dapat melihat", lalu tempel link foldernya di sini. Minimal 1 gambar untuk Jenis selain Mobile, minimal 2 gambar (1 tampilan Home, 1 fitur terbaik) untuk Jenis Mobile.</div>
+        </div>
+        <div class="sc-form-group">
+          <label class="sc-form-label"><span data-i18n="sc_label_trailer">Video Trailer</span> <span class="opt" data-i18n="sc_opt">opsional</span></label>
+          <input class="sc-input" id="scfTrailer" data-i18n-placeholder="sc_placeholder_trailer" placeholder="https://youtu.be/... atau https://www.youtube.com/watch?v=...">
+          <div class="sc-callout">
+            <div class="sc-callout-title" data-i18n="sc_tutorial_trailer_title">Cara mengambil link trailer</div>
+            <ol>
+              <li data-i18n="sc_tutorial_trailer_1">Upload video ke YouTube (boleh diatur "Unlisted", tidak harus publik penuh)</li>
+              <li data-i18n="sc_tutorial_trailer_2">Buka videonya, klik tombol Share/Bagikan, salin link yang muncul</li>
+              <li data-i18n="sc_tutorial_trailer_3">Tempel link tersebut di sini, nanti otomatis tampil sebagai video di halaman karyamu</li>
+            </ol>
+          </div>
+        </div>
+
         <div class="sc-form-section-title" data-i18n="sc_sec_tautan">Tautan</div>
 
         <div class="sc-form-group">
@@ -471,20 +505,20 @@
           <div class="sc-form-hint" data-i18n="sc_hint_demo">Link demo bisa diisi setelah status diubah menjadi "Sudah Deploy" di atas.</div>
         </div>
         <div class="sc-form-group">
-          <label class="sc-form-label"><span data-i18n="sc_label_source">Link Source Code</span> <span class="opt" data-i18n="sc_opt">opsional</span></label>
-          <input class="sc-input" id="scfSource" data-i18n-placeholder="sc_placeholder_source" placeholder="https://github.com/username/repo">
+          <label class="sc-form-label" data-i18n="sc_label_status_publish">Status Publish</label>
+          <div class="sc-seg" id="scfStatusPublish">
+            <button type="button" class="sc-seg-btn active" data-val="Belum Publish" data-i18n="sc_opt_belum_publish" onclick="scSelectSeg('scfStatusPublish',this)">Belum Publish</button>
+            <button type="button" class="sc-seg-btn" data-val="Sudah Publish" data-i18n="sc_opt_sudah_publish" onclick="scSelectSeg('scfStatusPublish',this)">Sudah Publish</button>
+          </div>
+          <div class="sc-form-hint" data-i18n="sc_hint_status_publish">"Sudah Publish" artinya karya sudah listing/tersedia di Play Store, App Store, atau tempat resmi lainnya (beda dari Status Deploy di atas, yang artinya sudah bisa dicoba lewat demo).</div>
+        </div>
+        <div class="sc-form-group" id="scfDownloadGroup" style="display:none;">
+          <label class="sc-form-label"><span data-i18n="sc_label_download">Link Download</span> <span class="sc-req">*</span></label>
+          <input class="sc-input" id="scfDownload" data-i18n-placeholder="sc_placeholder_download" placeholder="https://play.google.com/store/apps/... atau link toko resmi lainnya">
         </div>
         <div class="sc-form-group">
-          <label class="sc-form-label"><span data-i18n="sc_label_trailer">Video Trailer</span> <span class="opt" data-i18n="sc_opt">opsional</span></label>
-          <input class="sc-input" id="scfTrailer" data-i18n-placeholder="sc_placeholder_trailer" placeholder="https://youtu.be/... atau https://www.youtube.com/watch?v=...">
-          <div class="sc-callout">
-            <div class="sc-callout-title" data-i18n="sc_tutorial_trailer_title">Cara mengambil link trailer</div>
-            <ol>
-              <li data-i18n="sc_tutorial_trailer_1">Upload video ke YouTube (boleh diatur "Unlisted", tidak harus publik penuh)</li>
-              <li data-i18n="sc_tutorial_trailer_2">Buka videonya, klik tombol Share/Bagikan, salin link yang muncul</li>
-              <li data-i18n="sc_tutorial_trailer_3">Tempel link tersebut di sini, nanti otomatis tampil sebagai video di halaman karyamu</li>
-            </ol>
-          </div>
+          <label class="sc-form-label"><span data-i18n="sc_label_source">Link Source Code</span> <span class="opt" data-i18n="sc_opt">opsional</span></label>
+          <input class="sc-input" id="scfSource" data-i18n-placeholder="sc_placeholder_source" placeholder="https://github.com/username/repo">
         </div>
 
         <div class="sc-form-section-title" data-i18n="sc_sec_akademik">Informasi Akademik</div>
