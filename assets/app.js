@@ -110,7 +110,7 @@ const I18N = {
     dosen_subtitle: 'Cari dosen program studi yang bisa jadi pembimbing lomba, kegiatan lain, atau tugas akhir.',
     dosen_badge_tetap: 'Dosen Tetap',
     dosen_badge_ta: 'Pembimbing Tugas Akhir',
-    dosen_sinta_link: 'Profil SINTA',
+    dosen_sinta_link: 'SINTA',
     dosen_error: 'Gagal memuat daftar dosen. Coba lagi beberapa saat.',
     dosen_empty: 'Data dosen belum tersedia.',
     dosen_filter_empty: 'Tidak ada dosen yang sesuai dengan filter ini.',
@@ -362,7 +362,7 @@ const I18N = {
     dosen_subtitle: 'Find a study program lecturer who can supervise a competition, another activity, or your final thesis.',
     dosen_badge_tetap: 'Permanent Faculty',
     dosen_badge_ta: 'Thesis Supervisor',
-    dosen_sinta_link: 'SINTA Profile',
+    dosen_sinta_link: 'SINTA',
     dosen_error: 'Failed to load the lecturer list. Please try again shortly.',
     dosen_empty: 'Lecturer data is not available yet.',
     dosen_filter_empty: 'No lecturers match this filter.',
@@ -1715,9 +1715,11 @@ function dosenFilterBarHtml_() {
     '</div>';
 }
 
+var DOSEN_ICON_EXTERNAL = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>';
+
 function dosenCardHtml_(d) {
   var sintaHtml = d.sintaId
-    ? '<a class="dosen-sinta-link" href="https://sinta.kemdiktisaintek.go.id/authors/profile/' + encodeURIComponent(d.sintaId) + '" target="_blank" rel="noopener">' + t('dosen_sinta_link') + '</a>'
+    ? '<a class="dosen-sinta-link" href="https://sinta.kemdiktisaintek.go.id/authors/profile/' + encodeURIComponent(d.sintaId) + '" target="_blank" rel="noopener">' + DOSEN_ICON_EXTERNAL + t('dosen_sinta_link') + '</a>'
     : '';
   return '<div class="dosen-card">' +
     '<div class="dosen-card-name">' + escHtml(d.nama) + '</div>' +

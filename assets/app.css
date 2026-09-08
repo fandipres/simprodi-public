@@ -811,7 +811,7 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; s
 }
 .dosen-card-name { font-weight: 700; font-size: 0.92rem; margin-bottom: 8px; }
 .dosen-card-links { font-size: 0.82rem; }
-.dosen-sinta-link { color: var(--blue); font-weight: 600; text-decoration: none; }
+.dosen-sinta-link { display: inline-flex; align-items: center; gap: 3px; color: var(--blue); font-weight: 600; text-decoration: none; }
 .dosen-sinta-link:hover { text-decoration: underline; }
 
 .sc-card {
