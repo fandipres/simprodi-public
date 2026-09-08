@@ -1701,7 +1701,7 @@ function dosenCardHtml_(d) {
   if (d.dosenTetap) badges += '<span class="dosen-badge dosen-badge-tetap" data-i18n="dosen_badge_tetap">' + t('dosen_badge_tetap') + '</span>';
   if (d.dosenTA)    badges += '<span class="dosen-badge dosen-badge-ta" data-i18n="dosen_badge_ta">' + t('dosen_badge_ta') + '</span>';
   var sintaHtml = d.sintaId
-    ? '<a class="dosen-sinta-link" href="https://sinta.kemdikbud.go.id/authors/profile/' + encodeURIComponent(d.sintaId) + '" target="_blank" rel="noopener">' + t('dosen_sinta_link') + ' &#8599;</a>'
+    ? '<a class="dosen-sinta-link" href="https://sinta.kemdiktisaintek.go.id/authors/profile/' + encodeURIComponent(d.sintaId) + '" target="_blank" rel="noopener">' + t('dosen_sinta_link') + ' &#8599;</a>'
     : '';
   return '<div class="dosen-card">' +
     '<div class="dosen-card-name">' + escHtml(d.nama) + '</div>' +
