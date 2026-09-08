@@ -113,6 +113,7 @@ const I18N = {
     dosen_sinta_link: 'Profil SINTA',
     dosen_error: 'Gagal memuat daftar dosen. Coba lagi beberapa saat.',
     dosen_empty: 'Data dosen belum tersedia.',
+    dosen_filter_empty: 'Tidak ada dosen yang sesuai dengan filter ini.',
     sc_galeri_title: 'Karya Mahasiswa Teknik Informatika',
     sc_galeri_sub: 'Aplikasi, situs, dan game hasil tugas kuliah maupun tugas akhir mahasiswa. Jelajahi dan berikan dukungan lewat like.',
     sc_search_placeholder: 'Cari nama karya, kreator, atau teknologi...',
@@ -364,6 +365,7 @@ const I18N = {
     dosen_sinta_link: 'SINTA Profile',
     dosen_error: 'Failed to load the lecturer list. Please try again shortly.',
     dosen_empty: 'Lecturer data is not available yet.',
+    dosen_filter_empty: 'No lecturers match this filter.',
     sc_galeri_title: 'Informatics Engineering Student Works',
     sc_galeri_sub: 'Apps, websites, and games made for coursework or final projects. Explore and show your support with a like.',
     sc_search_placeholder: 'Search by project name, creator, or technology...',
@@ -1695,17 +1697,30 @@ function openPanduan() {
 // keluar ke profil SINTA masing-masing dosen (bukan disalin sebagai data
 // prestasi terpisah - publikasi/sitasi sudah dikelola SINTA sendiri).
 let dosenList_ = null;
+// Filter chip (bukan badge di tiap kartu lagi - user merasa badge per kartu
+// terlalu ramai/"lebay") - dua flag independen (dosen bisa Tetap DAN TA
+// sekaligus), tiap chip aktif MENYARING (AND): dosen harus cocok dengan
+// SEMUA chip yang sedang aktif.
+var dosenFilters_ = { tetap: false, ta: false };
+
+function dosenToggleFilter_(key) {
+  dosenFilters_[key] = !dosenFilters_[key];
+  renderDosen_();
+}
+
+function dosenFilterBarHtml_() {
+  return '<div class="sc-chipbar" style="margin-bottom:14px;">' +
+    '<button type="button" class="sc-fchip' + (dosenFilters_.tetap ? ' active' : '') + '" onclick="dosenToggleFilter_(\'tetap\')">' + t('dosen_badge_tetap') + '</button>' +
+    '<button type="button" class="sc-fchip' + (dosenFilters_.ta ? ' active' : '') + '" onclick="dosenToggleFilter_(\'ta\')">' + t('dosen_badge_ta') + '</button>' +
+    '</div>';
+}
 
 function dosenCardHtml_(d) {
-  var badges = '';
-  if (d.dosenTetap) badges += '<span class="dosen-badge dosen-badge-tetap">' + t('dosen_badge_tetap') + '</span>';
-  if (d.dosenTA)    badges += '<span class="dosen-badge dosen-badge-ta">' + t('dosen_badge_ta') + '</span>';
   var sintaHtml = d.sintaId
     ? '<a class="dosen-sinta-link" href="https://sinta.kemdiktisaintek.go.id/authors/profile/' + encodeURIComponent(d.sintaId) + '" target="_blank" rel="noopener">' + t('dosen_sinta_link') + '</a>'
     : '';
   return '<div class="dosen-card">' +
     '<div class="dosen-card-name">' + escHtml(d.nama) + '</div>' +
-    (badges ? '<div class="dosen-card-badges">' + badges + '</div>' : '') +
     (sintaHtml ? '<div class="dosen-card-links">' + sintaHtml + '</div>' : '') +
     '</div>';
 }
@@ -1717,7 +1732,15 @@ function renderDosen_() {
     el.innerHTML = '<p class="msg-error">' + t('dosen_empty') + '</p>';
     return;
   }
-  el.innerHTML = '<div class="dosen-grid">' + dosenList_.map(dosenCardHtml_).join('') + '</div>';
+  var filtered = dosenList_.filter(function(d) {
+    if (dosenFilters_.tetap && !d.dosenTetap) return false;
+    if (dosenFilters_.ta && !d.dosenTA) return false;
+    return true;
+  });
+  var gridHtml = filtered.length
+    ? '<div class="dosen-grid">' + filtered.map(dosenCardHtml_).join('') + '</div>'
+    : '<p class="msg-error">' + t('dosen_filter_empty') + '</p>';
+  el.innerHTML = dosenFilterBarHtml_() + gridHtml;
 }
 
 async function openDosen() {
