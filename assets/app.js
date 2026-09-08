@@ -1697,18 +1697,14 @@ function openPanduan() {
 let dosenList_ = null;
 
 function dosenCardHtml_(d) {
-  var initial = escHtml((String(d.nama || '').trim().charAt(0) || '?').toUpperCase());
   var badges = '';
   if (d.dosenTetap) badges += '<span class="dosen-badge dosen-badge-tetap">' + t('dosen_badge_tetap') + '</span>';
   if (d.dosenTA)    badges += '<span class="dosen-badge dosen-badge-ta">' + t('dosen_badge_ta') + '</span>';
   var sintaHtml = d.sintaId
-    ? '<a class="sc-btn sc-btn-outline sc-btn-sm dosen-sinta-link" href="https://sinta.kemdiktisaintek.go.id/authors/profile/' + encodeURIComponent(d.sintaId) + '" target="_blank" rel="noopener">' + t('dosen_sinta_link') + ' &#8599;</a>'
+    ? '<a class="dosen-sinta-link" href="https://sinta.kemdiktisaintek.go.id/authors/profile/' + encodeURIComponent(d.sintaId) + '" target="_blank" rel="noopener">' + t('dosen_sinta_link') + '</a>'
     : '';
   return '<div class="dosen-card">' +
-    '<div class="dosen-card-head">' +
-      '<div class="dosen-avatar">' + initial + '</div>' +
-      '<div class="dosen-card-name">' + escHtml(d.nama) + '</div>' +
-    '</div>' +
+    '<div class="dosen-card-name">' + escHtml(d.nama) + '</div>' +
     (badges ? '<div class="dosen-card-badges">' + badges + '</div>' : '') +
     (sintaHtml ? '<div class="dosen-card-links">' + sintaHtml + '</div>' : '') +
     '</div>';
