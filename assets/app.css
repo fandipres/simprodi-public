@@ -759,6 +759,7 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; s
 .panduan-glossary-group-btn { background: var(--blue-soft); }
 .panduan-glossary-group-btn:hover { background: var(--blue-soft); border-color: var(--blue-border); }
 .panduan-glossary-group-title { color: var(--blue); font-weight: 800; font-size: 0.86rem; }
+.panduan-glossary-group-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.55; padding: 10px 16px 0; }
 .panduan-glossary-group-terms {
   padding: 10px 0 2px 14px; margin-top: 2px;
   border-left: 2px solid var(--blue-border);
