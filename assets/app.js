@@ -85,6 +85,13 @@ const I18N = {
     home_card4_title: 'Statistik Prodi',
     home_card4_desc: 'Lihat sekilas capaian kolektif mahasiswa kami dalam angka.',
     home_card4_btn: 'Lihat Statistik',
+    home_card5_title: 'Buku Panduan Mahasiswa',
+    home_card5_desc: 'Panduan perjalanan akademik dari semester 1 sampai lulus, termasuk peminatan, MBKM, dan tugas akhir.',
+    home_card5_btn: 'Lihat Panduan',
+    panduan_title: 'Buku Panduan Mahasiswa',
+    panduan_subtitle: 'Gambaran perjalanan akademik program studi dari semester 1 sampai lulus, semester demi semester.',
+    panduan_semester_label: 'Semester',
+    panduan_sks_unit: 'SKS',
     stat_title: 'Capaian Kolektif Program Studi',
     stat_subtitle: 'Ratusan kegiatan, prestasi, dan karya lahir dari mahasiswa kami, dirangkum dalam angka.',
     stat_disclaimer_title: 'Data masih bersifat sementara',
@@ -318,6 +325,13 @@ const I18N = {
     home_card4_title: 'Program Statistics',
     home_card4_desc: 'See the collective achievements of our students at a glance.',
     home_card4_btn: 'View Statistics',
+    home_card5_title: 'Student Guide Book',
+    home_card5_desc: 'A guide to your academic journey from semester 1 to graduation, including specialization, MBKM, and your final project.',
+    home_card5_btn: 'View Guide',
+    panduan_title: 'Student Guide Book',
+    panduan_subtitle: 'An overview of the study program\'s academic journey from semester 1 to graduation, semester by semester.',
+    panduan_semester_label: 'Semester',
+    panduan_sks_unit: 'credits',
     stat_title: 'Our Collective Achievements',
     stat_subtitle: 'Hundreds of activities, awards, and projects from our students, summed up in numbers.',
     stat_disclaimer_title: 'Data is still provisional',
@@ -547,7 +561,8 @@ function rerenderActiveView() {
   if (document.getElementById('quizView').style.display !== 'none') { renderQuizQuestion(); return; }
   if (document.getElementById('quizResultView').style.display !== 'none') { showQuizResult(); return; }
   if (document.getElementById('scGaleriView').style.display !== 'none') { scRenderGaleri(); return; }
-  if (document.getElementById('scDetailView').style.display !== 'none' && _scCurrentDetail) { scRenderDetail(); }
+  if (document.getElementById('scDetailView').style.display !== 'none' && _scCurrentDetail) { scRenderDetail(); return; }
+  if (document.getElementById('panduanView').style.display !== 'none') { renderPanduan_(); }
 }
 
 // ==============================================================
@@ -630,6 +645,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   else if (path === '/showcase' && !kode) openShowcaseGaleri();
   else if (path === '/specialization')    openQuiz();
   else if (path === '/statistic')         openStatistik();
+  else if (path === '/panduan')           openPanduan();
 
   if (nim) { openPortofolio(); searchInput.value = nim; doSearch(true); }
   if (kode) { openShowcaseDetail(kode); }
@@ -1115,6 +1131,148 @@ async function openStatistik() {
   }
 }
 
+// ------ BUKU PANDUAN MAHASISWA ------
+// Konten statis (lihat BACKLOG.md #2) - tidak bersumber dari Google Sheets,
+// jadi tidak ada panggilan `gasGet` di sini sama sekali. SKS dan daftar mata
+// kuliah per semester mengikuti Peta Kurikulum 2026 S-1 Teknik Informatika
+// (Kurikulum.docx, bagian 8.3) - kalau kurikulum berubah di masa depan,
+// perbarui array ini langsung, tidak perlu skema baru.
+var PANDUAN_ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
+
+var PANDUAN_SEMESTERS = [
+  { sem: 1, sks: 20, courses: [
+    { id: 'Aljabar Linier', en: 'Linear Algebra' },
+    { id: 'Matematika Diskrit', en: 'Discrete Mathematics' },
+    { id: 'Pemrograman Komputer', en: 'Computer Programming' },
+    { id: 'Wawasan Informatika', en: 'Introduction to Informatics' },
+    { id: 'Sistem Otomasi Perkantoran', en: 'Office Automation Systems' },
+    { id: 'Kepemimpinan', en: 'Leadership' }
+  ]},
+  { sem: 2, sks: 20, courses: [
+    { id: 'Kalkulus', en: 'Calculus' },
+    { id: 'Basis Data', en: 'Databases' },
+    { id: 'Desain dan Analisis Algoritma', en: 'Algorithm Design and Analysis' },
+    { id: 'Organisasi dan Arsitektur Komputer', en: 'Computer Organization and Architecture' }
+  ]},
+  { sem: 3, sks: 20, courses: [
+    { id: 'Statistika', en: 'Statistics' },
+    { id: 'Web Front-End', en: 'Web Front-End' },
+    { id: 'Pemrograman Berorientasi Objek', en: 'Object-Oriented Programming' },
+    { id: 'Sains Data', en: 'Data Science' },
+    { id: 'Agama', en: 'Religion' }
+  ]},
+  { sem: 4, sks: 20, courses: [
+    { id: 'Rekayasa Perangkat Lunak', en: 'Software Engineering' },
+    { id: 'Web Back-End', en: 'Web Back-End' },
+    { id: 'Pengembangan Perangkat Lunak Modern', en: 'Modern Software Development' },
+    { id: 'Kecerdasan Artifisial', en: 'Artificial Intelligence' },
+    { id: 'Kewarganegaraan', en: 'Civics' },
+    { id: 'Pancasila', en: 'Pancasila' }
+  ]},
+  { sem: 5, sks: 20,
+    milestone: { id: 'Peminatan dimulai - pilih jalur SSD atau AISD.', en: 'Specialization begins - choose the SSD or AISD track.' },
+    courses: [
+      { id: 'Metodologi Penelitian', en: 'Research Methodology' },
+      { id: 'Sistem Operasi', en: 'Operating Systems' },
+      { id: 'Pengembangan Aplikasi Mobile Front-End', en: 'Mobile Application Front-End Development' },
+      { id: 'Bahasa Indonesia', en: 'Indonesian Language' }
+    ],
+    tracks: [
+      { key: 'ssd', courses: [
+        { id: 'Pengembangan dan Operasi', en: 'Development and Operations' },
+        { id: 'Sistem Terdistribusi', en: 'Distributed Systems' }
+      ]},
+      { key: 'aisd', courses: [
+        { id: 'Machine Learning', en: 'Machine Learning' },
+        { id: 'Natural Language Processing', en: 'Natural Language Processing' }
+      ]}
+    ]
+  },
+  { sem: 6, sks: 20,
+    milestone: { id: 'MBKM (Magang atau Studi Independen, 20 SKS) bisa diambil menggantikan mata kuliah peminatan semester ini.', en: 'MBKM (Internship or Independent Study, 20 credits) can be taken this semester in place of the specialization courses.' },
+    courses: [
+      { id: 'Bahasa Inggris', en: 'English' },
+      { id: 'Pengembangan Aplikasi Mobile Back-End', en: 'Mobile Application Back-End Development' },
+      { id: 'Jaringan Komputer', en: 'Computer Networks' },
+      { id: 'Komunikasi dan Negosiasi Bisnis', en: 'Business Communication and Negotiation' }
+    ],
+    tracks: [
+      { key: 'ssd', courses: [ { id: 'Komputasi Awan', en: 'Cloud Computing' } ] },
+      { key: 'aisd', courses: [ { id: 'Computer Vision', en: 'Computer Vision' } ] }
+    ]
+  },
+  { sem: 7, sks: 18,
+    milestone: { id: 'Proyek Informatika (proyek capstone). MBKM (Studi Independen atau Pertukaran Mahasiswa, 18 SKS) masih bisa jadi alternatif.', en: 'Proyek Informatika (capstone project). MBKM (Independent Study or Student Exchange, 18 credits) is still available as an alternative.' },
+    courses: [
+      { id: 'Proyek Informatika', en: 'Informatics Capstone Project' },
+      { id: 'Pengujian dan Kualitas Perangkat Lunak', en: 'Software Testing and Quality' },
+      { id: 'Kewirausahaan Digital', en: 'Digital Entrepreneurship' },
+      { id: 'Etika Kecerdasan Artifisial', en: 'AI Ethics' },
+      { id: 'Big Data', en: 'Big Data' }
+    ]
+  },
+  { sem: 8, sks: 6,
+    milestone: { id: 'Tugas Akhir / Skripsi.', en: 'Final Project / Thesis.' },
+    courses: [
+      { id: 'Tugas Akhir / Skripsi', en: 'Final Project / Thesis' }
+    ]
+  }
+];
+
+var PANDUAN_LANJUT = {
+  title: { id: 'Semester 9 dan Seterusnya', en: 'Semester 9 and Beyond' },
+  body: {
+    id: 'Kalau kamu belum menyelesaikan studi dalam 8 semester, semester-semester berikutnya berfokus pada penyelesaian mata kuliah yang tersisa dan/atau Tugas Akhir. Disarankan untuk berkonsultasi dengan Dosen Wali atau bagian akademik supaya rencana studi lanjutanmu tetap terarah.',
+    en: 'If you have not finished your studies within 8 semesters, the following semesters focus on completing any remaining courses and/or your Final Project. It is recommended to consult your academic advisor or the academic affairs office to keep your continued study plan on track.'
+  }
+};
+
+function panduanCoursePills_(courses) {
+  return courses.map(function(c) {
+    return '<span class="panduan-course-pill">' + escHtml(currentLang === 'en' ? c.en : c.id) + '</span>';
+  }).join('');
+}
+
+function renderPanduan_() {
+  var el = document.getElementById('panduanContent');
+  if (!el) return;
+  var html = PANDUAN_SEMESTERS.map(function(s) {
+    var milestoneHtml = s.milestone
+      ? '<div class="panduan-sem-note">' + escHtml(currentLang === 'en' ? s.milestone.en : s.milestone.id) + '</div>'
+      : '';
+    var tracksHtml = (s.tracks || []).map(function(tr) {
+      return '<div class="panduan-track-group">' +
+        '<span class="result-chip chip-' + tr.key + '">' + tr.key.toUpperCase() + '</span>' +
+        '<div class="panduan-course-list">' + panduanCoursePills_(tr.courses) + '</div>' +
+        '</div>';
+    }).join('');
+    return '<div class="panduan-sem-card">' +
+      '<div class="panduan-sem-head">' +
+        '<div class="panduan-sem-title">' + t('panduan_semester_label') + ' ' + PANDUAN_ROMAN[s.sem - 1] + '</div>' +
+        '<div class="panduan-sem-sks">' + s.sks + ' ' + t('panduan_sks_unit') + '</div>' +
+      '</div>' +
+      milestoneHtml +
+      '<div class="panduan-course-list">' + panduanCoursePills_(s.courses) + '</div>' +
+      tracksHtml +
+      '</div>';
+  }).join('');
+
+  html += '<div class="panduan-sem-card panduan-lanjut-card">' +
+    '<div class="panduan-sem-title">' + escHtml(currentLang === 'en' ? PANDUAN_LANJUT.title.en : PANDUAN_LANJUT.title.id) + '</div>' +
+    '<div class="panduan-sem-note" style="margin-top:6px;">' + escHtml(currentLang === 'en' ? PANDUAN_LANJUT.body.en : PANDUAN_LANJUT.body.id) + '</div>' +
+    '</div>';
+
+  el.innerHTML = html;
+}
+
+function openPanduan() {
+  scHideAllViews_();
+  document.getElementById('panduanView').style.display = 'block';
+  setCleanPath_('/panduan/');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  renderPanduan_();
+}
+
 let quizConfigApplied = false;
 
 async function ensureQuizConfig() {
@@ -1311,7 +1469,7 @@ function restartQuiz() {
 // ==============================================================
 function scHideAllViews_() {
   ['homeView','searchSection','detailView','quizView','quizResultView',
-   'scGaleriView','scDetailView','scFormView','scStatusView','statistikView'].forEach(function(id) {
+   'scGaleriView','scDetailView','scFormView','scStatusView','statistikView','panduanView'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.style.display = 'none';
   });

@@ -9,9 +9,10 @@ A bilingual (Indonesian/English) public portal for an Informatics Engineering st
 * **Specialization Quiz:** An interactive quiz that recommends a specialization track (SSD or AISD) based on the student's answers.
 * **Student Project Showcase:** A public gallery of apps, websites, games, and other student projects, with a full submit → moderation → publish flow, likes, content reporting, submission-status lookup, and edit-and-resubmit for rejected entries.
 * **Program Statistics:** A public dashboard of aggregate achievement counts (students, MBKM activities, achievement activities, certifications, showcase projects), with a disclaimer that the numbers are provisional and a report form for anything missing.
+* **Student Guide Book:** A semester-by-semester overview of the study program's academic journey, from semester 1 through graduation, covering the core curriculum, specialization tracks (SSD/AISD), MBKM eligibility, the capstone project, and the final project/thesis.
 * **Bilingual UI:** Every page, including dynamically rendered content, is available in Indonesian and English.
 * **Light/Dark Theme:** A manual toggle between light and dark mode, remembered per device.
-* **Shareable Clean URLs:** Each main section (`/portofolio/`, `/showcase/`, `/specialization/`, `/statistic/`) is a real, directly linkable page, on top of the existing per-record deep links (`?nim=`, `?kode=`).
+* **Shareable Clean URLs:** Each main section (`/portofolio/`, `/showcase/`, `/specialization/`, `/statistic/`, `/panduan/`) is a real, directly linkable page, on top of the existing per-record deep links (`?nim=`, `?kode=`).
 
 ## 💻 Application Preview
 
