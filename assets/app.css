@@ -745,6 +745,18 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; s
 
 /* ---- BUKU PANDUAN MAHASISWA ---- */
 .panduan-timeline { display: flex; flex-direction: column; gap: 14px; }
+.panduan-section-title { font-size: 0.95rem; font-weight: 800; color: var(--text); margin-bottom: 12px; }
+.panduan-glossary {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px 18px;
+}
+.panduan-glossary-grid {
+  display: grid; grid-template-columns: 1fr; gap: 14px;
+}
+@media (min-width: 640px) { .panduan-glossary-grid { grid-template-columns: 1fr 1fr; } }
+.panduan-glossary-term { font-size: 0.83rem; font-weight: 800; color: var(--blue); margin-bottom: 3px; }
+.panduan-glossary-full { font-weight: 600; color: var(--muted); }
+.panduan-glossary-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.55; }
 .panduan-sem-card {
   background: var(--card); border: 1px solid var(--border);
   border-radius: var(--radius); padding: 16px 18px;

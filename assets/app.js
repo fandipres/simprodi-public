@@ -92,6 +92,7 @@ const I18N = {
     panduan_subtitle: 'Gambaran perjalanan akademik program studi dari semester 1 sampai lulus, semester demi semester.',
     panduan_semester_label: 'Semester',
     panduan_sks_unit: 'SKS',
+    panduan_glossary_title: 'Istilah Penting untuk Mahasiswa Baru',
     stat_title: 'Capaian Kolektif Program Studi',
     stat_subtitle: 'Ratusan kegiatan, prestasi, dan karya lahir dari mahasiswa kami, dirangkum dalam angka.',
     stat_disclaimer_title: 'Data masih bersifat sementara',
@@ -332,6 +333,7 @@ const I18N = {
     panduan_subtitle: 'An overview of the study program\'s academic journey from semester 1 to graduation, semester by semester.',
     panduan_semester_label: 'Semester',
     panduan_sks_unit: 'credits',
+    panduan_glossary_title: 'Key Terms for New Students',
     stat_title: 'Our Collective Achievements',
     stat_subtitle: 'Hundreds of activities, awards, and projects from our students, summed up in numbers.',
     stat_disclaimer_title: 'Data is still provisional',
@@ -1139,8 +1141,55 @@ async function openStatistik() {
 // perbarui array ini langsung, tidak perlu skema baru.
 var PANDUAN_ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
 
+// Istilah dasar dunia perkuliahan untuk mahasiswa baru yang belum tahu
+// menahu soal SKS/IP/IPK dkk. Definisinya sengaja digeneralisasi (konsep
+// umum pendidikan tinggi Indonesia), TIDAK menyebutkan angka kebijakan
+// spesifik prodi/kampus (ambang IPK, jumlah maksimum cuti, syarat pasti
+// SP/DO, dsb) karena itu tidak ada di Kurikulum.docx (sudah dicek, nihil)
+// dan berpotensi salah/berubah - selalu arahkan ke Dosen Wali/bagian
+// akademik untuk detail resminya, sama seperti pola PANDUAN_LANJUT di bawah.
+var PANDUAN_GLOSSARY = [
+  { term: 'SKS', full: { id: 'Satuan Kredit Semester', en: 'Semester Credit Unit' },
+    desc: { id: 'Satuan yang menunjukkan beban belajar suatu mata kuliah - makin besar SKS-nya, makin besar bobot dan waktu belajarnya. Total SKS yang kamu ambil tiap semester diatur lewat KRS.',
+            en: 'A unit that measures a course’s study load - the higher a course’s SKS, the heavier its weight and the more study time it typically needs. The total SKS you take each semester is set through your KRS.' } },
+  { term: 'IP', full: { id: 'Indeks Prestasi', en: 'Semester GPA' },
+    desc: { id: 'Nilai rata-rata yang menggambarkan performa akademikmu dalam SATU semester, dihitung dari nilai tiap mata kuliah dikali SKS-nya, dalam skala 0-4.',
+            en: 'The average score reflecting your academic performance in a SINGLE semester, calculated from each course’s grade weighted by its SKS, on a 0-4 scale.' } },
+  { term: 'IPK', full: { id: 'Indeks Prestasi Kumulatif', en: 'Cumulative GPA' },
+    desc: { id: 'Sama seperti IP, tapi dihitung dari SELURUH semester yang sudah kamu jalani, bukan cuma satu semester. IPK ini yang biasanya jadi tolok ukur utama performa akademikmu secara keseluruhan.',
+            en: 'Similar to IP, but averaged across ALL the semesters you have completed so far, not just one. This is usually the main measure of your overall academic performance.' } },
+  { term: 'KRS', full: { id: 'Kartu Rencana Studi', en: 'Study Plan Card' },
+    desc: { id: 'Formulir yang kamu isi di awal tiap semester untuk memilih mata kuliah dan jumlah SKS yang akan kamu ambil semester itu.',
+            en: 'The form you fill out at the start of each semester to choose the courses (and total SKS) you will take that semester.' } },
+  { term: 'KHS', full: { id: 'Kartu Hasil Studi', en: 'Semester Grade Report' },
+    desc: { id: 'Laporan nilai yang kamu terima di akhir tiap semester, berisi nilai dan SKS tiap mata kuliah yang sudah diambil, plus IP semester itu.',
+            en: 'The grade report you receive at the end of each semester, listing the grade and SKS for each course you took, plus that semester’s IP.' } },
+  { term: 'Dosen Wali / PA', full: { id: 'Pembimbing Akademik', en: 'Academic Advisor' },
+    desc: { id: 'Dosen yang ditunjuk membimbingmu secara akademik selama kuliah - tempat utama untuk berkonsultasi soal KRS, IPK, rencana studi, cuti, sampai masalah akademik lainnya.',
+            en: 'The lecturer assigned to guide you academically throughout your studies - your main point of contact for questions about KRS, IPK, study planning, academic leave, or any other academic concern.' } },
+  { term: 'Status Aktif/Nonaktif', full: { id: '', en: '' },
+    desc: { id: '"Aktif" berarti kamu terdaftar dan mengisi KRS pada semester berjalan; "Nonaktif" berarti kamu tidak melakukan registrasi semester itu. Status ini bisa memengaruhi masa studimu, jadi pastikan kamu aktif tiap semester kecuali sedang cuti resmi.',
+            en: '"Active" means you are registered and have filled out your KRS for the current semester; "Inactive" means you did not register that semester. This status can affect your study duration, so make sure you stay active every semester unless you are on approved academic leave.' } },
+  { term: 'Semester Pendek (SP)', full: { id: '', en: '' },
+    desc: { id: 'Semester tambahan yang sifatnya opsional (biasanya di jeda antar semester genap-ganjil) untuk mengulang atau memperbaiki nilai mata kuliah yang belum memenuhi standar kelulusan.',
+            en: 'An optional additional semester (usually held during the break between even and odd semesters) for retaking or improving grades in courses that did not meet the passing standard.' } },
+  { term: 'Cuti Akademik', full: { id: '', en: '' },
+    desc: { id: 'Izin resmi untuk berhenti sementara dari perkuliahan selama satu semester atau lebih, tanpa berstatus keluar dari program studi. Tanyakan prosedur dan syaratnya ke Dosen Wali atau bagian akademik.',
+            en: 'Official permission to temporarily pause your studies for one or more semesters without being considered to have left the program. Ask your academic advisor or the academic affairs office about the procedure and requirements.' } },
+  { term: 'DO', full: { id: 'Drop Out', en: 'Drop Out' },
+    desc: { id: 'Pemberhentian status kemahasiswaan secara paksa, biasanya karena performa akademik yang terus-menerus di bawah standar atau melewati batas masa studi maksimum. Pantau terus IPK-mu dan jangan ragu berkonsultasi ke Dosen Wali kalau merasa kesulitan.',
+            en: 'Forced termination of student status, typically due to sustained academic performance below the required standard or exceeding the maximum allowed study duration. Keep track of your IPK and do not hesitate to consult your academic advisor if you are struggling.' } }
+];
+
+var PANDUAN_REMINDER = {
+  id: 'Ingat tiap akhir semester: cek KHS dan IPK kamu. Kalau ada mata kuliah yang belum lulus, kamu bisa ikut Semester Pendek (SP) untuk memperbaikinya sebelum semester berikutnya dimulai.',
+  en: 'Remember, at the end of every semester: check your KHS and IPK. If any course did not pass, you can take a Semester Pendek (SP) to improve it before the next semester begins.'
+};
+
 var PANDUAN_SEMESTERS = [
-  { sem: 1, sks: 20, courses: [
+  { sem: 1, sks: 20,
+    milestone: { id: 'Semester pertamamu - pastikan kamu sudah paham SKS, IP, dan IPK (lihat Istilah Penting di atas) sebelum mengisi KRS, dan kenali Dosen Wali/PA-mu sebagai tempat bertanya soal akademik.', en: 'Your first semester - make sure you understand SKS, IP, and IPK (see Key Terms above) before filling out your KRS, and get to know your Dosen Wali/PA as your point of contact for academic questions.' },
+    courses: [
     { id: 'Aljabar Linier', en: 'Linear Algebra' },
     { id: 'Matematika Diskrit', en: 'Discrete Mathematics' },
     { id: 'Pemrograman Komputer', en: 'Computer Programming' },
@@ -1148,20 +1197,26 @@ var PANDUAN_SEMESTERS = [
     { id: 'Sistem Otomasi Perkantoran', en: 'Office Automation Systems' },
     { id: 'Kepemimpinan', en: 'Leadership' }
   ]},
-  { sem: 2, sks: 20, courses: [
+  { sem: 2, sks: 20,
+    milestone: { id: 'Sudah terima KHS semester 1-mu? Cek IP kamu, dan kalau ada mata kuliah yang belum lulus, pertimbangkan ikut Semester Pendek (SP) supaya nilaimu tetap terjaga sebelum lanjut ke semester berikutnya.', en: 'Already got your semester 1 KHS? Check your IP, and if any course did not pass, consider taking a Semester Pendek (SP) to keep your grades on track before moving into the next semester.' },
+    courses: [
     { id: 'Kalkulus', en: 'Calculus' },
     { id: 'Basis Data', en: 'Databases' },
     { id: 'Desain dan Analisis Algoritma', en: 'Algorithm Design and Analysis' },
     { id: 'Organisasi dan Arsitektur Komputer', en: 'Computer Organization and Architecture' }
   ]},
-  { sem: 3, sks: 20, courses: [
+  { sem: 3, sks: 20,
+    milestone: { id: 'Selain menjaga performa akademikmu, mulai aktiflah di lomba, kompetisi, atau kegiatan lain sesuai minatmu - selain menambah pengalaman, ini juga bisa jadi petunjuk awal peminatan yang cocok buatmu di semester 5 nanti. Jangan lupa laporkan pencapaianmu ke program studi lewat Portofolio Akademik supaya tercatat resmi.', en: 'Besides keeping your academic performance on track, start getting involved in competitions or other activities that match your interests - besides adding experience, this can also be an early clue toward the specialization that suits you in semester 5. Don’t forget to report your achievements to the study program through the Portofolio Akademik page so they get officially recorded.' },
+    courses: [
     { id: 'Statistika', en: 'Statistics' },
     { id: 'Web Front-End', en: 'Web Front-End' },
     { id: 'Pemrograman Berorientasi Objek', en: 'Object-Oriented Programming' },
     { id: 'Sains Data', en: 'Data Science' },
     { id: 'Agama', en: 'Religion' }
   ]},
-  { sem: 4, sks: 20, courses: [
+  { sem: 4, sks: 20,
+    milestone: { id: 'Semester terakhirmu sebelum memilih peminatan - mulai pikirkan baik-baik jalur mana yang paling sesuai untukmu. Kalau masih ragu antara SSD atau AISD, coba ikut Tes Peminatan di beranda untuk membantu menentukan arah.', en: 'Your last semester before choosing a specialization - start thinking carefully about which track suits you best. If you are still unsure between SSD or AISD, try the Tes Peminatan on the home page to help decide.' },
+    courses: [
     { id: 'Rekayasa Perangkat Lunak', en: 'Software Engineering' },
     { id: 'Web Back-End', en: 'Web Back-End' },
     { id: 'Pengembangan Perangkat Lunak Modern', en: 'Modern Software Development' },
@@ -1170,7 +1225,7 @@ var PANDUAN_SEMESTERS = [
     { id: 'Pancasila', en: 'Pancasila' }
   ]},
   { sem: 5, sks: 20,
-    milestone: { id: 'Peminatan dimulai - pilih jalur SSD atau AISD.', en: 'Specialization begins - choose the SSD or AISD track.' },
+    milestone: { id: 'Peminatan dimulai - pilih jalur SSD atau AISD sesuai minatmu, karena ini akan menentukan sebagian besar mata kuliahmu sampai semester 7.', en: 'Specialization begins - choose the SSD or AISD track based on your interest, since it will shape most of your courses through semester 7.' },
     courses: [
       { id: 'Metodologi Penelitian', en: 'Research Methodology' },
       { id: 'Sistem Operasi', en: 'Operating Systems' },
@@ -1189,7 +1244,7 @@ var PANDUAN_SEMESTERS = [
     ]
   },
   { sem: 6, sks: 20,
-    milestone: { id: 'MBKM (Magang atau Studi Independen, 20 SKS) bisa diambil menggantikan mata kuliah peminatan semester ini.', en: 'MBKM (Internship or Independent Study, 20 credits) can be taken this semester in place of the specialization courses.' },
+    milestone: { id: 'MBKM (Magang atau Studi Independen, 20 SKS) bisa kamu ambil menggantikan mata kuliah peminatan semester ini - pertimbangkan baik-baik sesuai rencana kariermu sebelum memilih. Ini juga saat yang tepat untuk mulai memikirkan calon judul Tugas Akhir atau topik Proyek Informatika (capstone) yang ingin kamu kerjakan, supaya semester depan kamu sudah punya arah yang jelas.', en: 'MBKM (Internship or Independent Study, 20 credits) can be taken this semester in place of the specialization courses - weigh it carefully against your career plans before choosing. This is also a good time to start thinking about a potential Final Project title or Proyek Informatika (capstone) topic, so you already have a clear direction going into next semester.' },
     courses: [
       { id: 'Bahasa Inggris', en: 'English' },
       { id: 'Pengembangan Aplikasi Mobile Back-End', en: 'Mobile Application Back-End Development' },
@@ -1202,7 +1257,7 @@ var PANDUAN_SEMESTERS = [
     ]
   },
   { sem: 7, sks: 18,
-    milestone: { id: 'Proyek Informatika (proyek capstone). MBKM (Studi Independen atau Pertukaran Mahasiswa, 18 SKS) masih bisa jadi alternatif.', en: 'Proyek Informatika (capstone project). MBKM (Independent Study or Student Exchange, 18 credits) is still available as an alternative.' },
+    milestone: { id: 'Proyek Informatika (proyek capstone) - Tugas Akhir/Skripsi juga sudah bisa mulai diambil dari semester ini. MBKM (Studi Independen atau Pertukaran Mahasiswa, 18 SKS) masih bisa jadi alternatif. Kalau berencana mulai TA, diskusikan topiknya dengan Dosen Wali sedini mungkin.', en: 'Proyek Informatika (capstone project) - you can also start taking your Final Project/Thesis from this semester onward. MBKM (Independent Study or Student Exchange, 18 credits) is still available as an alternative. If you plan to start your Final Project, discuss your topic with your academic advisor as early as possible.' },
     courses: [
       { id: 'Proyek Informatika', en: 'Informatics Capstone Project' },
       { id: 'Pengujian dan Kualitas Perangkat Lunak', en: 'Software Testing and Quality' },
@@ -1212,7 +1267,7 @@ var PANDUAN_SEMESTERS = [
     ]
   },
   { sem: 8, sks: 6,
-    milestone: { id: 'Tugas Akhir / Skripsi.', en: 'Final Project / Thesis.' },
+    milestone: { id: 'Tugas Akhir/Skripsi (biasanya diselesaikan di semester ini kalau belum dimulai sejak semester 7). Jaga komunikasi rutin dengan dosen pembimbing supaya progresmu tetap sesuai target kelulusan.', en: 'Final Project/Thesis (usually completed this semester if not already started back in semester 7). Keep in regular contact with your thesis advisor to stay on track for graduation.' },
     courses: [
       { id: 'Tugas Akhir / Skripsi', en: 'Final Project / Thesis' }
     ]
@@ -1233,10 +1288,29 @@ function panduanCoursePills_(courses) {
   }).join('');
 }
 
+function panduanGlossaryHtml_() {
+  var items = PANDUAN_GLOSSARY.map(function(g) {
+    var full = currentLang === 'en' ? g.full.en : g.full.id;
+    var fullHtml = full ? ' <span class="panduan-glossary-full">(' + escHtml(full) + ')</span>' : '';
+    return '<div class="panduan-glossary-item">' +
+      '<div class="panduan-glossary-term">' + escHtml(g.term) + fullHtml + '</div>' +
+      '<div class="panduan-glossary-desc">' + escHtml(currentLang === 'en' ? g.desc.en : g.desc.id) + '</div>' +
+      '</div>';
+  }).join('');
+  return '<div class="panduan-glossary">' +
+    '<div class="panduan-section-title">' + t('panduan_glossary_title') + '</div>' +
+    '<div class="panduan-glossary-grid">' + items + '</div>' +
+    '</div>';
+}
+
 function renderPanduan_() {
   var el = document.getElementById('panduanContent');
   if (!el) return;
-  var html = PANDUAN_SEMESTERS.map(function(s) {
+  var html = panduanGlossaryHtml_();
+  html += '<div class="panduan-sem-card panduan-lanjut-card">' +
+    '<div class="panduan-sem-note" style="margin:0;">' + escHtml(currentLang === 'en' ? PANDUAN_REMINDER.en : PANDUAN_REMINDER.id) + '</div>' +
+    '</div>';
+  html += PANDUAN_SEMESTERS.map(function(s) {
     var milestoneHtml = s.milestone
       ? '<div class="panduan-sem-note">' + escHtml(currentLang === 'en' ? s.milestone.en : s.milestone.id) + '</div>'
       : '';
