@@ -617,17 +617,23 @@ window.addEventListener('DOMContentLoaded', async () => {
   applyI18n();
   applyThemeIcon_();
 
+  // Baca nim/kode dari query string DULU, sebelum rute path biasa dibuka -
+  // openPortofolio()/openShowcaseGaleri() memanggil setCleanPath_ yang
+  // membersihkan location.search, jadi kalau dibaca belakangan nim/kode-nya
+  // sudah keburu hilang duluan (bug lama: refresh ke halaman detail
+  // portofolio/showcase malah balik ke halaman pencarian/galeri).
+  const nim  = new URLSearchParams(location.search).get('nim');
+  const kode = new URLSearchParams(location.search).get('kode');
+
   // Setiap route punya berkas fisiknya sendiri, jadi tampilan awal yang
   // dibuka ditentukan langsung dari path saat ini (tidak perlu redirect).
   const path = location.pathname.replace(/\/+$/, '') || '/';
-  if      (path === '/portofolio')     openPortofolio();
-  else if (path === '/showcase')       openShowcaseGaleri();
-  else if (path === '/specialization') openQuiz();
-  else if (path === '/statistic')      openStatistik();
+  if      (path === '/portofolio')        openPortofolio();
+  else if (path === '/showcase' && !kode) openShowcaseGaleri();
+  else if (path === '/specialization')    openQuiz();
+  else if (path === '/statistic')         openStatistik();
 
-  const nim = new URLSearchParams(location.search).get('nim');
   if (nim) { openPortofolio(); searchInput.value = nim; doSearch(true); }
-  const kode = new URLSearchParams(location.search).get('kode');
   if (kode) { openShowcaseDetail(kode); }
 });
 
