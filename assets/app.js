@@ -107,9 +107,9 @@ const I18N = {
     home_card6_desc: 'Cari dosen pembimbing lomba, kegiatan lain, atau tugas akhir, lengkap dengan status kepegawaian dan profil riset SINTA mereka.',
     home_card6_btn: 'Lihat Dosen',
     dosen_title: 'Dosen Pembimbing',
-    dosen_subtitle: 'Cari dosen program studi yang bisa jadi pembimbing lomba, kegiatan lain, atau tugas akhir - lengkap dengan status kepegawaian dan profil riset SINTA mereka.',
+    dosen_subtitle: 'Cari dosen program studi yang bisa jadi pembimbing lomba, kegiatan lain, atau tugas akhir.',
     dosen_badge_tetap: 'Dosen Tetap',
-    dosen_badge_ta: 'Pembimbing TA',
+    dosen_badge_ta: 'Pembimbing Tugas Akhir',
     dosen_sinta_link: 'Profil SINTA',
     dosen_error: 'Gagal memuat daftar dosen. Coba lagi beberapa saat.',
     dosen_empty: 'Data dosen belum tersedia.',
@@ -358,7 +358,7 @@ const I18N = {
     home_card6_desc: 'Find a supervisor for a competition, another activity, or your final thesis, complete with their employment status and SINTA research profile.',
     home_card6_btn: 'View Lecturers',
     dosen_title: 'Supervising Lecturers',
-    dosen_subtitle: 'Find a study program lecturer who can supervise a competition, another activity, or your final thesis - complete with their employment status and SINTA research profile.',
+    dosen_subtitle: 'Find a study program lecturer who can supervise a competition, another activity, or your final thesis.',
     dosen_badge_tetap: 'Permanent Faculty',
     dosen_badge_ta: 'Thesis Supervisor',
     dosen_sinta_link: 'SINTA Profile',
@@ -1697,14 +1697,18 @@ function openPanduan() {
 let dosenList_ = null;
 
 function dosenCardHtml_(d) {
+  var initial = escHtml((String(d.nama || '').trim().charAt(0) || '?').toUpperCase());
   var badges = '';
-  if (d.dosenTetap) badges += '<span class="dosen-badge dosen-badge-tetap" data-i18n="dosen_badge_tetap">' + t('dosen_badge_tetap') + '</span>';
-  if (d.dosenTA)    badges += '<span class="dosen-badge dosen-badge-ta" data-i18n="dosen_badge_ta">' + t('dosen_badge_ta') + '</span>';
+  if (d.dosenTetap) badges += '<span class="dosen-badge dosen-badge-tetap">' + t('dosen_badge_tetap') + '</span>';
+  if (d.dosenTA)    badges += '<span class="dosen-badge dosen-badge-ta">' + t('dosen_badge_ta') + '</span>';
   var sintaHtml = d.sintaId
-    ? '<a class="dosen-sinta-link" href="https://sinta.kemdiktisaintek.go.id/authors/profile/' + encodeURIComponent(d.sintaId) + '" target="_blank" rel="noopener">' + t('dosen_sinta_link') + ' &#8599;</a>'
+    ? '<a class="sc-btn sc-btn-outline sc-btn-sm dosen-sinta-link" href="https://sinta.kemdiktisaintek.go.id/authors/profile/' + encodeURIComponent(d.sintaId) + '" target="_blank" rel="noopener">' + t('dosen_sinta_link') + ' &#8599;</a>'
     : '';
   return '<div class="dosen-card">' +
-    '<div class="dosen-card-name">' + escHtml(d.nama) + '</div>' +
+    '<div class="dosen-card-head">' +
+      '<div class="dosen-avatar">' + initial + '</div>' +
+      '<div class="dosen-card-name">' + escHtml(d.nama) + '</div>' +
+    '</div>' +
     (badges ? '<div class="dosen-card-badges">' + badges + '</div>' : '') +
     (sintaHtml ? '<div class="dosen-card-links">' + sintaHtml + '</div>' : '') +
     '</div>';
