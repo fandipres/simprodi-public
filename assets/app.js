@@ -1158,44 +1158,55 @@ var PANDUAN_ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
 // sebagai accordion (lihat panduanGlossaryHtml_) karena daftarnya sudah
 // cukup panjang untuk terasa berat kalau ditampilkan terbuka semua sekaligus.
 var PANDUAN_GLOSSARY_GROUPS = [
-  { title: { id: 'Administrasi Sehari-hari', en: 'Everyday Administration' },
+  { title: { id: 'Nilai & Performa Akademik', en: 'Grades & Academic Performance' },
     terms: [
-      { term: 'Akun Office 365', full: { id: '', en: '' },
-        desc: { id: 'Akun resmi kampus yang jadi satu pintu masuk untuk mengakses berbagai sistem kampus sekaligus, termasuk email kampus dan layanan Microsoft 365 (Word, Excel, Teams, dan lainnya).',
-                en: 'Your official campus account, used as a single sign-on to access various campus systems at once, including your campus email and Microsoft 365 services (Word, Excel, Teams, and more).' } },
-      { term: 'Asisten Laboratorium', full: { id: '', en: '' },
-        desc: { id: 'Mahasiswa atau tenaga kependidikan yang membantu jalannya praktikum di laboratorium - mis. mendampingi mahasiswa, memeriksa tugas praktikum, atau menjaga peralatan lab.',
-                en: 'A student or staff member who helps run practicum sessions in the laboratory - e.g. assisting students, checking practicum assignments, or maintaining lab equipment.' } },
-      { term: 'Cuti Akademik', full: { id: '', en: '' },
-        desc: { id: 'Izin resmi untuk berhenti sementara dari perkuliahan selama satu semester atau lebih, tanpa berstatus keluar dari program studi. Tanyakan prosedur dan syaratnya ke Dosen Wali/PA atau bagian akademik.',
-                en: 'Official permission to temporarily pause your studies for one or more semesters without being considered to have left the program. Ask your Dosen Wali/PA or the academic affairs office about the procedure and requirements.' } },
-      { term: 'DO', full: { id: 'Drop Out', en: 'Drop Out' },
-        desc: { id: 'Pemberhentian status kemahasiswaan secara paksa - konsekuensi akhir kalau Surat Peringatan (SP) sudah mencapai batas maksimum (SP3) tanpa perbaikan. Pantau terus IPK-mu dan jangan ragu berkonsultasi ke Dosen Wali/PA kalau merasa kesulitan.',
-                en: 'Forced termination of student status - the final consequence once Surat Peringatan (SP) reaches its maximum level (SP3) without improvement. Keep track of your IPK and do not hesitate to consult your Dosen Wali/PA if you are struggling.' } },
-      { term: 'Dosen Wali / PA', full: { id: 'Penasihat Akademik', en: 'Academic Advisor' },
-        desc: { id: 'Dosen yang ditunjuk membimbingmu secara akademik selama kuliah - tempat utama untuk berkonsultasi soal KRS, IPK, rencana studi, cuti, sampai masalah akademik lainnya.',
-                en: 'The lecturer assigned to guide you academically throughout your studies - your main point of contact for questions about KRS, IPK, study planning, academic leave, or any other academic concern.' } },
       { term: 'IP', full: { id: 'Indeks Prestasi', en: 'Semester GPA' },
         desc: { id: 'Nilai rata-rata yang menggambarkan performa akademikmu dalam SATU semester, dihitung dari nilai tiap mata kuliah dikali SKS-nya, dalam skala 0-4.',
                 en: 'The average score reflecting your academic performance in a SINGLE semester, calculated from each course’s grade weighted by its SKS, on a 0-4 scale.' } },
       { term: 'IPK', full: { id: 'Indeks Prestasi Kumulatif', en: 'Cumulative GPA' },
         desc: { id: 'Sama seperti IP, tapi dihitung dari SELURUH semester yang sudah kamu jalani, bukan cuma satu semester. IPK ini yang biasanya jadi tolok ukur utama performa akademikmu secara keseluruhan.',
                 en: 'Similar to IP, but averaged across ALL the semesters you have completed so far, not just one. This is usually the main measure of your overall academic performance.' } },
+      { term: 'SKS', full: { id: 'Satuan Kredit Semester', en: 'Semester Credit Unit' },
+        desc: { id: 'Satuan yang menunjukkan beban belajar suatu mata kuliah - makin besar SKS-nya, makin besar bobot dan waktu belajarnya. Total SKS yang kamu ambil tiap semester diatur lewat KRS.',
+                en: 'A unit that measures a course’s study load - the higher a course’s SKS, the heavier its weight and the more study time it typically needs. The total SKS you take each semester is set through your KRS.' } },
+      { term: 'UAS', full: { id: 'Ujian Akhir Semester', en: 'Ujian Akhir Semester (Final Exam)' },
+        desc: { id: 'Ujian yang diselenggarakan di akhir semester, biasanya mencakup seluruh materi mata kuliah selama satu semester dan jadi salah satu komponen penilaian akhir.',
+                en: 'The exam held at the end of the semester, usually covering all the course material for that semester and serving as one component of the final grade.' } },
+      { term: 'UTS', full: { id: 'Ujian Tengah Semester', en: 'Ujian Tengah Semester (Midterm Exam)' },
+        desc: { id: 'Ujian yang diselenggarakan di pertengahan semester, biasanya mencakup materi paruh pertama mata kuliah dan jadi salah satu komponen penilaian.',
+                en: 'The exam held midway through the semester, usually covering the first half of the course material and serving as one component of the grade.' } },
+    ]
+  },
+  { title: { id: 'Dokumen & Perencanaan Studi', en: 'Documents & Study Planning' },
+    terms: [
       { term: 'Kalender Akademik', full: { id: '', en: '' },
         desc: { id: 'Jadwal resmi kampus yang memuat tanggal-tanggal penting tiap semester, seperti periode pengisian KRS, jadwal kuliah, ujian, sampai libur akademik.',
                 en: 'The campus’s official schedule listing important dates each semester, such as the KRS registration period, class schedules, exams, and academic holidays.' } },
       { term: 'KHS', full: { id: 'Kartu Hasil Studi', en: 'Semester Grade Report' },
         desc: { id: 'Laporan nilai yang kamu terima di akhir tiap semester, berisi nilai dan SKS tiap mata kuliah yang sudah diambil, plus IP semester itu.',
                 en: 'The grade report you receive at the end of each semester, listing the grade and SKS for each course you took, plus that semester’s IP.' } },
-      { term: 'Komisaris Kelas', full: { id: '', en: '' },
-        desc: { id: 'Mahasiswa yang dipilih/ditunjuk sebagai perwakilan satu kelas atau angkatan, menjembatani komunikasi antara mahasiswa dengan dosen atau program studi (mis. menyampaikan informasi, koordinasi jadwal, dan lainnya).',
-                en: 'A student elected or appointed to represent one class or cohort, bridging communication between students and lecturers or the study program (e.g. relaying information, coordinating schedules, and more).' } },
       { term: 'Kontrak Perkuliahan', full: { id: '', en: '' },
         desc: { id: 'Kesepakatan di awal semester antara dosen dan mahasiswa tentang aturan main perkuliahan - mis. kehadiran minimum, komponen penilaian, dan tata tertib kelas.',
                 en: 'An agreement made at the start of the semester between the lecturer and students about how the course will run - e.g. minimum attendance, grading components, and classroom rules.' } },
       { term: 'KRS', full: { id: 'Kartu Rencana Studi', en: 'Study Plan Card' },
         desc: { id: 'Dokumen rencana studimu tiap semester, berisi mata kuliah dan jumlah SKS yang akan kamu ambil. Untuk semester 1-6, paketnya sudah otomatis disusun (auto-generate) sesuai jalur/peminatanmu, jadi kamu umumnya tinggal mengonfirmasi, bukan memilih mata kuliah satu per satu.',
                 en: 'Your study plan document each semester, listing the courses and total SKS you will take. For semesters 1-6, the package is auto-generated based on your track/specialization, so you generally just confirm it rather than picking each course individually.' } },
+      { term: 'RPS', full: { id: 'Rencana Pembelajaran Semester', en: 'Rencana Pembelajaran Semester (Semester Learning Plan)' },
+        desc: { id: 'Dokumen yang lebih rinci dari silabus, memuat rencana pembelajaran tiap pertemuan dalam satu semester - termasuk capaian pembelajaran, metode, bahan kajian, dan penilaian tiap pertemuannya.',
+                en: 'A more detailed document than the syllabus, outlining the learning plan for each session throughout the semester - including learning outcomes, methods, topics, and assessments for each meeting.' } },
+      { term: 'Silabus', full: { id: '', en: '' },
+        desc: { id: 'Dokumen ringkas yang memuat gambaran umum suatu mata kuliah - tujuan pembelajaran, topik yang akan dibahas, dan referensi yang dipakai selama satu semester.',
+                en: 'A concise document outlining a course’s overview - its learning objectives, topics to be covered, and references used throughout the semester.' } },
+      { term: 'Transkrip Akademik', full: { id: '', en: '' },
+        desc: { id: 'Dokumen resmi berisi rekap seluruh nilai dan mata kuliah yang sudah kamu tempuh sepanjang masa studi, termasuk IPK akhir - biasanya dibutuhkan untuk keperluan wisuda, melamar kerja, atau melanjutkan studi.',
+                en: 'An official document summarizing all the grades and courses you have taken throughout your studies, including your final IPK - usually needed for graduation, job applications, or further studies.' } },
+    ]
+  },
+  { title: { id: 'Identitas & Sistem Digital', en: 'Identity & Digital Systems' },
+    terms: [
+      { term: 'Akun Office 365', full: { id: '', en: '' },
+        desc: { id: 'Akun resmi kampus yang jadi satu pintu masuk untuk mengakses berbagai sistem kampus sekaligus, termasuk email kampus dan layanan Microsoft 365 (Word, Excel, Teams, dan lainnya).',
+                en: 'Your official campus account, used as a single sign-on to access various campus systems at once, including your campus email and Microsoft 365 services (Word, Excel, Teams, and more).' } },
       { term: 'KTM', full: { id: 'Kartu Tanda Mahasiswa', en: 'Student ID Card' },
         desc: { id: 'Kartu identitas resmi sebagai mahasiswa, biasanya dibutuhkan untuk berbagai keperluan administrasi kampus maupun di luar kampus (mis. diskon pelajar).',
                 en: 'Your official student identity card, usually needed for various administrative purposes both on and off campus (e.g. student discounts).' } },
@@ -1208,30 +1219,41 @@ var PANDUAN_GLOSSARY_GROUPS = [
       { term: 'NIM', full: { id: 'Nomor Induk Mahasiswa', en: 'Student ID Number' },
         desc: { id: 'Nomor unik yang menjadi identitas resmimu sebagai mahasiswa, dipakai di hampir semua sistem dan dokumen akademik (KRS, KHS, transkrip, dan lainnya).',
                 en: 'A unique number that serves as your official identity as a student, used across almost every academic system and document (KRS, KHS, transcript, and more).' } },
+    ]
+  },
+  { title: { id: 'Status & Keberlangsungan Studi', en: 'Status & Study Continuity' },
+    terms: [
+      { term: 'Cuti Akademik', full: { id: '', en: '' },
+        desc: { id: 'Izin resmi untuk berhenti sementara dari perkuliahan selama satu semester atau lebih, tanpa berstatus keluar dari program studi. Tanyakan prosedur dan syaratnya ke Dosen Wali/PA atau bagian akademik.',
+                en: 'Official permission to temporarily pause your studies for one or more semesters without being considered to have left the program. Ask your Dosen Wali/PA or the academic affairs office about the procedure and requirements.' } },
+      { term: 'DO', full: { id: 'Drop Out', en: 'Drop Out' },
+        desc: { id: 'Pemberhentian status kemahasiswaan secara paksa - konsekuensi akhir kalau Surat Peringatan (SP) sudah mencapai batas maksimum (SP3) tanpa perbaikan. Pantau terus IPK-mu dan jangan ragu berkonsultasi ke Dosen Wali/PA kalau merasa kesulitan.',
+                en: 'Forced termination of student status - the final consequence once Surat Peringatan (SP) reaches its maximum level (SP3) without improvement. Keep track of your IPK and do not hesitate to consult your Dosen Wali/PA if you are struggling.' } },
       { term: 'Remedial Semester', full: { id: '', en: '' },
         desc: { id: 'Remedial untuk memperbaiki nilai mata kuliah yang diambil pada semester yang SEDANG berjalan (bukan semester sebelumnya).',
                 en: 'A remedial to improve your grade for a course taken in the CURRENT, ongoing semester (not a previous one).' } },
       { term: 'Remedial Ulang', full: { id: '', en: '' },
         desc: { id: 'Remedial untuk memperbaiki nilai mata kuliah yang diambil pada semester-semester SEBELUMNYA (bukan semester yang sedang berjalan).',
                 en: 'A remedial to improve your grade for a course taken in a PREVIOUS semester (not the current one).' } },
-      { term: 'RPS', full: { id: 'Rencana Pembelajaran Semester', en: 'Rencana Pembelajaran Semester (Semester Learning Plan)' },
-        desc: { id: 'Dokumen yang lebih rinci dari silabus, memuat rencana pembelajaran tiap pertemuan dalam satu semester - termasuk capaian pembelajaran, metode, bahan kajian, dan penilaian tiap pertemuannya.',
-                en: 'A more detailed document than the syllabus, outlining the learning plan for each session throughout the semester - including learning outcomes, methods, topics, and assessments for each meeting.' } },
-      { term: 'Silabus', full: { id: '', en: '' },
-        desc: { id: 'Dokumen ringkas yang memuat gambaran umum suatu mata kuliah - tujuan pembelajaran, topik yang akan dibahas, dan referensi yang dipakai selama satu semester.',
-                en: 'A concise document outlining a course’s overview - its learning objectives, topics to be covered, and references used throughout the semester.' } },
-      { term: 'SKS', full: { id: 'Satuan Kredit Semester', en: 'Semester Credit Unit' },
-        desc: { id: 'Satuan yang menunjukkan beban belajar suatu mata kuliah - makin besar SKS-nya, makin besar bobot dan waktu belajarnya. Total SKS yang kamu ambil tiap semester diatur lewat KRS.',
-                en: 'A unit that measures a course’s study load - the higher a course’s SKS, the heavier its weight and the more study time it typically needs. The total SKS you take each semester is set through your KRS.' } },
       { term: 'SP', full: { id: 'Surat Peringatan', en: 'Surat Peringatan' },
         desc: { id: 'Surat teguran akademik yang diberikan kalau IPK kamu di bawah 2.0 pada semester 1-6, atau kalau kamu belum lulus di semester 8, 10, atau 12. Ada maksimal 3 tingkat (SP1, SP2, SP3) - kalau sudah sampai SP3 tanpa perbaikan, risikonya adalah DO. Segera konsultasikan ke Dosen Wali/PA kalau kamu menerima salah satunya.',
                 en: 'An academic warning letter issued if your IPK falls below 2.0 in semesters 1-6, or if you have not graduated by semester 8, 10, or 12. There are up to 3 levels (SP1, SP2, SP3) - reaching SP3 without improvement risks DO. Consult your Dosen Wali/PA right away if you receive one.' } },
       { term: 'Status Aktif/Nonaktif', full: { id: '', en: '' },
         desc: { id: '"Aktif" berarti kamu terdaftar dan mengisi KRS pada semester berjalan; "Nonaktif" berarti kamu tidak melakukan registrasi semester itu. Status ini bisa memengaruhi masa studimu, jadi pastikan kamu aktif tiap semester kecuali sedang cuti resmi.',
                 en: '"Active" means you are registered and have filled out your KRS for the current semester; "Inactive" means you did not register that semester. This status can affect your study duration, so make sure you stay active every semester unless you are on approved academic leave.' } },
-      { term: 'Transkrip Akademik', full: { id: '', en: '' },
-        desc: { id: 'Dokumen resmi berisi rekap seluruh nilai dan mata kuliah yang sudah kamu tempuh sepanjang masa studi, termasuk IPK akhir - biasanya dibutuhkan untuk keperluan wisuda, melamar kerja, atau melanjutkan studi.',
-                en: 'An official document summarizing all the grades and courses you have taken throughout your studies, including your final IPK - usually needed for graduation, job applications, or further studies.' } },
+    ]
+  },
+  { title: { id: 'Peran Pendukung Akademik', en: 'Academic Support Roles' },
+    terms: [
+      { term: 'Asisten Laboratorium', full: { id: '', en: '' },
+        desc: { id: 'Mahasiswa atau tenaga kependidikan yang membantu jalannya praktikum di laboratorium - mis. mendampingi mahasiswa, memeriksa tugas praktikum, atau menjaga peralatan lab.',
+                en: 'A student or staff member who helps run practicum sessions in the laboratory - e.g. assisting students, checking practicum assignments, or maintaining lab equipment.' } },
+      { term: 'Dosen Wali / PA', full: { id: 'Penasihat Akademik', en: 'Academic Advisor' },
+        desc: { id: 'Dosen yang ditunjuk membimbingmu secara akademik selama kuliah - tempat utama untuk berkonsultasi soal KRS, IPK, rencana studi, cuti, sampai masalah akademik lainnya.',
+                en: 'The lecturer assigned to guide you academically throughout your studies - your main point of contact for questions about KRS, IPK, study planning, academic leave, or any other academic concern.' } },
+      { term: 'Komisaris Kelas', full: { id: '', en: '' },
+        desc: { id: 'Mahasiswa yang dipilih/ditunjuk sebagai perwakilan satu kelas atau angkatan, menjembatani komunikasi antara mahasiswa dengan dosen atau program studi (mis. menyampaikan informasi, koordinasi jadwal, dan lainnya).',
+                en: 'A student elected or appointed to represent one class or cohort, bridging communication between students and lecturers or the study program (e.g. relaying information, coordinating schedules, and more).' } },
     ]
   },
   { title: { id: 'Organisasi & Kompetisi Mahasiswa', en: 'Student Organizations & Competitions' },
@@ -1253,7 +1275,20 @@ var PANDUAN_GLOSSARY_GROUPS = [
                 en: 'Student activity groups outside the study-program organization, usually based on specific interests or talents (sports, arts, religious activities, and more) - a fun way to develop yourself outside academics.' } },
     ]
   },
-  { title: { id: 'Desain Kurikulum', en: 'Curriculum Design' },
+  { title: { id: 'Konsep Kurikulum', en: 'Curriculum Concepts' },
+    terms: [
+      { term: 'Kurikulum', full: { id: '', en: '' },
+        desc: { id: 'Seperangkat rencana yang mengatur tujuan, isi, bahan pelajaran, dan cara pembelajaran, dipakai sebagai pedoman penyelenggaraan perkuliahan untuk mencapai tujuan pendidikan tertentu. Kurikulum dievaluasi dan diperbarui secara berkala mengikuti perkembangan ilmu dan kebutuhan industri.',
+                en: 'A set of plans governing the goals, content, materials, and methods of learning, used as the guideline for running courses to achieve specific educational objectives. The curriculum is evaluated and updated periodically to keep up with advances in the field and industry needs.' } },
+      { term: 'OBE', full: { id: 'Outcome-Based Education', en: 'Outcome-Based Education' },
+        desc: { id: 'Pendekatan pendidikan yang berfokus pada capaian pembelajaran yang terukur (pengetahuan, keterampilan, sikap) sebagai dasar merancang kurikulum - kurikulum program studi ini dirancang mengikuti pendekatan ini. Salah satu penerapannya di kelas: kalau kamu gagal di suatu asesmen (mis. tugas atau kuis) pada suatu mata kuliah, kamu biasanya diberi kesempatan untuk memperbaikinya, paling lambat sebelum UAS mata kuliah tersebut.',
+                en: 'An educational approach that focuses on measurable learning outcomes (knowledge, skills, attitudes) as the basis for designing a curriculum - this study program’s curriculum is designed following this approach. One way this shows up in class: if you fail a particular assessment (e.g. an assignment or quiz) in a course, you are usually given a chance to improve it, at the latest before that course\'s UAS (final exam).' } },
+      { term: 'Peminatan', full: { id: '', en: '' },
+        desc: { id: 'Jalur konsentrasi keahlian yang kamu pilih mulai semester 5, menentukan sebagian mata kuliah lanjutan yang akan kamu ambil. Di program studi ini ada dua peminatan: SSD dan AISD.',
+                en: 'The specialization track you choose starting semester 5, determining part of the advanced courses you will take afterward. This study program offers two tracks: SSD and AISD.' } },
+    ]
+  },
+  { title: { id: 'Capaian Pembelajaran', en: 'Learning Outcomes' },
     terms: [
       { term: 'CPL', full: { id: 'Capaian Pembelajaran Lulusan', en: 'Capaian Pembelajaran Lulusan (Graduate Learning Outcomes)' },
         desc: { id: 'Kemampuan (sikap, pengetahuan, keterampilan) yang harus kamu miliki setelah lulus dari program studi ini. CPL jadi acuan utama dalam merancang seluruh mata kuliah dan kurikulum.',
@@ -1261,9 +1296,13 @@ var PANDUAN_GLOSSARY_GROUPS = [
       { term: 'CPMK', full: { id: 'Capaian Pembelajaran Mata Kuliah', en: 'Capaian Pembelajaran Mata Kuliah (Course Learning Outcomes)' },
         desc: { id: 'Capaian pembelajaran yang lebih spesifik untuk satu mata kuliah tertentu, diturunkan dari CPL. CPMK jadi jembatan antara tujuan besar program studi (CPL) dan apa yang kamu pelajari di kelas.',
                 en: 'A more specific learning outcome for a particular course, derived from CPL. CPMK bridges the study program’s overall goals (CPL) and what you actually learn in that specific course.' } },
-      { term: 'Kurikulum', full: { id: '', en: '' },
-        desc: { id: 'Seperangkat rencana yang mengatur tujuan, isi, bahan pelajaran, dan cara pembelajaran, dipakai sebagai pedoman penyelenggaraan perkuliahan untuk mencapai tujuan pendidikan tertentu. Kurikulum dievaluasi dan diperbarui secara berkala mengikuti perkembangan ilmu dan kebutuhan industri.',
-                en: 'A set of plans governing the goals, content, materials, and methods of learning, used as the guideline for running courses to achieve specific educational objectives. The curriculum is evaluated and updated periodically to keep up with advances in the field and industry needs.' } },
+      { term: 'PL', full: { id: 'Profil Lulusan', en: 'Profil Lulusan (Graduate Profile)' },
+        desc: { id: 'Peran atau posisi yang diharapkan bisa dijalani lulusan program studi ini di dunia kerja atau bidang keahliannya, dirumuskan berdasarkan kebutuhan industri dan perkembangan ilmu pengetahuan.',
+                en: 'The roles or positions graduates of this study program are expected to be able to take on in the workforce or their field of expertise, formulated based on industry needs and advances in the field.' } },
+    ]
+  },
+  { title: { id: 'Kategori Mata Kuliah', en: 'Course Categories' },
+    terms: [
       { term: 'MKWF', full: { id: 'Mata Kuliah Wajib Fakultas', en: 'Mata Kuliah Wajib Fakultas (Faculty-Required Courses)' },
         desc: { id: 'Mata kuliah yang wajib diambil seluruh mahasiswa dalam satu fakultas (bukan cuma satu program studi), untuk membekali kompetensi dasar yang relevan dengan bidang ilmu fakultas tersebut.',
                 en: 'Courses required for all students within one faculty (not just a single study program), aimed at building foundational competencies relevant to that faculty’s field.' } },
@@ -1276,18 +1315,22 @@ var PANDUAN_GLOSSARY_GROUPS = [
       { term: 'MKWU', full: { id: 'Mata Kuliah Wajib Universitas', en: 'Mata Kuliah Wajib Universitas (University-Required Courses)' },
         desc: { id: 'Mata kuliah yang wajib diambil seluruh mahasiswa di universitas, dari program studi mana pun, untuk memastikan capaian pembelajaran selaras dengan visi dan misi universitas.',
                 en: 'Courses required for all students across the university, regardless of study program, ensuring learning outcomes align with the university’s vision and mission.' } },
-      { term: 'OBE', full: { id: 'Outcome-Based Education', en: 'Outcome-Based Education' },
-        desc: { id: 'Pendekatan pendidikan yang berfokus pada capaian pembelajaran yang terukur (pengetahuan, keterampilan, sikap) sebagai dasar merancang kurikulum - kurikulum program studi ini dirancang mengikuti pendekatan ini.',
-                en: 'An educational approach that focuses on measurable learning outcomes (knowledge, skills, attitudes) as the basis for designing a curriculum - this study program’s curriculum is designed following this approach.' } },
-      { term: 'Peminatan', full: { id: '', en: '' },
-        desc: { id: 'Jalur konsentrasi keahlian yang kamu pilih mulai semester 5, menentukan sebagian mata kuliah lanjutan yang akan kamu ambil. Di program studi ini ada dua peminatan: SSD dan AISD.',
-                en: 'The specialization track you choose starting semester 5, determining part of the advanced courses you will take afterward. This study program offers two tracks: SSD and AISD.' } },
-      { term: 'PL', full: { id: 'Profil Lulusan', en: 'Profil Lulusan (Graduate Profile)' },
-        desc: { id: 'Peran atau posisi yang diharapkan bisa dijalani lulusan program studi ini di dunia kerja atau bidang keahliannya, dirumuskan berdasarkan kebutuhan industri dan perkembangan ilmu pengetahuan.',
-                en: 'The roles or positions graduates of this study program are expected to be able to take on in the workforce or their field of expertise, formulated based on industry needs and advances in the field.' } },
     ]
   },
-  { title: { id: 'Struktur Organisasi Kampus', en: 'Campus Organizational Structure' },
+  { title: { id: 'Tingkat Universitas', en: 'University Level' },
+    terms: [
+      { term: 'Rektor', full: { id: '', en: '' },
+        desc: { id: 'Pemimpin tertinggi di tingkat universitas, bertanggung jawab atas seluruh kebijakan dan penyelenggaraan pendidikan di universitas, termasuk mengesahkan dokumen resmi seperti buku kurikulum program studi.',
+                en: 'The highest-ranking leader at the university level, responsible for all policies and the overall administration of education at the university, including ratifying official documents such as a study program’s curriculum book.' } },
+      { term: 'Sekretaris Universitas', full: { id: '', en: '' },
+        desc: { id: 'Pejabat yang membantu Rektor menjalankan tugas administratif dan operasional di tingkat universitas.',
+                en: 'An official who assists the Rector in carrying out administrative and operational duties at the university level.' } },
+      { term: 'Wakil Rektor', full: { id: '', en: '' },
+        desc: { id: 'Pejabat yang membantu Rektor menjalankan tugas di tingkat universitas, biasanya membawahi bidang tertentu (mis. akademik, kemahasiswaan, atau keuangan).',
+                en: 'An official who assists the Rector in carrying out duties at the university level, usually overseeing a specific area (e.g. academics, student affairs, or finance).' } },
+    ]
+  },
+  { title: { id: 'Tingkat Fakultas', en: 'Faculty Level' },
     terms: [
       { term: 'Dekan', full: { id: '', en: '' },
         desc: { id: 'Pemimpin tertinggi di tingkat fakultas, bertanggung jawab atas jalannya seluruh kegiatan akademik dan administratif fakultas, termasuk program studi-program studi di bawahnya.',
@@ -1295,30 +1338,44 @@ var PANDUAN_GLOSSARY_GROUPS = [
       { term: 'Fakultas', full: { id: '', en: '' },
         desc: { id: 'Unit yang mengelola sejumlah program studi dalam rumpun ilmu sejenis di suatu universitas. Program studi kita, S-1 Teknik Informatika, berada di bawah Fakultas Informatika.',
                 en: 'An organizational unit that manages several study programs within a related field at a university. Our study program, S-1 Teknik Informatika, is under the Faculty of Informatics (Fakultas Informatika).' } },
+      { term: 'Sekretaris Fakultas', full: { id: '', en: '' },
+        desc: { id: 'Pejabat yang membantu Dekan menjalankan tugas administratif dan operasional di tingkat fakultas.',
+                en: 'An official who assists the Dean in carrying out administrative and operational duties at the faculty level.' } },
+      { term: 'Wakil Dekan', full: { id: '', en: '' },
+        desc: { id: 'Pejabat yang membantu Dekan menjalankan tugas di tingkat fakultas, biasanya membawahi bidang tertentu (mis. akademik, kemahasiswaan, atau sumber daya).',
+                en: 'An official who assists the Dean in carrying out duties at the faculty level, usually overseeing a specific area (e.g. academics, student affairs, or resources).' } },
+    ]
+  },
+  { title: { id: 'Tingkat Program Studi', en: 'Study Program Level' },
+    terms: [
       { term: 'Ketua Program Studi', full: { id: '', en: '' },
         desc: { id: 'Pemimpin tertinggi di tingkat program studi, bertanggung jawab atas jalannya seluruh kegiatan akademik, kurikulum, dan administratif program studi - sering disingkat "Kaprodi".',
                 en: 'The highest-ranking leader at the study-program level, responsible for running all academic, curriculum, and administrative activities within the study program - often abbreviated as "Kaprodi".' } },
       { term: 'Program Studi', full: { id: '', en: '' },
         desc: { id: 'Unit penyelenggara pendidikan pada satu bidang keilmuan tertentu, tempat kamu resmi terdaftar sebagai mahasiswa. Kamu terdaftar di Program Studi S-1 Teknik Informatika, di bawah Fakultas Informatika.',
                 en: 'The academic unit that runs a degree program in a specific field, where you are officially enrolled as a student. You are enrolled in the S-1 Teknik Informatika study program, under the Faculty of Informatics.' } },
-      { term: 'Rektor', full: { id: '', en: '' },
-        desc: { id: 'Pemimpin tertinggi di tingkat universitas, bertanggung jawab atas seluruh kebijakan dan penyelenggaraan pendidikan di universitas, termasuk mengesahkan dokumen resmi seperti buku kurikulum program studi.',
-                en: 'The highest-ranking leader at the university level, responsible for all policies and the overall administration of education at the university, including ratifying official documents such as a study program’s curriculum book.' } },
-      { term: 'Sekretaris Fakultas', full: { id: '', en: '' },
-        desc: { id: 'Pejabat yang membantu Dekan menjalankan tugas administratif dan operasional di tingkat fakultas.',
-                en: 'An official who assists the Dean in carrying out administrative and operational duties at the faculty level.' } },
       { term: 'Sekretaris Program Studi', full: { id: '', en: '' },
         desc: { id: 'Pejabat yang membantu Ketua Program Studi menjalankan tugas administratif dan operasional di tingkat program studi.',
                 en: 'An official who assists the Ketua Program Studi (Head of Study Program) in carrying out administrative and operational duties at the study-program level.' } },
-      { term: 'Sekretaris Universitas', full: { id: '', en: '' },
-        desc: { id: 'Pejabat yang membantu Rektor menjalankan tugas administratif dan operasional di tingkat universitas.',
-                en: 'An official who assists the Rector in carrying out administrative and operational duties at the university level.' } },
-      { term: 'Wakil Dekan', full: { id: '', en: '' },
-        desc: { id: 'Pejabat yang membantu Dekan menjalankan tugas di tingkat fakultas, biasanya membawahi bidang tertentu (mis. akademik, kemahasiswaan, atau sumber daya).',
-                en: 'An official who assists the Dean in carrying out duties at the faculty level, usually overseeing a specific area (e.g. academics, student affairs, or resources).' } },
-      { term: 'Wakil Rektor', full: { id: '', en: '' },
-        desc: { id: 'Pejabat yang membantu Rektor menjalankan tugas di tingkat universitas, biasanya membawahi bidang tertentu (mis. akademik, kemahasiswaan, atau keuangan).',
-                en: 'An official who assists the Rector in carrying out duties at the university level, usually overseeing a specific area (e.g. academics, student affairs, or finance).' } },
+    ]
+  },
+  { title: { id: 'Bagian Administrasi & Layanan', en: 'Administrative & Service Divisions' },
+    terms: [
+      { term: 'Bagian Administrasi Akademik', full: { id: '', en: '' },
+        desc: { id: 'Bagian yang mengurus administrasi akademik mahasiswa, mis. KRS, KHS, transkrip, dan surat-surat akademik lainnya.',
+                en: 'The division that handles students\' academic administration, e.g. KRS, KHS, transcripts, and other academic correspondence.' } },
+      { term: 'Bagian Alumni', full: { id: '', en: '' },
+        desc: { id: 'Bagian yang mengelola hubungan dan data alumni, termasuk kegiatan tracer study (survei lulusan) untuk memantau perkembangan karier alumni.',
+                en: 'The division that manages alumni relations and data, including tracer studies (graduate surveys) to monitor alumni career progress.' } },
+      { term: 'Bagian Kemahasiswaan', full: { id: '', en: '' },
+        desc: { id: 'Bagian yang mengurus kegiatan dan kesejahteraan mahasiswa di luar akademik, mis. organisasi kemahasiswaan, beasiswa, dan kegiatan kemahasiswaan lainnya.',
+                en: 'The division that handles student activities and welfare outside academics, e.g. student organizations, scholarships, and other student affairs.' } },
+      { term: 'Bagian Keuangan', full: { id: '', en: '' },
+        desc: { id: 'Bagian yang mengurus pembayaran dan administrasi keuangan mahasiswa, mis. uang kuliah dan biaya-biaya lainnya.',
+                en: 'The division that handles student payments and financial administration, e.g. tuition fees and other charges.' } },
+      { term: 'Bagian Teknologi Informasi', full: { id: '', en: '' },
+        desc: { id: 'Bagian yang mengurus sistem dan infrastruktur teknologi informasi kampus, mis. akun Office 365, MIKA, jaringan, dan dukungan teknis lainnya.',
+                en: 'The division that manages the campus\'s information technology systems and infrastructure, e.g. Office 365 accounts, MIKA, networks, and other technical support.' } },
     ]
   }
 ];
@@ -1446,20 +1503,26 @@ function panduanCoursePills_(courses) {
 // induk membuat halaman dibuka dengan satu baris ringkas, bukan dinding
 // istilah, sementara Semester I ("Langkah Pertama") langsung jadi konten
 // utama yang terlihat - istilahnya tetap ada dan gampang dibuka kalau
-// dibutuhkan, cuma tidak lagi mendominasi tampilan awal. Toggle induknya
-// pakai key tetap ('glossaryAll'), tiap istilah di dalamnya tetap pakai
-// key global unik lintas grup (g0, g1, ...) - keduanya sama-sama lewat
-// mekanisme toggleAcc/.acc-btn/.acc-body yang sudah ada, tidak ada JS
-// baru yang ditulis untuk accordion bersarang ini.
-// PANDUAN_GLOSSARY_GROUPS mengelompokkan 49 istilah jadi 4 bagian
-// (administrasi sehari-hari, organisasi & kompetisi mahasiswa, desain
-// kurikulum, struktur organisasi kampus) - daftarnya sudah terlalu
-// panjang untuk jadi satu daftar abjad datar tanpa pengelompokan.
-// Alfabetis TETAP dipertahankan DI DALAM tiap grup (bukan diganti jadi
-// urutan lain), sesuai preferensi yang sudah ditetapkan sebelumnya.
+// dibutuhkan, cuma tidak lagi mendominasi tampilan awal.
+// TIGA tingkat accordion bersarang: toggle induk ('glossaryAll') -> tiap
+// GRUP juga togglenya sendiri ('grp0', 'grp1', ...) -> tiap ISTILAH juga
+// togglenya sendiri (key global lintas grup: g0, g1, ...). Grup ditambah
+// jadi accordion sendiri (sebelumnya cuma judul statis, semua istilah di
+// dalamnya langsung tampak begitu toggle induk dibuka) karena dengan 49
+// istilah, membuka toggle induk saja masih memuntahkan seluruh daftar ke
+// layar - dengan grup ikut tertutup secara default, membuka "Istilah
+// Penting" cuma menampilkan judul-judul grup yang ringkas, baru istilah
+// di dalam satu grup muncul kalau grup itu sendiri diklik. Ketiga tingkat
+// sama-sama lewat mekanisme toggleAcc/.acc-btn/.acc-body yang sudah ada,
+// tidak ada JS baru untuk accordion bersarang ini.
+// PANDUAN_GLOSSARY_GROUPS mengelompokkan 49 istilah jadi 12 bagian kecil
+// (dipecah lagi dari 4 bagian sebelumnya supaya tiap bagian tetap ringkas
+// untuk di-scan). Alfabetis TETAP dipertahankan DI DALAM tiap grup (bukan
+// diganti jadi urutan lain), sesuai preferensi yang sudah ditetapkan.
 function panduanGlossaryHtml_() {
   var idx = 0;
-  var groupsHtml = PANDUAN_GLOSSARY_GROUPS.map(function(group) {
+  var groupsHtml = PANDUAN_GLOSSARY_GROUPS.map(function(group, gi) {
+    var gk = 'grp' + gi;
     var items = group.terms.map(function(g) {
       var k = 'g' + (idx++);
       var full = currentLang === 'en' ? g.full.en : g.full.id;
@@ -1472,9 +1535,12 @@ function panduanGlossaryHtml_() {
         '<div class="acc-body" id="panel-' + k + '"><div class="panduan-glossary-desc">' + escHtml(currentLang === 'en' ? g.desc.en : g.desc.id) + '</div></div>' +
         '</div>';
     }).join('');
-    return '<div class="panduan-glossary-group">' +
-      '<div class="panduan-glossary-group-title">' + escHtml(currentLang === 'en' ? group.title.en : group.title.id) + '</div>' +
-      items +
+    return '<div class="acc-wrap panduan-glossary-group">' +
+      '<button class="acc-btn panduan-glossary-group-btn" id="trg-' + gk + '" onclick="toggleAcc(\'' + gk + '\')">' +
+        '<span class="acc-label panduan-glossary-group-title">' + escHtml(currentLang === 'en' ? group.title.en : group.title.id) + '</span>' +
+        '<span class="acc-icon" id="ico-' + gk + '"></span>' +
+      '</button>' +
+      '<div class="acc-body" id="panel-' + gk + '"><div class="panduan-glossary-group-terms">' + items + '</div></div>' +
       '</div>';
   }).join('');
   return '<div class="acc-wrap panduan-glossary-outer">' +
