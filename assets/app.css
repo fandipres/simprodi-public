@@ -211,6 +211,7 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; s
 #quizView .home-hero-inner, #quizResultView .home-hero-inner { max-width: 560px; }
 #statistikView { max-width: 780px; margin-left: auto; margin-right: auto; }
 #panduanView { max-width: 780px; margin-left: auto; margin-right: auto; }
+#dosenView { max-width: 780px; margin-left: auto; margin-right: auto; }
 
 /* Laptop/desktop saja: semua fitur dilebarkan ke lebar yang sama agar
    tidak ada ruang kosong berlebih di kanan-kiri pada layar lebar. Mobile
@@ -228,6 +229,8 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; s
   #statistikView .home-hero-inner { max-width: 1140px; }
   #panduanView { max-width: 1140px; }
   #panduanView .home-hero-inner { max-width: 1140px; }
+  #dosenView { max-width: 1140px; }
+  #dosenView .home-hero-inner { max-width: 1140px; }
 }
 
 /* ---- SEARCH ---- */
@@ -795,6 +798,28 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; s
 .panduan-kelulusan-card { background: var(--green-soft); border-color: var(--green-border); }
 .panduan-kelulusan-card .panduan-sem-note { color: var(--text); margin-bottom: 0; }
 .panduan-kelulusan-chapter { color: var(--green); }
+
+/* ---- DAFTAR DOSEN ---- */
+.dosen-grid {
+  display: grid; grid-template-columns: 1fr; gap: 10px;
+}
+@media (min-width: 640px) { .dosen-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1024px) { .dosen-grid { grid-template-columns: 1fr 1fr 1fr; } }
+.dosen-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 14px 16px;
+}
+.dosen-card-name { font-weight: 700; font-size: 0.92rem; margin-bottom: 8px; }
+.dosen-card-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.dosen-badge {
+  display: inline-block; font-size: 0.72rem; font-weight: 600;
+  padding: 3px 8px; border-radius: 20px; border: 1px solid;
+}
+.dosen-badge-tetap { background: var(--blue-soft); color: var(--blue); border-color: var(--blue-border); }
+.dosen-badge-ta { background: var(--green-soft); color: var(--green); border-color: var(--green-border); }
+.dosen-card-links { font-size: 0.82rem; }
+.dosen-sinta-link { color: var(--blue); font-weight: 600; text-decoration: none; }
+.dosen-sinta-link:hover { text-decoration: underline; }
 
 .sc-card {
   background: var(--card); border: 1px solid var(--border);

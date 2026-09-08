@@ -115,6 +115,15 @@
             <div class="home-card-btn" data-i18n="home_card2_btn">Mulai Tes</div>
           </div>
         </div>
+        <div class="home-card" onclick="openDosen()" role="button" tabindex="0"
+             onkeydown="if(event.key==='Enter'||event.key===' ')openDosen()">
+          <div class="home-card-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 00-3-3.87"></path><path d="M16 3.13a4 4 0 010 7.75"></path></svg></div>
+          <div class="home-card-body">
+            <div class="home-card-title" data-i18n="home_card6_title">Dosen Pembimbing</div>
+            <div class="home-card-desc" data-i18n="home_card6_desc">Cari dosen pembimbing lomba, kegiatan lain, atau tugas akhir, lengkap dengan status kepegawaian dan profil riset SINTA mereka.</div>
+            <div class="home-card-btn" data-i18n="home_card6_btn">Lihat Dosen</div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -580,7 +589,7 @@
           <label class="sc-form-label"><span data-i18n="sc_label_dosen">Dosen Pembimbing</span> <span class="opt" data-i18n="sc_opt">opsional</span></label>
           <div id="scfDosenFields">
             <div class="sc-single-field">
-              <input class="sc-input scf-dosen-nama" data-i18n-placeholder="sc_placeholder_dosen" placeholder="mis. Dr. Ir. Ahmad Fauzan, S.Kom., M.T.">
+              <select class="sc-select scf-dosen-nama"><option value="" data-i18n="sc_placeholder_dosen">Pilih dosen...</option></select>
               <button type="button" class="sc-icon-btn" onclick="scRemoveDosenRow(this)" title="Hapus">&times;</button>
             </div>
           </div>
@@ -694,6 +703,19 @@
       </div>
 
       <div class="panduan-timeline" id="panduanContent"></div>
+    </div>
+
+    <!-- Daftar Dosen -->
+    <div id="dosenView" style="display:none;">
+      <div class="home-hero">
+        <div class="home-hero-inner">
+          <button class="back-btn" onclick="showHome()"><span class="arr">&#8592;</span> <span data-i18n="btn_beranda">Beranda</span></button>
+          <div class="home-headline" style="font-size:1.05rem;margin-bottom:4px;" data-i18n="dosen_title">Dosen Pembimbing</div>
+          <div class="home-sub" style="margin-bottom:0;" data-i18n="dosen_subtitle">Dosen Program Studi S-1 Teknik Informatika beserta status kepegawaian dan profil riset SINTA.</div>
+        </div>
+      </div>
+
+      <div id="dosenContent"></div>
     </div>
 
   </div>

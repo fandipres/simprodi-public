@@ -92,7 +92,7 @@ const I18N = {
     panduan_subtitle: 'Gambaran perjalanan akademik program studi dari semester 1 sampai lulus, semester demi semester.',
     panduan_semester_label: 'Semester',
     panduan_sks_unit: 'SKS',
-    panduan_glossary_title: 'Istilah Penting untuk Mahasiswa Baru',
+    panduan_glossary_title: 'Istilah Penting untuk Mahasiswa',
     stat_title: 'Capaian Kolektif Program Studi',
     stat_subtitle: 'Ratusan kegiatan, prestasi, dan karya lahir dari mahasiswa kami, dirangkum dalam angka.',
     stat_disclaimer_title: 'Data masih bersifat sementara',
@@ -103,6 +103,16 @@ const I18N = {
     stat_label_sertifikasi: 'Sertifikasi Profesional',
     stat_label_showcase: 'Karya Showcase',
     stat_error: 'Gagal memuat statistik. Coba lagi beberapa saat.',
+    home_card6_title: 'Dosen Pembimbing',
+    home_card6_desc: 'Cari dosen pembimbing lomba, kegiatan lain, atau tugas akhir, lengkap dengan status kepegawaian dan profil riset SINTA mereka.',
+    home_card6_btn: 'Lihat Dosen',
+    dosen_title: 'Dosen Pembimbing',
+    dosen_subtitle: 'Cari dosen program studi yang bisa jadi pembimbing lomba, kegiatan lain, atau tugas akhir - lengkap dengan status kepegawaian dan profil riset SINTA mereka.',
+    dosen_badge_tetap: 'Dosen Tetap',
+    dosen_badge_ta: 'Pembimbing TA',
+    dosen_sinta_link: 'Profil SINTA',
+    dosen_error: 'Gagal memuat daftar dosen. Coba lagi beberapa saat.',
+    dosen_empty: 'Data dosen belum tersedia.',
     sc_galeri_title: 'Karya Mahasiswa Teknik Informatika',
     sc_galeri_sub: 'Aplikasi, situs, dan game hasil tugas kuliah maupun tugas akhir mahasiswa. Jelajahi dan berikan dukungan lewat like.',
     sc_search_placeholder: 'Cari nama karya, kreator, atau teknologi...',
@@ -210,7 +220,7 @@ const I18N = {
     sc_label_semester: 'Semester Dikerjakan',
     sc_placeholder_semester: 'mis. Genap 2025/2026',
     sc_label_dosen: 'Dosen Pembimbing',
-    sc_placeholder_dosen: 'mis. Dr. Ir. Ahmad Fauzan, S.Kom., M.T.',
+    sc_placeholder_dosen: 'Pilih dosen...',
     sc_label_kontak: 'Kontak Tim',
     sc_placeholder_kontak: 'nama@email.com',
     sc_hint_kontak: 'Gunakan alamat email aktif tim, supaya pengunjung bisa menghubungi lewat link yang muncul di halaman detail.',
@@ -333,7 +343,7 @@ const I18N = {
     panduan_subtitle: 'An overview of the study program\'s academic journey from semester 1 to graduation, semester by semester.',
     panduan_semester_label: 'Semester',
     panduan_sks_unit: 'credits',
-    panduan_glossary_title: 'Key Terms for New Students',
+    panduan_glossary_title: 'Key Terms for Students',
     stat_title: 'Our Collective Achievements',
     stat_subtitle: 'Hundreds of activities, awards, and projects from our students, summed up in numbers.',
     stat_disclaimer_title: 'Data is still provisional',
@@ -344,6 +354,16 @@ const I18N = {
     stat_label_sertifikasi: 'Professional Certifications',
     stat_label_showcase: 'Showcase Projects',
     stat_error: 'Failed to load statistics. Please try again shortly.',
+    home_card6_title: 'Supervising Lecturers',
+    home_card6_desc: 'Find a supervisor for a competition, another activity, or your final thesis, complete with their employment status and SINTA research profile.',
+    home_card6_btn: 'View Lecturers',
+    dosen_title: 'Supervising Lecturers',
+    dosen_subtitle: 'Find a study program lecturer who can supervise a competition, another activity, or your final thesis - complete with their employment status and SINTA research profile.',
+    dosen_badge_tetap: 'Permanent Faculty',
+    dosen_badge_ta: 'Thesis Supervisor',
+    dosen_sinta_link: 'SINTA Profile',
+    dosen_error: 'Failed to load the lecturer list. Please try again shortly.',
+    dosen_empty: 'Lecturer data is not available yet.',
     sc_galeri_title: 'Informatics Engineering Student Works',
     sc_galeri_sub: 'Apps, websites, and games made for coursework or final projects. Explore and show your support with a like.',
     sc_search_placeholder: 'Search by project name, creator, or technology...',
@@ -451,7 +471,7 @@ const I18N = {
     sc_label_semester: 'Semester Made',
     sc_placeholder_semester: 'e.g. Even 2025/2026',
     sc_label_dosen: 'Supervisor',
-    sc_placeholder_dosen: 'e.g. Dr. Ir. Ahmad Fauzan, S.Kom., M.T.',
+    sc_placeholder_dosen: 'Select a lecturer...',
     sc_label_kontak: 'Team Contact',
     sc_placeholder_kontak: 'name@email.com',
     sc_hint_kontak: 'Use an active team email address, so visitors can reach you via the link shown on the detail page.',
@@ -564,7 +584,8 @@ function rerenderActiveView() {
   if (document.getElementById('quizResultView').style.display !== 'none') { showQuizResult(); return; }
   if (document.getElementById('scGaleriView').style.display !== 'none') { scRenderGaleri(); return; }
   if (document.getElementById('scDetailView').style.display !== 'none' && _scCurrentDetail) { scRenderDetail(); return; }
-  if (document.getElementById('panduanView').style.display !== 'none') { renderPanduan_(); }
+  if (document.getElementById('panduanView').style.display !== 'none') { renderPanduan_(); return; }
+  if (document.getElementById('dosenView').style.display !== 'none') { renderDosen_(); }
 }
 
 // ==============================================================
@@ -648,6 +669,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   else if (path === '/specialization')    openQuiz();
   else if (path === '/statistic')         openStatistik();
   else if (path === '/student-guide')     openPanduan();
+  else if (path === '/lecturers')         openDosen();
 
   if (nim) { openPortofolio(); searchInput.value = nim; doSearch(true); }
   if (kode) { openShowcaseDetail(kode); }
@@ -1667,6 +1689,58 @@ function openPanduan() {
   renderPanduan_();
 }
 
+// ------ DAFTAR DOSEN ------
+// Sumber data: sheet DOSEN (diisi admin lewat import Excel "timpa penuh",
+// lihat Code.gs importDosen/getDosenList). SINTA ID dipakai untuk link
+// keluar ke profil SINTA masing-masing dosen (bukan disalin sebagai data
+// prestasi terpisah - publikasi/sitasi sudah dikelola SINTA sendiri).
+let dosenList_ = null;
+
+function dosenCardHtml_(d) {
+  var badges = '';
+  if (d.dosenTetap) badges += '<span class="dosen-badge dosen-badge-tetap" data-i18n="dosen_badge_tetap">' + t('dosen_badge_tetap') + '</span>';
+  if (d.dosenTA)    badges += '<span class="dosen-badge dosen-badge-ta" data-i18n="dosen_badge_ta">' + t('dosen_badge_ta') + '</span>';
+  var sintaHtml = d.sintaId
+    ? '<a class="dosen-sinta-link" href="https://sinta.kemdikbud.go.id/authors/profile/' + encodeURIComponent(d.sintaId) + '" target="_blank" rel="noopener">' + t('dosen_sinta_link') + ' &#8599;</a>'
+    : '';
+  return '<div class="dosen-card">' +
+    '<div class="dosen-card-name">' + escHtml(d.nama) + '</div>' +
+    (badges ? '<div class="dosen-card-badges">' + badges + '</div>' : '') +
+    (sintaHtml ? '<div class="dosen-card-links">' + sintaHtml + '</div>' : '') +
+    '</div>';
+}
+
+function renderDosen_() {
+  var el = document.getElementById('dosenContent');
+  if (!el || !dosenList_) return;
+  if (!dosenList_.length) {
+    el.innerHTML = '<p class="msg-error">' + t('dosen_empty') + '</p>';
+    return;
+  }
+  el.innerHTML = '<div class="dosen-grid">' + dosenList_.map(dosenCardHtml_).join('') + '</div>';
+}
+
+async function openDosen() {
+  scHideAllViews_();
+  document.getElementById('dosenView').style.display = 'block';
+  setCleanPath_('/lecturers/');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  var el = document.getElementById('dosenContent');
+  if (dosenList_) { renderDosen_(); return; }
+  el.innerHTML = '';
+  try {
+    const res = await gasGet({ action: 'dosen_list' });
+    if (res.ok) {
+      dosenList_ = res.dosen;
+      renderDosen_();
+    } else {
+      el.innerHTML = '<p class="msg-error">' + t('dosen_error') + '</p>';
+    }
+  } catch (e) {
+    el.innerHTML = '<p class="msg-error">' + t('dosen_error') + '</p>';
+  }
+}
+
 let quizConfigApplied = false;
 
 async function ensureQuizConfig() {
@@ -1863,7 +1937,7 @@ function restartQuiz() {
 // ==============================================================
 function scHideAllViews_() {
   ['homeView','searchSection','detailView','quizView','quizResultView',
-   'scGaleriView','scDetailView','scFormView','scStatusView','statistikView','panduanView'].forEach(function(id) {
+   'scGaleriView','scDetailView','scFormView','scStatusView','statistikView','panduanView','dosenView'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.style.display = 'none';
   });
@@ -2405,9 +2479,10 @@ function scResetForm() {
     '</div>';
   document.getElementById('scfDosenFields').innerHTML =
     '<div class="sc-single-field">' +
-      '<input class="sc-input scf-dosen-nama" placeholder="' + t('sc_placeholder_dosen') + '">' +
+      '<select class="sc-select scf-dosen-nama">' + scDosenOptionsHtml_('') + '</select>' +
       '<button type="button" class="sc-icon-btn" onclick="scRemoveDosenRow(this)" title="Hapus">&times;</button>' +
     '</div>';
+  scEnsureDosenOptions_();
   ['scfJenis', 'scfPeminatan', 'scfStatusDeploy', 'scfStatusPublish'].forEach(function(id) {
     var wrap = document.getElementById(id);
     wrap.querySelectorAll('.sc-seg-btn').forEach(function(b, i) { b.classList.toggle('active', i === 0); });
@@ -2441,7 +2516,7 @@ function scAddDosenRow() {
   var row = document.createElement('div');
   row.className = 'sc-single-field';
   row.innerHTML =
-    '<input class="sc-input scf-dosen-nama" placeholder="' + t('sc_placeholder_dosen') + '">' +
+    '<select class="sc-select scf-dosen-nama">' + scDosenOptionsHtml_('') + '</select>' +
     '<button type="button" class="sc-icon-btn" onclick="scRemoveDosenRow(this)" title="Hapus">&times;</button>';
   wrap.appendChild(row);
 }
@@ -2449,6 +2524,45 @@ function scRemoveDosenRow(btn) {
   var wrap = document.getElementById('scfDosenFields');
   if (wrap.children.length > 1) btn.closest('.sc-single-field').remove();
   else btn.closest('.sc-single-field').querySelector('.scf-dosen-nama').value = '';
+}
+
+// Pilihan Dosen Pembimbing di form Showcase (publik) bersumber dari sheet
+// DOSEN yang berstatus DosenTA='Ya' (lihat Code.gs getDosenList/importDosen)
+// - supaya daftar dosen di halaman /lecturers/ dan pilihan di form ini
+// selalu konsisten dari satu sumber data yang sama. `selected` yang tidak
+// ada di daftar (mis. nama lama hasil ketik bebas sebelum fitur ini ada)
+// tetap ditambahkan sebagai opsi tambahan supaya data lama tidak hilang.
+var scDosenOptions_        = null;
+var scDosenOptionsPromise_ = null;
+
+function scDosenOptionsHtml_(selected) {
+  var opts = '<option value="" data-i18n="sc_placeholder_dosen">' + t('sc_placeholder_dosen') + '</option>';
+  var found = false;
+  (scDosenOptions_ || []).forEach(function(nama) {
+    if (nama === selected) found = true;
+    opts += '<option value="' + escHtml(nama) + '"' + (nama === selected ? ' selected' : '') + '>' + escHtml(nama) + '</option>';
+  });
+  if (selected && !found) opts += '<option value="' + escHtml(selected) + '" selected>' + escHtml(selected) + '</option>';
+  return opts;
+}
+
+function scRefreshDosenSelects_() {
+  document.querySelectorAll('#scfDosenFields .scf-dosen-nama').forEach(function(sel) {
+    var current = sel.value;
+    sel.innerHTML = scDosenOptionsHtml_(current);
+  });
+}
+
+function scEnsureDosenOptions_() {
+  if (scDosenOptions_) return Promise.resolve(scDosenOptions_);
+  if (!scDosenOptionsPromise_) {
+    scDosenOptionsPromise_ = gasGet({ action: 'dosen_list' }).then(function(res) {
+      scDosenOptions_ = (res && res.ok) ? res.dosen.filter(function(d) { return d.dosenTA; }).map(function(d) { return d.nama; }) : [];
+      scRefreshDosenSelects_();
+      return scDosenOptions_;
+    }).catch(function() { scDosenOptions_ = []; return scDosenOptions_; });
+  }
+  return scDosenOptionsPromise_;
 }
 
 // Tag-input Teknologi: ketik teks, koma atau Enter langsung mengubahnya jadi
@@ -2581,10 +2695,11 @@ function scPopulateForm_(item) {
   if (item.dosenPembimbing && item.dosenPembimbing.length) {
     document.getElementById('scfDosenFields').innerHTML = item.dosenPembimbing.map(function(nm) {
       return '<div class="sc-single-field">' +
-        '<input class="sc-input scf-dosen-nama" value="' + escHtml(nm) + '">' +
+        '<select class="sc-select scf-dosen-nama">' + scDosenOptionsHtml_(nm) + '</select>' +
         '<button type="button" class="sc-icon-btn" onclick="scRemoveDosenRow(this)" title="Hapus">&times;</button>' +
       '</div>';
     }).join('');
+    scEnsureDosenOptions_();
   }
 }
 
