@@ -751,10 +751,21 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; s
   padding: 4px 2px 2px;
 }
 .panduan-glossary .acc-wrap:last-child { margin-bottom: 0; }
-.panduan-glossary-group-title { color: var(--text); font-weight: 700; }
-.panduan-glossary-group-terms { padding: 8px 2px 2px; }
+/* Grup (kategori) dibedakan dari istilah (sub-kategori) lewat KOMBINASI
+   beberapa isyarat sekaligus, bukan cuma warna teks (dulu satu-satunya
+   pembeda, user melaporkan sulit dibedakan): latar diwarnai + label lebih
+   besar untuk grup, sementara istilah di dalamnya diindentasi + diberi
+   garis penuntun di kiri + latar putih polos + label lebih kecil. */
+.panduan-glossary-group-btn { background: var(--blue-soft); }
+.panduan-glossary-group-btn:hover { background: var(--blue-soft); border-color: var(--blue-border); }
+.panduan-glossary-group-title { color: var(--blue); font-weight: 800; font-size: 0.86rem; }
+.panduan-glossary-group-terms {
+  padding: 10px 0 2px 14px; margin-top: 2px;
+  border-left: 2px solid var(--blue-border);
+}
 .panduan-glossary-group-terms .acc-wrap:last-child { margin-bottom: 0; }
-.panduan-glossary-group-terms .acc-label { color: var(--blue); font-weight: 800; }
+.panduan-glossary-group-terms .acc-btn { padding: 10px 14px; }
+.panduan-glossary-group-terms .acc-label { color: var(--text); font-weight: 600; font-size: 0.82rem; }
 .panduan-glossary-full { font-weight: 600; color: var(--muted); }
 .panduan-glossary-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.55; padding: 12px 16px; }
 .panduan-inline-link { color: var(--blue); font-weight: 700; cursor: pointer; }
@@ -780,6 +791,9 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; s
 .panduan-track-group .result-chip { margin-bottom: 8px; }
 .panduan-lanjut-card { background: var(--blue-soft); border-color: var(--blue-border); }
 .panduan-lanjut-card .panduan-sem-note { color: var(--text); margin-bottom: 0; }
+.panduan-kelulusan-card { background: var(--green-soft); border-color: var(--green-border); }
+.panduan-kelulusan-card .panduan-sem-note { color: var(--text); margin-bottom: 0; }
+.panduan-kelulusan-chapter { color: var(--green); }
 
 .sc-card {
   background: var(--card); border: 1px solid var(--border);

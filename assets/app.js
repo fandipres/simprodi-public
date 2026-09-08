@@ -1377,6 +1377,22 @@ var PANDUAN_GLOSSARY_GROUPS = [
         desc: { id: 'Bagian yang mengurus sistem dan infrastruktur teknologi informasi kampus, mis. akun Office 365, MIKA, jaringan, dan dukungan teknis lainnya.',
                 en: 'The division that manages the campus\'s information technology systems and infrastructure, e.g. Office 365 accounts, MIKA, networks, and other technical support.' } },
     ]
+  },
+  { title: { id: 'Kelulusan & Wisuda', en: 'Graduation' },
+    terms: [
+      { term: 'Predikat Kelulusan', full: { id: '', en: '' },
+        desc: { id: 'Predikat yang diberikan berdasarkan IPK akhir kamu saat lulus, seperti Memuaskan, Sangat Memuaskan, atau Dengan Pujian (Cum Laude). Predikat ini biasanya tercantum di transkrip dan ijazahmu.',
+                en: 'The honor/distinction awarded based on your final IPK upon graduating, such as Satisfactory, Very Satisfactory, or With Honors (Cum Laude). This is usually listed on your transcript and diploma.' } },
+      { term: 'Sidang Tugas Akhir', full: { id: '', en: '' },
+        desc: { id: 'Ujian untuk mempertahankan Tugas Akhir/Skripsi kamu di depan dosen penguji, biasanya dilakukan setelah Tugas Akhir selesai dan disetujui dosen pembimbing. Kalau lulus sidang, kamu tinggal selangkah lagi menuju kelulusan.',
+                en: 'The examination where you defend your Final Project/Thesis in front of examining lecturers, usually held once your Final Project is finished and approved by your advisor. Passing this puts you one step away from graduating.' } },
+      { term: 'Wisuda', full: { id: '', en: '' },
+        desc: { id: 'Upacara resmi pengukuhan kelulusan, tempat kamu resmi dinyatakan sebagai lulusan dan menerima ijazah.',
+                en: 'The official graduation ceremony, where you are formally declared a graduate and receive your diploma.' } },
+      { term: 'Yudisium', full: { id: '', en: '' },
+        desc: { id: 'Rapat resmi penetapan status dan predikat kelulusanmu, biasanya dilakukan setelah kamu lulus Sidang Tugas Akhir dan sebelum Wisuda.',
+                en: 'The official meeting that determines your graduation status and honors, usually held after you pass your Sidang Tugas Akhir and before Wisuda.' } },
+    ]
   }
 ];
 
@@ -1473,13 +1489,32 @@ var PANDUAN_SEMESTERS = [
     ]
   },
   { sem: 8, sks: 6,
-    chapter: { id: 'Garis Akhir', en: 'The Finish Line' },
+    chapter: { id: 'Menuju Kelulusan', en: 'Heading Toward Graduation' },
     milestone: { id: 'Tugas Akhir/Skripsi (biasanya diselesaikan di semester ini kalau belum dimulai sejak semester 7). Jaga komunikasi rutin dengan dosen pembimbing supaya progresmu tetap sesuai target kelulusan - semester ini juga jadi checkpoint pertama masa studi, kalau belum lulus di akhir semester 8 kamu akan menerima Surat Peringatan pertama (SP1).', en: 'Final Project/Thesis (usually completed this semester if not already started back in semester 7). Keep in regular contact with your thesis advisor to stay on track for graduation - this semester is also the first study-duration checkpoint: if you have not graduated by the end of semester 8, you will receive your first Surat Peringatan (SP1).' },
     courses: [
       { id: 'Tugas Akhir / Skripsi', en: 'Final Project / Thesis' }
     ]
   }
 ];
+
+// Ditambahkan setelah user menyadari perjalanan yang digambarkan berhenti
+// di "selesai Tugas Akhir" (semester 8), padahal subtitle halaman ini
+// sendiri janji "sampai lulus" - Sidang, Yudisium, dan Wisuda belum
+// pernah muncul sama sekali sebelumnya. Kartu ini mengisi jarak antara
+// "Tugas Akhir selesai" dan "resmi jadi lulusan", ditampilkan SETELAH
+// Semester VIII tapi SEBELUM PANDUAN_LANJUT (khusus jalur berhasil lulus
+// tepat waktu - PANDUAN_LANJUT tetap khusus untuk yang belum selesai
+// dalam 8 semester). Semester VIII sendiri di-rename chapter-nya dari
+// "Garis Akhir" ke "Menuju Kelulusan" supaya metafora "garis akhir" yang
+// sebenarnya dipindah ke sini, ke titik kelulusan yang sesungguhnya.
+var PANDUAN_KELULUSAN = {
+  title: { id: 'Kelulusan', en: 'Graduation' },
+  chapter: { id: 'Garis Akhir', en: 'The Finish Line' },
+  body: {
+    id: 'Setelah Tugas Akhir/Skripsi kamu selesai dan disetujui Dosen Wali/PA atau dosen pembimbing, kamu akan melalui Sidang Tugas Akhir untuk mempertahankan hasil karyamu di depan dosen penguji. Kalau lulus sidang, kamu akan mengikuti Yudisium (penetapan status dan Predikat Kelulusanmu secara resmi), lalu diwisuda di Wisuda sebagai lulusan Program Studi S-1 Teknik Informatika. Selamat menempuh perjalanan barumu!',
+    en: 'Once your Final Project/Thesis is finished and approved by your Dosen Wali/PA or thesis advisor, you will go through a Sidang Tugas Akhir (thesis defense) to defend your work in front of examining lecturers. If you pass, you will go through Yudisium (the official determination of your graduation status and Predikat Kelulusan), then be conferred at Wisuda (the graduation ceremony) as a graduate of the S-1 Teknik Informatika study program. Congratulations on the new journey ahead!'
+  }
+};
 
 var PANDUAN_LANJUT = {
   title: { id: 'Semester 9 dan Seterusnya', en: 'Semester 9 and Beyond' },
@@ -1586,6 +1621,12 @@ function renderPanduan_() {
       tracksHtml +
       '</div>';
   }).join('');
+
+  html += '<div class="panduan-sem-card panduan-kelulusan-card">' +
+    '<div class="panduan-sem-title">' + escHtml(currentLang === 'en' ? PANDUAN_KELULUSAN.title.en : PANDUAN_KELULUSAN.title.id) + '</div>' +
+    '<div class="panduan-sem-chapter panduan-kelulusan-chapter">' + escHtml(currentLang === 'en' ? PANDUAN_KELULUSAN.chapter.en : PANDUAN_KELULUSAN.chapter.id) + '</div>' +
+    '<div class="panduan-sem-note" style="margin-top:6px;">' + (currentLang === 'en' ? PANDUAN_KELULUSAN.body.en : PANDUAN_KELULUSAN.body.id) + '</div>' +
+    '</div>';
 
   html += '<div class="panduan-sem-card panduan-lanjut-card">' +
     '<div class="panduan-sem-title">' + escHtml(currentLang === 'en' ? PANDUAN_LANJUT.title.en : PANDUAN_LANJUT.title.id) + '</div>' +
