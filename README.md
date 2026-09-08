@@ -12,7 +12,7 @@ A bilingual (Indonesian/English) public portal for an Informatics Engineering st
 * **Student Guide Book:** A semester-by-semester overview of the study program's academic journey, from semester 1 through graduation, covering the core curriculum, specialization tracks (SSD/AISD), MBKM eligibility, the capstone project, and the final project/thesis.
 * **Bilingual UI:** Every page, including dynamically rendered content, is available in Indonesian and English.
 * **Light/Dark Theme:** A manual toggle between light and dark mode, remembered per device.
-* **Shareable Clean URLs:** Each main section (`/portofolio/`, `/showcase/`, `/specialization/`, `/statistic/`, `/panduan/`) is a real, directly linkable page, on top of the existing per-record deep links (`?nim=`, `?kode=`).
+* **Shareable Clean URLs:** Each main section (`/portofolio/`, `/showcase/`, `/specialization/`, `/statistic/`, `/student-guide/`) is a real, directly linkable page, on top of the existing per-record deep links (`?nim=`, `?kode=`).
 
 ## 💻 Application Preview
 

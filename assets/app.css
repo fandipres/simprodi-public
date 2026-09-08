@@ -745,10 +745,10 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; s
 
 /* ---- BUKU PANDUAN MAHASISWA ---- */
 .panduan-timeline { display: flex; flex-direction: column; gap: 14px; }
-.panduan-section-title { font-size: 0.95rem; font-weight: 800; color: var(--text); margin-bottom: 12px; }
+.panduan-glossary-outer { margin-bottom: 0; }
+.panduan-glossary-outer > .acc-btn .acc-label { font-size: 0.95rem; font-weight: 800; }
 .panduan-glossary {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 16px 18px;
+  padding: 4px 2px 2px;
 }
 .panduan-glossary .acc-wrap:last-child { margin-bottom: 0; }
 .panduan-glossary .acc-label { color: var(--blue); font-weight: 800; }
@@ -761,10 +761,11 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; s
   border-radius: var(--radius); padding: 16px 18px;
 }
 .panduan-sem-head {
-  display: flex; align-items: baseline; justify-content: space-between;
+  display: flex; align-items: flex-start; justify-content: space-between;
   gap: 10px; margin-bottom: 4px;
 }
 .panduan-sem-title { font-size: 0.95rem; font-weight: 800; color: var(--text); }
+.panduan-sem-chapter { font-size: 0.78rem; font-weight: 600; color: var(--blue); margin-top: 1px; }
 .panduan-sem-sks { font-size: 0.76rem; color: var(--muted); font-weight: 600; white-space: nowrap; }
 .panduan-sem-note { font-size: 0.79rem; color: var(--muted); line-height: 1.55; margin-bottom: 12px; }
 .panduan-course-list { display: flex; flex-wrap: wrap; gap: 7px; }
