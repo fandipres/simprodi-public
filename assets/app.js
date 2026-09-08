@@ -1180,7 +1180,7 @@ var PANDUAN_GLOSSARY_GROUPS = [
                 en: 'The division that handles student payments and financial administration, e.g. tuition fees and other charges.' } },
       { term: 'Bagian Teknologi Informasi', full: { id: '', en: '' },
         desc: { id: 'Bagian yang mengurus sistem dan infrastruktur teknologi informasi kampus, mis. akun Office 365, MIKA, jaringan, dan dukungan teknis lainnya.',
-                en: 'The division that manages the campus\'s information technology systems and infrastructure, e.g. Office 365 accounts, MIKA, networks, and other technical support.' } },
+                en: 'The division that manages the campus\'s information technology systems and infrastructure, e.g. Office 365 accounts, MIKA, networks, and other technical support.' } }
     ]
   },
   { title: { id: 'Capaian Pembelajaran', en: 'Learning Outcomes' },
@@ -1193,7 +1193,7 @@ var PANDUAN_GLOSSARY_GROUPS = [
                 en: 'A more specific learning outcome for a particular course, derived from CPL. CPMK bridges the study program’s overall goals (CPL) and what you actually learn in that specific course.' } },
       { term: 'PL', full: { id: 'Profil Lulusan', en: 'Profil Lulusan (Graduate Profile)' },
         desc: { id: 'Peran atau posisi yang diharapkan bisa dijalani lulusan program studi ini di dunia kerja atau bidang keahliannya, dirumuskan berdasarkan kebutuhan industri dan perkembangan ilmu pengetahuan.',
-                en: 'The roles or positions graduates of this study program are expected to be able to take on in the workforce or their field of expertise, formulated based on industry needs and advances in the field.' } },
+                en: 'The roles or positions graduates of this study program are expected to be able to take on in the workforce or their field of expertise, formulated based on industry needs and advances in the field.' } }
     ]
   },
   { title: { id: 'Dokumen & Perencanaan Studi', en: 'Documents & Study Planning' },
@@ -1218,7 +1218,7 @@ var PANDUAN_GLOSSARY_GROUPS = [
                 en: 'A concise document outlining a course’s overview - its learning objectives, topics to be covered, and references used throughout the semester.' } },
       { term: 'Transkrip Akademik', full: { id: '', en: '' },
         desc: { id: 'Dokumen resmi berisi rekap seluruh nilai dan mata kuliah yang sudah kamu tempuh sepanjang masa studi, termasuk IPK akhir - biasanya dibutuhkan untuk keperluan wisuda, melamar kerja, atau melanjutkan studi.',
-                en: 'An official document summarizing all the grades and courses you have taken throughout your studies, including your final IPK - usually needed for graduation, job applications, or further studies.' } },
+                en: 'An official document summarizing all the grades and courses you have taken throughout your studies, including your final IPK - usually needed for graduation, job applications, or further studies.' } }
     ]
   },
   { title: { id: 'Identitas & Sistem Digital', en: 'Identity & Digital Systems' },
@@ -1237,7 +1237,7 @@ var PANDUAN_GLOSSARY_GROUPS = [
                 en: 'The campus’s online academic portal - where you can view your KRS, KHS, IPK, class schedule, and other academic information.' } },
       { term: 'NIM', full: { id: 'Nomor Induk Mahasiswa', en: 'Student ID Number' },
         desc: { id: 'Nomor unik yang menjadi identitas resmimu sebagai mahasiswa, dipakai di hampir semua sistem dan dokumen akademik (KRS, KHS, transkrip, dan lainnya).',
-                en: 'A unique number that serves as your official identity as a student, used across almost every academic system and document (KRS, KHS, transcript, and more).' } },
+                en: 'A unique number that serves as your official identity as a student, used across almost every academic system and document (KRS, KHS, transcript, and more).' } }
     ]
   },
   { title: { id: 'Kategori Mata Kuliah', en: 'Course Categories' },
@@ -1253,7 +1253,7 @@ var PANDUAN_GLOSSARY_GROUPS = [
                 en: 'Courses required for all students within this specific study program, aimed at achieving specialized competencies matching the program’s field of expertise.' } },
       { term: 'MKWU', full: { id: 'Mata Kuliah Wajib Universitas', en: 'Mata Kuliah Wajib Universitas (University-Required Courses)' },
         desc: { id: 'Mata kuliah yang wajib diambil seluruh mahasiswa di universitas, dari program studi mana pun, untuk memastikan capaian pembelajaran selaras dengan visi dan misi universitas.',
-                en: 'Courses required for all students across the university, regardless of study program, ensuring learning outcomes align with the university’s vision and mission.' } },
+                en: 'Courses required for all students across the university, regardless of study program, ensuring learning outcomes align with the university’s vision and mission.' } }
     ]
   },
   { title: { id: 'Kelulusan & Wisuda', en: 'Graduation' },
@@ -1269,7 +1269,7 @@ var PANDUAN_GLOSSARY_GROUPS = [
                 en: 'The official graduation ceremony, where you are formally declared a graduate and receive your diploma.' } },
       { term: 'Yudisium', full: { id: '', en: '' },
         desc: { id: 'Rapat resmi penetapan status dan predikat kelulusanmu, biasanya dilakukan setelah kamu lulus Sidang Tugas Akhir dan sebelum Wisuda.',
-                en: 'The official meeting that determines your graduation status and honors, usually held after you pass your Sidang Tugas Akhir and before Wisuda.' } },
+                en: 'The official meeting that determines your graduation status and honors, usually held after you pass your Sidang Tugas Akhir and before Wisuda.' } }
     ]
   },
   { title: { id: 'Konsep Kurikulum', en: 'Curriculum Concepts' },
@@ -1282,7 +1282,7 @@ var PANDUAN_GLOSSARY_GROUPS = [
                 en: 'An educational approach that focuses on measurable learning outcomes (knowledge, skills, attitudes) as the basis for designing a curriculum - this study program’s curriculum is designed following this approach. One way this shows up in class: if you fail a particular assessment (e.g. an assignment or quiz) in a course, you are usually given a chance to improve it, at the latest before that course\'s UAS (final exam).' } },
       { term: 'Peminatan', full: { id: '', en: '' },
         desc: { id: 'Jalur konsentrasi keahlian yang kamu pilih mulai semester 5, menentukan sebagian mata kuliah lanjutan yang akan kamu ambil. Di program studi ini ada dua peminatan: SSD dan AISD.',
-                en: 'The specialization track you choose starting semester 5, determining part of the advanced courses you will take afterward. This study program offers two tracks: SSD and AISD.' } },
+                en: 'The specialization track you choose starting semester 5, determining part of the advanced courses you will take afterward. This study program offers two tracks: SSD and AISD.' } }
     ]
   },
   { title: { id: 'Nilai & Performa Akademik', en: 'Grades & Academic Performance' },
@@ -1301,7 +1301,7 @@ var PANDUAN_GLOSSARY_GROUPS = [
                 en: 'The exam held at the end of the semester, usually covering all the course material for that semester and serving as one component of the final grade.' } },
       { term: 'UTS', full: { id: 'Ujian Tengah Semester', en: 'Ujian Tengah Semester (Midterm Exam)' },
         desc: { id: 'Ujian yang diselenggarakan di pertengahan semester, biasanya mencakup materi paruh pertama mata kuliah dan jadi salah satu komponen penilaian.',
-                en: 'The exam held midway through the semester, usually covering the first half of the course material and serving as one component of the grade.' } },
+                en: 'The exam held midway through the semester, usually covering the first half of the course material and serving as one component of the grade.' } }
     ]
   },
   { title: { id: 'Organisasi & Kompetisi Mahasiswa', en: 'Student Organizations & Competitions' },
@@ -1317,23 +1317,22 @@ var PANDUAN_GLOSSARY_GROUPS = [
                 en: 'A national student creativity grant and competition program from Kemendikbudristek/Belmawa, covering various fields (research, entrepreneurship, community service, innovative work, and more) - a great opportunity to sharpen your skills while building your portfolio.' } },
       { term: 'UKM', full: { id: 'Unit Kegiatan Mahasiswa', en: 'Unit Kegiatan Mahasiswa (Student Activity Unit)' },
         desc: { id: 'Wadah kegiatan mahasiswa di luar organisasi program studi, biasanya berdasarkan minat/bakat tertentu (olahraga, seni, keagamaan, dan lainnya) - salah satu cara seru untuk mengembangkan diri di luar akademik.',
-                en: 'Student activity groups outside the study-program organization, usually based on specific interests or talents (sports, arts, religious activities, and more) - a fun way to develop yourself outside academics.' } },
+                en: 'Student activity groups outside the study-program organization, usually based on specific interests or talents (sports, arts, religious activities, and more) - a fun way to develop yourself outside academics.' } }
     ]
   },
   { title: { id: 'Pembelajaran di Luar Program Studi', en: 'Learning Outside the Study Program' },
+    desc: { id: 'Kebijakan nasional yang memberi mahasiswa kesempatan belajar di luar program studi, seperti Magang, Studi Independen, atau Penelitian dan Pengabdian Bersama Dosen - bisa kamu ambil mulai semester 6 sebagai alternatif mata kuliah peminatan.',
+            en: 'A national policy giving students the opportunity to learn outside their study program, such as through an Internship (Magang), Independent Study, or Research and Community Service with a Lecturer - available starting semester 6 as an alternative to specialization courses.' },
     terms: [
       { term: 'Magang', full: { id: '', en: '' },
         desc: { id: 'Salah satu bentuk kegiatan MBKM di mana kamu bekerja langsung di perusahaan atau instansi mitra untuk mendapatkan pengalaman kerja nyata. Bisa kamu ambil dari semester 6, menggantikan mata kuliah peminatan (20 SKS).',
                 en: 'One form of MBKM activity where you work directly at a partner company or institution to gain real work experience. Can be taken starting semester 6, in place of specialization courses (20 credits).' } },
-      { term: 'MBKM', full: { id: 'Merdeka Belajar-Kampus Merdeka', en: 'Merdeka Belajar-Kampus Merdeka (Freedom to Learn - Independent Campus)' },
-        desc: { id: 'Kebijakan nasional yang memberi mahasiswa kesempatan belajar di luar program studi, seperti Magang, Studi Independen, atau Penelitian dan Pengabdian Bersama Dosen - bisa kamu ambil mulai semester 6 sebagai alternatif mata kuliah peminatan.',
-                en: 'A national policy giving students the opportunity to learn outside their study program, such as through an Internship (Magang), Independent Study, or Research and Community Service with a Lecturer - available starting semester 6 as an alternative to specialization courses.' } },
       { term: 'Penelitian dan Pengabdian Bersama Dosen', full: { id: '', en: '' },
         desc: { id: 'Program yang memungkinkanmu terlibat langsung dalam penelitian atau pengabdian masyarakat bersama dosen. Sama seperti MBKM, program ini juga bisa mulai kamu ambil dari semester 6 sebagai alternatif mata kuliah peminatan.',
                 en: 'A program that lets you get directly involved in research or community service alongside a lecturer. Like MBKM, this can also be taken starting semester 6 as an alternative to the specialization courses.' } },
       { term: 'Studi Independen', full: { id: '', en: '' },
         desc: { id: 'Salah satu bentuk kegiatan MBKM di mana kamu mengerjakan proyek belajar mandiri (kadang lintas kampus) sesuai minatmu, biasanya dengan bimbingan dari luar program studi. Bisa kamu ambil dari semester 6, menggantikan mata kuliah peminatan (20 SKS).',
-                en: 'One form of MBKM activity where you work on a self-directed learning project (sometimes across campuses) based on your interests, usually guided from outside the study program. Can be taken starting semester 6, in place of specialization courses (20 credits).' } },
+                en: 'One form of MBKM activity where you work on a self-directed learning project (sometimes across campuses) based on your interests, usually guided from outside the study program. Can be taken starting semester 6, in place of specialization courses (20 credits).' } }
     ]
   },
   { title: { id: 'Peran Pendukung Akademik', en: 'Academic Support Roles' },
@@ -1346,7 +1345,7 @@ var PANDUAN_GLOSSARY_GROUPS = [
                 en: 'The lecturer assigned to guide you academically throughout your studies - your main point of contact for questions about KRS, IPK, study planning, academic leave, or any other academic concern.' } },
       { term: 'Komisaris Kelas', full: { id: '', en: '' },
         desc: { id: 'Mahasiswa yang dipilih/ditunjuk sebagai perwakilan satu kelas atau angkatan, menjembatani komunikasi antara mahasiswa dengan dosen atau program studi (mis. menyampaikan informasi, koordinasi jadwal, dan lainnya).',
-                en: 'A student elected or appointed to represent one class or cohort, bridging communication between students and lecturers or the study program (e.g. relaying information, coordinating schedules, and more).' } },
+                en: 'A student elected or appointed to represent one class or cohort, bridging communication between students and lecturers or the study program (e.g. relaying information, coordinating schedules, and more).' } }
     ]
   },
   { title: { id: 'Status & Keberlangsungan Studi', en: 'Status & Study Continuity' },
@@ -1371,7 +1370,7 @@ var PANDUAN_GLOSSARY_GROUPS = [
                 en: 'An academic warning letter issued if your IPK falls below 2.0 in semesters 1-6, or if you have not graduated by semester 8, 10, or 12. There are up to 3 levels (SP1, SP2, SP3) - reaching SP3 without improvement risks DO. Consult your Dosen Wali/PA right away if you receive one.' } },
       { term: 'Status Aktif/Nonaktif', full: { id: '', en: '' },
         desc: { id: '"Aktif" berarti kamu terdaftar dan mengisi KRS pada semester berjalan; "Nonaktif" berarti kamu tidak melakukan registrasi semester itu. Status ini bisa memengaruhi masa studimu, jadi pastikan kamu aktif tiap semester kecuali sedang cuti resmi.',
-                en: '"Active" means you are registered and have filled out your KRS for the current semester; "Inactive" means you did not register that semester. This status can affect your study duration, so make sure you stay active every semester unless you are on approved academic leave.' } },
+                en: '"Active" means you are registered and have filled out your KRS for the current semester; "Inactive" means you did not register that semester. This status can affect your study duration, so make sure you stay active every semester unless you are on approved academic leave.' } }
     ]
   },
   { title: { id: 'Tingkat Fakultas', en: 'Faculty Level' },
@@ -1386,7 +1385,7 @@ var PANDUAN_GLOSSARY_GROUPS = [
                 en: 'An official who assists the Dean in carrying out administrative and operational duties at the faculty level.' } },
       { term: 'Wakil Dekan', full: { id: '', en: '' },
         desc: { id: 'Pejabat yang membantu Dekan menjalankan tugas di tingkat fakultas, biasanya membawahi bidang tertentu (mis. akademik, kemahasiswaan, atau sumber daya).',
-                en: 'An official who assists the Dean in carrying out duties at the faculty level, usually overseeing a specific area (e.g. academics, student affairs, or resources).' } },
+                en: 'An official who assists the Dean in carrying out duties at the faculty level, usually overseeing a specific area (e.g. academics, student affairs, or resources).' } }
     ]
   },
   { title: { id: 'Tingkat Program Studi', en: 'Study Program Level' },
@@ -1398,7 +1397,7 @@ var PANDUAN_GLOSSARY_GROUPS = [
                 en: 'The highest-ranking leader at the study-program level, responsible for running all academic, curriculum, and administrative activities within the study program - often abbreviated as "Kaprodi".' } },
       { term: 'Sekretaris Program Studi', full: { id: '', en: '' },
         desc: { id: 'Pejabat yang membantu Ketua Program Studi menjalankan tugas administratif dan operasional di tingkat program studi.',
-                en: 'An official who assists the Ketua Program Studi (Head of Study Program) in carrying out administrative and operational duties at the study-program level.' } },
+                en: 'An official who assists the Ketua Program Studi (Head of Study Program) in carrying out administrative and operational duties at the study-program level.' } }
     ]
   },
   { title: { id: 'Tingkat Universitas', en: 'University Level' },
@@ -1411,7 +1410,7 @@ var PANDUAN_GLOSSARY_GROUPS = [
                 en: 'An official who assists the Rector in carrying out administrative and operational duties at the university level.' } },
       { term: 'Wakil Rektor', full: { id: '', en: '' },
         desc: { id: 'Pejabat yang membantu Rektor menjalankan tugas di tingkat universitas, biasanya membawahi bidang tertentu (mis. akademik, kemahasiswaan, atau keuangan).',
-                en: 'An official who assists the Rector in carrying out duties at the university level, usually overseeing a specific area (e.g. academics, student affairs, or finance).' } },
+                en: 'An official who assists the Rector in carrying out duties at the university level, usually overseeing a specific area (e.g. academics, student affairs, or finance).' } }
     ]
   }
 ];
