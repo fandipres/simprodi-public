@@ -136,7 +136,6 @@ const I18N = {
     sc_btn_demo: 'Demo',
     sc_btn_download: 'Unduh',
     sc_btn_source: 'Source Code',
-    sc_btn_screenshot: 'Lihat Screenshot',
     sc_report_link: 'Laporkan',
     sc_detail_not_found: 'Karya tidak ditemukan atau belum disetujui.',
 
@@ -370,7 +369,6 @@ const I18N = {
     sc_btn_demo: 'Demo',
     sc_btn_download: 'Download',
     sc_btn_source: 'Source Code',
-    sc_btn_screenshot: 'View Screenshots',
     sc_report_link: 'Report',
     sc_detail_not_found: 'Work not found or not yet approved.',
 
@@ -1650,10 +1648,10 @@ function scBuildDetailBodyHtml_(item, opts) {
   opts = opts || {};
   var yt = scYoutubeId_(item.videoTrailer);
   var mediaHtml = '';
-  // linkScreenshot adalah link FOLDER (mis. Google Drive), bukan link
-  // gambar langsung - tidak bisa dipasang sebagai <img>/background-image,
-  // jadi folder screenshot tetap ditawarkan sebagai tombol terpisah ("Lihat
-  // Screenshot") di actionsHtml, bukan hero media. Slide 1 (thumbnail)
+  // linkScreenshot (folder screenshot mentah yang dikirim mahasiswa) TIDAK
+  // ditampilkan di sini sama sekali - itu cuma bahan mentah untuk admin
+  // membuat thumbnail lewat "Buat Thumbnail" (lihat linkRow di
+  // admin-script.html), bukan untuk konsumsi publik. Slide 1 (thumbnail)
   // SELALU coba thumbnail dulu (linkThumbnail kalau admin isi override-nya,
   // atau kalau tidak, path konvensi dari scDerivedThumbUrl_ - lihat komentar
   // di definisinya) - fallback-nya (ikon per Jenis) cuma dipasang tersembunyi,
@@ -1669,8 +1667,8 @@ function scBuildDetailBodyHtml_(item, opts) {
   // user minta ini juga diakses langsung dari hero-nya, tapi bukan overlay
   // di atas thumbnail (yang sudah pernah dicoba & ditolak) - carousel-nya
   // slide yang jelas terpisah, bukan menyatu di gambar yang sama. Tombol
-  // "Trailer" yang berdiri sendiri jadi dihapus (lihat previewLinksHtml di
-  // bawah) supaya tidak ada 2 jalan ke konten yang sama.
+  // "Trailer" yang berdiri sendiri jadi dihapus supaya tidak ada 2 jalan ke
+  // konten yang sama.
   if (item.videoTrailer) {
     // enablejsapi=1 + id tetap "scHeroYtFrame" (cuma satu detail view aktif
     // dalam satu waktu, SPA) supaya scHeroCarouselInit_ bisa membungkusnya
@@ -1691,9 +1689,6 @@ function scBuildDetailBodyHtml_(item, opts) {
   } else {
     mediaHtml = slide1Html;
   }
-  var screenshotButtonHtml = item.linkScreenshot
-    ? '<a class="sc-btn sc-btn-outline" href="' + safeUrl_(item.linkScreenshot) + '" target="_blank" rel="noopener">' + t('sc_btn_screenshot') + '</a>'
-    : '';
   var pemBadge = item.peminatan === 'Tanpa Peminatan' ? '' :
     '<span class="sc-tag ' + (item.peminatan === 'SSD' ? 'sc-tag-ssd' : 'sc-tag-aisd') + '">' + escHtml(item.peminatan) + '</span>';
   var publishBadge = item.statusPublish === 'Sudah Publish' ? '<span class="sc-tag sc-tag-live">' + t('sc_status_publish_sudah') + '</span>' : '';
@@ -1718,17 +1713,6 @@ function scBuildDetailBodyHtml_(item, opts) {
   var techHtml = (item.teknologi && item.teknologi.length)
     ? '<div class="sc-section-label">' + t('sc_tech_label') + '</div><div class="sc-tech-pills">' +
       item.teknologi.map(function(x) { return '<span class="sc-tech-pill">' + escHtml(x) + '</span>'; }).join('') + '</div>'
-    : '';
-
-  // Screenshot dikelompokkan terpisah dari Demo/Download/Source Code -
-  // materi PREVIEW (bukan tautan akses), sama seperti pengelompokan
-  // "Tampilan Karya" vs "Tautan" yang sudah dipakai di form Kirim Karya &
-  // modal edit admin (lihat CLAUDE.md). Trailer TIDAK ada di sini lagi -
-  // sekarang jadi slide carousel di hero (lihat mediaHtml di atas), bukan
-  // tombol terpisah, supaya tidak ada 2 jalan ke konten yang sama.
-  var previewLinksHtml = screenshotButtonHtml
-    ? '<div class="sc-section-label">' + t('sc_sec_tampilan') + '</div>' +
-      '<div class="sc-action-row">' + screenshotButtonHtml + '</div>'
     : '';
 
   var linkButtonsHtml =
@@ -1762,7 +1746,7 @@ function scBuildDetailBodyHtml_(item, opts) {
       ((item.dosenPembimbing && item.dosenPembimbing.length) ? '<div class="sc-info-card"><div class="sc-info-icon">' + SC_ICON_DOSEN + '</div><div><div class="sc-info-k">' + t('sc_dosen_label') + '</div><div class="sc-info-v">' + escHtml(item.dosenPembimbing.join(', ')) + '</div></div></div>' : '') +
       '<div class="sc-info-card"><div class="sc-info-icon">' + SC_ICON_KONTAK + '</div><div><div class="sc-info-k">' + t('sc_kontak_label') + '</div><div class="sc-info-v">' + scRenderKontak_(item.kontakTim) + '</div></div></div>' +
     '</div>' +
-    techHtml + previewLinksHtml + actionsHtml + reportHtml;
+    techHtml + actionsHtml + reportHtml;
 }
 
 function scRenderDetail() {
