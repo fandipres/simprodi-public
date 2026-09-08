@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://simprodi.fandipres.my.id/sitemap.xml
