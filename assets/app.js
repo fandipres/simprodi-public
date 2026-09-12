@@ -1454,7 +1454,7 @@ var PANDUAN_SEMESTERS = [
     { id: 'Pemrograman Komputer', en: 'Computer Programming' },
     { id: 'Wawasan Informatika', en: 'Introduction to Informatics' },
     { id: 'Sistem Otomasi Perkantoran', en: 'Office Automation Systems' },
-    { id: 'Kepemimpinan', en: 'Leadership' }
+    { id: 'Pengembangan Karakter: Kepemimpinan', en: 'Character Development: Leadership' }
   ]},
   { sem: 2, sks: 20,
     chapter: { id: 'Membangun Kebiasaan', en: 'Building Habits' },
@@ -1470,21 +1470,21 @@ var PANDUAN_SEMESTERS = [
     milestone: { id: 'Selain menjaga performa akademikmu, mulai aktiflah di organisasi seperti HMPS atau UKM, dan ikut lomba/kompetisi seperti PKM atau GEMASTIK sesuai minatmu - selain menambah pengalaman, ini juga bisa jadi petunjuk awal peminatan yang cocok buatmu di semester 5 nanti. Jangan lupa laporkan pencapaianmu ke program studi lewat <a href="javascript:void(0)" onclick="openPortofolio()" class="panduan-inline-link">Portofolio Akademik</a> supaya tercatat resmi.', en: 'Besides keeping your academic performance on track, get involved in organizations like HMPS or UKM, and join competitions like PKM or GEMASTIK that match your interests - besides adding experience, this can also be an early clue toward the specialization that suits you in semester 5. Don’t forget to report your achievements to the study program through <a href="javascript:void(0)" onclick="openPortofolio()" class="panduan-inline-link">Academic Portfolio</a> so they get officially recorded.' },
     courses: [
     { id: 'Statistika', en: 'Statistics' },
-    { id: 'Web Front-End', en: 'Web Front-End' },
-    { id: 'Pemrograman Berorientasi Objek', en: 'Object-Oriented Programming' },
+    { id: 'Pengembangan Web Front-End', en: 'Front-End Web Development' },
+    { id: 'Perancangan dan Pemrograman Berorientasi Objek', en: 'Object-Oriented Design and Programming' },
     { id: 'Sains Data', en: 'Data Science' },
-    { id: 'Agama', en: 'Religion' }
+    { id: 'Pengembangan Karakter: Agama', en: 'Character Development: Religion' }
   ]},
   { sem: 4, sks: 20,
     chapter: { id: 'Menyiapkan Pilihan', en: 'Preparing to Choose' },
     milestone: { id: 'Semester terakhirmu sebelum memilih peminatan - mulai pikirkan baik-baik jalur mana yang paling sesuai untukmu. Kalau masih ragu antara SSD atau AISD, coba ikut <a href="javascript:void(0)" onclick="openQuiz()" class="panduan-inline-link">Tes Peminatan</a> untuk membantu menentukan arah.', en: 'Your last semester before choosing a specialization - start thinking carefully about which track suits you best. If you are still unsure between SSD or AISD, try the <a href="javascript:void(0)" onclick="openQuiz()" class="panduan-inline-link">Specialization Test</a> to help decide.' },
     courses: [
     { id: 'Rekayasa Perangkat Lunak', en: 'Software Engineering' },
-    { id: 'Web Back-End', en: 'Web Back-End' },
-    { id: 'Pengembangan Perangkat Lunak Modern', en: 'Modern Software Development' },
+    { id: 'Pengembangan Web Back-End', en: 'Back-End Web Development' },
+    { id: 'Pengembangan Perangkat Lunak Tangkas', en: 'Agile Software Development' },
     { id: 'Kecerdasan Artifisial', en: 'Artificial Intelligence' },
-    { id: 'Kewarganegaraan', en: 'Civics' },
-    { id: 'Pancasila', en: 'Pancasila' }
+    { id: 'Pengembangan Karakter: Kewarganegaraan', en: 'Character Development: Civics' },
+    { id: 'Pengembangan Karakter: Pancasila', en: 'Character Development: Pancasila' }
   ]},
   { sem: 5, sks: 20,
     chapter: { id: 'Menentukan Arah', en: 'Choosing Your Direction' },
@@ -1501,8 +1501,8 @@ var PANDUAN_SEMESTERS = [
         { id: 'Sistem Terdistribusi', en: 'Distributed Systems' }
       ]},
       { key: 'aisd', courses: [
-        { id: 'Machine Learning', en: 'Machine Learning' },
-        { id: 'Natural Language Processing', en: 'Natural Language Processing' }
+        { id: 'Pembelajaran Mesin', en: 'Machine Learning' },
+        { id: 'Pemrosesan Bahasa Alami', en: 'Natural Language Processing' }
       ]}
     ]
   },
@@ -1513,11 +1513,11 @@ var PANDUAN_SEMESTERS = [
       { id: 'Bahasa Inggris', en: 'English' },
       { id: 'Pengembangan Aplikasi Mobile Back-End', en: 'Mobile Application Back-End Development' },
       { id: 'Jaringan Komputer', en: 'Computer Networks' },
-      { id: 'Komunikasi dan Negosiasi Bisnis', en: 'Business Communication and Negotiation' }
+      { id: 'Komunikasi dan Negosiasi Bisnis Profesional', en: 'Professional Business Communication and Negotiation' }
     ],
     tracks: [
       { key: 'ssd', courses: [ { id: 'Komputasi Awan', en: 'Cloud Computing' } ] },
-      { key: 'aisd', courses: [ { id: 'Computer Vision', en: 'Computer Vision' } ] }
+      { key: 'aisd', courses: [ { id: 'Visi Komputer', en: 'Computer Vision' } ] }
     ]
   },
   { sem: 7, sks: 18,
@@ -1527,8 +1527,8 @@ var PANDUAN_SEMESTERS = [
       { id: 'Proyek Informatika', en: 'Informatics Capstone Project' },
       { id: 'Pengujian dan Kualitas Perangkat Lunak', en: 'Software Testing and Quality' },
       { id: 'Kewirausahaan Digital', en: 'Digital Entrepreneurship' },
-      { id: 'Etika Kecerdasan Artifisial', en: 'AI Ethics' },
-      { id: 'Big Data', en: 'Big Data' }
+      { id: 'Etika Kecerdasan Buatan', en: 'AI Ethics' },
+      { id: 'Data Besar', en: 'Big Data' }
     ]
   },
   { sem: 8, sks: 6,
@@ -1851,7 +1851,7 @@ var PEM_INFO = {
       en: ['Data Analyst', 'Data Quality Engineer', 'Data Scientist Supervisor']
     },
     courses: {
-      id: ['Machine Learning', 'Natural Language Processing', 'Computer Vision'],
+      id: ['Pembelajaran Mesin', 'Pemrosesan Bahasa Alami', 'Visi Komputer'],
       en: ['Machine Learning', 'Natural Language Processing', 'Computer Vision']
     }
   }
