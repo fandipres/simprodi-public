@@ -25,7 +25,6 @@ const I18N = {
     home_card2_title: 'Tes Peminatan',
     home_card2_desc: 'Jawab 7 pertanyaan singkat untuk tahu apakah kamu lebih cocok ke SSD atau AISD.',
     home_card2_btn: 'Mulai Tes',
-    btn_beranda: 'Beranda',
     search_placeholder: 'Cari berdasarkan NIM atau nama...',
     search_btn: 'Cari', search_btn_loading: 'Mencari...',
     search_hint: 'Masukkan NIM lengkap atau sebagian nama mahasiswa (minimal 3 karakter).',
@@ -34,13 +33,12 @@ const I18N = {
     search_conn_error: 'Tidak dapat terhubung ke server. Periksa koneksi internet dan coba lagi.',
     search_result_found: 'Ditemukan {count} mahasiswa untuk kata kunci "{query}".',
     search_result_toomany: 'Menampilkan 30 dari {total} hasil. Perlengkap kata kunci untuk mempersempit pencarian.',
-    btn_kembali: 'Kembali',
     detail_title: 'Detail Portofolio Mahasiswa',
     detail_sub: 'Rincian prestasi, MBKM, dan sertifikasi yang tercatat untuk mahasiswa ini.',
     follow_nim_btn: 'Ikuti NIM Ini',
-    follow_nim_btn_active: 'Diikuti ✓',
+    follow_btn_active: 'Diikuti ✓',
     follow_nim_section_title: 'NIM yang Kamu Ikuti',
-    follow_nim_remove: 'Berhenti mengikuti',
+    follow_remove: 'Berhenti mengikuti',
     follow_nim_not_found: 'Data untuk NIM ini tidak ditemukan (mungkin sudah tidak ada catatan tersimpan).',
     label_mbkm: 'MBKM', label_prestasi: 'Prestasi', label_sertifikasi: 'Sertifikasi',
     info_title_mbkm: 'Apa itu MBKM?', info_title_prestasi: 'Apa itu Prestasi?', info_title_sertifikasi: 'Apa itu Sertifikasi?',
@@ -114,8 +112,8 @@ const I18N = {
     dosen_title: 'Dosen Pembimbing',
     dosen_subtitle: 'Cari dosen program studi yang bisa jadi pembimbing lomba, kegiatan lain, atau tugas akhir.',
     dosen_badge_tetap: 'Dosen Tetap Program Studi',
-    dosen_badge_ta1: 'Pembimbing TA 1',
-    dosen_badge_ta2: 'Pembimbing TA 2',
+    dosen_badge_ta1: 'Dosen Pembimbing 1',
+    dosen_badge_ta2: 'Dosen Pembimbing 2',
     dosen_sinta_link: 'SINTA',
     dosen_error: 'Gagal memuat daftar dosen. Coba lagi beberapa saat.',
     dosen_empty: 'Data dosen belum tersedia.',
@@ -148,7 +146,6 @@ const I18N = {
     sc_error: 'Gagal memuat showcase. Coba lagi sebentar.',
     sc_creator_more: '+{n} lainnya',
 
-    sc_back: 'Kembali',
     sc_detail_title: 'Detail Karya Showcase',
     sc_detail_sub: 'Info lengkap, tautan, dan dukungan untuk karya mahasiswa ini.',
     sc_creators_label: 'Dikerjakan Oleh',
@@ -156,7 +153,7 @@ const I18N = {
     sc_sumber_tugas_label: 'Sumber Karya',
     sc_semester_label: 'Semester Dikerjakan',
     sc_dosen_label: 'Dosen Pembimbing',
-    sc_dosen_ordinal: 'Pembimbing {n}: ',
+    sc_dosen_ordinal: '{n}: ',
     sc_kontak_label: 'Kontak Tim',
     sc_tech_label: 'Teknologi',
     sc_btn_demo: 'Demo',
@@ -258,6 +255,9 @@ const I18N = {
     sc_status_sub: 'Masukkan kode yang kamu dapat setelah mengirim karya untuk melihat progres peninjauannya.',
     sc_status_placeholder: 'mis. SC-7K2M9',
     sc_btn_cek: 'Cek',
+    follow_karya_btn: 'Ikuti Pengajuan Ini',
+    follow_karya_section_title: 'Pengajuan yang Kamu Ikuti',
+    follow_karya_changed: 'Status berubah',
     sc_status_menunggu: 'Menunggu',
     sc_status_disetujui: 'Disetujui',
     sc_status_ditolak: 'Ditolak',
@@ -284,7 +284,6 @@ const I18N = {
     home_card2_title: 'Specialization Test',
     home_card2_desc: 'Answer 7 short questions to find out whether SSD or AISD suits you better.',
     home_card2_btn: 'Start Test',
-    btn_beranda: 'Home',
     search_placeholder: 'Search by NIM or name...',
     search_btn: 'Search', search_btn_loading: 'Searching...',
     search_hint: 'Enter a full NIM or part of a student name (minimum 3 characters).',
@@ -293,13 +292,12 @@ const I18N = {
     search_conn_error: 'Unable to connect to the server. Check your internet connection and try again.',
     search_result_found: 'Found {count} student(s) for "{query}".',
     search_result_toomany: 'Showing 30 of {total} results. Refine your keyword to narrow the search.',
-    btn_kembali: 'Back',
     detail_title: 'Student Portfolio Detail',
     detail_sub: 'Recorded achievements, MBKM activities, and certifications for this student.',
     follow_nim_btn: 'Follow This NIM',
-    follow_nim_btn_active: 'Following ✓',
+    follow_btn_active: 'Following ✓',
     follow_nim_section_title: 'NIMs You Follow',
-    follow_nim_remove: 'Unfollow',
+    follow_remove: 'Unfollow',
     follow_nim_not_found: 'No data found for this NIM (it may no longer have any records).',
     label_mbkm: 'MBKM', label_prestasi: 'Achievements', label_sertifikasi: 'Certifications',
     info_title_mbkm: 'What is MBKM?', info_title_prestasi: 'What is Prestasi?', info_title_sertifikasi: 'What is Sertifikasi?',
@@ -373,8 +371,8 @@ const I18N = {
     dosen_title: 'Supervising Lecturers',
     dosen_subtitle: 'Find a study program lecturer who can supervise a competition, another activity, or your final thesis.',
     dosen_badge_tetap: 'Permanent Faculty',
-    dosen_badge_ta1: 'Thesis Supervisor 1',
-    dosen_badge_ta2: 'Thesis Supervisor 2',
+    dosen_badge_ta1: 'Supervising Lecturer 1',
+    dosen_badge_ta2: 'Supervising Lecturer 2',
     dosen_sinta_link: 'SINTA',
     dosen_error: 'Failed to load the lecturer list. Please try again shortly.',
     dosen_empty: 'Lecturer data is not available yet.',
@@ -407,7 +405,6 @@ const I18N = {
     sc_error: 'Failed to load the showcase. Please try again shortly.',
     sc_creator_more: '+{n} more',
 
-    sc_back: 'Back',
     sc_detail_title: 'Showcase Project Detail',
     sc_detail_sub: 'Full info, links, and support for this student project.',
     sc_creators_label: 'Made By',
@@ -415,7 +412,7 @@ const I18N = {
     sc_sumber_tugas_label: 'Work Source',
     sc_semester_label: 'Semester Made',
     sc_dosen_label: 'Supervisor',
-    sc_dosen_ordinal: 'Supervisor {n}: ',
+    sc_dosen_ordinal: '{n}: ',
     sc_kontak_label: 'Team Contact',
     sc_tech_label: 'Technology',
     sc_btn_demo: 'Demo',
@@ -517,6 +514,9 @@ const I18N = {
     sc_status_sub: "Enter the code you received after submitting your work to see its review progress.",
     sc_status_placeholder: 'e.g. SC-7K2M9',
     sc_btn_cek: 'Check',
+    follow_karya_btn: 'Follow This Submission',
+    follow_karya_section_title: 'Submissions You Follow',
+    follow_karya_changed: 'Status changed',
     sc_status_menunggu: 'Pending',
     sc_status_disetujui: 'Approved',
     sc_status_ditolak: 'Rejected',
@@ -629,25 +629,61 @@ function fetchQuizConfig() {
 // Set URL jadi "?key=value" (dan bersihkan param lain) supaya halaman detail
 // yang sedang dibuka bisa langsung disalin dari address bar dan dibagikan.
 // Panggil tanpa argumen untuk membersihkan kembali ke URL bersih (mis. saat
-// kembali ke daftar/galeri). Pakai replaceState, bukan pushState, supaya
-// tidak menambah riwayat browser untuk setiap detail yang dibuka.
-function updateUrlParam_(key, value) {
+// kembali ke daftar/galeri). Pakai pushState (bukan replaceState) supaya tiap
+// navigasi menambah riwayat browser sungguhan - ini yang membuat tombol
+// back/forward perangkat bisa mundur/maju layar demi layar di dalam situs,
+// bukan langsung keluar situs setelah satu kali tekan (lihat dispatchRoute_
+// di bawah). noPush=true dipakai khusus saat fungsi ini dipanggil untuk
+// MEREKONSTRUKSI tampilan dari riwayat yang sudah ada (oleh dispatchRoute_
+// saat event popstate, atau saat load pertama kali) - saat itu URL-nya
+// sendiri sudah benar (browser yang mengubahnya), jadi cukup replaceState
+// (no-op) supaya tidak menambah entri baru yang tidak perlu.
+function updateUrlParam_(key, value, noPush) {
   var url = new URL(location.href);
   url.search = '';
   if (key && value) url.searchParams.set(key, value);
-  history.replaceState(null, '', url.toString());
+  if (noPush) history.replaceState(null, '', url.toString());
+  else history.pushState(null, '', url.toString());
 }
 
 // Sama seperti updateUrlParam_, tapi juga mengganti PATH-nya (bukan cuma
 // query string) - dipakai supaya tiap fitur utama (/portofolio/, /showcase/,
 // /specialization/) punya alamat bersih sendiri yang gampang dibagikan,
 // bukan cuma root diikuti parameter. Query string yang sedang aktif ikut
-// dibersihkan setiap path berpindah.
-function setCleanPath_(path) {
+// dibersihkan setiap path berpindah. Sama seperti updateUrlParam_, noPush
+// dipakai saat merekonstruksi tampilan dari riwayat yang sudah ada.
+function setCleanPath_(path, noPush) {
   var url = new URL(location.href);
   url.pathname = path;
   url.search = '';
-  history.replaceState(null, '', url.toString());
+  if (noPush) history.replaceState(null, '', url.toString());
+  else history.pushState(null, '', url.toString());
+}
+
+// Titik dispatch tunggal: dari path+query URL saat ini, tentukan tampilan
+// mana yang harus terbuka. Dipakai di DUA tempat - saat load pertama kali
+// (DOMContentLoaded, noPush=true karena URL-nya sendiri sudah benar dari
+// awal) dan saat event popstate (tombol back/forward perangkat/browser,
+// noPush=true karena browser sudah mengubah location.* duluan sebelum
+// popstate ditembakkan, jadi kita cukup MEREKONSTRUKSI tampilannya saja,
+// bukan menulis ulang riwayatnya). Ini yang membuat tombol back perangkat
+// bisa "mundur satu layar" di dalam situs alih-alih langsung menutup situs -
+// setiap open*() yang dipanggil dari sini dengan noPush=true tidak menambah
+// entri riwayat baru, cuma menampilkan ulang apa yang seharusnya sudah ada
+// di entri riwayat tersebut.
+function dispatchRoute_(noPush) {
+  var nim  = new URLSearchParams(location.search).get('nim');
+  var kode = new URLSearchParams(location.search).get('kode');
+  var path = location.pathname.replace(/\/+$/, '') || '/';
+  if      (path === '/portofolio' && nim) { openPortofolio(noPush); searchInput.value = nim; doSearch(true, noPush); }
+  else if (path === '/portofolio')        openPortofolio(noPush);
+  else if (path === '/showcase' && kode)  openShowcaseDetail(kode, noPush);
+  else if (path === '/showcase')          openShowcaseGaleri(noPush);
+  else if (path === '/specialization')    openQuiz(noPush);
+  else if (path === '/statistic')         openStatistik(noPush);
+  else if (path === '/student-guide')     openPanduan(noPush);
+  else if (path === '/lecturers')         openDosen(noPush);
+  else                                     showHome(noPush);
 }
 
 // Markup tampilan (home, portofolio, tes peminatan, showcase, modal, dst)
@@ -671,30 +707,62 @@ window.addEventListener('DOMContentLoaded', async () => {
   applyI18n();
   applyThemeIcon_();
 
-  // Baca nim/kode dari query string DULU, sebelum rute path biasa dibuka -
-  // openPortofolio()/openShowcaseGaleri() memanggil setCleanPath_ yang
-  // membersihkan location.search, jadi kalau dibaca belakangan nim/kode-nya
-  // sudah keburu hilang duluan (bug lama: refresh ke halaman detail
-  // portofolio/showcase malah balik ke halaman pencarian/galeri).
-  const nim  = new URLSearchParams(location.search).get('nim');
-  const kode = new URLSearchParams(location.search).get('kode');
+  // Kalau situs dibuka langsung ke halaman selain Home (mis. dari share
+  // link seperti /showcase/?kode=SC-XXX), riwayat browser di tab ini masih
+  // kosong - satu-satunya entri riwayat adalah halaman ini sendiri, jadi
+  // tombol back akan langsung keluar situs pada percobaan PERTAMA (tidak
+  // ada "Home" untuk dituju dulu). Supaya tombol back tetap berguna di
+  // kasus ini, sisipkan dulu satu entri "Home" SEBELUM entri halaman yang
+  // sedang dibuka: replaceState entri saat ini jadi Home, lalu pushState
+  // URL aslinya lagi di atasnya (tidak dirender - cuma menyusun riwayat).
+  // Begitu pengguna menekan back sekali, dia mendarat di entri Home ini
+  // dulu (masih di dalam situs, lewat popstate di bawah), bukan langsung
+  // keluar - baru kalau ditekan back SEKALI LAGI dari Home, situs benar-
+  // benar ditinggalkan (sama seperti aplikasi lain pada umumnya, Home
+  // dianggap "akar" navigasi).
+  // CATATAN: sengaja TIDAK disyaratkan history.length<=1 di sini walau itu
+  // sempat dicoba - niatnya supaya me-refresh halaman di tengah navigasi
+  // yang sudah benar tidak menyisipkan Home duplikat, tapi ternyata
+  // history.length awal tidak bisa diasumsikan selalu 1 untuk navigasi
+  // baru (headless test membuktikan ini bisa 2+ tergantung browser/
+  // konteksnya) - kalau dipaksakan, syarat itu berisiko membuat seeding
+  // ini gagal berjalan sama sekali di sebagian browser/in-app-browser
+  // nyata, yang berarti fitur utama (back dari share-link ke Home) rusak
+  // total. Konsekuensi dari TIDAK memberi syarat ini cuma kosmetik dan
+  // ringan (refresh di tengah navigasi bisa menambah satu langkah Home
+  // ekstra yang berulang saat back) - jauh lebih aman daripada
+  // mempertaruhkan fitur utamanya sendiri demi kasus tepi yang jarang.
+  var _initialPath = location.pathname.replace(/\/+$/, '') || '/';
+  if (_initialPath !== '/') {
+    var _initialHref = location.href;
+    history.replaceState(null, '', '/');
+    history.pushState(null, '', _initialHref);
+  }
 
-  // Setiap route punya berkas fisiknya sendiri, jadi tampilan awal yang
-  // dibuka ditentukan langsung dari path saat ini (tidak perlu redirect).
-  const path = location.pathname.replace(/\/+$/, '') || '/';
-  if      (path === '/portofolio')        openPortofolio();
-  else if (path === '/showcase' && !kode) openShowcaseGaleri();
-  else if (path === '/specialization')    openQuiz();
-  else if (path === '/statistic')         openStatistik();
-  else if (path === '/student-guide')     openPanduan();
-  else if (path === '/lecturers')         openDosen();
+  // Tampilan awal ditentukan dari path+query URL saat ini lewat
+  // dispatchRoute_ (lihat definisinya di atas) - noPush=true karena entri
+  // riwayat untuk tampilan ini sendiri sudah benar (baik dari load biasa,
+  // atau baru saja disisipkan di atas), tidak perlu menambah riwayat baru
+  // lagi di sini.
+  dispatchRoute_(true);
 
-  if (nim) { openPortofolio(); searchInput.value = nim; doSearch(true); }
-  if (kode) { openShowcaseDetail(kode); }
+  // Tombol back/forward perangkat/browser memicu popstate, bukan reload
+  // halaman - dengarkan di sini supaya tombol back bisa mundur ke layar
+  // sebelumnya DI DALAM situs (Home <-> fitur <-> detail) alih-alih langsung
+  // keluar situs setelah satu kali tekan. scForm/scStatus (form Kirim Karya,
+  // Cek Status Pengajuan) tidak punya path/query sendiri (lihat komentar di
+  // openShowcaseForm/openShowcaseStatus), jadi ditandai lewat history.state
+  // dan dicek lebih dulu di sini sebelum jatuh ke dispatchRoute_ yang
+  // berbasis path.
+  window.addEventListener('popstate', function(e) {
+    if (e.state && e.state.view === 'scForm')   { openShowcaseForm(true); return; }
+    if (e.state && e.state.view === 'scStatus') { openShowcaseStatus(true); return; }
+    dispatchRoute_(true);
+  });
 });
 
 // ------ SEARCH ------
-async function doSearch(autoOpen = false) {
+async function doSearch(autoOpen = false, noPush = false) {
   const q = searchInput.value.trim();
   if (q.length < 3) {
     setStatus(t('search_min_chars_msg'), true);
@@ -718,7 +786,7 @@ async function doSearch(autoOpen = false) {
     allTotal    = res.total    || 0;
     if (!res.ok) setStatus(res.message, true);
     if (autoOpen && allStudents.length === 1 && allStudents[0].nim.toLowerCase() === q.toLowerCase()) {
-      renderList(); openDetail(0);
+      renderList(); openDetail(0, noPush);
     } else {
       renderList();
     }
@@ -738,7 +806,7 @@ async function doSearch(autoOpen = false) {
     allTotal    = res.total    || 0;
     if (!res.ok) setStatus(res.message, true);
     if (autoOpen && allStudents.length === 1 && allStudents[0].nim.toLowerCase() === q.toLowerCase()) {
-      renderList(); openDetail(0);
+      renderList(); openDetail(0, noPush);
     } else {
       renderList();
     }
@@ -814,15 +882,6 @@ function renderList() {
   lv.innerHTML = html;
 }
 
-function showList() {
-  document.getElementById('detailView').style.display    = 'none';
-  document.getElementById('searchSection').style.display = 'block';
-  document.getElementById('listView').style.display      = 'block';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  setStatus('');
-  updateUrlParam_();
-}
-
 // ------ IKUTI NIM (bookmark lokal per-browser, tanpa akun/login) ------
 // Disimpan di localStorage, bukan di server - murni penanda pribadi per
 // perangkat supaya mahasiswa bisa cek dengan cepat kalau ada capaian baru
@@ -859,7 +918,7 @@ function updateFollowBtn_() {
   if (!btn || !currentStudent) return;
   var following = isFollowingNim_(currentStudent.nim);
   btn.classList.toggle('active', following);
-  btn.textContent = following ? t('follow_nim_btn_active') : t('follow_nim_btn');
+  btn.textContent = following ? t('follow_btn_active') : t('follow_nim_btn');
 }
 // Perbarui snapshot count NIM yang diikuti begitu detailnya benar-benar
 // dilihat (lewat jalur manapun - pencarian biasa atau daftar "diikuti"),
@@ -881,13 +940,13 @@ function followedNimCardHtml_(f, freshCounts) {
   if (freshCounts) {
     delta = Math.max(0, freshCounts.mbkm - f.counts.mbkm) + Math.max(0, freshCounts.prestasi - f.counts.prestasi) + Math.max(0, freshCounts.sertifikasi - f.counts.sertifikasi);
   }
-  var badge = delta > 0 ? '<span class="follow-nim-badge">+' + delta + '</span>' : '';
-  return '<div class="student-card follow-nim-card" onclick="openFollowedNim_(\'' + escHtml(f.nim) + '\')">' +
+  var badge = delta > 0 ? '<span class="follow-badge">+' + delta + '</span>' : '';
+  return '<div class="student-card follow-card" onclick="openFollowedNim_(\'' + escHtml(f.nim) + '\')">' +
     '<div class="s-body">' +
       '<div class="s-name">' + escHtml(f.nama || '-') + badge + '</div>' +
       '<div class="s-nim">NIM. ' + escHtml(f.nim) + '</div>' +
     '</div>' +
-    '<button type="button" class="follow-nim-remove" onclick="unfollowNim_(\'' + escHtml(f.nim) + '\', event)" title="' + t('follow_nim_remove') + '">&times;</button>' +
+    '<button type="button" class="follow-remove-btn" onclick="unfollowNim_(\'' + escHtml(f.nim) + '\', event)" title="' + t('follow_remove') + '">&times;</button>' +
   '</div>';
 }
 function renderFollowedNimSection_() {
@@ -895,7 +954,7 @@ function renderFollowedNimSection_() {
   if (!el) return;
   var list = getFollowedNim_();
   if (!list.length) { el.innerHTML = ''; return; }
-  el.innerHTML = '<div class="follow-nim-title">' + t('follow_nim_section_title') + '</div><div id="followedNimCards">' +
+  el.innerHTML = '<div class="follow-list-title">' + t('follow_nim_section_title') + '</div><div id="followedNimCards">' +
     list.map(function(f) { return followedNimCardHtml_(f, null); }).join('') + '</div>';
   // Cek jumlah terkini di latar belakang (tidak menghalangi render daftar)
   // supaya badge "+N" muncul begitu ada capaian baru sejak terakhir dilihat.
@@ -921,7 +980,7 @@ function openFollowedNim_(nim) {
 }
 
 // ------ DETAIL ------
-function openDetail(idx) {
+function openDetail(idx, noPush) {
   const s = allStudents[idx];
   if (!s) return;
   currentStudent = s;
@@ -956,7 +1015,7 @@ function openDetail(idx) {
   document.getElementById('searchSection').style.display = 'none';
   document.getElementById('detailView').style.display    = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  updateUrlParam_('nim', s.nim);
+  updateUrlParam_('nim', s.nim, noPush);
 }
 
 // ------ ACCORDION ------
@@ -1225,19 +1284,22 @@ function updateCharCounter(textareaId, counterId, min) {
 }
 
 // ------ NAVIGASI BERANDA ------
-function showHome() {
+function showHome(noPush) {
   scHideAllViews_();
   document.getElementById('homeView').style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  setCleanPath_('/');
+  setCleanPath_('/', noPush);
 }
 
-function openPortofolio() {
+function openPortofolio(noPush) {
   scHideAllViews_();
   document.getElementById('searchSection').style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  setTimeout(function() { searchInput.focus(); }, 80);
-  setCleanPath_('/portofolio/');
+  // Jangan auto-fokus (buka keyboard mobile) saat ini cuma rekonstruksi dari
+  // riwayat (tombol back/forward) - hanya relevan saat sungguh-sungguh
+  // navigasi baru ke Portofolio.
+  if (!noPush) setTimeout(function() { searchInput.focus(); }, 80);
+  setCleanPath_('/portofolio/', noPush);
   renderFollowedNimSection_();
 }
 
@@ -1248,10 +1310,10 @@ function fmtStat_(n) {
   return Number(n || 0).toLocaleString('id-ID') + '+';
 }
 
-async function openStatistik() {
+async function openStatistik(noPush) {
   scHideAllViews_();
   document.getElementById('statistikView').style.display = 'block';
-  setCleanPath_('/statistic/');
+  setCleanPath_('/statistic/', noPush);
   window.scrollTo({ top: 0, behavior: 'smooth' });
   if (statLoaded) return;
 
@@ -1638,7 +1700,7 @@ var PANDUAN_SEMESTERS = [
   },
   { sem: 7, sks: 18,
     chapter: { id: 'Menuju Puncak', en: 'Approaching the Peak' },
-    milestone: { id: 'Proyek Informatika (proyek capstone) - Tugas Akhir/Skripsi juga sudah bisa mulai diambil dari semester ini, asalkan kamu sudah lulus minimal 110 SKS dan dokumen pengajuanmu sudah disetujui. MBKM (Studi Independen atau Pertukaran Mahasiswa, 18 SKS) masih bisa jadi alternatif. Kalau berencana mulai TA, diskusikan topiknya dengan Dosen Wali sedini mungkin.', en: 'Proyek Informatika (capstone project) - you can also start taking your Final Project/Thesis from this semester onward, as long as you have passed at least 110 credits and your submission documents have been approved. MBKM (Independent Study or Student Exchange, 18 credits) is still available as an alternative. If you plan to start your Final Project, discuss your topic with your academic advisor as early as possible.' },
+    milestone: { id: 'Proyek Informatika (proyek capstone) - Tugas Akhir/Skripsi juga sudah bisa mulai diambil dari semester ini, asalkan kamu sudah lulus minimal 110 SKS dan dokumen mahasiswa sudah disetujui. MBKM (Studi Independen atau Pertukaran Mahasiswa, 18 SKS) masih bisa jadi alternatif. Kalau berencana mulai TA, diskusikan topiknya dengan Dosen Wali sedini mungkin.', en: 'Proyek Informatika (capstone project) - you can also start taking your Final Project/Thesis from this semester onward, as long as you have passed at least 110 credits and your student documents have been approved. MBKM (Independent Study or Student Exchange, 18 credits) is still available as an alternative. If you plan to start your Final Project, discuss your topic with your academic advisor as early as possible.' },
     courses: [
       { id: 'Proyek Informatika', en: 'Informatics Capstone Project' },
       { id: 'Pengujian dan Kualitas Perangkat Lunak', en: 'Software Testing and Quality' },
@@ -1650,7 +1712,7 @@ var PANDUAN_SEMESTERS = [
   },
   { sem: 8, sks: 6,
     chapter: { id: 'Menuju Kelulusan', en: 'Heading Toward Graduation' },
-    milestone: { id: 'Tugas Akhir/Skripsi (biasanya diselesaikan di semester ini kalau belum dimulai sejak semester 7) - syaratnya sudah lulus minimal 120 SKS dan dokumen pengajuanmu sudah disetujui. Jaga komunikasi rutin dengan dosen pembimbing supaya progresmu tetap sesuai target kelulusan - semester ini juga jadi checkpoint pertama masa studi, kalau belum lulus di akhir semester 8 kamu akan menerima Surat Peringatan pertama (SP1).', en: 'Final Project/Thesis (usually completed this semester if not already started back in semester 7) - requires having passed at least 120 credits and having your submission documents approved. Keep in regular contact with your thesis advisor to stay on track for graduation - this semester is also the first study-duration checkpoint: if you have not graduated by the end of semester 8, you will receive your first Surat Peringatan (SP1).' },
+    milestone: { id: 'Tugas Akhir/Skripsi (biasanya diselesaikan di semester ini kalau belum dimulai sejak semester 7) - syaratnya sudah lulus minimal 120 SKS dan dokumen mahasiswa sudah disetujui. Jaga komunikasi rutin dengan dosen pembimbing supaya progresmu tetap sesuai target kelulusan - semester ini juga jadi checkpoint pertama masa studi, kalau belum lulus di akhir semester 8 kamu akan menerima Surat Peringatan pertama (SP1).', en: 'Final Project/Thesis (usually completed this semester if not already started back in semester 7) - requires having passed at least 120 credits and having your student documents approved. Keep in regular contact with your thesis advisor to stay on track for graduation - this semester is also the first study-duration checkpoint: if you have not graduated by the end of semester 8, you will receive your first Surat Peringatan (SP1).' },
     courses: [
       { id: 'Tugas Akhir / Skripsi', en: 'Final Project / Thesis' }
     ]
@@ -1680,8 +1742,8 @@ var PANDUAN_LANJUT = {
   title: { id: 'Semester 9 dan Seterusnya', en: 'Semester 9 and Beyond' },
   chapter: { id: 'Kalau Perjalanan Berlanjut', en: 'If the Journey Continues' },
   body: {
-    id: 'Kalau kamu belum menyelesaikan studi dalam 8 semester, semester-semester berikutnya berfokus pada penyelesaian mata kuliah yang tersisa dan/atau Tugas Akhir. Syarat minimal SKS untuk mengajukan Tugas Akhir/Skripsi juga terus meningkat mengikuti pola serupa semester 7-8 kalau kamu belum memulainya - tanyakan angka pastinya ke Dosen Wali/PA atau bagian akademik. Ingat juga checkpoint masa studi berikutnya: Surat Peringatan kedua (SP2) kalau belum lulus di semester 10, dan Surat Peringatan ketiga/terakhir (SP3) kalau belum lulus di semester 12. Disarankan untuk berkonsultasi dengan Dosen Wali/PA atau bagian akademik sesegera mungkin supaya rencana studi lanjutanmu tetap terarah.',
-    en: 'If you have not finished your studies within 8 semesters, the following semesters focus on completing any remaining courses and/or your Final Project. The minimum-credit requirement to submit your Final Project/Thesis also keeps increasing, following a similar pattern to semesters 7-8, if you have not started it yet - check the exact number with your Dosen Wali/PA or the academic affairs office. Also keep in mind the next study-duration checkpoints: a second Surat Peringatan (SP2) if you have not graduated by semester 10, and a third and final Surat Peringatan (SP3) if you have not graduated by semester 12. It is recommended to consult your Dosen Wali/PA or the academic affairs office as soon as possible to keep your continued study plan on track.'
+    id: 'Kalau kamu belum menyelesaikan studi dalam 8 semester, semester-semester berikutnya berfokus pada penyelesaian mata kuliah yang tersisa dan/atau Tugas Akhir. Syarat minimal SKS untuk mengajukan Tugas Akhir/Skripsi juga terus meningkat mengikuti pola serupa semester 7-8 kalau kamu belum memulainya - tanyakan angka pastinya ke Program Studi. Ingat juga checkpoint masa studi berikutnya: Surat Peringatan kedua (SP2) kalau belum lulus di semester 10, dan Surat Peringatan ketiga/terakhir (SP3) kalau belum lulus di semester 12. Disarankan untuk berkonsultasi dengan Program Studi sesegera mungkin supaya rencana studi lanjutanmu tetap terarah.',
+    en: 'If you have not finished your studies within 8 semesters, the following semesters focus on completing any remaining courses and/or your Final Project. The minimum-credit requirement to submit your Final Project/Thesis also keeps increasing, following a similar pattern to semesters 7-8, if you have not started it yet - check the exact number with your Study Program. Also keep in mind the next study-duration checkpoints: a second Surat Peringatan (SP2) if you have not graduated by semester 10, and a third and final Surat Peringatan (SP3) if you have not graduated by semester 12. It is recommended to consult your Study Program as soon as possible to keep your continued study plan on track.'
   }
 };
 
@@ -1800,10 +1862,10 @@ function renderPanduan_() {
   el.innerHTML = html;
 }
 
-function openPanduan() {
+function openPanduan(noPush) {
   scHideAllViews_();
   document.getElementById('panduanView').style.display = 'block';
-  setCleanPath_('/student-guide/');
+  setCleanPath_('/student-guide/', noPush);
   window.scrollTo({ top: 0, behavior: 'smooth' });
   renderPanduan_();
 }
@@ -1864,10 +1926,10 @@ function renderDosen_() {
   el.innerHTML = dosenFilterBarHtml_() + gridHtml;
 }
 
-async function openDosen() {
+async function openDosen(noPush) {
   scHideAllViews_();
   document.getElementById('dosenView').style.display = 'block';
-  setCleanPath_('/lecturers/');
+  setCleanPath_('/lecturers/', noPush);
   window.scrollTo({ top: 0, behavior: 'smooth' });
   var el = document.getElementById('dosenContent');
   if (dosenList_) { renderDosen_(); return; }
@@ -1900,10 +1962,10 @@ async function ensureQuizConfig() {
   quizConfigApplied = true;
 }
 
-async function openQuiz() {
+async function openQuiz(noPush) {
   scHideAllViews_();
   document.getElementById('quizView').style.display  = 'block';
-  setCleanPath_('/specialization/');
+  setCleanPath_('/specialization/', noPush);
   await ensureQuizConfig();
   startQuiz();
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -2249,11 +2311,11 @@ var _scLoaded  = false;
 var _scFilters = { jenis: '', peminatan: '', status: '', statusPublish: '', sumber: '' };
 var _scSort    = 'baru';
 
-async function openShowcaseGaleri() {
+async function openShowcaseGaleri(noPush) {
   scHideAllViews_();
   document.getElementById('scGaleriView').style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  setCleanPath_('/showcase/');
+  setCleanPath_('/showcase/', noPush);
   await scEnsureGaleriLoaded();
   scRenderGaleri();
 }
@@ -2388,7 +2450,7 @@ var _scCurrentDetail = null;
 // yang datang belakangan (basi) tidak boleh menimpa detail yang sedang tampil.
 var _scDetailReqKode = null;
 
-async function openShowcaseDetail(kode) {
+async function openShowcaseDetail(kode, noPush) {
   scHideAllViews_();
   document.getElementById('scDetailView').style.display = 'block';
   document.getElementById('scDetailBody').innerHTML = '<p class="msg-center">' + t('sc_loading') + '</p>';
@@ -2403,7 +2465,7 @@ async function openShowcaseDetail(kode) {
     }
     _scCurrentDetail = res.item;
     scRenderDetail();
-    updateUrlParam_('kode', res.item.kode);
+    updateUrlParam_('kode', res.item.kode, noPush);
   } catch (e) {
     if (_scDetailReqKode !== kode) return;
     document.getElementById('scDetailBody').innerHTML = '<p class="msg-error">' + t('sc_error') + '</p>';
@@ -2597,13 +2659,19 @@ async function submitScReport() {
 }
 
 // ---- Form Submit ----
-function openShowcaseForm() {
+// scFormView/scStatusView tidak punya path/query URL sendiri (keduanya cuma
+// sub-tampilan di dalam /showcase/), jadi riwayatnya ditandai lewat
+// history.state, bukan lewat setCleanPath_/updateUrlParam_ - lihat listener
+// popstate di DOMContentLoaded yang mengecek state.view ini.
+function openShowcaseForm(noPush) {
   scHideAllViews_();
   document.getElementById('scFormView').style.display = 'block';
   _scResubmitKode = null;
   document.getElementById('scFormTitle').textContent = t('sc_form_title');
   scResetForm();
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (noPush) history.replaceState({ view: 'scForm' }, '', location.href);
+  else history.pushState({ view: 'scForm' }, '', location.href);
 }
 
 function scResetForm() {
@@ -2859,6 +2927,7 @@ async function scOpenResubmit(kode) {
   document.getElementById('scFormView').style.display = 'block';
   document.getElementById('scFormTitle').textContent = t('sc_resubmit_title');
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  history.pushState({ view: 'scForm' }, '', location.href);
   scResetForm();
   document.getElementById('scFormBody').style.display = 'none';
   document.getElementById('scfSubmitBtn').style.display = 'none';
@@ -2986,8 +3055,111 @@ async function submitShowcaseForm() {
   }
 }
 
+// ------ IKUTI PENGAJUAN/KARYA (bookmark lokal, sama seperti Ikuti NIM di
+// atas) ------ Membandingkan StatusModerasi terakhir kali dilihat dengan
+// status TERKINI, supaya mahasiswa tahu ada perubahan (mis. Menunggu ->
+// Disetujui) tanpa perlu bolak-balik cek manual. Sama-sama localStorage
+// saja, BUKAN notifikasi push sungguhan, dan tidak disinkronkan antar
+// perangkat/browser - lihat catatan lengkap di blok Ikuti NIM di atas,
+// alasannya sama persis.
+const FOLLOW_KARYA_KEY = 'simprodi_followed_karya';
+
+// Hasil cekShowcaseStatus() TERAKHIR - dipakai toggleFollowKarya_() untuk
+// mengambil namaProgram/statusModerasi TANPA menyisipkannya sebagai literal
+// string JS di dalam atribut onclick. namaProgram adalah teks bebas
+// (isian mahasiswa/admin) yang bisa memuat tanda kutip/kurung/titik koma -
+// menyisipkannya langsung ke onclick="toggleFollowKarya_('...')" rentan
+// injeksi (escHtml tidak mengubah tanda kutip tunggal, dan meng-encode-nya
+// jadi &#39; TIDAK cukup, karena decoding entity HTML pada atribut tetap
+// terjadi SEBELUM string itu dieksekusi sebagai JS - jadi tetap bisa
+// memutus string literalnya). Hanya `kode` (format tetap dari server,
+// mis. "SC-7K2M9") yang aman disisipkan langsung.
+var _scLastStatusRes = null;
+function getFollowedKarya_() {
+  try { return JSON.parse(localStorage.getItem(FOLLOW_KARYA_KEY) || '[]'); } catch (e) { return []; }
+}
+function saveFollowedKarya_(list) {
+  try { localStorage.setItem(FOLLOW_KARYA_KEY, JSON.stringify(list)); } catch (e) {}
+}
+function isFollowingKarya_(kode) {
+  return getFollowedKarya_().some(function(f) { return f.kode === kode; });
+}
+function scStatusLabel_(status) {
+  return status === 'Disetujui' ? t('sc_status_disetujui') : (status === 'Ditolak' ? t('sc_status_ditolak') : t('sc_status_menunggu'));
+}
+function toggleFollowKarya_(kode) {
+  var list = getFollowedKarya_();
+  var idx = list.findIndex(function(f) { return f.kode === kode; });
+  if (idx !== -1) {
+    list.splice(idx, 1);
+  } else {
+    var res = _scLastStatusRes;
+    list.push({
+      kode: kode,
+      namaProgram: (res && res.kode === kode) ? res.namaProgram : '',
+      statusModerasi: (res && res.kode === kode) ? res.statusModerasi : 'Menunggu'
+    });
+  }
+  saveFollowedKarya_(list);
+  var btn = document.getElementById('followKaryaBtn');
+  if (btn) {
+    var following = isFollowingKarya_(kode);
+    btn.classList.toggle('active', following);
+    btn.textContent = following ? t('follow_btn_active') : t('follow_karya_btn');
+  }
+  renderFollowedKaryaSection_();
+}
+// Perbarui snapshot status begitu benar-benar dilihat (lewat cek manual ATAU
+// lewat daftar "diikuti"), supaya badge "status berubah" hilang setelah
+// dilihat, bukan cuma setelah di-follow.
+function markFollowedKaryaSeen_(kode, statusModerasi) {
+  var list = getFollowedKarya_();
+  var idx = list.findIndex(function(f) { return f.kode === kode; });
+  if (idx === -1) return;
+  list[idx].statusModerasi = statusModerasi;
+  saveFollowedKarya_(list);
+}
+function unfollowKarya_(kode, ev) {
+  if (ev) ev.stopPropagation();
+  saveFollowedKarya_(getFollowedKarya_().filter(function(f) { return f.kode !== kode; }));
+  renderFollowedKaryaSection_();
+}
+function followedKaryaCardHtml_(f, freshStatus) {
+  var changed = freshStatus && freshStatus !== f.statusModerasi;
+  var badge = changed ? '<span class="follow-badge">' + t('follow_karya_changed') + '</span>' : '';
+  return '<div class="sc-card follow-card" onclick="openFollowedKarya_(\'' + escHtml(f.kode) + '\')" style="cursor:pointer;">' +
+    '<div class="sc-status-card-top">' +
+      '<div><div class="sc-status-name">' + escHtml(f.namaProgram || '-') + badge + '</div><div class="sc-status-code">' + escHtml(f.kode) + ' &middot; ' + escHtml(scStatusLabel_(freshStatus || f.statusModerasi)) + '</div></div>' +
+      '<button type="button" class="follow-remove-btn" onclick="unfollowKarya_(\'' + escHtml(f.kode) + '\', event)" title="' + t('follow_remove') + '">&times;</button>' +
+    '</div>' +
+  '</div>';
+}
+function renderFollowedKaryaSection_() {
+  var el = document.getElementById('followedKaryaSection');
+  if (!el) return;
+  var list = getFollowedKarya_();
+  if (!list.length) { el.innerHTML = ''; return; }
+  el.innerHTML = '<div class="follow-list-title">' + t('follow_karya_section_title') + '</div><div id="followedKaryaCards">' +
+    list.map(function(f) { return followedKaryaCardHtml_(f, null); }).join('') + '</div>';
+  // Cek status terkini di latar belakang (tidak menghalangi render daftar)
+  // supaya badge "status berubah" muncul begitu statusnya berubah sejak
+  // terakhir dilihat.
+  list.forEach(function(f, i) {
+    gasGet({ action: 'showcase_status', kode: f.kode, lang: currentLang }).then(function(res) {
+      if (!res || !res.ok) return;
+      var cardsWrap = document.getElementById('followedKaryaCards');
+      if (!cardsWrap || !cardsWrap.children[i]) return;
+      cardsWrap.children[i].outerHTML = followedKaryaCardHtml_(f, res.statusModerasi);
+    }).catch(function() {});
+  });
+}
+function openFollowedKarya_(kode) {
+  document.getElementById('scStatusInput').value = kode;
+  cekShowcaseStatus();
+}
+
 // ---- Cek Status ----
-function openShowcaseStatus() {
+function openShowcaseStatus(noPush) {
   scHideAllViews_();
   document.getElementById('scStatusView').style.display = 'block';
   document.getElementById('scStatusResult').innerHTML = '';
@@ -2995,6 +3167,9 @@ function openShowcaseStatus() {
   document.getElementById('scOwnDetailBody').innerHTML = '';
   document.getElementById('scOwnDetailBody').style.display = 'none';
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  renderFollowedKaryaSection_();
+  if (noPush) history.replaceState({ view: 'scStatus' }, '', location.href);
+  else history.pushState({ view: 'scStatus' }, '', location.href);
 }
 
 async function cekShowcaseStatus() {
@@ -3008,6 +3183,7 @@ async function cekShowcaseStatus() {
       resultEl.innerHTML = '<p class="msg-error">' + escHtml((res && res.message) || t('sc_status_not_found')) + '</p>';
       return;
     }
+    _scLastStatusRes = res;
     var pillClass = res.statusModerasi === 'Disetujui' ? 'sc-status-disetujui' : (res.statusModerasi === 'Ditolak' ? 'sc-status-ditolak' : 'sc-status-menunggu');
     var pillLabel = res.statusModerasi === 'Disetujui' ? t('sc_status_disetujui') : (res.statusModerasi === 'Ditolak' ? t('sc_status_ditolak') : t('sc_status_menunggu'));
     var html = '<div class="sc-card">' +
@@ -3023,10 +3199,12 @@ async function cekShowcaseStatus() {
     } else {
       html += '<div class="sc-action-row"><button class="sc-btn sc-btn-outline sc-btn-sm" onclick="scViewOwnDetail(\'' + escHtml(res.kode) + '\')">' + t('sc_btn_lihat_detail') + '</button></div>';
     }
+    html += '<button type="button" class="follow-btn' + (isFollowingKarya_(res.kode) ? ' active' : '') + '" id="followKaryaBtn" style="margin-top:10px;" onclick="toggleFollowKarya_(\'' + escHtml(res.kode) + '\')">' + t(isFollowingKarya_(res.kode) ? 'follow_btn_active' : 'follow_karya_btn') + '</button>';
     html += '</div>';
     resultEl.innerHTML = html;
     document.getElementById('scOwnDetailBody').innerHTML = '';
     document.getElementById('scOwnDetailBody').style.display = 'none';
+    markFollowedKaryaSeen_(res.kode, res.statusModerasi);
   } catch (e) {
     resultEl.innerHTML = '<p class="msg-error">' + t('sc_error') + '</p>';
   }

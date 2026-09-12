@@ -131,7 +131,6 @@
     <div id="searchSection" style="display:none;">
       <div class="home-hero">
         <div class="home-hero-inner">
-          <button class="back-btn" onclick="showHome()"><span class="arr">&#8592;</span> <span data-i18n="btn_beranda">Beranda</span></button>
           <div class="home-headline" style="font-size:1.05rem;margin-bottom:4px;" data-i18n="home_card1_title">Portofolio Akademik</div>
           <div class="home-sub" style="margin-bottom:0;" data-i18n="home_card1_desc">Cek prestasi, MBKM, dan sertifikasi yang sudah tercatat di program studi.</div>
         </div>
@@ -159,10 +158,6 @@
 
       <div class="home-hero">
         <div class="home-hero-inner">
-          <button class="back-btn" onclick="showList()">
-            <span class="arr">&#8592;</span>
-            <span data-i18n="btn_kembali">Kembali</span>
-          </button>
           <div class="home-headline" style="font-size:1.05rem;margin-bottom:4px;" data-i18n="detail_title">Detail Portofolio Mahasiswa</div>
           <div class="home-sub" style="margin-bottom:0;" data-i18n="detail_sub">Rincian prestasi, MBKM, dan sertifikasi yang tercatat untuk mahasiswa ini.</div>
         </div>
@@ -173,7 +168,7 @@
           <div class="d-name" id="dNama"></div>
           <div class="d-nim"  id="dNim"></div>
         </div>
-        <button type="button" class="follow-nim-btn" id="followNimBtn" onclick="toggleFollowNim_()" data-i18n="follow_nim_btn">Ikuti NIM Ini</button>
+        <button type="button" class="follow-btn" id="followNimBtn" onclick="toggleFollowNim_()" data-i18n="follow_nim_btn">Ikuti NIM Ini</button>
       </div>
 
       <!-- Accordion: MBKM -->
@@ -254,7 +249,6 @@
     <div id="quizView" style="display:none;">
       <div class="home-hero">
         <div class="home-hero-inner">
-          <button class="back-btn" onclick="showHome()"><span class="arr">&#8592;</span> <span data-i18n="btn_beranda">Beranda</span></button>
           <div class="home-headline" style="font-size:1.05rem;margin-bottom:4px;" data-i18n="home_card2_title">Tes Peminatan</div>
           <div class="home-sub" style="margin-bottom:0;" data-i18n="home_card2_desc">Jawab 7 pertanyaan singkat untuk tahu apakah kamu lebih cocok ke SSD atau AISD.</div>
         </div>
@@ -276,9 +270,6 @@
     <div id="quizResultView" style="display:none;">
       <div class="home-hero">
         <div class="home-hero-inner">
-          <button class="back-btn" onclick="showHome()">
-            <span class="arr">&#8592;</span> <span data-i18n="btn_beranda">Beranda</span>
-          </button>
           <div class="home-headline" style="font-size:1.05rem;margin-bottom:4px;" data-i18n="quiz_result_title">Hasil Tes Peminatan</div>
           <div class="home-sub" style="margin-bottom:0;" data-i18n="quiz_result_sub">Rekomendasi peminatan berdasarkan jawabanmu.</div>
         </div>
@@ -314,7 +305,6 @@
     <div id="scGaleriView">
       <div class="home-hero">
         <div class="home-hero-inner">
-          <button class="back-btn" onclick="showHome()"><span class="arr">&#8592;</span> <span data-i18n="btn_beranda">Beranda</span></button>
           <div class="home-headline" style="font-size:1.05rem;margin-bottom:4px;" data-i18n="sc_galeri_title">Karya Mahasiswa Teknik Informatika</div>
           <div class="home-sub" style="margin-bottom:0;" data-i18n="sc_galeri_sub">Aplikasi, situs, dan game hasil tugas kuliah maupun tugas akhir mahasiswa. Jelajahi dan berikan dukungan lewat like.</div>
         </div>
@@ -413,7 +403,6 @@
     <div id="scDetailView">
       <div class="home-hero">
         <div class="home-hero-inner">
-          <button class="back-btn" onclick="openShowcaseGaleri()"><span class="arr">&#8592;</span> <span data-i18n="sc_back">Kembali</span></button>
           <div class="home-headline" style="font-size:1.05rem;margin-bottom:4px;" data-i18n="sc_detail_title">Detail Karya Showcase</div>
           <div class="home-sub" style="margin-bottom:0;" data-i18n="sc_detail_sub">Info lengkap, tautan, dan dukungan untuk karya mahasiswa ini.</div>
         </div>
@@ -425,7 +414,6 @@
     <div id="scFormView">
       <div class="home-hero">
         <div class="home-hero-inner">
-          <button class="back-btn" onclick="openShowcaseGaleri()"><span class="arr">&#8592;</span> <span data-i18n="sc_back">Kembali</span></button>
           <div id="scFormTitle" class="home-headline" style="font-size:1.05rem;margin-bottom:4px;" data-i18n="sc_form_title">Tambahkan Karyamu ke Showcase</div>
           <div class="home-sub" style="margin-bottom:0;" data-i18n="sc_form_sub">Isi form di bawah untuk menampilkan aplikasi, web, atau game buatanmu ke galeri publik.</div>
         </div>
@@ -633,7 +621,6 @@
     <div id="scStatusView">
       <div class="home-hero">
         <div class="home-hero-inner">
-          <button class="back-btn" onclick="openShowcaseGaleri()"><span class="arr">&#8592;</span> <span data-i18n="sc_back">Kembali</span></button>
           <div class="home-headline" style="font-size:1.05rem;margin-bottom:4px;" data-i18n="sc_status_title">Cek Status Pengajuan Karya</div>
           <div class="home-sub" style="margin-bottom:0;" data-i18n="sc_status_sub">Masukkan kode yang kamu dapat setelah mengirim karya untuk melihat progres peninjauannya.</div>
         </div>
@@ -644,6 +631,8 @@
         <button class="sc-btn sc-btn-primary" onclick="cekShowcaseStatus()" data-i18n="sc_btn_cek">Cek</button>
       </div>
 
+      <div id="followedKaryaSection" style="margin-top:16px;"></div>
+
       <div id="scStatusResult" style="margin-top:16px;"></div>
       <div id="scOwnDetailBody" style="margin-top:12px;display:none;"></div>
     </div>
@@ -652,7 +641,6 @@
     <div id="statistikView" style="display:none;">
       <div class="home-hero">
         <div class="home-hero-inner">
-          <button class="back-btn" onclick="showHome()"><span class="arr">&#8592;</span> <span data-i18n="btn_beranda">Beranda</span></button>
           <div class="home-headline" style="font-size:1.05rem;margin-bottom:4px;" data-i18n="stat_title">Capaian Kolektif Program Studi</div>
           <div class="home-sub" style="margin-bottom:0;" data-i18n="stat_subtitle">Ratusan kegiatan, prestasi, dan karya lahir dari mahasiswa kami, dirangkum dalam angka.</div>
         </div>
@@ -699,7 +687,6 @@
     <div id="panduanView" style="display:none;">
       <div class="home-hero">
         <div class="home-hero-inner">
-          <button class="back-btn" onclick="showHome()"><span class="arr">&#8592;</span> <span data-i18n="btn_beranda">Beranda</span></button>
           <div class="home-headline" style="font-size:1.05rem;margin-bottom:4px;" data-i18n="panduan_title">Buku Panduan Mahasiswa</div>
           <div class="home-sub" style="margin-bottom:0;" data-i18n="panduan_subtitle">Gambaran perjalanan akademik program studi dari semester 1 sampai lulus, semester demi semester.</div>
         </div>
@@ -712,7 +699,6 @@
     <div id="dosenView" style="display:none;">
       <div class="home-hero">
         <div class="home-hero-inner">
-          <button class="back-btn" onclick="showHome()"><span class="arr">&#8592;</span> <span data-i18n="btn_beranda">Beranda</span></button>
           <div class="home-headline" style="font-size:1.05rem;margin-bottom:4px;" data-i18n="dosen_title">Dosen Pembimbing</div>
           <div class="home-sub" style="margin-bottom:0;" data-i18n="dosen_subtitle">Cari dosen program studi yang bisa jadi pembimbing lomba, kegiatan lain, atau tugas akhir.</div>
         </div>

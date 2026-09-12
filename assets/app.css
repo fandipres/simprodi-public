@@ -303,19 +303,6 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; s
 /* ---- DETAIL VIEW ---- */
 #detailView { display: none; }
 
-.back-btn {
-  display: inline-flex; align-items: center; gap: 7px;
-  background: none; border: 1px solid var(--border);
-  border-radius: 7px; padding: 7px 13px;
-  font-size: 0.82rem; font-weight: 600; font-family: var(--font);
-  color: var(--muted); cursor: pointer; margin-bottom: 16px;
-  transition: border-color .15s, color .15s;
-}
-.back-btn:hover { border-color: var(--blue); color: var(--blue); }
-.back-btn .arr  { font-size: 0.9rem; }
-.home-hero .back-btn { color: rgba(255,255,255,.8); border-color: rgba(255,255,255,.3); }
-.home-hero .back-btn:hover { color: #fff; border-color: #fff; }
-
 .detail-header {
   background: var(--card); border: 1px solid var(--border);
   border-radius: var(--radius); padding: 16px;
@@ -323,29 +310,29 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; s
 }
 
 /* ---- IKUTI NIM (bookmark lokal, lihat app.js) ---- */
-.follow-nim-btn {
+.follow-btn {
   flex-shrink: 0; background: var(--card); border: 1.5px solid var(--border);
   border-radius: 8px; padding: 8px 14px; font-size: 0.82rem; font-weight: 600;
   font-family: var(--font); color: var(--muted); cursor: pointer;
   transition: border-color .15s, color .15s, background .15s;
 }
-.follow-nim-btn:hover { border-color: var(--blue); color: var(--blue); }
-.follow-nim-btn.active { background: var(--blue-soft); border-color: var(--blue); color: var(--blue); }
-.follow-nim-title {
+.follow-btn:hover { border-color: var(--blue); color: var(--blue); }
+.follow-btn.active { background: var(--blue-soft); border-color: var(--blue); color: var(--blue); }
+.follow-list-title {
   font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
   letter-spacing: .05em; color: var(--muted); margin: 2px 0 8px;
 }
-.follow-nim-badge {
+.follow-badge {
   display: inline-block; margin-left: 6px; font-size: 0.68rem; font-weight: 700;
   padding: 1px 7px; border-radius: 20px; vertical-align: middle;
   background: var(--red-soft); color: var(--red); border: 1px solid var(--red-border);
 }
-.follow-nim-remove {
+.follow-remove-btn {
   flex-shrink: 0; width: 26px; height: 26px; border-radius: 6px;
   border: 1px solid var(--border); background: var(--card); color: var(--muted);
   font-size: 0.95rem; cursor: pointer; transition: border-color .15s, color .15s, background .15s;
 }
-.follow-nim-remove:hover { border-color: var(--red-border); color: var(--red); background: var(--red-soft); }
+.follow-remove-btn:hover { border-color: var(--red-border); color: var(--red); background: var(--red-soft); }
 .d-name    { font-size: 1rem; font-weight: 700; }
 .d-nim     { font-size: 0.80rem; color: var(--muted); margin-top: 2px; }
 
