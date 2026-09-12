@@ -37,6 +37,11 @@ const I18N = {
     btn_kembali: 'Kembali',
     detail_title: 'Detail Portofolio Mahasiswa',
     detail_sub: 'Rincian prestasi, MBKM, dan sertifikasi yang tercatat untuk mahasiswa ini.',
+    follow_nim_btn: 'Ikuti NIM Ini',
+    follow_nim_btn_active: 'Diikuti ✓',
+    follow_nim_section_title: 'NIM yang Kamu Ikuti',
+    follow_nim_remove: 'Berhenti mengikuti',
+    follow_nim_not_found: 'Data untuk NIM ini tidak ditemukan (mungkin sudah tidak ada catatan tersimpan).',
     label_mbkm: 'MBKM', label_prestasi: 'Prestasi', label_sertifikasi: 'Sertifikasi',
     info_title_mbkm: 'Apa itu MBKM?', info_title_prestasi: 'Apa itu Prestasi?', info_title_sertifikasi: 'Apa itu Sertifikasi?',
     mbkm_title: 'Merdeka Belajar Kampus Merdeka',
@@ -108,8 +113,9 @@ const I18N = {
     home_card6_btn: 'Lihat Dosen',
     dosen_title: 'Dosen Pembimbing',
     dosen_subtitle: 'Cari dosen program studi yang bisa jadi pembimbing lomba, kegiatan lain, atau tugas akhir.',
-    dosen_badge_tetap: 'Dosen Tetap',
-    dosen_badge_ta: 'Pembimbing Tugas Akhir',
+    dosen_badge_tetap: 'Dosen Tetap Program Studi',
+    dosen_badge_ta1: 'Pembimbing TA 1',
+    dosen_badge_ta2: 'Pembimbing TA 2',
     dosen_sinta_link: 'SINTA',
     dosen_error: 'Gagal memuat daftar dosen. Coba lagi beberapa saat.',
     dosen_empty: 'Data dosen belum tersedia.',
@@ -150,6 +156,7 @@ const I18N = {
     sc_sumber_tugas_label: 'Sumber Karya',
     sc_semester_label: 'Semester Dikerjakan',
     sc_dosen_label: 'Dosen Pembimbing',
+    sc_dosen_ordinal: 'Pembimbing {n}: ',
     sc_kontak_label: 'Kontak Tim',
     sc_tech_label: 'Teknologi',
     sc_btn_demo: 'Demo',
@@ -289,6 +296,11 @@ const I18N = {
     btn_kembali: 'Back',
     detail_title: 'Student Portfolio Detail',
     detail_sub: 'Recorded achievements, MBKM activities, and certifications for this student.',
+    follow_nim_btn: 'Follow This NIM',
+    follow_nim_btn_active: 'Following ✓',
+    follow_nim_section_title: 'NIMs You Follow',
+    follow_nim_remove: 'Unfollow',
+    follow_nim_not_found: 'No data found for this NIM (it may no longer have any records).',
     label_mbkm: 'MBKM', label_prestasi: 'Achievements', label_sertifikasi: 'Certifications',
     info_title_mbkm: 'What is MBKM?', info_title_prestasi: 'What is Prestasi?', info_title_sertifikasi: 'What is Sertifikasi?',
     mbkm_title: 'Merdeka Belajar Kampus Merdeka (Freedom to Learn – Independent Campus)',
@@ -361,7 +373,8 @@ const I18N = {
     dosen_title: 'Supervising Lecturers',
     dosen_subtitle: 'Find a study program lecturer who can supervise a competition, another activity, or your final thesis.',
     dosen_badge_tetap: 'Permanent Faculty',
-    dosen_badge_ta: 'Thesis Supervisor',
+    dosen_badge_ta1: 'Thesis Supervisor 1',
+    dosen_badge_ta2: 'Thesis Supervisor 2',
     dosen_sinta_link: 'SINTA',
     dosen_error: 'Failed to load the lecturer list. Please try again shortly.',
     dosen_empty: 'Lecturer data is not available yet.',
@@ -402,6 +415,7 @@ const I18N = {
     sc_sumber_tugas_label: 'Work Source',
     sc_semester_label: 'Semester Made',
     sc_dosen_label: 'Supervisor',
+    sc_dosen_ordinal: 'Supervisor {n}: ',
     sc_kontak_label: 'Team Contact',
     sc_tech_label: 'Technology',
     sc_btn_demo: 'Demo',
@@ -576,10 +590,12 @@ function rerenderActiveView() {
     fillMbkm(s.mbkm || []);
     fillPrestasi(s.prestasi || []);
     fillSertifikasi(s.sertifikasi || []);
+    updateFollowBtn_();
     return;
   }
   if (document.getElementById('searchSection').style.display !== 'none') {
     if (lastQuery) doSearch(); else renderList();
+    renderFollowedNimSection_();
     return;
   }
   if (document.getElementById('quizView').style.display !== 'none') { renderQuizQuestion(); return; }
@@ -807,6 +823,103 @@ function showList() {
   updateUrlParam_();
 }
 
+// ------ IKUTI NIM (bookmark lokal per-browser, tanpa akun/login) ------
+// Disimpan di localStorage, bukan di server - murni penanda pribadi per
+// perangkat supaya mahasiswa bisa cek dengan cepat kalau ada capaian baru
+// pada NIM yang mereka ikuti, tanpa perlu sistem akun. Dibandingkan dengan
+// JUMLAH MBKM/Prestasi/Sertifikasi terakhir kali dilihat - BUKAN notifikasi
+// push sungguhan (situs statis, tidak ada server yang bisa mendorong pesan
+// ke perangkat), cuma badge "+N" yang muncul begitu mahasiswa membuka lagi
+// halaman Portofolio Akademik. Tidak disinkronkan antar perangkat/browser.
+const FOLLOW_NIM_KEY = 'simprodi_followed_nim';
+
+function getFollowedNim_() {
+  try { return JSON.parse(localStorage.getItem(FOLLOW_NIM_KEY) || '[]'); } catch (e) { return []; }
+}
+function saveFollowedNim_(list) {
+  try { localStorage.setItem(FOLLOW_NIM_KEY, JSON.stringify(list)); } catch (e) {}
+}
+function isFollowingNim_(nim) {
+  return getFollowedNim_().some(function(f) { return f.nim === nim; });
+}
+function countsOf_(s) {
+  return { mbkm: (s.mbkm || []).length, prestasi: (s.prestasi || []).length, sertifikasi: (s.sertifikasi || []).length };
+}
+function toggleFollowNim_() {
+  if (!currentStudent) return;
+  var list = getFollowedNim_();
+  var idx = list.findIndex(function(f) { return f.nim === currentStudent.nim; });
+  if (idx !== -1) list.splice(idx, 1);
+  else list.push({ nim: currentStudent.nim, nama: currentStudent.nama, counts: countsOf_(currentStudent) });
+  saveFollowedNim_(list);
+  updateFollowBtn_();
+}
+function updateFollowBtn_() {
+  var btn = document.getElementById('followNimBtn');
+  if (!btn || !currentStudent) return;
+  var following = isFollowingNim_(currentStudent.nim);
+  btn.classList.toggle('active', following);
+  btn.textContent = following ? t('follow_nim_btn_active') : t('follow_nim_btn');
+}
+// Perbarui snapshot count NIM yang diikuti begitu detailnya benar-benar
+// dilihat (lewat jalur manapun - pencarian biasa atau daftar "diikuti"),
+// supaya badge "+N" hilang setelah dilihat, bukan cuma setelah di-follow.
+function markFollowedSeen_(nim, counts) {
+  var list = getFollowedNim_();
+  var idx = list.findIndex(function(f) { return f.nim === nim; });
+  if (idx === -1) return;
+  list[idx].counts = counts;
+  saveFollowedNim_(list);
+}
+function unfollowNim_(nim, ev) {
+  if (ev) ev.stopPropagation();
+  saveFollowedNim_(getFollowedNim_().filter(function(f) { return f.nim !== nim; }));
+  renderFollowedNimSection_();
+}
+function followedNimCardHtml_(f, freshCounts) {
+  var delta = 0;
+  if (freshCounts) {
+    delta = Math.max(0, freshCounts.mbkm - f.counts.mbkm) + Math.max(0, freshCounts.prestasi - f.counts.prestasi) + Math.max(0, freshCounts.sertifikasi - f.counts.sertifikasi);
+  }
+  var badge = delta > 0 ? '<span class="follow-nim-badge">+' + delta + '</span>' : '';
+  return '<div class="student-card follow-nim-card" onclick="openFollowedNim_(\'' + escHtml(f.nim) + '\')">' +
+    '<div class="s-body">' +
+      '<div class="s-name">' + escHtml(f.nama || '-') + badge + '</div>' +
+      '<div class="s-nim">NIM. ' + escHtml(f.nim) + '</div>' +
+    '</div>' +
+    '<button type="button" class="follow-nim-remove" onclick="unfollowNim_(\'' + escHtml(f.nim) + '\', event)" title="' + t('follow_nim_remove') + '">&times;</button>' +
+  '</div>';
+}
+function renderFollowedNimSection_() {
+  var el = document.getElementById('followedNimSection');
+  if (!el) return;
+  var list = getFollowedNim_();
+  if (!list.length) { el.innerHTML = ''; return; }
+  el.innerHTML = '<div class="follow-nim-title">' + t('follow_nim_section_title') + '</div><div id="followedNimCards">' +
+    list.map(function(f) { return followedNimCardHtml_(f, null); }).join('') + '</div>';
+  // Cek jumlah terkini di latar belakang (tidak menghalangi render daftar)
+  // supaya badge "+N" muncul begitu ada capaian baru sejak terakhir dilihat.
+  list.forEach(function(f, i) {
+    gasGet({ action: 'search', q: f.nim, lang: currentLang }).then(function(res) {
+      if (!res || !res.ok) return;
+      var match = (res.students || []).find(function(s) { return s.nim === f.nim; });
+      if (!match) return;
+      var cardsWrap = document.getElementById('followedNimCards');
+      if (!cardsWrap || !cardsWrap.children[i]) return;
+      cardsWrap.children[i].outerHTML = followedNimCardHtml_(f, countsOf_(match));
+    }).catch(function() {});
+  });
+}
+function openFollowedNim_(nim) {
+  gasGet({ action: 'search', q: nim, lang: currentLang }).then(function(res) {
+    if (!res || !res.ok) { setStatus((res && res.message) || t('search_conn_error'), true); return; }
+    var match = (res.students || []).find(function(s) { return s.nim === nim; });
+    if (!match) { setStatus(t('follow_nim_not_found'), true); return; }
+    allStudents = [match];
+    openDetail(0);
+  }).catch(function() { setStatus(t('search_conn_error'), true); });
+}
+
 // ------ DETAIL ------
 function openDetail(idx) {
   const s = allStudents[idx];
@@ -815,6 +928,8 @@ function openDetail(idx) {
 
   document.getElementById('dNama').textContent = s.nama || '-';
   document.getElementById('dNim').textContent  = 'NIM. ' + s.nim;
+  markFollowedSeen_(s.nim, countsOf_(s));
+  updateFollowBtn_();
 
   const cp = (s.prestasi||[]).length, cm = (s.mbkm||[]).length, cs = (s.sertifikasi||[]).length;
 
@@ -1123,6 +1238,7 @@ function openPortofolio() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
   setTimeout(function() { searchInput.focus(); }, 80);
   setCleanPath_('/portofolio/');
+  renderFollowedNimSection_();
 }
 
 // ------ STATISTIK PROGRAM STUDI ------
@@ -1522,18 +1638,19 @@ var PANDUAN_SEMESTERS = [
   },
   { sem: 7, sks: 18,
     chapter: { id: 'Menuju Puncak', en: 'Approaching the Peak' },
-    milestone: { id: 'Proyek Informatika (proyek capstone) - Tugas Akhir/Skripsi juga sudah bisa mulai diambil dari semester ini. MBKM (Studi Independen atau Pertukaran Mahasiswa, 18 SKS) masih bisa jadi alternatif. Kalau berencana mulai TA, diskusikan topiknya dengan Dosen Wali sedini mungkin.', en: 'Proyek Informatika (capstone project) - you can also start taking your Final Project/Thesis from this semester onward. MBKM (Independent Study or Student Exchange, 18 credits) is still available as an alternative. If you plan to start your Final Project, discuss your topic with your academic advisor as early as possible.' },
+    milestone: { id: 'Proyek Informatika (proyek capstone) - Tugas Akhir/Skripsi juga sudah bisa mulai diambil dari semester ini, asalkan kamu sudah lulus minimal 110 SKS dan dokumen pengajuanmu sudah disetujui. MBKM (Studi Independen atau Pertukaran Mahasiswa, 18 SKS) masih bisa jadi alternatif. Kalau berencana mulai TA, diskusikan topiknya dengan Dosen Wali sedini mungkin.', en: 'Proyek Informatika (capstone project) - you can also start taking your Final Project/Thesis from this semester onward, as long as you have passed at least 110 credits and your submission documents have been approved. MBKM (Independent Study or Student Exchange, 18 credits) is still available as an alternative. If you plan to start your Final Project, discuss your topic with your academic advisor as early as possible.' },
     courses: [
       { id: 'Proyek Informatika', en: 'Informatics Capstone Project' },
       { id: 'Pengujian dan Kualitas Perangkat Lunak', en: 'Software Testing and Quality' },
       { id: 'Kewirausahaan Digital', en: 'Digital Entrepreneurship' },
       { id: 'Etika Kecerdasan Buatan', en: 'AI Ethics' },
-      { id: 'Data Besar', en: 'Big Data' }
+      { id: 'Data Besar', en: 'Big Data' },
+      { id: 'Tugas Akhir / Skripsi', en: 'Final Project / Thesis' }
     ]
   },
   { sem: 8, sks: 6,
     chapter: { id: 'Menuju Kelulusan', en: 'Heading Toward Graduation' },
-    milestone: { id: 'Tugas Akhir/Skripsi (biasanya diselesaikan di semester ini kalau belum dimulai sejak semester 7). Jaga komunikasi rutin dengan dosen pembimbing supaya progresmu tetap sesuai target kelulusan - semester ini juga jadi checkpoint pertama masa studi, kalau belum lulus di akhir semester 8 kamu akan menerima Surat Peringatan pertama (SP1).', en: 'Final Project/Thesis (usually completed this semester if not already started back in semester 7). Keep in regular contact with your thesis advisor to stay on track for graduation - this semester is also the first study-duration checkpoint: if you have not graduated by the end of semester 8, you will receive your first Surat Peringatan (SP1).' },
+    milestone: { id: 'Tugas Akhir/Skripsi (biasanya diselesaikan di semester ini kalau belum dimulai sejak semester 7) - syaratnya sudah lulus minimal 120 SKS dan dokumen pengajuanmu sudah disetujui. Jaga komunikasi rutin dengan dosen pembimbing supaya progresmu tetap sesuai target kelulusan - semester ini juga jadi checkpoint pertama masa studi, kalau belum lulus di akhir semester 8 kamu akan menerima Surat Peringatan pertama (SP1).', en: 'Final Project/Thesis (usually completed this semester if not already started back in semester 7) - requires having passed at least 120 credits and having your submission documents approved. Keep in regular contact with your thesis advisor to stay on track for graduation - this semester is also the first study-duration checkpoint: if you have not graduated by the end of semester 8, you will receive your first Surat Peringatan (SP1).' },
     courses: [
       { id: 'Tugas Akhir / Skripsi', en: 'Final Project / Thesis' }
     ]
@@ -1563,8 +1680,8 @@ var PANDUAN_LANJUT = {
   title: { id: 'Semester 9 dan Seterusnya', en: 'Semester 9 and Beyond' },
   chapter: { id: 'Kalau Perjalanan Berlanjut', en: 'If the Journey Continues' },
   body: {
-    id: 'Kalau kamu belum menyelesaikan studi dalam 8 semester, semester-semester berikutnya berfokus pada penyelesaian mata kuliah yang tersisa dan/atau Tugas Akhir. Ingat juga checkpoint masa studi berikutnya: Surat Peringatan kedua (SP2) kalau belum lulus di semester 10, dan Surat Peringatan ketiga/terakhir (SP3) kalau belum lulus di semester 12. Disarankan untuk berkonsultasi dengan Dosen Wali/PA atau bagian akademik sesegera mungkin supaya rencana studi lanjutanmu tetap terarah.',
-    en: 'If you have not finished your studies within 8 semesters, the following semesters focus on completing any remaining courses and/or your Final Project. Also keep in mind the next study-duration checkpoints: a second Surat Peringatan (SP2) if you have not graduated by semester 10, and a third and final Surat Peringatan (SP3) if you have not graduated by semester 12. It is recommended to consult your Dosen Wali/PA or the academic affairs office as soon as possible to keep your continued study plan on track.'
+    id: 'Kalau kamu belum menyelesaikan studi dalam 8 semester, semester-semester berikutnya berfokus pada penyelesaian mata kuliah yang tersisa dan/atau Tugas Akhir. Syarat minimal SKS untuk mengajukan Tugas Akhir/Skripsi juga terus meningkat mengikuti pola serupa semester 7-8 kalau kamu belum memulainya - tanyakan angka pastinya ke Dosen Wali/PA atau bagian akademik. Ingat juga checkpoint masa studi berikutnya: Surat Peringatan kedua (SP2) kalau belum lulus di semester 10, dan Surat Peringatan ketiga/terakhir (SP3) kalau belum lulus di semester 12. Disarankan untuk berkonsultasi dengan Dosen Wali/PA atau bagian akademik sesegera mungkin supaya rencana studi lanjutanmu tetap terarah.',
+    en: 'If you have not finished your studies within 8 semesters, the following semesters focus on completing any remaining courses and/or your Final Project. The minimum-credit requirement to submit your Final Project/Thesis also keeps increasing, following a similar pattern to semesters 7-8, if you have not started it yet - check the exact number with your Dosen Wali/PA or the academic affairs office. Also keep in mind the next study-duration checkpoints: a second Surat Peringatan (SP2) if you have not graduated by semester 10, and a third and final Surat Peringatan (SP3) if you have not graduated by semester 12. It is recommended to consult your Dosen Wali/PA or the academic affairs office as soon as possible to keep your continued study plan on track.'
   }
 };
 
@@ -1698,10 +1815,10 @@ function openPanduan() {
 // prestasi terpisah - publikasi/sitasi sudah dikelola SINTA sendiri).
 let dosenList_ = null;
 // Filter chip (bukan badge di tiap kartu lagi - user merasa badge per kartu
-// terlalu ramai/"lebay") - dua flag independen (dosen bisa Tetap DAN TA
-// sekaligus), tiap chip aktif MENYARING (AND): dosen harus cocok dengan
-// SEMUA chip yang sedang aktif.
-var dosenFilters_ = { tetap: false, ta: false };
+// terlalu ramai/"lebay") - tiga flag independen dari sheet DOSEN (Dosen
+// Tetap Program Studi, Pembimbing TA 1, Pembimbing TA 2), tiap chip aktif
+// MENYARING (AND): dosen harus cocok dengan SEMUA chip yang sedang aktif.
+var dosenFilters_ = { tetap: false, ta1: false, ta2: false };
 
 function dosenToggleFilter_(key) {
   dosenFilters_[key] = !dosenFilters_[key];
@@ -1711,7 +1828,8 @@ function dosenToggleFilter_(key) {
 function dosenFilterBarHtml_() {
   return '<div class="sc-chipbar" style="margin-bottom:14px;">' +
     '<button type="button" class="sc-fchip' + (dosenFilters_.tetap ? ' active' : '') + '" onclick="dosenToggleFilter_(\'tetap\')">' + t('dosen_badge_tetap') + '</button>' +
-    '<button type="button" class="sc-fchip' + (dosenFilters_.ta ? ' active' : '') + '" onclick="dosenToggleFilter_(\'ta\')">' + t('dosen_badge_ta') + '</button>' +
+    '<button type="button" class="sc-fchip' + (dosenFilters_.ta1 ? ' active' : '') + '" onclick="dosenToggleFilter_(\'ta1\')">' + t('dosen_badge_ta1') + '</button>' +
+    '<button type="button" class="sc-fchip' + (dosenFilters_.ta2 ? ' active' : '') + '" onclick="dosenToggleFilter_(\'ta2\')">' + t('dosen_badge_ta2') + '</button>' +
     '</div>';
 }
 
@@ -1736,7 +1854,8 @@ function renderDosen_() {
   }
   var filtered = dosenList_.filter(function(d) {
     if (dosenFilters_.tetap && !d.dosenTetap) return false;
-    if (dosenFilters_.ta && !d.dosenTA) return false;
+    if (dosenFilters_.ta1 && !d.dosenTa1) return false;
+    if (dosenFilters_.ta2 && !d.dosenTa2) return false;
     return true;
   });
   var gridHtml = filtered.length
@@ -2363,7 +2482,7 @@ function scBuildDetailBodyHtml_(item, opts) {
 
   var techHtml = (item.teknologi && item.teknologi.length)
     ? '<div class="sc-section-label">' + t('sc_tech_label') + '</div><div class="sc-tech-pills">' +
-      item.teknologi.map(function(x) { return '<span class="sc-tech-pill">' + escHtml(x) + '</span>'; }).join('') + '</div>'
+      sortTeknologi_(item.teknologi).map(function(x) { return '<span class="sc-tech-pill">' + escHtml(x) + '</span>'; }).join('') + '</div>'
     : '';
 
   var linkButtonsHtml =
@@ -2394,7 +2513,7 @@ function scBuildDetailBodyHtml_(item, opts) {
     '<div class="sc-info-grid">' +
       '<div class="sc-info-card"><div class="sc-info-icon">' + SC_ICON_SUMBER + '</div><div><div class="sc-info-k">' + t('sc_sumber_tugas_label') + '</div><div class="sc-info-v">' + escHtml(sumberLabel) + '</div></div></div>' +
       '<div class="sc-info-card"><div class="sc-info-icon">' + SC_ICON_SEMESTER + '</div><div><div class="sc-info-k">' + t('sc_semester_label') + '</div><div class="sc-info-v">' + escHtml(translateSemesterLabel_(item.semester)) + '</div></div></div>' +
-      ((item.dosenPembimbing && item.dosenPembimbing.length) ? '<div class="sc-info-card"><div class="sc-info-icon">' + SC_ICON_DOSEN + '</div><div><div class="sc-info-k">' + t('sc_dosen_label') + '</div><div class="sc-info-v">' + escHtml(item.dosenPembimbing.join(', ')) + '</div></div></div>' : '') +
+      ((item.dosenPembimbing && item.dosenPembimbing.length) ? '<div class="sc-info-card"><div class="sc-info-icon">' + SC_ICON_DOSEN + '</div><div><div class="sc-info-k">' + t('sc_dosen_label') + '</div><div class="sc-info-v">' + item.dosenPembimbing.map(function(nm, i) { return t('sc_dosen_ordinal', { n: i + 1 }) + escHtml(nm); }).join('<br>') + '</div></div></div>' : '') +
       '<div class="sc-info-card"><div class="sc-info-icon">' + SC_ICON_KONTAK + '</div><div><div class="sc-info-k">' + t('sc_kontak_label') + '</div><div class="sc-info-v">' + scRenderKontak_(item.kontakTim) + '</div></div></div>' +
     '</div>' +
     techHtml + actionsHtml + reportHtml;
@@ -2582,7 +2701,7 @@ function scEnsureDosenOptions_() {
   if (scDosenOptions_) return Promise.resolve(scDosenOptions_);
   if (!scDosenOptionsPromise_) {
     scDosenOptionsPromise_ = gasGet({ action: 'dosen_list' }).then(function(res) {
-      scDosenOptions_ = (res && res.ok) ? res.dosen.filter(function(d) { return d.dosenTA; }).map(function(d) { return d.nama; }) : [];
+      scDosenOptions_ = (res && res.ok) ? res.dosen.filter(function(d) { return d.dosenTa1 || d.dosenTa2; }).map(function(d) { return d.nama; }) : [];
       scRefreshDosenSelects_();
       return scDosenOptions_;
     }).catch(function() { scDosenOptions_ = []; return scDosenOptions_; });
@@ -2624,11 +2743,18 @@ function scTeknologiKeydown_(e) {
     if (chips.lastElementChild) chips.lastElementChild.remove();
   }
 }
+// Teknologi diurutkan abjad di mana pun ditampilkan/disimpan (public dan
+// admin) - sebelumnya tidak ada pengurutan sama sekali, jadi urutannya ikut
+// urutan mahasiswa/admin mengetik (mis. "Flask, Firebase" - tidak berurut).
+function sortTeknologi_(arr) {
+  return (arr || []).slice().sort(function(a, b) { return a.localeCompare(b, 'id', { sensitivity: 'base' }); });
+}
+
 function scGetTechValues_() {
   var vals = Array.prototype.map.call(document.querySelectorAll('#scfTeknologiChips .sc-tag-chip'), function(el) { return el.dataset.val; });
   var trailing = document.getElementById('scfTeknologi').value.trim();
   if (trailing) vals.push(trailing);
-  return vals;
+  return sortTeknologi_(vals);
 }
 
 function scSelectSeg(groupId, btn) {
@@ -2693,7 +2819,7 @@ function scPopulateForm_(item) {
   document.getElementById('scfDeskripsi').value = item.deskripsi.id;
   document.getElementById('scfTeknologiChips').innerHTML = '';
   document.getElementById('scfTeknologi').value = '';
-  (item.teknologi || []).forEach(function(x) { scAddTechChip_(x); });
+  sortTeknologi_(item.teknologi).forEach(function(x) { scAddTechChip_(x); });
   document.getElementById('scfKontak').value = item.kontakTim;
   document.getElementById('scfDemo').value = item.linkDemo;
   document.getElementById('scfDownload').value = item.linkDownload || '';

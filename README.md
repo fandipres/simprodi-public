@@ -5,6 +5,7 @@ A bilingual (Indonesian/English) public portal for an Informatics Engineering st
 ## ✨ Key Features
 
 * **Achievement Lookup:** Search MBKM, Prestasi (awards), and Sertifikasi (certification) records by NIM or name.
+* **Follow a NIM:** A no-login, browser-local bookmark for a student record - flags when new achievements are recorded since it was last viewed, without needing an account.
 * **Data Correction Report:** Students can flag achievement records that look incorrect directly from the search results.
 * **Specialization Quiz:** An interactive quiz that recommends a specialization track (SSD or AISD) based on the student's answers.
 * **Student Project Showcase:** A public gallery of apps, websites, games, and other student projects, with a full submit → moderation → publish flow, likes, content reporting, submission-status lookup, and edit-and-resubmit for rejected entries.
