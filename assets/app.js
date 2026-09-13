@@ -892,6 +892,12 @@ function renderList() {
 // halaman Portofolio Akademik. Tidak disinkronkan antar perangkat/browser.
 const FOLLOW_NIM_KEY = 'simprodi_followed_nim';
 
+// Jarak minimum antar-refresh latar belakang untuk daftar "diikuti" (NIM
+// maupun Karya) - lihat catatan lengkap di renderFollowedNimSection_/
+// renderFollowedKaryaSection_ soal kenapa ini perlu ada.
+var FOLLOW_REFRESH_COOLDOWN_MS = 15000;
+var _followNimLastRefresh = 0;
+
 function getFollowedNim_() {
   try { return JSON.parse(localStorage.getItem(FOLLOW_NIM_KEY) || '[]'); } catch (e) { return []; }
 }
@@ -958,6 +964,20 @@ function renderFollowedNimSection_() {
     list.map(function(f) { return followedNimCardHtml_(f, null); }).join('') + '</div>';
   // Cek jumlah terkini di latar belakang (tidak menghalangi render daftar)
   // supaya badge "+N" muncul begitu ada capaian baru sejak terakhir dilihat.
+  // renderFollowedNimSection_ dipanggil BERULANG KALI tanpa aksi baru dari
+  // pengguna (tiap kali halaman Portofolio dibuka lagi termasuk lewat
+  // tombol back/forward, dan tiap kali bahasa ID/EN di-toggle lewat
+  // rerenderActiveView) - tanpa jeda ini, satu sesi bisa memicu permintaan
+  // 'search' berkali-kali lipat dibanding sebelum fitur ini ada, dan
+  // action 'search' TIDAK punya rate limit sendiri di server (lihat
+  // searchMahasiswa di Code.gs) sehingga bisa memperlambat/membebani
+  // pembacaan Sheet untuk semua pengunjung sekaligus. Jeda ini membatasi
+  // refresh JARINGANNYA saja ke maksimal sekali per
+  // FOLLOW_REFRESH_COOLDOWN_MS - daftarnya sendiri tetap langsung
+  // dirender ulang dari localStorage setiap kali dipanggil, cuma bagian
+  // fetch status terkininya yang dilewati kalau masih terlalu baru.
+  if (Date.now() - _followNimLastRefresh < FOLLOW_REFRESH_COOLDOWN_MS) return;
+  _followNimLastRefresh = Date.now();
   list.forEach(function(f, i) {
     gasGet({ action: 'search', q: f.nim, lang: currentLang }).then(function(res) {
       if (!res || !res.ok) return;
@@ -2575,7 +2595,7 @@ function scBuildDetailBodyHtml_(item, opts) {
     '<div class="sc-info-grid">' +
       '<div class="sc-info-card"><div class="sc-info-icon">' + SC_ICON_SUMBER + '</div><div><div class="sc-info-k">' + t('sc_sumber_tugas_label') + '</div><div class="sc-info-v">' + escHtml(sumberLabel) + '</div></div></div>' +
       '<div class="sc-info-card"><div class="sc-info-icon">' + SC_ICON_SEMESTER + '</div><div><div class="sc-info-k">' + t('sc_semester_label') + '</div><div class="sc-info-v">' + escHtml(translateSemesterLabel_(item.semester)) + '</div></div></div>' +
-      ((item.dosenPembimbing && item.dosenPembimbing.length) ? '<div class="sc-info-card"><div class="sc-info-icon">' + SC_ICON_DOSEN + '</div><div><div class="sc-info-k">' + t('sc_dosen_label') + '</div><div class="sc-info-v">' + item.dosenPembimbing.map(function(nm, i) { return t('sc_dosen_ordinal', { n: i + 1 }) + escHtml(nm); }).join('<br>') + '</div></div></div>' : '') +
+      ((item.dosenPembimbing && item.dosenPembimbing.length) ? '<div class="sc-info-card"><div class="sc-info-icon">' + SC_ICON_DOSEN + '</div><div><div class="sc-info-k">' + t('sc_dosen_label') + '</div><div class="sc-info-v">' + item.dosenPembimbing.map(function(nm, i) { return (item.dosenPembimbing.length > 1 ? t('sc_dosen_ordinal', { n: i + 1 }) : '') + escHtml(nm); }).join('<br>') + '</div></div></div>' : '') +
       '<div class="sc-info-card"><div class="sc-info-icon">' + SC_ICON_KONTAK + '</div><div><div class="sc-info-k">' + t('sc_kontak_label') + '</div><div class="sc-info-v">' + scRenderKontak_(item.kontakTim) + '</div></div></div>' +
     '</div>' +
     techHtml + actionsHtml + reportHtml;
@@ -3063,6 +3083,7 @@ async function submitShowcaseForm() {
 // perangkat/browser - lihat catatan lengkap di blok Ikuti NIM di atas,
 // alasannya sama persis.
 const FOLLOW_KARYA_KEY = 'simprodi_followed_karya';
+var _followKaryaLastRefresh = 0;
 
 // Hasil cekShowcaseStatus() TERAKHIR - dipakai toggleFollowKarya_() untuk
 // mengambil namaProgram/statusModerasi TANPA menyisipkannya sebagai literal
@@ -3143,7 +3164,21 @@ function renderFollowedKaryaSection_() {
     list.map(function(f) { return followedKaryaCardHtml_(f, null); }).join('') + '</div>';
   // Cek status terkini di latar belakang (tidak menghalangi render daftar)
   // supaya badge "status berubah" muncul begitu statusnya berubah sejak
-  // terakhir dilihat.
+  // terakhir dilihat. Sama seperti renderFollowedNimSection_ - jeda ini
+  // WAJIB ada karena openShowcaseStatus() (satu-satunya pemanggil fungsi
+  // ini) sekarang juga dipanggil ulang lewat tombol back/forward
+  // (popstate), jadi tanpa jeda, hanya bolak-balik di riwayat browser saja
+  // sudah bisa memicu action 'showcase_status' berkali-kali - action ini
+  // punya rate limit KETAT dan GLOBAL untuk SELURUH pengunjung situs
+  // sekaligus (checkRateLimit_('sc_status', 20) di Code.gs, 20x/menit
+  // dibagi rata semua orang, bukan per-pengunjung), jadi volume permintaan
+  // ekstra dari fitur follow ini bisa membuat pengecekan status manual
+  // milik pengunjung LAIN ikut gagal (pesan "sc_rate_limited") walau
+  // mereka sama sekali tidak memakai fitur follow. Ini kemungkinan besar
+  // penyebab laporan "sering gagal mengambil data" setelah fitur ini
+  // ditambahkan.
+  if (Date.now() - _followKaryaLastRefresh < FOLLOW_REFRESH_COOLDOWN_MS) return;
+  _followKaryaLastRefresh = Date.now();
   list.forEach(function(f, i) {
     gasGet({ action: 'showcase_status', kode: f.kode, lang: currentLang }).then(function(res) {
       if (!res || !res.ok) return;
