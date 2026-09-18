@@ -459,9 +459,12 @@
         </div>
         <div class="sc-form-group">
           <label class="sc-form-label"><span data-i18n="sc_label_teknologi">Teknologi</span> <span class="opt" data-i18n="sc_hint_koma">ketik lalu tekan koma atau Enter, opsional</span></label>
-          <div class="sc-tag-input" id="scfTeknologiWrap" onclick="document.getElementById('scfTeknologi').focus()">
-            <span id="scfTeknologiChips"></span>
-            <input id="scfTeknologi" data-i18n-placeholder="sc_placeholder_teknologi" placeholder="Flutter, TensorFlow Lite, Firebase" oninput="scTeknologiCommit_()" onkeydown="scTeknologiKeydown_(event)">
+          <div class="sc-tech-suggest-wrap">
+            <div class="sc-tag-input" id="scfTeknologiWrap" onclick="document.getElementById('scfTeknologi').focus()">
+              <span id="scfTeknologiChips"></span>
+              <input id="scfTeknologi" data-i18n-placeholder="sc_placeholder_teknologi" placeholder="Flutter, TensorFlow Lite, Firebase" oninput="scTeknologiInput_()" onkeydown="scTeknologiKeydown_(event)" onblur="scHideTechSuggest_()" autocomplete="off">
+            </div>
+            <div class="sc-tech-suggest" id="scfTeknologiSuggest" style="display:none;"></div>
           </div>
         </div>
 

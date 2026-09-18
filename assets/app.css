@@ -1046,6 +1046,18 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; s
   font-size: 0.9rem; line-height: 1; padding: 2px 5px; font-family: var(--font);
 }
 .sc-tag-chip button:hover { color: var(--red); }
+.sc-tech-suggest-wrap { position: relative; }
+.sc-tech-suggest {
+  position: absolute; left: 0; right: 0; top: calc(100% + 4px); z-index: 20;
+  background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.12); overflow: hidden;
+}
+.sc-tech-suggest-item {
+  display: block; width: 100%; text-align: left; border: none; background: none;
+  color: var(--text); font-family: var(--font); font-size: 0.84rem;
+  padding: 8px 12px; cursor: pointer;
+}
+.sc-tech-suggest-item:hover, .sc-tech-suggest-item:focus { background: var(--blue-soft); color: var(--blue); }
 .sc-action-row { display: flex; gap: 9px; margin-top: 18px; flex-wrap: wrap; }
 .sc-action-row .sc-btn { flex: 1; min-width: 130px; }
 .sc-report-link { display: block; margin: 14px auto 0; border: none; background: none; color: var(--muted); font-family: var(--font); font-size: 0.78rem; font-weight: 600; cursor: pointer; text-align: center; width: 100%; }

@@ -2701,6 +2701,7 @@ function scResetForm() {
     document.getElementById(id).value = '';
   });
   document.getElementById('scfTeknologiChips').innerHTML = '';
+  scHideTechSuggest_();
   document.getElementById('scfConsent1').checked = false;
   document.getElementById('scfConsent2').checked = false;
   document.getElementById('scfKreatorFields').innerHTML =
@@ -2797,6 +2798,68 @@ function scEnsureDosenOptions_() {
   return scDosenOptionsPromise_;
 }
 
+// Daftar rekomendasi teknologi - BUKAN daftar tertutup (mahasiswa tetap
+// bebas mengetik apa saja, termasuk yang tidak ada di sini), cuma saran yang
+// muncul sambil mengetik supaya penulisan nama teknologi yang SAMA jadi
+// seragam antar-karya (mis. selalu "Firebase", bukan campuran "firebase"/
+// "Fire base"/dst). Ejaan di sini sengaja jadi bentuk baku yang dipakai
+// (huruf besar/kecil, titik, spasi) - kalau ada tambahan, ikuti gaya
+// penulisan resmi teknologi tsb, bukan sembarang kapitalisasi.
+var SC_TECH_SUGGESTIONS = [
+  // Bahasa pemrograman
+  'JavaScript', 'TypeScript', 'Python', 'Java', 'Kotlin', 'Swift', 'Dart',
+  'PHP', 'C++', 'C#', 'Go', 'Rust', 'HTML', 'CSS',
+  // Web framework/library
+  'React', 'Next.js', 'Vue.js', 'Angular', 'Svelte', 'Laravel', 'CodeIgniter',
+  'Django', 'Flask', 'FastAPI', 'Express.js', 'Node.js', 'Spring Boot',
+  'ASP.NET', 'Tailwind CSS', 'Bootstrap',
+  // Mobile
+  'Flutter', 'React Native', 'Android (Kotlin)', 'Android (Java)', 'SwiftUI',
+  // Game/desktop
+  'Unity', 'Unreal Engine', 'Godot', 'Electron', 'JavaFX', '.NET MAUI',
+  // AI/ML/Data
+  'TensorFlow', 'PyTorch', 'Keras', 'Scikit-learn', 'OpenCV', 'Pandas',
+  'NumPy', 'YOLO', 'Hugging Face Transformers',
+  // Database
+  'MySQL', 'PostgreSQL', 'MongoDB', 'Firebase Firestore',
+  'Firebase Realtime Database', 'SQLite', 'Redis', 'Supabase',
+  // Cloud/infrastruktur
+  'Firebase', 'Google Cloud Platform', 'AWS', 'Microsoft Azure', 'Docker',
+  'Vercel', 'Netlify', 'Heroku',
+  // Lainnya
+  'GraphQL', 'REST API', 'Socket.IO', 'Figma'
+];
+
+function scTechSuggestFilter_(query) {
+  var q = String(query || '').trim().toLowerCase();
+  if (!q) return [];
+  var already = Array.prototype.map.call(document.querySelectorAll('#scfTeknologiChips .sc-tag-chip'), function(el) { return el.dataset.val.toLowerCase(); });
+  return SC_TECH_SUGGESTIONS
+    .filter(function(t) { return t.toLowerCase().indexOf(q) !== -1 && already.indexOf(t.toLowerCase()) === -1; })
+    .slice(0, 6);
+}
+function scRenderTechSuggest_() {
+  var box = document.getElementById('scfTeknologiSuggest');
+  if (!box) return;
+  var matches = scTechSuggestFilter_(document.getElementById('scfTeknologi').value);
+  if (!matches.length) { box.innerHTML = ''; box.style.display = 'none'; return; }
+  box.innerHTML = matches.map(function(t) {
+    return '<button type="button" class="sc-tech-suggest-item" data-val="' + escHtml(t) + '" onmousedown="event.preventDefault();scPickTechSuggest_(this.dataset.val)">' + escHtml(t) + '</button>';
+  }).join('');
+  box.style.display = 'block';
+}
+function scPickTechSuggest_(val) {
+  scAddTechChip_(val);
+  var input = document.getElementById('scfTeknologi');
+  input.value = '';
+  input.focus();
+  scRenderTechSuggest_();
+}
+function scHideTechSuggest_() {
+  var box = document.getElementById('scfTeknologiSuggest');
+  if (box) { box.innerHTML = ''; box.style.display = 'none'; }
+}
+
 // Tag-input Teknologi: ketik teks, koma atau Enter langsung mengubahnya jadi
 // chip supaya keyword yang sudah selesai diketik terlihat jelas terpisah,
 // bukan cuma teks polos dipisah koma.
@@ -2821,11 +2884,18 @@ function scTeknologiCommit_() {
   parts.forEach(function(p) { scAddTechChip_(p); });
   input.value = last;
 }
+function scTeknologiInput_() {
+  scTeknologiCommit_();
+  scRenderTechSuggest_();
+}
 function scTeknologiKeydown_(e) {
   if (e.key === 'Enter') {
     e.preventDefault();
     scAddTechChip_(e.target.value);
     e.target.value = '';
+    scHideTechSuggest_();
+  } else if (e.key === 'Escape') {
+    scHideTechSuggest_();
   } else if (e.key === 'Backspace' && !e.target.value) {
     var chips = document.getElementById('scfTeknologiChips');
     if (chips.lastElementChild) chips.lastElementChild.remove();
