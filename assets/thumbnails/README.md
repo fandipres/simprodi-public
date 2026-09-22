@@ -9,14 +9,19 @@ panel admin.**
 ## Cara upload (lewat GitHub, tanpa perlu tahu git)
 
 1. Buka tool "Buat Thumbnail" di panel admin, susun thumbnail-nya, lalu
-   unduh sebagai PNG (tombol "Unduh PNG").
+   unduh (tombol "Unduh Thumbnail") - hasilnya file **WebP** (jauh lebih
+   kecil dari PNG untuk gambar seperti ini, biasanya 70-90% lebih hemat
+   tanpa kelihatan bedanya). Kalau browser yang dipakai admin ternyata
+   tidak mendukung WebP, tool ini otomatis mengunduh PNG sebagai gantinya
+   - perhatikan ekstensi file yang benar-benar terunduh.
 2. Buka folder ini di github.com (repo `fandipres/simprodi`, harus sudah
    diundang sebagai kolaborator).
 3. Klik tombol "Add file" > "Upload files".
-4. Seret file PNG hasil unduhan ke sana. **Ganti nama filenya jadi kode
-   karyanya persis**, misalnya `SC-7XQ2M.png` (kode karya bisa dilihat
-   di daftar Karya Terpublikasi/Antrian Moderasi) - WAJIB persis supaya
-   situs publik bisa menemukannya secara otomatis.
+4. Seret file hasil unduhan ke sana. **Ganti nama filenya jadi kode
+   karyanya persis, dengan ekstensi yang SAMA seperti file yang
+   terunduh**, misalnya `SC-7XQ2M.webp` (kode karya bisa dilihat di
+   daftar Karya Terpublikasi/Antrian Moderasi) - WAJIB persis (termasuk
+   ekstensinya) supaya situs publik bisa menemukannya secara otomatis.
 5. Klik "Commit changes" langsung ke branch `main`.
 6. Tunggu sekitar 1 menit (proses sinkronisasi otomatis ke situs
    publik) - selesai, thumbnail-nya langsung tampil di galeri dan

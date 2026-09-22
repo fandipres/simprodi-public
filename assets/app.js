@@ -2202,14 +2202,20 @@ function scYoutubeId_(url) {
 
 // linkThumbnail cuma dipakai sebagai OVERRIDE eksplisit sekarang - kalau
 // admin tidak isi field itu, situs publik langsung coba path konvensi ini
-// (lihat docs/assets/thumbnails/README.md - staf upload PNG-nya lewat
-// GitHub dengan nama file KODE.png, tanpa perlu tempel link sama sekali).
-// location.origin (bukan domain di-hardcode) supaya tetap benar diakses
-// lewat domain apapun situs ini disajikan (custom domain, staging, atau
-// server lokal saat testing) - hasilnya http(s):// penuh supaya lolos
-// validasi safeUrl_ yang sama seperti link lain di halaman ini.
+// (lihat docs/assets/thumbnails/README.md - staf upload WebP-nya lewat
+// GitHub dengan nama file KODE.webp, tanpa perlu tempel link sama sekali).
+// Ekstensi .webp (bukan .png lagi) - tool "Buat Thumbnail" sekarang
+// mengekspor WebP (jauh lebih kecil untuk konten screenshot/foto seperti
+// ini, lihat thumbDownload_ di admin-script.html), dan 11 thumbnail lama
+// yang sudah terlanjur di-upload sebagai PNG sudah dikonversi ulang jadi
+// WebP juga supaya konsisten satu ekstensi saja - tidak perlu logika
+// fallback dua-ekstensi di sini. location.origin (bukan domain di-
+// hardcode) supaya tetap benar diakses lewat domain apapun situs ini
+// disajikan (custom domain, staging, atau server lokal saat testing) -
+// hasilnya http(s):// penuh supaya lolos validasi safeUrl_ yang sama
+// seperti link lain di halaman ini.
 function scDerivedThumbUrl_(kode) {
-  return location.origin + '/assets/thumbnails/' + kode + '.png';
+  return location.origin + '/assets/thumbnails/' + kode + '.webp';
 }
 
 // Dipasang sebagai onerror pada <img class="sc-gthumb">/<img> hero detail -
@@ -2430,7 +2436,7 @@ function scRenderGaleri() {
     // linkScreenshot adalah link folder, bukan link gambar langsung, jadi
     // tidak bisa dipakai sebagai thumbnail. Urutan prioritas: linkThumbnail
     // (override eksplisit admin, kalau diisi) -> path konvensi
-    // /assets/thumbnails/KODE.png (coba duluan, tanpa perlu admin isi
+    // /assets/thumbnails/KODE.webp (coba duluan, tanpa perlu admin isi
     // apa-apa - lihat scDerivedThumbUrl_) -> kalau itu 404 juga, thumbnail
     // YouTube (kalau ada trailer) -> ikon fallback per Jenis. Pakai <img>
     // + onerror (scThumbFallback_), bukan background-image, supaya bisa
