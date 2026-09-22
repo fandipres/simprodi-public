@@ -798,6 +798,8 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; s
 .panduan-sem-chapter { font-size: 0.78rem; font-weight: 600; color: var(--blue); margin-top: 1px; }
 .panduan-sem-sks { font-size: 0.76rem; color: var(--muted); font-weight: 600; white-space: nowrap; }
 .panduan-sem-note { font-size: 0.79rem; color: var(--muted); line-height: 1.55; margin-bottom: 12px; }
+.panduan-sem-note p { margin: 0 0 8px; }
+.panduan-sem-note p:last-child { margin-bottom: 0; }
 .panduan-course-list { display: flex; flex-wrap: wrap; gap: 7px; }
 .panduan-course-pill {
   font-size: 0.76rem; background: var(--bg); border: 1px solid var(--border);
