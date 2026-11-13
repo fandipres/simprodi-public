@@ -21,8 +21,11 @@ A bilingual (Indonesian/English) public portal for an Informatics Engineering st
 ![Home Page](./previews/home-page.png)
 *Home page.*
 
-![Achievements Detail Page](./previews/achievements-detail-page.png)
-*Student achievement detail page.*
+![Student Guide Page](./previews/student-guide-page.png)
+*Student guide book, semester by semester.*
+
+![Program Statistics Page](./previews/statistic-page.png)
+*Aggregate program statistics.*
 
 ![Specialization Test Page](./previews/specialization-test-page.png)
 *Specialization-track quiz.*
