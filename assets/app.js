@@ -149,6 +149,7 @@ const I18N = {
     dosen_error: 'Gagal memuat daftar dosen. Coba lagi beberapa saat.',
     dosen_empty: 'Data dosen belum tersedia.',
     dosen_filter_empty: 'Tidak ada dosen yang sesuai dengan filter ini.',
+    dosen_search_placeholder: 'Cari nama dosen',
     sc_search_placeholder: 'Cari nama karya, kreator, atau teknologi...',
     sc_filter_btn: 'Filter',
     sc_filter_peminatan_label: 'Peminatan',
@@ -414,6 +415,7 @@ const I18N = {
     dosen_error: 'Failed to load the lecturer list. Please try again shortly.',
     dosen_empty: 'Lecturer data is not available yet.',
     dosen_filter_empty: 'No lecturers match this filter.',
+    dosen_search_placeholder: 'Search lecturer name',
     sc_search_placeholder: 'Search by project name, creator, or technology...',
     sc_filter_btn: 'Filter',
     sc_filter_peminatan_label: 'Track',
@@ -604,6 +606,7 @@ function rerenderActiveView() {
     fillMbkm(s.mbkm || []);
     fillPrestasi(s.prestasi || []);
     fillSertifikasi(s.sertifikasi || []);
+    renderDStats_(s);
     updateFollowBtn_();
     return;
   }
@@ -908,6 +911,16 @@ function toggleFollowNim_() {
   saveFollowedNim_(list);
   updateFollowBtn_();
 }
+// Ringkasan jumlah capaian di bawah nama, supaya isinya terbaca sekilas
+// tanpa membuka tiap akordeon.
+function renderDStats_(s) {
+  var el = document.getElementById('dStats');
+  if (!el) return;
+  el.innerHTML = [['mbkm', 'label_mbkm'], ['prestasi', 'label_prestasi'], ['sertifikasi', 'label_sertifikasi']].map(function(c) {
+    return '<div class="d-stat"><span class="d-stat-v">' + (s[c[0]] || []).length + '</span><span class="d-stat-k">' + t(c[1]) + '</span></div>';
+  }).join('');
+}
+
 function updateFollowBtn_() {
   var btn = document.getElementById('followNimBtn');
   if (!btn || !currentStudent) return;
@@ -1001,6 +1014,7 @@ function openDetail(idx, noPush) {
 
   const cp = (s.prestasi||[]).length, cm = (s.mbkm||[]).length, cs = (s.sertifikasi||[]).length;
 
+  renderDStats_(s);
   document.getElementById('cnt-mbkm').textContent        = cm;
   document.getElementById('cnt-prestasi').textContent    = cp;
   document.getElementById('cnt-sertifikasi').textContent = cs;
@@ -1858,6 +1872,12 @@ let dosenList_ = null;
 // Tetap Program Studi, Pembimbing TA 1, Pembimbing TA 2), tiap chip aktif
 // MENYARING (AND): dosen harus cocok dengan SEMUA chip yang sedang aktif.
 var dosenFilters_ = { tetap: false, ta1: false, ta2: false };
+var dosenQuery_ = '';
+
+function dosenSearch_(q) {
+  dosenQuery_ = q;
+  renderDosen_();
+}
 
 function dosenToggleFilter_(key) {
   dosenFilters_[key] = !dosenFilters_[key];
@@ -1926,6 +1946,7 @@ function renderDosen_() {
     if (dosenFilters_.tetap && !d.dosenTetap) return false;
     if (dosenFilters_.ta1 && !d.dosenTa1) return false;
     if (dosenFilters_.ta2 && !d.dosenTa2) return false;
+    if (dosenQuery_.trim() && d.nama.toLowerCase().indexOf(dosenQuery_.trim().toLowerCase()) === -1) return false;
     return true;
   });
   var gridHtml = filtered.length
