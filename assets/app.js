@@ -52,25 +52,13 @@ const I18N = {
     prestasi_empty: 'Belum ada data prestasi yang tercatat.',
     sertifikasi_empty: 'Belum ada data sertifikasi yang tercatat.',
     lapor_title: 'Ada data yang perlu dikoreksi?',
-    lapor_desc: 'Sampaikan ke program studi agar bisa segera diperbaiki.',
-    btn_lapor_kesalahan: 'Laporkan Kesalahan',
-    lapor_pesan_label: 'Jelaskan data yang perlu dikoreksi',
-    lapor_pesan_placeholder: 'Contoh: pada semester Ganjil 2025/2026, kegiatan saya seharusnya Juara 2, bukan Peserta.',
-    lapor_note: 'Tindak lanjut laporan akan disampaikan melalui nomor yang tercatat di MIKA kamu. Pastikan nomor tersebut sudah diperbarui sebelum mengirim.',
-    btn_kirim_laporan: 'Kirim Laporan', lapor_send_loading: 'Mengirim...',
-    lapor_too_short_msg: 'Tuliskan penjelasan yang lebih lengkap agar bisa kami tindaklanjuti.',
-    lapor_success_msg: 'Laporan berhasil dikirim. Terima kasih, kami akan segera meninjau datanya.',
-    lapor_fail_generic: 'Pengiriman gagal. Coba lagi beberapa saat.',
+    lapor_desc: 'Hubungi program studi lewat WhatsApp agar bisa segera diperbaiki.',
+    btn_lapor_kesalahan: 'Laporkan via WhatsApp',
+    wa_koreksi_msg: '[SIMPRODI | Koreksi Data Portofolio]\nNama: {nama}\nNIM: {nim}\nKategori (MBKM/Prestasi/Sertifikasi): \nSemester: \nData yang salah: \nSeharusnya: ',
+    wa_notfound_msg: '[SIMPRODI | Data Portofolio Belum Tercatat]\nKata kunci pencarian: {q}\nNama: \nNIM: \nKategori (MBKM/Prestasi/Sertifikasi): \nSemester: \nKeterangan: ',
+    wa_karya_msg: '[SIMPRODI | Laporan Karya Showcase]\nNama karya: {nama}\nKode karya: {kode}\nAlasan laporan: ',
     notfound_title: 'Data kamu seharusnya tercatat di sini?',
-    notfound_desc: 'Jika sudah pernah lapor namun datamu belum tercatat, sampaikan ke program studi agar dapat segera ditindaklanjuti.',
-    notfound_nim_label: 'NIM', notfound_nim_placeholder: 'Masukkan NIM kamu',
-    notfound_nama_label: 'Nama lengkap', notfound_nama_placeholder: 'Masukkan nama lengkap kamu',
-    notfound_ket_label: 'Keterangan',
-    notfound_ket_placeholder: 'Contoh: Saya mengikuti MBKM Magang Industri semester Ganjil 2025/2026 namun nama saya tidak muncul saat dicari.',
-    notfound_nim_required: 'NIM tidak boleh kosong.', notfound_nim_invalid: 'Format NIM tidak valid.',
-    notfound_nama_required: 'Nama tidak boleh kosong.',
-    notfound_ket_too_short: 'Tuliskan keterangan yang lebih lengkap agar bisa kami tindaklanjuti.',
-    notfound_success_msg: 'Laporan berhasil dikirim. Program studi akan segera menindaklanjuti, terima kasih.',
+    notfound_desc: 'Jika datamu belum tercatat, hubungi program studi lewat WhatsApp agar dapat segera ditindaklanjuti.',
     quiz_result_title: 'Hasil Tes Peminatan',
     quiz_result_sub: 'Rekomendasi peminatan berdasarkan jawabanmu.',
     quiz_disclaimer: 'Hasil ini berdasarkan preferensi yang kamu pilih dan bersifat indikatif. Konsultasikan dengan dosen wali atau pembimbing akademik untuk keputusan final pemilihan peminatan.',
@@ -95,7 +83,46 @@ const I18N = {
     panduan_subtitle: 'Gambaran perjalanan akademik program studi dari semester 1 sampai lulus, semester demi semester.',
     panduan_semester_label: 'Semester',
     panduan_sks_unit: 'SKS',
-    panduan_glossary_title: 'Istilah Penting untuk Mahasiswa',
+    home_pengumuman_label: 'Pengumuman',
+    scn_sub: 'Karya Mahasiswa Teknik Informatika',
+    sc_tab_all: 'Semua',
+    sc_latest_title: 'Karya Terbaru',
+    sc_popular_title: 'Paling Disukai',
+    sc_all_title: 'Semua Karya',
+    sc_results_title: 'Hasil',
+    sc_filter_tek_label: 'Teknologi',
+    sc_filter_dosen_label: 'Dosen Pembimbing',
+    sc_filter_semua: 'Semua',
+    sc_team_count: 'Tim {n} mahasiswa',
+    sc_btn_like: 'Suka',
+    sc_btn_share: 'Bagikan',
+    sc_link_copied: 'Tautan karya disalin.',
+    sc_stat_likes: 'Suka',
+    sc_stat_tech: 'Teknologi',
+    sc_badge_demo: 'Demo tersedia',
+    sc_preview_title: 'Pratinjau',
+    sc_about_title: 'Tentang Karya',
+    sc_info_title: 'Informasi',
+    sc_code_label: 'Kode Karya',
+    sc_dosen_role: 'Pembimbing {n}',
+    sc_link_download_sub: 'Tersedia di toko aplikasi resmi',
+    sc_link_demo_sub: 'Buka versi demo di tab baru',
+    sc_link_source_sub: 'Repositori kode tim',
+    sc_more_pem: 'Karya Lain di Peminatan {p}',
+    sc_more_jenis: 'Karya {j} Lainnya',
+    sc_report_q: 'Ada yang salah dengan karya ini?',
+    dosen_karya_link: 'Karya bimbingan ({n})',
+    scn_explore: 'Jelajahi',
+    scn_status: 'Cek Status',
+    scn_submit: 'Kirim Karya',
+    home_pengumuman_link: 'Selengkapnya',
+    panduan_tab_journey: 'Perjalanan Semester',
+    panduan_tab_glossary: 'Istilah Penting',
+    panduan_search_placeholder: 'Cari istilah, misal KRS atau IPK',
+    panduan_cat_label: 'Kategori',
+    panduan_cat_all: 'Semua istilah',
+    panduan_term_count: '{n} istilah',
+    panduan_search_empty: 'Tidak ada istilah yang cocok dengan "{q}".',
     stat_title: 'Capaian Kolektif Program Studi',
     stat_subtitle: 'Ratusan kegiatan, prestasi, dan karya lahir dari mahasiswa kami, dirangkum dalam angka.',
     stat_disclaimer_title: 'Data masih bersifat sementara',
@@ -118,18 +145,12 @@ const I18N = {
     dosen_error: 'Gagal memuat daftar dosen. Coba lagi beberapa saat.',
     dosen_empty: 'Data dosen belum tersedia.',
     dosen_filter_empty: 'Tidak ada dosen yang sesuai dengan filter ini.',
-    sc_galeri_title: 'Karya Mahasiswa Teknik Informatika',
-    sc_galeri_sub: 'Aplikasi, situs, dan game hasil tugas kuliah maupun tugas akhir mahasiswa. Jelajahi dan berikan dukungan lewat like.',
     sc_search_placeholder: 'Cari nama karya, kreator, atau teknologi...',
-    sc_add_btn: 'Kirim Karya',
-    sc_status_link: 'Cek Status Pengajuan',
     sc_filter_btn: 'Filter',
-    sc_filter_jenis_label: 'Jenis',
     sc_filter_peminatan_label: 'Peminatan',
     sc_filter_status_label: 'Status',
     sc_filter_status_publish_label: 'Status Publish',
     sc_filter_sumber_label: 'Sumber Karya',
-    sc_filter_semua_jenis: 'Semua Jenis',
     sc_filter_semua_peminatan: 'Semua Peminatan',
     sc_filter_semua_status: 'Semua Status',
     sc_filter_semua_status_publish: 'Semua',
@@ -144,33 +165,18 @@ const I18N = {
     sc_empty: 'Belum ada karya yang tayang untuk filter ini.',
     sc_loading: 'Memuat karya...',
     sc_error: 'Gagal memuat showcase. Coba lagi sebentar.',
-    sc_creator_more: '+{n} lainnya',
 
-    sc_detail_title: 'Detail Karya Showcase',
-    sc_detail_sub: 'Info lengkap, tautan, dan dukungan untuk karya mahasiswa ini.',
-    sc_creators_label: 'Dikerjakan Oleh',
-    sc_academic_label: 'Informasi Akademik',
+    sc_creators_label: 'Tim Pembuat',
     sc_sumber_tugas_label: 'Sumber Karya',
     sc_semester_label: 'Semester Dikerjakan',
     sc_dosen_label: 'Dosen Pembimbing',
-    sc_dosen_ordinal: '{n}. ',
     sc_kontak_label: 'Kontak Tim',
     sc_tech_label: 'Teknologi',
     sc_btn_demo: 'Demo',
     sc_btn_download: 'Unduh',
     sc_btn_source: 'Source Code',
-    sc_report_link: 'Laporkan',
+    sc_report_link: 'Laporkan via WhatsApp',
     sc_detail_not_found: 'Karya tidak ditemukan atau belum disetujui.',
-
-    sc_report_modal_title: 'Laporkan Karya',
-    sc_report_desc: 'Laporkan kalau ada yang tidak sesuai dari karya "{nama}", misalnya link rusak, konten menyinggung, atau dugaan bukan karya asli.',
-    sc_report_reason_label: 'Alasan Laporan',
-    sc_report_reason_placeholder: 'Jelaskan singkat apa yang menurutmu bermasalah...',
-    sc_report_contact_label: 'Kontak Kamu',
-    sc_report_contact_placeholder: 'Email / nomor WhatsApp, kalau perlu ditindaklanjuti',
-    sc_report_submit: 'Kirim Laporan',
-    sc_report_success: 'Laporan terkirim. Terima kasih, admin akan meninjau karya ini.',
-    sc_report_reason_short: 'Alasan laporan terlalu pendek (minimal 10 karakter).',
 
     sc_form_title: 'Tambahkan Karyamu ke Showcase',
     sc_resubmit_title: 'Edit & Kirim Ulang Karya',
@@ -311,25 +317,13 @@ const I18N = {
     prestasi_empty: 'No achievement data recorded yet.',
     sertifikasi_empty: 'No certification data recorded yet.',
     lapor_title: 'Is there data that needs correcting?',
-    lapor_desc: 'Let the study program know so it can be fixed promptly.',
-    btn_lapor_kesalahan: 'Report an Issue',
-    lapor_pesan_label: 'Describe the data that needs correcting',
-    lapor_pesan_placeholder: 'Example: in the Odd 2025/2026 semester, my activity should be "2nd Place", not "Participant".',
-    lapor_note: 'Follow-up on your report will be sent to the phone number on file in your MIKA account. Make sure it is up to date before submitting.',
-    btn_kirim_laporan: 'Submit Report', lapor_send_loading: 'Sending...',
-    lapor_too_short_msg: 'Please write a more detailed explanation so we can follow up.',
-    lapor_success_msg: 'Report submitted successfully. Thank you, we will review it shortly.',
-    lapor_fail_generic: 'Submission failed. Please try again shortly.',
+    lapor_desc: 'Contact the study program on WhatsApp so it can be fixed promptly.',
+    btn_lapor_kesalahan: 'Report via WhatsApp',
+    wa_koreksi_msg: '[SIMPRODI | Koreksi Data Portofolio]\nName: {nama}\nNIM: {nim}\nCategory (MBKM/Achievement/Certification): \nSemester: \nIncorrect data: \nShould be: ',
+    wa_notfound_msg: '[SIMPRODI | Data Portofolio Belum Tercatat]\nSearch keyword: {q}\nName: \nNIM: \nCategory (MBKM/Achievement/Certification): \nSemester: \nDetails: ',
+    wa_karya_msg: '[SIMPRODI | Laporan Karya Showcase]\nWork name: {nama}\nWork code: {kode}\nReason: ',
     notfound_title: 'Should your data be listed here?',
-    notfound_desc: "If you've reported this before but your data still isn't listed, let the study program know so it can be followed up.",
-    notfound_nim_label: 'NIM', notfound_nim_placeholder: 'Enter your NIM',
-    notfound_nama_label: 'Full name', notfound_nama_placeholder: 'Enter your full name',
-    notfound_ket_label: 'Details',
-    notfound_ket_placeholder: 'Example: I took part in the MBKM Industry Internship in the Odd 2025/2026 semester but my name does not appear in the search.',
-    notfound_nim_required: 'NIM must not be empty.', notfound_nim_invalid: 'Invalid NIM format.',
-    notfound_nama_required: 'Name must not be empty.',
-    notfound_ket_too_short: 'Please write more detailed information so we can follow up.',
-    notfound_success_msg: 'Report submitted successfully. The study program will follow up shortly, thank you.',
+    notfound_desc: "If your data isn't listed yet, contact the study program on WhatsApp so it can be followed up.",
     quiz_result_title: 'Specialization Test Result',
     quiz_result_sub: 'A recommendation based on your answers.',
     quiz_disclaimer: 'This result is based on the preferences you selected and is indicative only. Consult your academic advisor for the final specialization decision.',
@@ -354,7 +348,46 @@ const I18N = {
     panduan_subtitle: 'An overview of the study program\'s academic journey from semester 1 to graduation, semester by semester.',
     panduan_semester_label: 'Semester',
     panduan_sks_unit: 'credits',
-    panduan_glossary_title: 'Key Terms for Students',
+    home_pengumuman_label: 'Announcements',
+    scn_sub: 'Informatics Engineering Student Works',
+    sc_tab_all: 'All',
+    sc_latest_title: 'Latest Works',
+    sc_popular_title: 'Most Liked',
+    sc_all_title: 'All Works',
+    sc_results_title: 'Results',
+    sc_filter_tek_label: 'Technology',
+    sc_filter_dosen_label: 'Supervising Lecturer',
+    sc_filter_semua: 'All',
+    sc_team_count: 'Team of {n} students',
+    sc_btn_like: 'Like',
+    sc_btn_share: 'Share',
+    sc_link_copied: 'Link to this work copied.',
+    sc_stat_likes: 'Likes',
+    sc_stat_tech: 'Technologies',
+    sc_badge_demo: 'Demo available',
+    sc_preview_title: 'Preview',
+    sc_about_title: 'About This Work',
+    sc_info_title: 'Information',
+    sc_code_label: 'Work Code',
+    sc_dosen_role: 'Supervisor {n}',
+    sc_link_download_sub: 'Available on an official app store',
+    sc_link_demo_sub: 'Open the demo in a new tab',
+    sc_link_source_sub: 'Team code repository',
+    sc_more_pem: 'More {p} Works',
+    sc_more_jenis: 'More {j} Works',
+    sc_report_q: 'Something wrong with this work?',
+    dosen_karya_link: 'Supervised works ({n})',
+    scn_explore: 'Explore',
+    scn_status: 'Check Status',
+    scn_submit: 'Submit Work',
+    home_pengumuman_link: 'Read more',
+    panduan_tab_journey: 'Semester Journey',
+    panduan_tab_glossary: 'Key Terms',
+    panduan_search_placeholder: 'Search terms, e.g. KRS or IPK',
+    panduan_cat_label: 'Categories',
+    panduan_cat_all: 'All terms',
+    panduan_term_count: '{n} terms',
+    panduan_search_empty: 'No terms match "{q}".',
     stat_title: 'Our Collective Achievements',
     stat_subtitle: 'Hundreds of activities, awards, and projects from our students, summed up in numbers.',
     stat_disclaimer_title: 'Data is still provisional',
@@ -377,18 +410,12 @@ const I18N = {
     dosen_error: 'Failed to load the lecturer list. Please try again shortly.',
     dosen_empty: 'Lecturer data is not available yet.',
     dosen_filter_empty: 'No lecturers match this filter.',
-    sc_galeri_title: 'Informatics Engineering Student Works',
-    sc_galeri_sub: 'Apps, websites, and games made for coursework or final projects. Explore and show your support with a like.',
     sc_search_placeholder: 'Search by project name, creator, or technology...',
-    sc_add_btn: 'Submit a Work',
-    sc_status_link: 'Check Submission Status',
     sc_filter_btn: 'Filter',
-    sc_filter_jenis_label: 'Type',
     sc_filter_peminatan_label: 'Track',
     sc_filter_status_label: 'Status',
     sc_filter_status_publish_label: 'Publish Status',
     sc_filter_sumber_label: 'Work Source',
-    sc_filter_semua_jenis: 'All Types',
     sc_filter_semua_peminatan: 'All Tracks',
     sc_filter_semua_status: 'All Statuses',
     sc_filter_semua_status_publish: 'All',
@@ -403,33 +430,19 @@ const I18N = {
     sc_empty: 'No published works match this filter yet.',
     sc_loading: 'Loading works...',
     sc_error: 'Failed to load the showcase. Please try again shortly.',
-    sc_creator_more: '+{n} more',
 
-    sc_detail_title: 'Showcase Project Detail',
-    sc_detail_sub: 'Full info, links, and support for this student project.',
-    sc_creators_label: 'Made By',
-    sc_academic_label: 'Academic Information',
+    sc_creators_label: 'Team',
     sc_sumber_tugas_label: 'Work Source',
     sc_semester_label: 'Semester Made',
     sc_dosen_label: 'Supervisor',
-    sc_dosen_ordinal: '{n}. ',
     sc_kontak_label: 'Team Contact',
     sc_tech_label: 'Technology',
     sc_btn_demo: 'Demo',
     sc_btn_download: 'Download',
     sc_btn_source: 'Source Code',
-    sc_report_link: 'Report',
+    sc_report_link: 'Report via WhatsApp',
     sc_detail_not_found: 'Work not found or not yet approved.',
 
-    sc_report_modal_title: 'Report This Work',
-    sc_report_desc: 'Report if something is wrong with "{nama}", such as a broken link, offensive content, or suspected plagiarism.',
-    sc_report_reason_label: 'Reason',
-    sc_report_reason_placeholder: 'Briefly explain what you think is wrong...',
-    sc_report_contact_label: 'Your Contact',
-    sc_report_contact_placeholder: 'Email / WhatsApp number, if follow-up is needed',
-    sc_report_submit: 'Submit Report',
-    sc_report_success: 'Report submitted. Thanks, an admin will review this work.',
-    sc_report_reason_short: 'Report reason is too short (minimum 10 characters).',
 
     sc_form_title: 'Add Your Work to the Showcase',
     sc_resubmit_title: 'Edit & Resubmit Work',
@@ -585,6 +598,7 @@ function toggleTheme() {
 }
 
 function rerenderActiveView() {
+  if (document.body.dataset.page === 'showcase') { scRerender_(); return; }
   if (document.getElementById('detailView').style.display !== 'none' && currentStudent) {
     const s = currentStudent;
     fillMbkm(s.mbkm || []);
@@ -600,8 +614,6 @@ function rerenderActiveView() {
   }
   if (document.getElementById('quizView').style.display !== 'none') { renderQuizQuestion(); return; }
   if (document.getElementById('quizResultView').style.display !== 'none') { showQuizResult(); return; }
-  if (document.getElementById('scGaleriView').style.display !== 'none') { scRenderGaleri(); return; }
-  if (document.getElementById('scDetailView').style.display !== 'none' && _scCurrentDetail) { scRenderDetail(); return; }
   if (document.getElementById('panduanView').style.display !== 'none') { renderPanduan_(); return; }
   if (document.getElementById('dosenView').style.display !== 'none') { renderDosen_(); }
 }
@@ -673,12 +685,9 @@ function setCleanPath_(path, noPush) {
 // di entri riwayat tersebut.
 function dispatchRoute_(noPush) {
   var nim  = new URLSearchParams(location.search).get('nim');
-  var kode = new URLSearchParams(location.search).get('kode');
   var path = location.pathname.replace(/\/+$/, '') || '/';
   if      (path === '/portofolio' && nim) { openPortofolio(noPush); searchInput.value = nim; doSearch(true, noPush); }
   else if (path === '/portofolio')        openPortofolio(noPush);
-  else if (path === '/showcase' && kode)  openShowcaseDetail(kode, noPush);
-  else if (path === '/showcase')          openShowcaseGaleri(noPush);
   else if (path === '/specialization')    openQuiz(noPush);
   else if (path === '/statistic')         openStatistik(noPush);
   else if (path === '/student-guide')     openPanduan(noPush);
@@ -692,17 +701,23 @@ function dispatchRoute_(noPush) {
 // <head> masing-masing (judul & meta khusus untuk preview media sosial),
 // sementara isi <body>-nya sama untuk semua route. Di sinilah shell itu
 // diambil lalu disisipkan ke halaman saat ini sebelum tampilan awal dibuka.
-async function loadAppShell_() {
-  const res  = await fetch('/assets/app-shell.html');
+async function loadAppShell_(url) {
+  const res  = await fetch(url);
   const html = await res.text();
   document.body.insertAdjacentHTML('afterbegin', html);
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
-  await loadAppShell_();
+  // Halaman Showcase (/showcase/) punya shell dan skrip sendiri
+  // (showcase-shell.html, showcase.js); app.js tetap jadi mesin bersama
+  // untuk i18n, tema, gasGet, dan riwayat browser.
+  var isShowcase = document.body.dataset.page === 'showcase';
+  await loadAppShell_(isShowcase ? '/assets/showcase-shell.html' : '/assets/app-shell.html');
 
-  searchInput = document.getElementById('searchInput');
-  searchInput.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
+  if (!isShowcase) {
+    searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
+  }
 
   applyI18n();
   applyThemeIcon_();
@@ -744,19 +759,17 @@ window.addEventListener('DOMContentLoaded', async () => {
   // riwayat untuk tampilan ini sendiri sudah benar (baik dari load biasa,
   // atau baru saja disisipkan di atas), tidak perlu menambah riwayat baru
   // lagi di sini.
-  dispatchRoute_(true);
+  if (isShowcase) scDispatchRoute_(true);
+  else { dispatchRoute_(true); loadPengumuman_(); }
 
   // Tombol back/forward perangkat/browser memicu popstate, bukan reload
   // halaman - dengarkan di sini supaya tombol back bisa mundur ke layar
   // sebelumnya DI DALAM situs (Home <-> fitur <-> detail) alih-alih langsung
-  // keluar situs setelah satu kali tekan. scForm/scStatus (form Kirim Karya,
-  // Cek Status Pengajuan) tidak punya path/query sendiri (lihat komentar di
-  // openShowcaseForm/openShowcaseStatus), jadi ditandai lewat history.state
-  // dan dicek lebih dulu di sini sebelum jatuh ke dispatchRoute_ yang
-  // berbasis path.
+  // keluar situs setelah satu kali tekan. Di halaman Showcase, penanganannya
+  // diserahkan ke scPopstate_ (showcase.js), yang juga mengenali penanda
+  // history.state untuk Kirim Karya/Cek Status.
   window.addEventListener('popstate', function(e) {
-    if (e.state && e.state.view === 'scForm')   { openShowcaseForm(true); return; }
-    if (e.state && e.state.view === 'scStatus') { openShowcaseStatus(true); return; }
+    if (isShowcase) { scPopstate_(e); return; }
     dispatchRoute_(true);
   });
 });
@@ -821,7 +834,6 @@ function renderList() {
   const lv = document.getElementById('listView');
 
   if (!allStudents.length) {
-    const isNimLike = /^\d{9}$/.test(lastQuery);
     lv.innerHTML =
       '<div class="lapor-card">' +
         '<div class="lapor-header">' +
@@ -829,30 +841,7 @@ function renderList() {
             '<div class="lapor-title">' + t('notfound_title') + '</div>' +
             '<div class="lapor-desc">' + t('notfound_desc') + '</div>' +
           '</div>' +
-          '<button class="btn-lapor" onclick="toggleNotFoundLapor()">' + t('btn_lapor_kesalahan') + '</button>' +
-        '</div>' +
-        '<div id="notFoundLaporForm" class="lapor-form">' +
-          '<div style="display:flex;flex-direction:column;gap:10px;margin-bottom:10px;">' +
-            '<div>' +
-              '<label class="form-label" for="notFoundNim">' + t('notfound_nim_label') + ' <span style="color:var(--red);">*</span></label>' +
-              '<input class="text-input" type="tel" id="notFoundNim" placeholder="' + t('notfound_nim_placeholder') + '" maxlength="9"' +
-              ' inputmode="numeric" oninput="this.value=this.value.replace(/[^0-9]/g,\'\')"' +
-              ' value="' + (isNimLike ? escHtml(lastQuery) : '') + '">' +
-            '</div>' +
-            '<div>' +
-              '<label class="form-label" for="notFoundNama">' + t('notfound_nama_label') + ' <span style="color:var(--red);">*</span></label>' +
-              '<input class="text-input" type="text" id="notFoundNama" placeholder="' + t('notfound_nama_placeholder') + '" maxlength="100">' +
-            '</div>' +
-            '<div>' +
-              '<label class="form-label" for="notFoundPesan">' + t('notfound_ket_label') + ' <span style="color:var(--red);">*</span></label>' +
-              '<textarea class="form-textarea" id="notFoundPesan" oninput="updateCharCounter(\'notFoundPesan\',\'notFoundPesanCount\',10)"' +
-              ' placeholder="' + t('notfound_ket_placeholder') + '"></textarea>' +
-              '<div class="char-counter" id="notFoundPesanCount">0/10</div>' +
-            '</div>' +
-          '</div>' +
-          '<div class="lapor-note">' + t('lapor_note') + '</div>' +
-          '<button class="btn-send" id="notFoundLaporBtn" onclick="doLaporNotFound()">' + t('btn_kirim_laporan') + '</button>' +
-          '<div id="notFoundLaporMsg"></div>' +
+          '<button class="btn-lapor" onclick="laporNotFoundWa_()">' + t('btn_lapor_kesalahan') + '</button>' +
         '</div>' +
       '</div>';
     return;
@@ -1026,11 +1015,6 @@ function openDetail(idx, noPush) {
   (cp ? openAcc : closeAcc)('prestasi');
   (cs ? openAcc : closeAcc)('sertifikasi');
 
-  document.getElementById('laporForm').classList.remove('open');
-  document.getElementById('laporPesan').value   = '';
-  updateCharCounter('laporPesan', 'laporPesanCount', 10);
-  document.getElementById('laporMsg').innerHTML  = '';
-
   document.getElementById('listView').style.display      = 'none';
   document.getElementById('searchSection').style.display = 'none';
   document.getElementById('detailView').style.display    = 'block';
@@ -1165,99 +1149,23 @@ function showToast(msg) {
   setTimeout(() => toastEl.classList.remove('show'), 2500);
 }
 
-// ------ LAPORAN ------
-function toggleLapor() {
-  document.getElementById('laporForm').classList.toggle('open');
+// ------ LAPORAN VIA WHATSAPP ------
+// Koreksi data capaian, data yang belum tercatat, dan laporan karya Showcase
+// tidak lagi lewat form + backend: langsung dialihkan ke WhatsApp prodi dengan
+// pesan awal yang sudah terisi, supaya lebih sederhana dan cepat ditanggapi.
+const PRODI_WA = '6282277880303';
+
+function openProdiWa_(text) {
+  window.open('https://wa.me/' + PRODI_WA + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
 }
 
-async function doLapor() {
+function laporKoreksiWa_() {
   if (!currentStudent) return;
-  const pesan = document.getElementById('laporPesan').value.trim();
-  const msgEl = document.getElementById('laporMsg');
-
-  if (pesan.length < 10) {
-    msgEl.innerHTML = '<div class="alert alert-err">' + t('lapor_too_short_msg') + '</div>';
-    return;
-  }
-
-  const btn = document.getElementById('laporBtn');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span>' + t('lapor_send_loading');
-  msgEl.innerHTML = '';
-
-  try {
-    const res = await gasGet({
-      action: 'laporan',
-      nim:   currentStudent.nim,
-      nama:  currentStudent.nama,
-      pesan,
-      lang: currentLang
-    });
-    btn.disabled = false; btn.textContent = t('btn_kirim_laporan');
-    if (res.ok) {
-      msgEl.innerHTML = '<div class="alert alert-ok">' + t('lapor_success_msg') + '</div>';
-      document.getElementById('laporPesan').value = '';
-      updateCharCounter('laporPesan', 'laporPesanCount', 10);
-    } else {
-      msgEl.innerHTML = `<div class="alert alert-err">${escHtml(res.message)}</div>`;
-    }
-  } catch {
-    btn.disabled = false; btn.textContent = t('btn_kirim_laporan');
-    msgEl.innerHTML = '<div class="alert alert-err">' + t('lapor_fail_generic') + '</div>';
-  }
+  openProdiWa_(t('wa_koreksi_msg', { nama: currentStudent.nama, nim: currentStudent.nim }));
 }
 
-// ------ LAPORAN DATA TIDAK DITEMUKAN ------
-function toggleNotFoundLapor() {
-  document.getElementById('notFoundLaporForm').classList.toggle('open');
-}
-
-async function doLaporNotFound() {
-  const nim   = document.getElementById('notFoundNim').value.trim();
-  const nama  = document.getElementById('notFoundNama').value.trim();
-  const pesan = document.getElementById('notFoundPesan').value.trim();
-  const msgEl = document.getElementById('notFoundLaporMsg');
-
-  if (!nim) {
-    msgEl.innerHTML = '<div class="alert alert-err">' + t('notfound_nim_required') + '</div>'; return;
-  }
-  if (!/^\d{9}$/.test(nim)) {
-    msgEl.innerHTML = '<div class="alert alert-err">' + t('notfound_nim_invalid') + '</div>'; return;
-  }
-  if (!nama) {
-    msgEl.innerHTML = '<div class="alert alert-err">' + t('notfound_nama_required') + '</div>'; return;
-  }
-  if (pesan.length < 10) {
-    msgEl.innerHTML = '<div class="alert alert-err">' + t('notfound_ket_too_short') + '</div>'; return;
-  }
-
-  const btn = document.getElementById('notFoundLaporBtn');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span>' + t('lapor_send_loading');
-  msgEl.innerHTML = '';
-
-  try {
-    const res = await gasGet({
-      action: 'laporan',
-      nim,
-      nama,
-      pesan: '[DATA TIDAK DITEMUKAN] ' + pesan,
-      lang: currentLang
-    });
-    btn.disabled = false; btn.textContent = t('btn_kirim_laporan');
-    if (res.ok) {
-      msgEl.innerHTML = '<div class="alert alert-ok">' + t('notfound_success_msg') + '</div>';
-      document.getElementById('notFoundNim').value   = '';
-      document.getElementById('notFoundNama').value  = '';
-      document.getElementById('notFoundPesan').value = '';
-      updateCharCounter('notFoundPesan', 'notFoundPesanCount', 10);
-    } else {
-      msgEl.innerHTML = '<div class="alert alert-err">' + escHtml(res.message) + '</div>';
-    }
-  } catch {
-    btn.disabled = false; btn.textContent = t('btn_kirim_laporan');
-    msgEl.innerHTML = '<div class="alert alert-err">' + t('lapor_fail_generic') + '</div>';
-  }
+function laporNotFoundWa_() {
+  openProdiWa_(t('wa_notfound_msg', { q: lastQuery }));
 }
 
 // ------ HELPERS ------
@@ -1296,11 +1204,30 @@ function safeUrl_(url) {
   return encodeURI(s);
 }
 
-function updateCharCounter(textareaId, counterId, min) {
-  var len = document.getElementById(textareaId).value.trim().length;
-  var el  = document.getElementById(counterId);
-  el.textContent = len + '/' + min;
-  el.classList.toggle('ok', len >= min);
+// ------ PENGUMUMAN PRODI (beranda) ------
+// Diisi admin lewat menu Pengumuman (Code.gs getPengumumanAktif). Isinya
+// satu bahasa (ditulis admin), hanya labelnya yang ikut i18n. Gagal muat
+// atau kosong = bagian ini tidak tampil sama sekali.
+async function loadPengumuman_() {
+  var el = document.getElementById('homeAnnouncements');
+  if (!el) return;
+  try {
+    var res = await gasGet({ action: 'pengumuman' });
+    var items = (res && res.ok && res.items) || [];
+    if (!items.length) return;
+    el.innerHTML = '<div class="ann-label" data-i18n="home_pengumuman_label">' + t('home_pengumuman_label') + '</div>' +
+      items.map(function(p) {
+        var link = /^https?:\/\//i.test(p.tautan || '')
+          ? '<a class="ann-link" href="' + escHtml(p.tautan) + '" target="_blank" rel="noopener" data-i18n="home_pengumuman_link">' + t('home_pengumuman_link') + '</a>'
+          : '';
+        return '<div class="ann-card">' +
+          '<div class="ann-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a1 1 0 0 0 1 1h3l5 4V6L7 10H4a1 1 0 0 0-1 1z"/><path d="M16 9a3 3 0 0 1 0 6"/></svg></div>' +
+          '<div class="ann-body"><div class="ann-title">' + escHtml(p.judul) + '</div>' +
+          '<div class="ann-text">' + escHtml(p.isi) + '</div>' + link + '</div>' +
+        '</div>';
+      }).join('');
+    el.style.display = '';
+  } catch (e) { /* pengumuman bersifat tambahan, diam saja kalau gagal */ }
 }
 
 // ------ NAVIGASI BERANDA ------
@@ -1377,9 +1304,9 @@ var PANDUAN_ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
 // akademik terpisah), jadi jangan diubah tanpa konfirmasi ulang dari prodi
 // kalau kurikulum/kebijakan berikutnya berbeda. Diurutkan ABJAD per
 // `term` (bukan `full`) supaya urutannya konsisten ID/EN, dan dirender
-// sebagai accordion (lihat panduanGlossaryHtml_) karena daftarnya sudah
-// cukup panjang untuk terasa berat kalau ditampilkan terbuka semua sekaligus.
-// Grup boleh punya `desc` opsional (dirender di panduanGlossaryHtml_ tepat
+// sebagai kartu per kategori di tab Istilah Penting (lihat
+// renderPanduanGlossary_), lengkap dengan kotak cari dan daftar kategori.
+// Grup boleh punya `desc` opsional (dirender di renderPanduanGlossary_ tepat
 // di bawah judul grup, sebelum daftar istilahnya) - dipakai untuk istilah
 // yang sebenarnya cuma mendeskripsikan GRUP itu sendiri (mis. "Fakultas"
 // untuk grup Tingkat Fakultas, "Program Studi" untuk grup Tingkat Program
@@ -1645,7 +1572,7 @@ var PANDUAN_REMINDER = {
 var PANDUAN_SEMESTERS = [
   { sem: 1, sks: 20,
     chapter: { id: 'Langkah Pertama', en: 'First Steps' },
-    milestone: { id: 'Semester pertamamu - pastikan kamu sudah paham SKS, IP, dan IPK (lihat Istilah Penting di atas), dan kenali Dosen Wali/PA-mu sebagai tempat bertanya soal akademik. Paket KRS semester 1-6 sudah otomatis disusun (auto-generate), jadi kamu tinggal fokus menjalani studi dengan baik sejak awal.', en: 'Your first semester - make sure you understand SKS, IP, and IPK (see Key Terms above), and get to know your Dosen Wali/PA as your point of contact for academic questions. Your KRS package for semesters 1-6 is auto-generated, so you can simply focus on doing well in your studies from the start.' },
+    milestone: { id: 'Semester pertamamu - pastikan kamu sudah paham SKS, IP, dan IPK (lihat tab Istilah Penting), dan kenali Dosen Wali/PA-mu sebagai tempat bertanya soal akademik. Paket KRS semester 1-6 sudah otomatis disusun (auto-generate), jadi kamu tinggal fokus menjalani studi dengan baik sejak awal.', en: 'Your first semester - make sure you understand SKS, IP, and IPK (see the Key Terms tab), and get to know your Dosen Wali/PA as your point of contact for academic questions. Your KRS package for semesters 1-6 is auto-generated, so you can simply focus on doing well in your studies from the start.' },
     courses: [
     { id: 'Aljabar Linier', en: 'Linear Algebra' },
     { id: 'Matematika Diskrit', en: 'Discrete Mathematics' },
@@ -1773,75 +1700,105 @@ function panduanCoursePills_(courses) {
   }).join('');
 }
 
-// Accordion glossary di dalam SATU toggle induk lagi ("Sebelum Memulai"),
-// tertutup semua secara default - user menilai versi sebelumnya (24 baris
-// istilah langsung terbuka di paling atas halaman) terasa seperti kamus,
-// bukan seperti awal sebuah perjalanan. Membungkusnya di balik satu toggle
-// induk membuat halaman dibuka dengan satu baris ringkas, bukan dinding
-// istilah, sementara Semester I ("Langkah Pertama") langsung jadi konten
-// utama yang terlihat - istilahnya tetap ada dan gampang dibuka kalau
-// dibutuhkan, cuma tidak lagi mendominasi tampilan awal.
-// TIGA tingkat accordion bersarang: toggle induk ('glossaryAll') -> tiap
-// GRUP juga togglenya sendiri ('grp0', 'grp1', ...) -> tiap ISTILAH juga
-// togglenya sendiri (key global lintas grup: g0, g1, ...). Grup ditambah
-// jadi accordion sendiri (sebelumnya cuma judul statis, semua istilah di
-// dalamnya langsung tampak begitu toggle induk dibuka) karena dengan 49
-// istilah, membuka toggle induk saja masih memuntahkan seluruh daftar ke
-// layar - dengan grup ikut tertutup secara default, membuka "Istilah
-// Penting" cuma menampilkan judul-judul grup yang ringkas, baru istilah
-// di dalam satu grup muncul kalau grup itu sendiri diklik. Ketiga tingkat
-// sama-sama lewat mekanisme toggleAcc/.acc-btn/.acc-body yang sudah ada,
-// tidak ada JS baru untuk accordion bersarang ini.
-// PANDUAN_GLOSSARY_GROUPS mengelompokkan 49 istilah jadi 12 bagian kecil
-// (dipecah lagi dari 4 bagian sebelumnya supaya tiap bagian tetap ringkas
-// untuk di-scan). Alfabetis TETAP dipertahankan DI DALAM tiap grup (bukan
-// diganti jadi urutan lain), sesuai preferensi yang sudah ditetapkan.
-function panduanGlossaryHtml_() {
-  var idx = 0;
-  var groupsHtml = PANDUAN_GLOSSARY_GROUPS.map(function(group, gi) {
-    var gk = 'grp' + gi;
-    var items = group.terms.map(function(g) {
-      var k = 'g' + (idx++);
-      var full = currentLang === 'en' ? g.full.en : g.full.id;
-      var fullHtml = full ? ' <span class="panduan-glossary-full">(' + escHtml(full) + ')</span>' : '';
-      return '<div class="acc-wrap">' +
-        '<button class="acc-btn" id="trg-' + k + '" onclick="toggleAcc(\'' + k + '\')">' +
-          '<span class="acc-label">' + escHtml(g.term) + fullHtml + '</span>' +
-          '<span class="acc-icon" id="ico-' + k + '"></span>' +
-        '</button>' +
-        '<div class="acc-body" id="panel-' + k + '"><div class="panduan-glossary-desc">' + escHtml(currentLang === 'en' ? g.desc.en : g.desc.id) + '</div></div>' +
-        '</div>';
+// Istilah Penting tampil di tab tersendiri (bukan lagi akordeon 3 tingkat di
+// atas perjalanan semester): kotak cari di hero, daftar kategori di samping
+// (di HP jadi deretan chip), dan istilah sebagai kartu yang bisa dipindai
+// sekilas. Urutan grup dan istilah tetap alfabetis seperti di
+// PANDUAN_GLOSSARY_GROUPS.
+var _panduanTab = 'journey';   // 'journey' | 'glossary'
+var _panduanCat = -1;          // -1 = semua kategori, selain itu index grup
+var _panduanQuery = '';
+
+function panduanTermCount_() {
+  return PANDUAN_GLOSSARY_GROUPS.reduce(function(n, g) { return n + g.terms.length; }, 0);
+}
+
+function panduanSetTab_(tab) {
+  _panduanTab = tab;
+  renderPanduan_();
+}
+
+function panduanSetCat_(i) {
+  _panduanCat = i;
+  _panduanQuery = '';
+  var input = document.getElementById('panduanSearch');
+  if (input) input.value = '';
+  renderPanduanGlossary_();
+}
+
+function panduanSearch_(q) {
+  _panduanQuery = q;
+  if (q.trim()) _panduanCat = -1;
+  renderPanduanGlossary_();
+}
+
+function renderPanduanTabs_() {
+  var el = document.getElementById('panduanTabs');
+  if (!el) return;
+  el.innerHTML =
+    '<button type="button" role="tab" aria-selected="' + (_panduanTab === 'journey') + '" class="panduan-tab' + (_panduanTab === 'journey' ? ' active' : '') + '" onclick="panduanSetTab_(\'journey\')">' + t('panduan_tab_journey') + '</button>' +
+    '<button type="button" role="tab" aria-selected="' + (_panduanTab === 'glossary') + '" class="panduan-tab' + (_panduanTab === 'glossary' ? ' active' : '') + '" onclick="panduanSetTab_(\'glossary\')">' + t('panduan_tab_glossary') + ' · ' + panduanTermCount_() + '</button>';
+  document.getElementById('panduanSearchWrap').style.display = _panduanTab === 'glossary' ? '' : 'none';
+}
+
+function renderPanduanGlossary_() {
+  var el = document.getElementById('panduanContent');
+  if (!el) return;
+  var lang = currentLang === 'en' ? 'en' : 'id';
+  var q = _panduanQuery.trim().toLowerCase();
+  var cats = '<button type="button" class="panduan-cat' + (_panduanCat === -1 ? ' active' : '') + '" onclick="panduanSetCat_(-1)">' +
+      '<span>' + t('panduan_cat_all') + '</span><span class="panduan-cat-n">' + panduanTermCount_() + '</span></button>' +
+    PANDUAN_GLOSSARY_GROUPS.map(function(g, i) {
+      return '<button type="button" class="panduan-cat' + (_panduanCat === i ? ' active' : '') + '" onclick="panduanSetCat_(' + i + ')">' +
+        '<span>' + escHtml(g.title[lang]) + '</span><span class="panduan-cat-n">' + g.terms.length + '</span></button>';
     }).join('');
-    var groupDescHtml = group.desc
-      ? '<div class="panduan-glossary-group-desc">' + escHtml(currentLang === 'en' ? group.desc.en : group.desc.id) + '</div>'
-      : '';
-    return '<div class="acc-wrap panduan-glossary-group">' +
-      '<button class="acc-btn panduan-glossary-group-btn" id="trg-' + gk + '" onclick="toggleAcc(\'' + gk + '\')">' +
-        '<span class="acc-label panduan-glossary-group-title">' + escHtml(currentLang === 'en' ? group.title.en : group.title.id) + '</span>' +
-        '<span class="acc-icon" id="ico-' + gk + '"></span>' +
-      '</button>' +
-      '<div class="acc-body" id="panel-' + gk + '">' + groupDescHtml + '<div class="panduan-glossary-group-terms">' + items + '</div></div>' +
-      '</div>';
+
+  var sections = PANDUAN_GLOSSARY_GROUPS.map(function(g, i) {
+    if (_panduanCat !== -1 && _panduanCat !== i) return '';
+    var terms = g.terms.filter(function(tm) {
+      if (!q) return true;
+      // Kueri pendek (mis. 'ip') hanya dicocokkan ke nama istilah, supaya tidak
+      // ikut menangkap potongan kata di deskripsi (mis. 'transkrip').
+      var hay = tm.term + ' ' + (tm.full[lang] || '') + (q.length >= 3 ? ' ' + tm.desc[lang] : '');
+      return hay.toLowerCase().indexOf(q) !== -1;
+    });
+    if (!terms.length) return '';
+    return '<section class="panduan-gl-section">' +
+      '<h2 class="panduan-gl-title">' + escHtml(g.title[lang]) + '</h2>' +
+      '<div class="panduan-gl-count">' + t('panduan_term_count', { n: terms.length }) + '</div>' +
+      (g.desc ? '<p class="panduan-gl-desc">' + escHtml(g.desc[lang]) + '</p>' : '') +
+      '<div class="panduan-gl-grid">' + terms.map(function(tm) {
+        var full = tm.full[lang];
+        return '<article class="panduan-term">' +
+          '<div class="panduan-term-name">' + escHtml(tm.term) + '</div>' +
+          (full ? '<div class="panduan-term-full">' + escHtml(full) + '</div>' : '') +
+          '<p class="panduan-term-desc">' + escHtml(tm.desc[lang]) + '</p>' +
+        '</article>';
+      }).join('') + '</div>' +
+    '</section>';
   }).join('');
-  return '<div class="acc-wrap panduan-glossary-outer">' +
-    '<button class="acc-btn" id="trg-glossaryAll" onclick="toggleAcc(\'glossaryAll\')">' +
-      '<span class="acc-label">' + t('panduan_glossary_title') + '</span>' +
-      '<span class="acc-icon" id="ico-glossaryAll"></span>' +
-    '</button>' +
-    '<div class="acc-body" id="panel-glossaryAll"><div class="panduan-glossary">' + groupsHtml + '</div></div>' +
-    '</div>';
+
+  if (!sections) sections = '<p class="msg-center">' + t('panduan_search_empty', { q: escHtml(_panduanQuery.trim()) }) + '</p>';
+
+  el.innerHTML = '<div class="panduan-gl-layout">' +
+    '<nav class="panduan-cats" aria-label="' + t('panduan_cat_label') + '">' +
+      '<span class="panduan-cats-label">' + t('panduan_cat_label') + '</span>' + cats +
+    '</nav>' +
+    '<div class="panduan-gl-content">' + sections + '</div>' +
+  '</div>';
 }
 
 // Milestone/reminder/lanjut TIDAK di-escHtml - semua kontennya statis dan
 // ditulis langsung di sini (bukan input pengguna), dan beberapa sengaja
 // berisi tautan (mis. <a onclick="openPortofolio()">) ke fitur lain di
-// situs. Beda dari panduan-glossary-desc di atas dan panduan-course-pill
+// situs. Beda dari kartu istilah di tab Istilah Penting dan panduan-course-pill
 // (tetap di-escHtml, tidak ada alasan untuk berisi HTML).
 function renderPanduan_() {
   var el = document.getElementById('panduanContent');
   if (!el) return;
-  var html = panduanGlossaryHtml_();
-  html += '<div class="panduan-sem-card panduan-lanjut-card">' +
+  renderPanduanTabs_();
+  if (_panduanTab === 'glossary') { renderPanduanGlossary_(); return; }
+  var html = '<div class="panduan-sem-card panduan-lanjut-card">' +
     '<div class="panduan-sem-note" style="margin:0;">' + (currentLang === 'en' ? PANDUAN_REMINDER.en : PANDUAN_REMINDER.id) + '</div>' +
     '</div>';
   html += PANDUAN_SEMESTERS.map(function(s) {
@@ -1917,13 +1874,44 @@ function dosenFilterBarHtml_() {
 
 var DOSEN_ICON_EXTERNAL = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>';
 
+// Jumlah karya Showcase per nama dosen pembimbing, dihitung dari galeri
+// publik (sudah di-cache di server) di latar belakang. Tautan "Karya
+// bimbingan" hanya muncul untuk dosen yang punya karya, dan membuka galeri
+// Showcase yang langsung tersaring ke dosen itu (/showcase/?dosen=Nama).
+let dosenKaryaCount_ = null;
+
+// Nama dicocokkan tanpa tanda baca/spasi/huruf besar, karena karya lama bisa
+// menulis nama dosen sedikit berbeda (mis. tanpa koma setelah nama).
+// Sama dengan scNormName_ di showcase.js.
+function dosenNormName_(s) {
+  return String(s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+}
+
+async function loadDosenKaryaCount_() {
+  if (dosenKaryaCount_) return;
+  try {
+    var res = await gasGet({ action: 'showcase_galeri' });
+    if (!res || !res.ok) return;
+    var counts = {};
+    (res.items || []).forEach(function(it) {
+      (it.dosenPembimbing || []).forEach(function(n) { var k = dosenNormName_(n); counts[k] = (counts[k] || 0) + 1; });
+    });
+    dosenKaryaCount_ = counts;
+    if (document.getElementById('dosenView').style.display !== 'none') renderDosen_();
+  } catch (e) { /* tautan karya bimbingan bersifat tambahan */ }
+}
+
 function dosenCardHtml_(d) {
   var sintaHtml = d.sintaId
     ? '<a class="dosen-sinta-link" href="https://sinta.kemdiktisaintek.go.id/authors/profile/' + encodeURIComponent(d.sintaId) + '" target="_blank" rel="noopener">' + DOSEN_ICON_EXTERNAL + t('dosen_sinta_link') + '</a>'
     : '';
+  var nKarya = dosenKaryaCount_ && dosenKaryaCount_[dosenNormName_(d.nama)];
+  var karyaHtml = nKarya
+    ? '<a class="dosen-sinta-link" href="/showcase/?dosen=' + encodeURIComponent(d.nama) + '">' + t('dosen_karya_link', { n: nKarya }) + '</a>'
+    : '';
   return '<div class="dosen-card">' +
     '<div class="dosen-card-name">' + escHtml(d.nama) + '</div>' +
-    (sintaHtml ? '<div class="dosen-card-links">' + sintaHtml + '</div>' : '') +
+    ((sintaHtml || karyaHtml) ? '<div class="dosen-card-links">' + sintaHtml + karyaHtml + '</div>' : '') +
     '</div>';
 }
 
@@ -1951,6 +1939,7 @@ async function openDosen(noPush) {
   document.getElementById('dosenView').style.display = 'block';
   setCleanPath_('/lecturers/', noPush);
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  loadDosenKaryaCount_();
   var el = document.getElementById('dosenContent');
   if (dosenList_) { renderDosen_(); return; }
   el.innerHTML = '';
@@ -2159,1178 +2148,14 @@ function restartQuiz() {
 }
 
 // ==============================================================
-// SHOWCASE MAHASISWA
+// TAMPILAN (dipakai bersama situs utama dan halaman Showcase)
 // ==============================================================
+// Menyembunyikan semua view; null-safe karena tiap halaman hanya punya
+// sebagian view (Showcase punya shell sendiri, lihat showcase.js).
 function scHideAllViews_() {
   ['homeView','searchSection','detailView','quizView','quizResultView',
    'scGaleriView','scDetailView','scFormView','scStatusView','statistikView','panduanView','dosenView'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.style.display = 'none';
   });
-}
-
-// Placeholder ikon untuk kartu galeri yang belum punya trailer YouTube.
-// Dipakai ganti kotak abu polos supaya kartu tanpa preview tetap terlihat
-// tertata, bukan seperti kosong/rusak.
-var SC_ICON_NOPREVIEW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>';
-
-// Ikon besar per Jenis karya, dipakai sebagai hero banner fallback di halaman
-// detail saat karya tidak punya video trailer sama sekali.
-var SC_ICON_JENIS = {
-  'Mobile':  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"></rect><path d="M11 18h2"></path></svg>',
-  'Web':     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 2.6 3.8 5.9 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.9-3.8-9s1.3-6.4 3.8-9z"></path></svg>',
-  'Game':    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="11" rx="5.5"></rect><path d="M7 10.5v4M5 12.5h4"></path><circle cx="16" cy="10.5" r="1"></circle><circle cx="18.5" cy="13" r="1"></circle></svg>',
-  'Console': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="11" rx="5.5"></rect><path d="M7 10.5v4M5 12.5h4"></path><circle cx="16" cy="10.5" r="1"></circle><circle cx="18.5" cy="13" r="1"></circle></svg>',
-  'Desktop': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1.5"></rect><path d="M8 20h8M12 16v4"></path></svg>',
-  'AI':      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8"></path><circle cx="12" cy="12" r="4"></circle></svg>'
-};
-var SC_ICON_JENIS_DEFAULT = SC_ICON_NOPREVIEW;
-
-// Ikon kecil di depan label info akademik pada halaman detail (Sumber, Semester, Dosen, Kontak).
-var SC_ICON_SUMBER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"></path></svg>';
-var SC_ICON_SEMESTER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2"></rect><path d="M3 9.5h18M8 2.5v4M16 2.5v4"></path></svg>';
-var SC_ICON_DOSEN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"></circle><path d="M4.5 20c1.3-3.6 4-5.5 7.5-5.5s6.2 1.9 7.5 5.5"></path></svg>';
-var SC_ICON_KONTAK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2"></rect><path d="M3 6.5l9 6.5 9-6.5"></path></svg>';
-
-// Kontak Tim ditetapkan email saja, dipakai baik saat validasi form maupun render detail.
-var SC_EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-function scYoutubeId_(url) {
-  var m = String(url || '').match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([a-zA-Z0-9_-]{11})/);
-  return m ? m[1] : null;
-}
-
-// linkThumbnail cuma dipakai sebagai OVERRIDE eksplisit sekarang - kalau
-// admin tidak isi field itu, situs publik langsung coba path konvensi ini
-// (lihat docs/assets/thumbnails/README.md - staf upload WebP-nya lewat
-// GitHub dengan nama file KODE.webp, tanpa perlu tempel link sama sekali).
-// Ekstensi .webp (bukan .png lagi) - tool "Buat Thumbnail" sekarang
-// mengekspor WebP (jauh lebih kecil untuk konten screenshot/foto seperti
-// ini, lihat thumbDownload_ di admin-script.html), dan 11 thumbnail lama
-// yang sudah terlanjur di-upload sebagai PNG sudah dikonversi ulang jadi
-// WebP juga supaya konsisten satu ekstensi saja - tidak perlu logika
-// fallback dua-ekstensi di sini. location.origin (bukan domain di-
-// hardcode) supaya tetap benar diakses lewat domain apapun situs ini
-// disajikan (custom domain, staging, atau server lokal saat testing) -
-// hasilnya http(s):// penuh supaya lolos validasi safeUrl_ yang sama
-// seperti link lain di halaman ini.
-function scDerivedThumbUrl_(kode) {
-  return location.origin + '/assets/thumbnails/' + kode + '.webp';
-}
-
-// Dipasang sebagai onerror pada <img class="sc-gthumb">/<img> hero detail -
-// coba data-fallback (thumbnail YouTube kalau ada trailer) dulu sekali,
-// baru kalau itu juga gagal (atau memang tidak ada trailer sama sekali)
-// sembunyikan gambarnya dan tampilkan elemen sibling berikutnya (ikon
-// fallback / markup pengganti lain, tergantung konteks pemanggilnya).
-function scThumbFallback_(img) {
-  var fb = img.getAttribute('data-fallback');
-  if (fb) {
-    img.removeAttribute('data-fallback');
-    img.src = fb;
-  } else {
-    img.style.display = 'none';
-    if (img.nextElementSibling) img.nextElementSibling.style.display = '';
-  }
-}
-
-// Sama idenya, tapi utk hero halaman detail - gambarnya dibungkus
-// .sc-hero-media (posisi absolut di dalamnya, sama pola dgn iframe
-// YouTube), jadi yang disembunyikan/dimunculkan itu WRAPPER-nya, bukan
-// <img>-nya sendiri.
-function scHeroThumbFallback_(img) {
-  var wrap = img.closest('.sc-hero-media');
-  if (!wrap) return;
-  wrap.style.display = 'none';
-  if (wrap.nextElementSibling) wrap.nextElementSibling.style.display = '';
-}
-
-// Carousel hero (thumbnail + trailer, 2 slide tetap) - .sc-hero-track pakai
-// scroll-snap native (lihat app.css) jadi swipe di HP sudah otomatis
-// berfungsi tanpa JS sama sekali; kedua fungsi ini cuma buat sinkronisasi
-// titik indikator dgn slide yang sedang tampil, dan navigasi klik titiknya.
-function scHeroCarouselGo_(dotEl, index) {
-  var track = dotEl.closest('.sc-hero-carousel').querySelector('.sc-hero-track');
-  track.scrollTo({ left: track.clientWidth * index, behavior: 'smooth' });
-}
-function scHeroCarouselScroll_(track) {
-  var index = Math.round(track.scrollLeft / track.clientWidth);
-  var dots = track.parentElement.querySelectorAll('.sc-hero-dot');
-  dots.forEach(function(d, i) { d.classList.toggle('active', i === index); });
-}
-
-// Auto-geser antara slide thumbnail <-> trailer terus-menerus, berhenti
-// HANYA saat trailernya (kalau YouTube) benar-benar diputar - bukan cuma
-// berhenti begitu slide trailer tampil, harus menunggu play sungguhan
-// lewat YT IFrame API (postMessage), makanya slide2Html di atas menambah
-// enablejsapi=1 pada iframe-nya. Klik titik/swipe manual TIDAK menghentikan
-// auto-geser (sesuai diminta - cuma play yang menghentikan).
-var _scHeroAutoTimer = null;
-function scHeroCarouselStopAuto_() {
-  if (_scHeroAutoTimer) { clearInterval(_scHeroAutoTimer); _scHeroAutoTimer = null; }
-}
-function scHeroCarouselAutoAdvance_(track) {
-  // isConnected jadi jaring pengaman kalau timer lama belum sempat
-  // dibersihkan tapi pengguna sudah pindah halaman (DOM lama sudah lepas) -
-  // daripada nge-scroll elemen yang sudah tidak ada di layar, matikan saja.
-  if (!track || !track.isConnected) { scHeroCarouselStopAuto_(); return; }
-  var current = Math.round(track.scrollLeft / track.clientWidth);
-  track.scrollTo({ left: track.clientWidth * (current === 0 ? 1 : 0), behavior: 'smooth' });
-}
-// Dipanggil sekali setiap detail karya selesai dirender (lihat scRenderDetail
-// & scViewOwnDetail) - selalu menghentikan timer lama dulu (kalau ada karya
-// sebelumnya juga carousel) sebelum mulai yang baru, supaya tidak ada 2 timer
-// jalan bareng saat berpindah-pindah antar karya.
-function scHeroCarouselInit_() {
-  scHeroCarouselStopAuto_();
-  var carousel = document.querySelector('.sc-hero-carousel');
-  if (!carousel) return;
-  var track = carousel.querySelector('.sc-hero-track');
-  _scHeroAutoTimer = setInterval(function() { scHeroCarouselAutoAdvance_(track); }, 4500);
-  if (carousel.querySelector('#scHeroYtFrame')) scEnsureYtApi_(scHeroSetupYtWatcher_);
-}
-
-// YT IFrame API dimuat sekali saja (bukan per-render) - callback yang
-// menunggu ditumpuk di _scYtApiCallbacks kalau skripnya belum selesai load
-// saat dibutuhkan lagi (mis. pindah ke karya lain sebelum API siap).
-var _scYtApiLoading = false;
-var _scYtApiCallbacks = [];
-function scEnsureYtApi_(callback) {
-  if (window.YT && window.YT.Player) { callback(); return; }
-  _scYtApiCallbacks.push(callback);
-  if (_scYtApiLoading) return;
-  _scYtApiLoading = true;
-  var tag = document.createElement('script');
-  tag.src = 'https://www.youtube.com/iframe_api';
-  document.head.appendChild(tag);
-  window.onYouTubeIframeAPIReady = function() {
-    _scYtApiCallbacks.forEach(function(cb) { cb(); });
-    _scYtApiCallbacks = [];
-  };
-}
-function scHeroSetupYtWatcher_() {
-  if (!document.getElementById('scHeroYtFrame')) return;
-  new YT.Player('scHeroYtFrame', {
-    events: {
-      onStateChange: function(e) {
-        if (e.data === YT.PlayerState.PLAYING) scHeroCarouselStopAuto_();
-      }
-    }
-  });
-}
-
-// Kontak Tim ditetapkan email saja (lihat sc_email_regex_) supaya tidak perlu
-// menebak jenis kontak dari format teks. Dirender langsung sebagai link
-// mailto: tanpa label tambahan.
-function scRenderKontak_(kontak) {
-  var s = String(kontak || '').trim();
-  if (!s) return '';
-  if (SC_EMAIL_REGEX.test(s)) {
-    return '<a href="mailto:' + encodeURIComponent(s) + '">' + escHtml(s) + '</a>';
-  }
-  return escHtml(s);
-}
-
-// ---- Galeri ----
-var _scItems   = [];
-var _scLoaded  = false;
-var _scFilters = { jenis: '', peminatan: '', status: '', statusPublish: '', sumber: '' };
-var _scSort    = 'baru';
-
-async function openShowcaseGaleri(noPush) {
-  scHideAllViews_();
-  document.getElementById('scGaleriView').style.display = 'block';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  setCleanPath_('/showcase/', noPush);
-  await scEnsureGaleriLoaded();
-  scRenderGaleri();
-}
-
-async function scEnsureGaleriLoaded() {
-  if (_scLoaded) return;
-  document.getElementById('scGaleriGrid').innerHTML = '<div class="sc-empty">' + t('sc_loading') + '</div>';
-  try {
-    var res = await gasGet({ action: 'showcase_galeri' });
-    if (res && res.ok) { _scItems = res.items; _scLoaded = true; }
-    else { document.getElementById('scGaleriGrid').innerHTML = '<div class="sc-empty">' + t('sc_error') + '</div>'; }
-  } catch (e) {
-    document.getElementById('scGaleriGrid').innerHTML = '<div class="sc-empty">' + t('sc_error') + '</div>';
-  }
-}
-
-function scToggleFilterPanel() {
-  var overlay = document.getElementById('scFilterOverlay');
-  var btn     = document.getElementById('scFilterToggleBtn');
-  var open    = !overlay.classList.contains('open');
-  overlay.classList.toggle('open', open);
-  btn.classList.toggle('active', open);
-}
-
-function scCloseFilterPanel() {
-  document.getElementById('scFilterOverlay').classList.remove('open');
-  document.getElementById('scFilterToggleBtn').classList.remove('active');
-}
-
-function scSetFilter(group, val, btn) {
-  _scFilters[group] = val;
-  var bar = btn.parentElement;
-  bar.querySelectorAll('.sc-fchip').forEach(function(c) { c.classList.remove('active'); });
-  btn.classList.add('active');
-  var activeCount = Object.keys(_scFilters).filter(function(k) { return _scFilters[k]; }).length;
-  var badge = document.getElementById('scFilterBadge');
-  if (activeCount > 0) { badge.textContent = activeCount; badge.style.display = 'inline-flex'; }
-  else badge.style.display = 'none';
-  scRenderGaleri();
-}
-
-function scToggleSortMenu() {
-  var menu = document.getElementById('scSortMenu');
-  menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
-}
-document.addEventListener('click', function(e) {
-  var menu = document.getElementById('scSortMenu');
-  if (menu && menu.style.display !== 'none' && !e.target.closest('.sc-sort-wrap')) menu.style.display = 'none';
-});
-
-// NIM cuma boleh angka, berlaku untuk semua baris kreator (statis, ditambah
-// dinamis, maupun hasil scPopulateForm_ saat resubmit) lewat event delegation.
-document.addEventListener('input', function(e) {
-  if (e.target.classList.contains('scf-kreator-nim')) {
-    e.target.value = e.target.value.replace(/\D/g, '');
-  }
-});
-
-function scSetSort(key) {
-  _scSort = key;
-  document.querySelectorAll('.sc-sort-option').forEach(function(o) { o.classList.toggle('active', o.dataset.sort === key); });
-  document.getElementById('scSortBtnLabel').textContent = t('sc_sort_' + key);
-  document.getElementById('scSortMenu').style.display = 'none';
-  scRenderGaleri();
-}
-
-function scRenderGaleri() {
-  var q = (document.getElementById('scSearchInput').value || '').trim().toLowerCase();
-  var list = _scItems.filter(function(item) {
-    if (_scFilters.jenis && item.jenis !== _scFilters.jenis) return false;
-    if (_scFilters.peminatan && item.peminatan !== _scFilters.peminatan) return false;
-    if (_scFilters.status && item.statusDeploy !== _scFilters.status) return false;
-    if (_scFilters.statusPublish && item.statusPublish !== _scFilters.statusPublish) return false;
-    if (_scFilters.sumber && item.sumberTugas !== _scFilters.sumber) return false;
-    if (q) {
-      var hay = [item.namaProgram, item.namaProgramEn, item.teknologi.join(' '), item.kreator.map(function(k) { return k.nama; }).join(' ')].join(' ').toLowerCase();
-      if (hay.indexOf(q) === -1) return false;
-    }
-    return true;
-  });
-
-  if (_scSort === 'abjad') list.sort(function(a, b) { return a.namaProgram.localeCompare(b.namaProgram); });
-  else if (_scSort === 'populer') list.sort(function(a, b) { return b.likes - a.likes; });
-  else list.sort(function(a, b) { return new Date(b.timestamp) - new Date(a.timestamp); });
-
-  document.getElementById('scResultCount').textContent = t('sc_result_count', { n: list.length });
-
-  var grid = document.getElementById('scGaleriGrid');
-  if (!list.length) { grid.innerHTML = '<div class="sc-empty">' + t('sc_empty') + '</div>'; return; }
-
-  grid.innerHTML = list.map(function(item) {
-    // linkScreenshot adalah link folder, bukan link gambar langsung, jadi
-    // tidak bisa dipakai sebagai thumbnail. Urutan prioritas: linkThumbnail
-    // (override eksplisit admin, kalau diisi) -> path konvensi
-    // /assets/thumbnails/KODE.webp (coba duluan, tanpa perlu admin isi
-    // apa-apa - lihat scDerivedThumbUrl_) -> kalau itu 404 juga, thumbnail
-    // YouTube (kalau ada trailer) -> ikon fallback per Jenis. Pakai <img>
-    // + onerror (scThumbFallback_), bukan background-image, supaya bisa
-    // rantai fallback begini.
-    var thumbYt = scYoutubeId_(item.videoTrailer);
-    var thumbYtUrl = thumbYt ? ('https://img.youtube.com/vi/' + thumbYt + '/hqdefault.jpg') : '';
-    var thumbPrimary = item.linkThumbnail || scDerivedThumbUrl_(item.kode);
-    var thumbHtml = '<img class="sc-gthumb" src="' + safeUrl_(thumbPrimary) + '" alt="" loading="lazy"' +
-        (thumbYtUrl ? ' data-fallback="' + safeUrl_(thumbYtUrl) + '"' : '') +
-        ' onerror="scThumbFallback_(this)">' +
-      '<div class="sc-gthumb sc-gthumb-empty" style="display:none;">' + SC_ICON_NOPREVIEW + '</div>';
-    var creators = item.kreator.length
-      ? escHtml(item.kreator[0].nama) + (item.kreator.length > 1 ? ' ' + t('sc_creator_more', { n: item.kreator.length - 1 }) : '')
-      : '';
-    var pemBadge = item.peminatan === 'Tanpa Peminatan' ? '' :
-      '<span class="sc-tag ' + (item.peminatan === 'SSD' ? 'sc-tag-ssd' : 'sc-tag-aisd') + '">' + escHtml(item.peminatan) + '</span>';
-    var publishBadge = item.statusPublish === 'Sudah Publish' ? '<span class="sc-tag sc-tag-live">' + t('sc_status_publish_sudah') + '</span>' : '';
-    var statusTag = item.statusDeploy === 'Sudah Deploy' ? 'sc-tag-live' : 'sc-tag-dev';
-    var statusLabel = item.statusDeploy === 'Sudah Deploy' ? t('sc_status_sudah') : t('sc_status_belum');
-    return '<div class="sc-card sc-gcard" onclick="openShowcaseDetail(\'' + escHtml(item.kode) + '\')">' +
-      thumbHtml +
-      '<div class="sc-gbody">' +
-        '<div class="sc-tags"><span class="sc-tag sc-tag-jenis">' + escHtml(item.jenis) + '</span>' + pemBadge + publishBadge + '</div>' +
-        '<div class="sc-gtitle">' + escHtml((currentLang === 'en' && item.namaProgramEn) ? item.namaProgramEn : item.namaProgram) + '</div>' +
-        '<div class="sc-gcreators">' + creators + '</div>' +
-        '<div class="sc-gfoot"><span class="sc-tag ' + statusTag + '">' + statusLabel + '</span><span class="sc-likes"><span class="heart">&hearts;</span> ' + item.likes + '</span></div>' +
-      '</div>' +
-    '</div>';
-  }).join('');
-}
-
-// ---- Detail Karya ----
-var _scCurrentDetail = null;
-
-// Kode yang sedang diminta paling baru. Dipakai untuk cegah race condition:
-// kalau user pindah ke detail lain sebelum request sebelumnya selesai, respons
-// yang datang belakangan (basi) tidak boleh menimpa detail yang sedang tampil.
-var _scDetailReqKode = null;
-
-async function openShowcaseDetail(kode, noPush) {
-  scHideAllViews_();
-  document.getElementById('scDetailView').style.display = 'block';
-  document.getElementById('scDetailBody').innerHTML = '<p class="msg-center">' + t('sc_loading') + '</p>';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  _scDetailReqKode = kode;
-  try {
-    var res = await gasGet({ action: 'showcase_detail', kode: kode });
-    if (_scDetailReqKode !== kode) return;
-    if (!res || !res.ok) {
-      document.getElementById('scDetailBody').innerHTML = '<p class="msg-error">' + escHtml((res && res.message) || t('sc_detail_not_found')) + '</p>';
-      return;
-    }
-    _scCurrentDetail = res.item;
-    scRenderDetail();
-    updateUrlParam_('kode', res.item.kode, noPush);
-  } catch (e) {
-    if (_scDetailReqKode !== kode) return;
-    document.getElementById('scDetailBody').innerHTML = '<p class="msg-error">' + t('sc_error') + '</p>';
-  }
-}
-
-// Dipakai bersama oleh halaman Detail Karya publik (karya Disetujui) dan
-// tampilan "Lihat Detail" milik sendiri di Cek Status (berapa pun statusnya).
-// opts.showLike/opts.showReport mengatur elemen yang cuma relevan untuk
-// karya yang sudah tayang publik.
-function scBuildDetailBodyHtml_(item, opts) {
-  opts = opts || {};
-  var yt = scYoutubeId_(item.videoTrailer);
-  var mediaHtml = '';
-  // linkScreenshot (folder screenshot mentah yang dikirim mahasiswa) TIDAK
-  // ditampilkan di sini sama sekali - itu cuma bahan mentah untuk admin
-  // membuat thumbnail lewat "Buat Thumbnail" (lihat linkRow di
-  // admin-script.html), bukan untuk konsumsi publik. Slide 1 (thumbnail)
-  // SELALU coba thumbnail dulu (linkThumbnail kalau admin isi override-nya,
-  // atau kalau tidak, path konvensi dari scDerivedThumbUrl_ - lihat komentar
-  // di definisinya) - fallback-nya (ikon per Jenis) cuma dipasang tersembunyi,
-  // baru dimunculkan lewat scHeroThumbFallback_ kalau <img>-nya gagal dimuat
-  // (404 - berarti PNG-nya belum diupload).
-  var thumbUrl = item.linkThumbnail || scDerivedThumbUrl_(item.kode);
-  var slide1Html = '<div class="sc-hero-media" style="cursor:default;">' +
-    '<img src="' + safeUrl_(thumbUrl) + '" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" onerror="scHeroThumbFallback_(this)">' +
-    '</div>' +
-    '<div class="sc-hero-media sc-hero-fallback" style="display:none;">' + (SC_ICON_JENIS[item.jenis] || SC_ICON_JENIS_DEFAULT) + '</div>';
-  // Kalau ada trailer, hero-nya jadi carousel 2 slide (thumbnail lalu
-  // trailer) - dulu trailer cuma jadi tombol terpisah di sc-action-row,
-  // user minta ini juga diakses langsung dari hero-nya, tapi bukan overlay
-  // di atas thumbnail (yang sudah pernah dicoba & ditolak) - carousel-nya
-  // slide yang jelas terpisah, bukan menyatu di gambar yang sama. Tombol
-  // "Trailer" yang berdiri sendiri jadi dihapus supaya tidak ada 2 jalan ke
-  // konten yang sama.
-  if (item.videoTrailer) {
-    // enablejsapi=1 + id tetap "scHeroYtFrame" (cuma satu detail view aktif
-    // dalam satu waktu, SPA) supaya scHeroCarouselInit_ bisa membungkusnya
-    // dengan YT.Player dan mendeteksi kapan videonya benar-benar diputar.
-    var slide2Html = yt
-      ? '<div class="sc-hero-media" style="cursor:default;"><iframe id="scHeroYtFrame" style="position:absolute;inset:0;width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/' + yt + '?enablejsapi=1&origin=' + encodeURIComponent(location.origin) + '" allowfullscreen loading="lazy"></iframe></div>'
-      : '<a class="sc-hero-media" href="' + safeUrl_(item.videoTrailer) + '" target="_blank" rel="noopener"><span class="play">&#9654;</span></a>';
-    mediaHtml = '<div class="sc-hero-carousel">' +
-      '<div class="sc-hero-track" onscroll="scHeroCarouselScroll_(this)">' +
-        '<div class="sc-hero-slide">' + slide1Html + '</div>' +
-        '<div class="sc-hero-slide">' + slide2Html + '</div>' +
-      '</div>' +
-      '<div class="sc-hero-dots">' +
-        '<button class="sc-hero-dot active" aria-label="1" onclick="scHeroCarouselGo_(this,0)"></button>' +
-        '<button class="sc-hero-dot" aria-label="2" onclick="scHeroCarouselGo_(this,1)"></button>' +
-      '</div>' +
-    '</div>';
-  } else {
-    mediaHtml = slide1Html;
-  }
-  var pemBadge = item.peminatan === 'Tanpa Peminatan' ? '' :
-    '<span class="sc-tag ' + (item.peminatan === 'SSD' ? 'sc-tag-ssd' : 'sc-tag-aisd') + '">' + escHtml(item.peminatan) + '</span>';
-  var publishBadge = item.statusPublish === 'Sudah Publish' ? '<span class="sc-tag sc-tag-live">' + t('sc_status_publish_sudah') + '</span>' : '';
-  var statusTag = item.statusDeploy === 'Sudah Deploy' ? 'sc-tag-live' : 'sc-tag-dev';
-  var statusLabel = item.statusDeploy === 'Sudah Deploy' ? t('sc_status_sudah') : t('sc_status_belum');
-
-  var creatorsHtml = item.kreator.map(function(k) {
-    var initial = escHtml((String(k.nama || '').trim().charAt(0) || '?').toUpperCase());
-    return '<div class="sc-team-member"><div class="sc-creator-avatar">' + initial + '</div><div><b>' + escHtml(k.nama) + '</b><div class="sc-creator-nim">NIM. ' + escHtml(k.nim) + '</div></div></div>';
-  }).join('');
-
-  var mataKuliahDisplay = (currentLang === 'en' && item.mataKuliahEn) ? item.mataKuliahEn : item.mataKuliah;
-  // Penanda sumber karya ditaruh di depan nama mata kuliah/kompetisi supaya
-  // jelas keduanya, mis. "Kompetisi GEMASTIK 2026" / "Competition GEMASTIK
-  // 2026" (nama lombanya sendiri tidak diterjemahkan, cuma penandanya).
-  var sumberTugasLabel = t(item.sumberTugas === 'Kompetisi' ? 'sc_opt_kompetisi' : 'sc_opt_matkul');
-  var sumberLabel = (item.sumberTugas === 'Mata Kuliah' || item.sumberTugas === 'Kompetisi')
-    ? (mataKuliahDisplay ? (sumberTugasLabel + ' ' + mataKuliahDisplay) : sumberTugasLabel)
-    : t('sc_opt_ta');
-  var namaProgramDisplay = (currentLang === 'en' && item.namaProgramEn) ? item.namaProgramEn : item.namaProgram;
-
-  var techHtml = (item.teknologi && item.teknologi.length)
-    ? '<div class="sc-section-label">' + t('sc_tech_label') + '</div><div class="sc-tech-pills">' +
-      sortTeknologi_(item.teknologi).map(function(x) { return '<span class="sc-tech-pill">' + escHtml(x) + '</span>'; }).join('') + '</div>'
-    : '';
-
-  var linkButtonsHtml =
-    (item.linkDemo ? '<a class="sc-btn sc-btn-primary" href="' + safeUrl_(item.linkDemo) + '" target="_blank" rel="noopener">' + t('sc_btn_demo') + '</a>' : '') +
-    (item.linkDownload ? '<a class="sc-btn sc-btn-primary" href="' + safeUrl_(item.linkDownload) + '" target="_blank" rel="noopener">' + t('sc_btn_download') + '</a>' : '') +
-    (item.linkSourceCode ? '<a class="sc-btn sc-btn-outline" href="' + safeUrl_(item.linkSourceCode) + '" target="_blank" rel="noopener">' + t('sc_btn_source') + '</a>' : '');
-  var actionsHtml = linkButtonsHtml
-    ? '<div class="sc-section-label">' + t('sc_sec_tautan') + '</div><div class="sc-action-row">' + linkButtonsHtml + '</div>'
-    : '';
-
-  var likeHtml = opts.showLike
-    ? '<button class="sc-like-btn" id="scLikeBtn" onclick="scDoLike(\'' + escHtml(item.kode) + '\')"><span id="scLikeHeart">&hearts;</span><span id="scLikeCount">' + item.likes + '</span></button>'
-    : '';
-  var reportHtml = opts.showReport
-    ? '<button class="sc-report-link" onclick="openScReportModal(\'' + escHtml(item.kode) + '\')">' + t('sc_report_link') + '</button>'
-    : '';
-
-  return mediaHtml +
-    '<div class="sc-detail-head">' +
-      '<div class="sc-detail-head-main"><div class="sc-tags"><span class="sc-tag sc-tag-jenis">' + escHtml(item.jenis) + '</span>' + pemBadge + '<span class="sc-tag ' + statusTag + '">' + statusLabel + '</span>' + publishBadge + '</div>' +
-      '<div class="sc-detail-title">' + escHtml(namaProgramDisplay) + '</div></div>' +
-      likeHtml +
-    '</div>' +
-    '<p class="sc-detail-desc">' + escHtml(pick(item.deskripsi)) + '</p>' +
-    '<div class="sc-section-label">' + t('sc_creators_label') + '</div>' +
-    '<div class="sc-card sc-team-card">' + creatorsHtml + '</div>' +
-    '<div class="sc-section-label">' + t('sc_academic_label') + '</div>' +
-    '<div class="sc-info-grid">' +
-      '<div class="sc-info-card"><div class="sc-info-icon">' + SC_ICON_SUMBER + '</div><div><div class="sc-info-k">' + t('sc_sumber_tugas_label') + '</div><div class="sc-info-v">' + escHtml(sumberLabel) + '</div></div></div>' +
-      '<div class="sc-info-card"><div class="sc-info-icon">' + SC_ICON_SEMESTER + '</div><div><div class="sc-info-k">' + t('sc_semester_label') + '</div><div class="sc-info-v">' + escHtml(translateSemesterLabel_(item.semester)) + '</div></div></div>' +
-      ((item.dosenPembimbing && item.dosenPembimbing.length) ? '<div class="sc-info-card"><div class="sc-info-icon">' + SC_ICON_DOSEN + '</div><div><div class="sc-info-k">' + t('sc_dosen_label') + '</div><div class="sc-info-v">' + item.dosenPembimbing.map(function(nm, i) { return (item.dosenPembimbing.length > 1 ? t('sc_dosen_ordinal', { n: i + 1 }) : '') + escHtml(nm); }).join('<br>') + '</div></div></div>' : '') +
-      '<div class="sc-info-card"><div class="sc-info-icon">' + SC_ICON_KONTAK + '</div><div><div class="sc-info-k">' + t('sc_kontak_label') + '</div><div class="sc-info-v">' + scRenderKontak_(item.kontakTim) + '</div></div></div>' +
-    '</div>' +
-    techHtml + actionsHtml + reportHtml;
-}
-
-function scRenderDetail() {
-  var item = _scCurrentDetail;
-  if (!item) return;
-  document.getElementById('scDetailBody').innerHTML = scBuildDetailBodyHtml_(item, { showLike: true, showReport: true });
-  if (localStorage.getItem('sc_liked_' + item.kode)) {
-    document.getElementById('scLikeBtn').classList.add('liked');
-  }
-  scHeroCarouselInit_();
-}
-
-async function scDoLike(kode) {
-  var likedKey = 'sc_liked_' + kode;
-  if (localStorage.getItem(likedKey)) return;
-  var btn = document.getElementById('scLikeBtn');
-  if (btn.disabled) return; // request sebelumnya masih diproses, cegah klik ganda
-  btn.disabled = true;
-  try {
-    var res = await gasGet({ action: 'showcase_like', kode: kode, lang: currentLang });
-    // Cuma tandai "sudah like" (localStorage + UI) SETELAH server konfirmasi
-    // berhasil. Kalau ditandai duluan lalu request gagal, tombol jadi terkunci
-    // permanen (early-return di atas) padahal counter di server tidak pernah
-    // bertambah, itu penyebab bug "sudah dilike tapi tidak terhitung".
-    if (res && res.ok) {
-      localStorage.setItem(likedKey, '1');
-      // Kalau user sudah pindah ke detail lain sebelum respons ini datang,
-      // jangan timpa scLikeCount/scLikeBtn milik detail yang sedang tampil
-      // sekarang dengan data dari kode yang berbeda (scLikeCount di-lookup
-      // ulang di sini, bukan elemen yang sama dengan btn di atas).
-      if (_scCurrentDetail && _scCurrentDetail.kode === kode) {
-        btn.classList.add('liked');
-        document.getElementById('scLikeCount').textContent = res.likes;
-      }
-    }
-  } catch (e) {
-  } finally {
-    btn.disabled = false;
-  }
-}
-
-// ---- Laporkan Karya ----
-function openScReportModal(kode) {
-  var nama = (_scCurrentDetail && _scCurrentDetail.kode === kode) ? _scCurrentDetail.namaProgram : kode;
-  document.getElementById('scReportDesc').textContent = t('sc_report_desc', { nama: nama });
-  document.getElementById('scReportReason').value = '';
-  document.getElementById('scReportContact').value = '';
-  document.getElementById('scReportMsg').style.display = 'none';
-  document.getElementById('scReportForm').style.display = 'block';
-  document.getElementById('scReportSuccess').style.display = 'none';
-  document.getElementById('scReportOverlay').dataset.kode = kode;
-  document.getElementById('scReportOverlay').classList.add('open');
-}
-function closeScReportModal() { document.getElementById('scReportOverlay').classList.remove('open'); }
-
-async function submitScReport() {
-  var kode = document.getElementById('scReportOverlay').dataset.kode;
-  var reason = document.getElementById('scReportReason').value.trim();
-  var msgEl = document.getElementById('scReportMsg');
-  if (reason.length < 10) { msgEl.textContent = t('sc_report_reason_short'); msgEl.style.display = 'block'; return; }
-  msgEl.style.display = 'none';
-  try {
-    var res = await gasGet({
-      action: 'showcase_report', kode: kode, alasan: reason,
-      kontak: document.getElementById('scReportContact').value.trim(), lang: currentLang
-    });
-    if (res && res.ok) {
-      document.getElementById('scReportForm').style.display = 'none';
-      document.getElementById('scReportSuccess').style.display = 'block';
-    } else {
-      msgEl.textContent = (res && res.message) || t('sc_error');
-      msgEl.style.display = 'block';
-    }
-  } catch (e) {
-    msgEl.textContent = t('sc_error');
-    msgEl.style.display = 'block';
-  }
-}
-
-// ---- Form Submit ----
-// scFormView/scStatusView tidak punya path/query URL sendiri (keduanya cuma
-// sub-tampilan di dalam /showcase/), jadi riwayatnya ditandai lewat
-// history.state, bukan lewat setCleanPath_/updateUrlParam_ - lihat listener
-// popstate di DOMContentLoaded yang mengecek state.view ini.
-function openShowcaseForm(noPush) {
-  scHideAllViews_();
-  document.getElementById('scFormView').style.display = 'block';
-  _scResubmitKode = null;
-  document.getElementById('scFormTitle').textContent = t('sc_form_title');
-  scResetForm();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  if (noPush) history.replaceState({ view: 'scForm' }, '', location.href);
-  else history.pushState({ view: 'scForm' }, '', location.href);
-}
-
-function scResetForm() {
-  document.getElementById('scFormBody').style.display = 'block';
-  document.getElementById('scFormSuccess').style.display = 'none';
-  ['scfNama','scfDeskripsi','scfTeknologi','scfKontak','scfDemo','scfDownload','scfSource','scfTrailer','scfScreenshot','scfMatkul','scfSemester'].forEach(function(id) {
-    document.getElementById(id).value = '';
-  });
-  document.getElementById('scfTeknologiChips').innerHTML = '';
-  scHideTechSuggest_();
-  document.getElementById('scfConsent1').checked = false;
-  document.getElementById('scfConsent2').checked = false;
-  document.getElementById('scfKreatorFields').innerHTML =
-    '<div class="sc-creator-field">' +
-      '<input class="sc-input scf-kreator-nim" inputmode="numeric" pattern="[0-9]*" placeholder="' + t('sc_placeholder_nim') + '">' +
-      '<input class="sc-input scf-kreator-nama" placeholder="' + t('sc_placeholder_nama') + '">' +
-      '<button type="button" class="sc-icon-btn" onclick="scRemoveKreatorRow(this)" title="Hapus">&times;</button>' +
-    '</div>';
-  document.getElementById('scfDosenFields').innerHTML =
-    '<div class="sc-single-field">' +
-      '<select class="sc-select scf-dosen-nama">' + scDosenOptionsHtml_('') + '</select>' +
-      '<button type="button" class="sc-icon-btn" onclick="scRemoveDosenRow(this)" title="Hapus">&times;</button>' +
-    '</div>';
-  scEnsureDosenOptions_();
-  ['scfJenis', 'scfPeminatan', 'scfStatusDeploy', 'scfStatusPublish'].forEach(function(id) {
-    var wrap = document.getElementById(id);
-    wrap.querySelectorAll('.sc-seg-btn').forEach(function(b, i) { b.classList.toggle('active', i === 0); });
-  });
-  document.getElementById('scfDemoGroup').style.display = 'none';
-  document.getElementById('scfDemoNote').style.display  = 'block';
-  document.getElementById('scfDownloadGroup').style.display = 'none';
-  scApplyScreenshotFieldsForJenis_(document.querySelector('#scfJenis .sc-seg-btn.active').dataset.val);
-  scSetSegValue_('scfSumber', 'Mata Kuliah');
-  document.getElementById('scfMsg').style.display = 'none';
-  scRefreshSubmitState();
-}
-
-function scAddKreatorRow() {
-  var wrap = document.getElementById('scfKreatorFields');
-  var row = document.createElement('div');
-  row.className = 'sc-creator-field';
-  row.innerHTML =
-    '<input class="sc-input scf-kreator-nim" inputmode="numeric" pattern="[0-9]*" placeholder="' + t('sc_placeholder_nim') + '">' +
-    '<input class="sc-input scf-kreator-nama" placeholder="' + t('sc_placeholder_nama') + '">' +
-    '<button type="button" class="sc-icon-btn" onclick="scRemoveKreatorRow(this)" title="Hapus">&times;</button>';
-  wrap.appendChild(row);
-}
-function scRemoveKreatorRow(btn) {
-  var wrap = document.getElementById('scfKreatorFields');
-  if (wrap.children.length > 1) btn.closest('.sc-creator-field').remove();
-}
-
-function scAddDosenRow() {
-  var wrap = document.getElementById('scfDosenFields');
-  var row = document.createElement('div');
-  row.className = 'sc-single-field';
-  row.innerHTML =
-    '<select class="sc-select scf-dosen-nama">' + scDosenOptionsHtml_('') + '</select>' +
-    '<button type="button" class="sc-icon-btn" onclick="scRemoveDosenRow(this)" title="Hapus">&times;</button>';
-  wrap.appendChild(row);
-}
-function scRemoveDosenRow(btn) {
-  var wrap = document.getElementById('scfDosenFields');
-  if (wrap.children.length > 1) btn.closest('.sc-single-field').remove();
-  else btn.closest('.sc-single-field').querySelector('.scf-dosen-nama').value = '';
-}
-
-// Pilihan Dosen Pembimbing di form Showcase (publik) bersumber dari sheet
-// DOSEN yang berstatus DosenTA='Ya' (lihat Code.gs getDosenList/importDosen)
-// - supaya daftar dosen di halaman /lecturers/ dan pilihan di form ini
-// selalu konsisten dari satu sumber data yang sama. `selected` yang tidak
-// ada di daftar (mis. nama lama hasil ketik bebas sebelum fitur ini ada)
-// tetap ditambahkan sebagai opsi tambahan supaya data lama tidak hilang.
-var scDosenOptions_        = null;
-var scDosenOptionsPromise_ = null;
-
-function scDosenOptionsHtml_(selected) {
-  var opts = '<option value="" data-i18n="sc_placeholder_dosen">' + t('sc_placeholder_dosen') + '</option>';
-  var found = false;
-  (scDosenOptions_ || []).forEach(function(nama) {
-    if (nama === selected) found = true;
-    opts += '<option value="' + escHtml(nama) + '"' + (nama === selected ? ' selected' : '') + '>' + escHtml(nama) + '</option>';
-  });
-  if (selected && !found) opts += '<option value="' + escHtml(selected) + '" selected>' + escHtml(selected) + '</option>';
-  return opts;
-}
-
-function scRefreshDosenSelects_() {
-  document.querySelectorAll('#scfDosenFields .scf-dosen-nama').forEach(function(sel) {
-    var current = sel.value;
-    sel.innerHTML = scDosenOptionsHtml_(current);
-  });
-}
-
-function scEnsureDosenOptions_() {
-  if (scDosenOptions_) return Promise.resolve(scDosenOptions_);
-  if (!scDosenOptionsPromise_) {
-    scDosenOptionsPromise_ = gasGet({ action: 'dosen_list' }).then(function(res) {
-      scDosenOptions_ = (res && res.ok) ? res.dosen.filter(function(d) { return d.dosenTa1 || d.dosenTa2; }).map(function(d) { return d.nama; }) : [];
-      scRefreshDosenSelects_();
-      return scDosenOptions_;
-    }).catch(function() { scDosenOptions_ = []; return scDosenOptions_; });
-  }
-  return scDosenOptionsPromise_;
-}
-
-// Daftar rekomendasi teknologi - BUKAN daftar tertutup (mahasiswa tetap
-// bebas mengetik apa saja, termasuk yang tidak ada di sini), cuma saran yang
-// muncul sambil mengetik supaya penulisan nama teknologi yang SAMA jadi
-// seragam antar-karya (mis. selalu "Firebase", bukan campuran "firebase"/
-// "Fire base"/dst). Ejaan di sini sengaja jadi bentuk baku yang dipakai
-// (huruf besar/kecil, titik, spasi) - kalau ada tambahan, ikuti gaya
-// penulisan resmi teknologi tsb, bukan sembarang kapitalisasi.
-var SC_TECH_SUGGESTIONS = [
-  // Bahasa pemrograman
-  'JavaScript', 'TypeScript', 'Python', 'Java', 'Kotlin', 'Swift', 'Dart',
-  'PHP', 'C++', 'C#', 'Go', 'Rust', 'HTML', 'CSS',
-  // Web framework/library
-  'React', 'Next.js', 'Vue.js', 'Angular', 'Svelte', 'Laravel', 'CodeIgniter',
-  'Django', 'Flask', 'FastAPI', 'Express.js', 'Node.js', 'Spring Boot',
-  'ASP.NET', 'Tailwind CSS', 'Bootstrap',
-  // Mobile
-  'Flutter', 'React Native', 'Android (Kotlin)', 'Android (Java)', 'SwiftUI',
-  // Game/desktop
-  'Unity', 'Unreal Engine', 'Godot', 'Electron', 'JavaFX', '.NET MAUI',
-  // AI/ML/Data
-  'TensorFlow', 'PyTorch', 'Keras', 'Scikit-learn', 'OpenCV', 'Pandas',
-  'NumPy', 'YOLO', 'Hugging Face Transformers',
-  // Database
-  'MySQL', 'PostgreSQL', 'MongoDB', 'Firebase Firestore',
-  'Firebase Realtime Database', 'SQLite', 'Redis', 'Supabase',
-  // Cloud/infrastruktur
-  'Firebase', 'Google Cloud Platform', 'AWS', 'Microsoft Azure', 'Docker',
-  'Vercel', 'Netlify', 'Heroku',
-  // Lainnya
-  'GraphQL', 'REST API', 'Socket.IO', 'Figma'
-];
-
-function scTechSuggestFilter_(query) {
-  var q = String(query || '').trim().toLowerCase();
-  if (!q) return [];
-  var already = Array.prototype.map.call(document.querySelectorAll('#scfTeknologiChips .sc-tag-chip'), function(el) { return el.dataset.val.toLowerCase(); });
-  return SC_TECH_SUGGESTIONS
-    .filter(function(t) { return t.toLowerCase().indexOf(q) !== -1 && already.indexOf(t.toLowerCase()) === -1; })
-    .slice(0, 6);
-}
-function scRenderTechSuggest_() {
-  var box = document.getElementById('scfTeknologiSuggest');
-  if (!box) return;
-  var matches = scTechSuggestFilter_(document.getElementById('scfTeknologi').value);
-  if (!matches.length) { box.innerHTML = ''; box.style.display = 'none'; return; }
-  box.innerHTML = matches.map(function(t) {
-    return '<button type="button" class="sc-tech-suggest-item" data-val="' + escHtml(t) + '" onmousedown="event.preventDefault();scPickTechSuggest_(this.dataset.val)">' + escHtml(t) + '</button>';
-  }).join('');
-  box.style.display = 'block';
-}
-function scPickTechSuggest_(val) {
-  scAddTechChip_(val);
-  var input = document.getElementById('scfTeknologi');
-  input.value = '';
-  input.focus();
-  scRenderTechSuggest_();
-}
-function scHideTechSuggest_() {
-  var box = document.getElementById('scfTeknologiSuggest');
-  if (box) { box.innerHTML = ''; box.style.display = 'none'; }
-}
-
-// Tag-input Teknologi: ketik teks, koma atau Enter langsung mengubahnya jadi
-// chip supaya keyword yang sudah selesai diketik terlihat jelas terpisah,
-// bukan cuma teks polos dipisah koma.
-function scAddTechChip_(text) {
-  var val = String(text || '').trim();
-  if (!val) return;
-  var chips = document.getElementById('scfTeknologiChips');
-  var chip = document.createElement('span');
-  chip.className = 'sc-tag-chip';
-  chip.dataset.val = val;
-  chip.innerHTML = escHtml(val) + '<button type="button" tabindex="-1" onclick="scRemoveTechChip(this)">&times;</button>';
-  chips.appendChild(chip);
-}
-function scRemoveTechChip(btn) {
-  btn.closest('.sc-tag-chip').remove();
-}
-function scTeknologiCommit_() {
-  var input = document.getElementById('scfTeknologi');
-  if (input.value.indexOf(',') === -1) return;
-  var parts = input.value.split(',');
-  var last = parts.pop();
-  parts.forEach(function(p) { scAddTechChip_(p); });
-  input.value = last;
-}
-function scTeknologiInput_() {
-  scTeknologiCommit_();
-  scRenderTechSuggest_();
-}
-function scTeknologiKeydown_(e) {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    scAddTechChip_(e.target.value);
-    e.target.value = '';
-    scHideTechSuggest_();
-  } else if (e.key === 'Escape') {
-    scHideTechSuggest_();
-  } else if (e.key === 'Backspace' && !e.target.value) {
-    var chips = document.getElementById('scfTeknologiChips');
-    if (chips.lastElementChild) chips.lastElementChild.remove();
-  }
-}
-// Teknologi diurutkan abjad di mana pun ditampilkan/disimpan (public dan
-// admin) - sebelumnya tidak ada pengurutan sama sekali, jadi urutannya ikut
-// urutan mahasiswa/admin mengetik (mis. "Flask, Firebase" - tidak berurut).
-function sortTeknologi_(arr) {
-  return (arr || []).slice().sort(function(a, b) { return a.localeCompare(b, 'id', { sensitivity: 'base' }); });
-}
-
-function scGetTechValues_() {
-  var vals = Array.prototype.map.call(document.querySelectorAll('#scfTeknologiChips .sc-tag-chip'), function(el) { return el.dataset.val; });
-  var trailing = document.getElementById('scfTeknologi').value.trim();
-  if (trailing) vals.push(trailing);
-  return sortTeknologi_(vals);
-}
-
-function scSelectSeg(groupId, btn) {
-  var wrap = document.getElementById(groupId);
-  wrap.querySelectorAll('.sc-seg-btn').forEach(function(b) { b.classList.remove('active'); });
-  btn.classList.add('active');
-  scApplySegSideEffects_(groupId, btn);
-}
-
-function scApplySegSideEffects_(groupId, btn) {
-  if (groupId === 'scfStatusDeploy') {
-    var sudah = btn.dataset.val === 'Sudah Deploy';
-    document.getElementById('scfDemoGroup').style.display = sudah ? 'block' : 'none';
-    document.getElementById('scfDemoNote').style.display  = sudah ? 'none'  : 'block';
-  }
-  if (groupId === 'scfStatusPublish') {
-    var sudahPublish = btn.dataset.val === 'Sudah Publish';
-    document.getElementById('scfDownloadGroup').style.display = sudahPublish ? 'block' : 'none';
-  }
-  if (groupId === 'scfJenis') {
-    scApplyScreenshotFieldsForJenis_(btn.dataset.val);
-  }
-  if (groupId === 'scfSumber') {
-    var val = btn.dataset.val;
-    document.getElementById('scfMatkulGroup').style.display = (val === 'Mata Kuliah' || val === 'Kompetisi') ? 'block' : 'none';
-    var key = val === 'Kompetisi' ? 'sc_label_kompetisi' : 'sc_label_matkul';
-    var placeholderKey = val === 'Kompetisi' ? 'sc_placeholder_kompetisi' : 'sc_placeholder_matkul';
-    document.getElementById('scfMatkulLabel').innerHTML = '<span data-i18n="' + key + '">' + t(key) + '</span> <span class="sc-req">*</span>';
-    document.getElementById('scfMatkul').placeholder = t(placeholderKey);
-  }
-}
-
-// Screenshot yang diminta beda per Jenis, supaya preview di galeri/detail
-// punya konsep seragam: AI tidak butuh screenshot sama sekali (dipakaikan
-// ilustrasi template), Mobile butuh 2 (Home/Login + Fitur Terbaik) karena
-// ditampilkan berdampingan, Jenis lain cukup 1 (Home).
-// Satu field screenshot (link folder) yang cuma disembunyikan utk Jenis AI
-// (tidak butuh screenshot sama sekali). Berapa banyak gambar yang harus
-// ada di dalam foldernya (1 utk Jenis lain, 2 utk Mobile) sudah dijelaskan
-// di teks bantuan statis field-nya, tidak perlu berubah per Jenis lagi.
-function scApplyScreenshotFieldsForJenis_(jenis) {
-  document.getElementById('scfScreenshotGroup').style.display = jenis === 'AI' ? 'none' : 'block';
-}
-
-// Set nilai seg tanpa event klik (dipakai saat mengisi ulang form untuk Edit & Kirim Ulang).
-function scSetSegValue_(groupId, val) {
-  var wrap = document.getElementById(groupId);
-  var matched = null;
-  wrap.querySelectorAll('.sc-seg-btn').forEach(function(b) {
-    var isMatch = b.dataset.val === val;
-    b.classList.toggle('active', isMatch);
-    if (isMatch) matched = b;
-  });
-  if (matched) scApplySegSideEffects_(groupId, matched);
-}
-
-// ---- Edit & Kirim Ulang (karya berstatus Ditolak) ----
-var _scResubmitKode = null;
-
-function scPopulateForm_(item) {
-  document.getElementById('scfNama').value = item.namaProgram;
-  document.getElementById('scfDeskripsi').value = item.deskripsi.id;
-  document.getElementById('scfTeknologiChips').innerHTML = '';
-  document.getElementById('scfTeknologi').value = '';
-  sortTeknologi_(item.teknologi).forEach(function(x) { scAddTechChip_(x); });
-  document.getElementById('scfKontak').value = item.kontakTim;
-  document.getElementById('scfDemo').value = item.linkDemo;
-  document.getElementById('scfDownload').value = item.linkDownload || '';
-  document.getElementById('scfSource').value = item.linkSourceCode;
-  document.getElementById('scfTrailer').value = item.videoTrailer;
-  document.getElementById('scfScreenshot').value = item.linkScreenshot || '';
-  document.getElementById('scfMatkul').value = item.mataKuliah;
-  document.getElementById('scfSemester').value = item.semester;
-
-  scSetSegValue_('scfJenis', item.jenis);
-  scSetSegValue_('scfPeminatan', item.peminatan);
-  scSetSegValue_('scfSumber', item.sumberTugas);
-  scSetSegValue_('scfStatusDeploy', item.statusDeploy);
-  scSetSegValue_('scfStatusPublish', item.statusPublish || 'Belum Publish');
-
-  document.getElementById('scfKreatorFields').innerHTML = item.kreator.map(function(k) {
-    return '<div class="sc-creator-field">' +
-      '<input class="sc-input scf-kreator-nim" inputmode="numeric" pattern="[0-9]*" value="' + escHtml(k.nim) + '">' +
-      '<input class="sc-input scf-kreator-nama" value="' + escHtml(k.nama) + '">' +
-      '<button type="button" class="sc-icon-btn" onclick="scRemoveKreatorRow(this)" title="Hapus">&times;</button>' +
-    '</div>';
-  }).join('');
-
-  if (item.dosenPembimbing && item.dosenPembimbing.length) {
-    document.getElementById('scfDosenFields').innerHTML = item.dosenPembimbing.map(function(nm) {
-      return '<div class="sc-single-field">' +
-        '<select class="sc-select scf-dosen-nama">' + scDosenOptionsHtml_(nm) + '</select>' +
-        '<button type="button" class="sc-icon-btn" onclick="scRemoveDosenRow(this)" title="Hapus">&times;</button>' +
-      '</div>';
-    }).join('');
-    scEnsureDosenOptions_();
-  }
-}
-
-async function scOpenResubmit(kode) {
-  scHideAllViews_();
-  document.getElementById('scFormView').style.display = 'block';
-  document.getElementById('scFormTitle').textContent = t('sc_resubmit_title');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  history.pushState({ view: 'scForm' }, '', location.href);
-  scResetForm();
-  document.getElementById('scFormBody').style.display = 'none';
-  document.getElementById('scfSubmitBtn').style.display = 'none';
-  var loadingEl = document.getElementById('scFormLoading');
-  loadingEl.textContent = t('sc_loading');
-  loadingEl.style.display = 'block';
-  try {
-    var res = await gasGet({ action: 'showcase_mine', kode: kode, lang: currentLang });
-    if (!res || !res.ok) { scFormError_((res && res.message) || t('sc_error')); return; }
-    scPopulateForm_(res.item);
-    _scResubmitKode = kode;
-  } catch (e) {
-    scFormError_(t('sc_error'));
-  } finally {
-    loadingEl.style.display = 'none';
-    document.getElementById('scFormBody').style.display = '';
-    document.getElementById('scfSubmitBtn').style.display = '';
-  }
-}
-
-function scGetSegVal_(groupId) {
-  var active = document.querySelector('#' + groupId + ' .sc-seg-btn.active');
-  return active ? active.dataset.val : '';
-}
-
-function scRefreshSubmitState() {
-  var ok = document.getElementById('scfConsent1').checked && document.getElementById('scfConsent2').checked;
-  document.getElementById('scfSubmitBtn').disabled = !ok;
-}
-
-function scFormError_(msg) {
-  var el = document.getElementById('scfMsg');
-  el.textContent = msg;
-  el.style.display = 'block';
-  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-}
-
-async function submitShowcaseForm() {
-  document.getElementById('scfMsg').style.display = 'none';
-
-  var namaProgram = document.getElementById('scfNama').value.trim();
-  if (!namaProgram) return scFormError_(t('sc_err_nama'));
-
-  var deskripsiId = document.getElementById('scfDeskripsi').value.trim();
-  if (!deskripsiId) return scFormError_(t('sc_err_deskripsi'));
-
-  var kreator = [];
-  document.querySelectorAll('#scfKreatorFields .sc-creator-field').forEach(function(row) {
-    var nim  = row.querySelector('.scf-kreator-nim').value.trim();
-    var nama = row.querySelector('.scf-kreator-nama').value.trim();
-    if (nim && nama) kreator.push({ nim: nim, nama: nama });
-  });
-  if (!kreator.length) return scFormError_(t('sc_err_kreator'));
-
-  var sumberTugas = scGetSegVal_('scfSumber');
-  var mataKuliah  = document.getElementById('scfMatkul').value.trim();
-  if (sumberTugas === 'Mata Kuliah' && !mataKuliah) return scFormError_(t('sc_err_matkul'));
-  if (sumberTugas === 'Kompetisi' && !mataKuliah) return scFormError_(t('sc_err_kompetisi'));
-
-  var semester = document.getElementById('scfSemester').value.trim();
-  if (!semester) return scFormError_(t('sc_err_semester'));
-
-  var kontakTim = document.getElementById('scfKontak').value.trim();
-  if (!kontakTim) return scFormError_(t('sc_err_kontak'));
-  if (!SC_EMAIL_REGEX.test(kontakTim)) return scFormError_(t('sc_err_kontak_email'));
-
-  var statusDeploy = scGetSegVal_('scfStatusDeploy');
-  var linkDemo = document.getElementById('scfDemo').value.trim();
-  if (statusDeploy === 'Sudah Deploy' && !linkDemo) return scFormError_(t('sc_err_demo'));
-
-  var statusPublish = scGetSegVal_('scfStatusPublish');
-  var linkDownload = document.getElementById('scfDownload').value.trim();
-  if (statusPublish === 'Sudah Publish' && !linkDownload) return scFormError_(t('sc_err_download'));
-
-  var jenis = scGetSegVal_('scfJenis');
-  var linkScreenshot = document.getElementById('scfScreenshot').value.trim();
-  if (jenis !== 'AI' && !linkScreenshot) return scFormError_(t('sc_err_ss'));
-
-  if (!document.getElementById('scfConsent1').checked || !document.getElementById('scfConsent2').checked) {
-    return scFormError_(t('sc_err_consent'));
-  }
-
-  var payload = {
-    namaProgram: { id: namaProgram, en: '' },
-    deskripsi: { id: deskripsiId, en: '' },
-    kreator: kreator,
-    jenis: jenis,
-    peminatan: scGetSegVal_('scfPeminatan'),
-    sumberTugas: sumberTugas,
-    mataKuliah: mataKuliah,
-    semester: semester,
-    teknologi: scGetTechValues_(),
-    kontakTim: kontakTim,
-    statusDeploy: statusDeploy,
-    linkDemo: linkDemo,
-    statusPublish: statusPublish,
-    linkDownload: linkDownload,
-    linkSourceCode: document.getElementById('scfSource').value.trim(),
-    videoTrailer: document.getElementById('scfTrailer').value.trim(),
-    linkScreenshot: linkScreenshot,
-    dosenPembimbing: Array.prototype.map.call(document.querySelectorAll('#scfDosenFields .scf-dosen-nama'), function(el) { return el.value.trim(); }).filter(Boolean)
-  };
-
-  var btn = document.getElementById('scfSubmitBtn');
-  btn.disabled = true; btn.textContent = t('sc_submitting');
-  try {
-    var params = _scResubmitKode
-      ? { action: 'showcase_resubmit', kode: _scResubmitKode, data: JSON.stringify(payload), lang: currentLang }
-      : { action: 'showcase_submit', data: JSON.stringify(payload), lang: currentLang };
-    var res = await gasGet(params);
-    if (res && res.ok) {
-      document.getElementById('scFormBody').style.display = 'none';
-      document.getElementById('scFormSuccess').style.display = 'block';
-      document.getElementById('scFormSuccessTitle').textContent = _scResubmitKode ? t('sc_resubmit_success_title') : t('sc_success_title');
-      document.getElementById('scFormSuccessCode').textContent = res.kode;
-      _scResubmitKode = null;
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      btn.disabled = false; btn.textContent = t('sc_btn_submit');
-      scFormError_((res && res.message) || t('sc_error'));
-    }
-  } catch (e) {
-    btn.disabled = false; btn.textContent = t('sc_btn_submit');
-    scFormError_(t('sc_error'));
-  }
-}
-
-// ------ IKUTI PENGAJUAN/KARYA (bookmark lokal, sama seperti Ikuti NIM di
-// atas) ------ Membandingkan StatusModerasi terakhir kali dilihat dengan
-// status TERKINI, supaya mahasiswa tahu ada perubahan (mis. Menunggu ->
-// Disetujui) tanpa perlu bolak-balik cek manual. Sama-sama localStorage
-// saja, BUKAN notifikasi push sungguhan, dan tidak disinkronkan antar
-// perangkat/browser - lihat catatan lengkap di blok Ikuti NIM di atas,
-// alasannya sama persis.
-const FOLLOW_KARYA_KEY = 'simprodi_followed_karya';
-var _followKaryaLastRefresh = 0;
-
-// Hasil cekShowcaseStatus() TERAKHIR - dipakai toggleFollowKarya_() untuk
-// mengambil namaProgram/statusModerasi TANPA menyisipkannya sebagai literal
-// string JS di dalam atribut onclick. namaProgram adalah teks bebas
-// (isian mahasiswa/admin) yang bisa memuat tanda kutip/kurung/titik koma -
-// menyisipkannya langsung ke onclick="toggleFollowKarya_('...')" rentan
-// injeksi (escHtml tidak mengubah tanda kutip tunggal, dan meng-encode-nya
-// jadi &#39; TIDAK cukup, karena decoding entity HTML pada atribut tetap
-// terjadi SEBELUM string itu dieksekusi sebagai JS - jadi tetap bisa
-// memutus string literalnya). Hanya `kode` (format tetap dari server,
-// mis. "SC-7K2M9") yang aman disisipkan langsung.
-var _scLastStatusRes = null;
-function getFollowedKarya_() {
-  try { return JSON.parse(localStorage.getItem(FOLLOW_KARYA_KEY) || '[]'); } catch (e) { return []; }
-}
-function saveFollowedKarya_(list) {
-  try { localStorage.setItem(FOLLOW_KARYA_KEY, JSON.stringify(list)); } catch (e) {}
-}
-function isFollowingKarya_(kode) {
-  return getFollowedKarya_().some(function(f) { return f.kode === kode; });
-}
-function scStatusLabel_(status) {
-  return status === 'Disetujui' ? t('sc_status_disetujui') : (status === 'Ditolak' ? t('sc_status_ditolak') : t('sc_status_menunggu'));
-}
-function toggleFollowKarya_(kode) {
-  var list = getFollowedKarya_();
-  var idx = list.findIndex(function(f) { return f.kode === kode; });
-  if (idx !== -1) {
-    list.splice(idx, 1);
-  } else {
-    var res = _scLastStatusRes;
-    list.push({
-      kode: kode,
-      namaProgram: (res && res.kode === kode) ? res.namaProgram : '',
-      statusModerasi: (res && res.kode === kode) ? res.statusModerasi : 'Menunggu'
-    });
-  }
-  saveFollowedKarya_(list);
-  var btn = document.getElementById('followKaryaBtn');
-  if (btn) {
-    var following = isFollowingKarya_(kode);
-    btn.classList.toggle('active', following);
-    btn.textContent = following ? t('follow_btn_active') : t('follow_karya_btn');
-  }
-  renderFollowedKaryaSection_();
-}
-// Perbarui snapshot status begitu benar-benar dilihat (lewat cek manual ATAU
-// lewat daftar "diikuti"), supaya badge "status berubah" hilang setelah
-// dilihat, bukan cuma setelah di-follow.
-function markFollowedKaryaSeen_(kode, statusModerasi) {
-  var list = getFollowedKarya_();
-  var idx = list.findIndex(function(f) { return f.kode === kode; });
-  if (idx === -1) return;
-  list[idx].statusModerasi = statusModerasi;
-  saveFollowedKarya_(list);
-}
-function unfollowKarya_(kode, ev) {
-  if (ev) ev.stopPropagation();
-  saveFollowedKarya_(getFollowedKarya_().filter(function(f) { return f.kode !== kode; }));
-  renderFollowedKaryaSection_();
-}
-function followedKaryaCardHtml_(f, freshStatus) {
-  var changed = freshStatus && freshStatus !== f.statusModerasi;
-  var badge = changed ? '<span class="follow-badge">' + t('follow_karya_changed') + '</span>' : '';
-  return '<div class="sc-card follow-card" onclick="openFollowedKarya_(\'' + escHtml(f.kode) + '\')" style="cursor:pointer;">' +
-    '<div class="sc-status-card-top">' +
-      '<div><div class="sc-status-name">' + escHtml(f.namaProgram || '-') + badge + '</div><div class="sc-status-code">' + escHtml(f.kode) + ' &middot; ' + escHtml(scStatusLabel_(freshStatus || f.statusModerasi)) + '</div></div>' +
-      '<button type="button" class="follow-remove-btn" onclick="unfollowKarya_(\'' + escHtml(f.kode) + '\', event)" title="' + t('follow_remove') + '">&times;</button>' +
-    '</div>' +
-  '</div>';
-}
-function renderFollowedKaryaSection_() {
-  var el = document.getElementById('followedKaryaSection');
-  if (!el) return;
-  var list = getFollowedKarya_();
-  if (!list.length) { el.innerHTML = ''; return; }
-  el.innerHTML = '<div class="follow-list-title">' + t('follow_karya_section_title') + '</div><div id="followedKaryaCards">' +
-    list.map(function(f) { return followedKaryaCardHtml_(f, null); }).join('') + '</div>';
-  // Cek status terkini di latar belakang (tidak menghalangi render daftar)
-  // supaya badge "status berubah" muncul begitu statusnya berubah sejak
-  // terakhir dilihat. Sama seperti renderFollowedNimSection_ - jeda ini
-  // WAJIB ada karena openShowcaseStatus() (satu-satunya pemanggil fungsi
-  // ini) sekarang juga dipanggil ulang lewat tombol back/forward
-  // (popstate), jadi tanpa jeda, hanya bolak-balik di riwayat browser saja
-  // sudah bisa memicu action 'showcase_status' berkali-kali - action ini
-  // punya rate limit KETAT dan GLOBAL untuk SELURUH pengunjung situs
-  // sekaligus (checkRateLimit_('sc_status', 20) di Code.gs, 20x/menit
-  // dibagi rata semua orang, bukan per-pengunjung), jadi volume permintaan
-  // ekstra dari fitur follow ini bisa membuat pengecekan status manual
-  // milik pengunjung LAIN ikut gagal (pesan "sc_rate_limited") walau
-  // mereka sama sekali tidak memakai fitur follow. Ini kemungkinan besar
-  // penyebab laporan "sering gagal mengambil data" setelah fitur ini
-  // ditambahkan.
-  if (Date.now() - _followKaryaLastRefresh < FOLLOW_REFRESH_COOLDOWN_MS) return;
-  _followKaryaLastRefresh = Date.now();
-  list.forEach(function(f, i) {
-    gasGet({ action: 'showcase_status', kode: f.kode, lang: currentLang }).then(function(res) {
-      if (!res || !res.ok) return;
-      var cardsWrap = document.getElementById('followedKaryaCards');
-      if (!cardsWrap || !cardsWrap.children[i]) return;
-      cardsWrap.children[i].outerHTML = followedKaryaCardHtml_(f, res.statusModerasi);
-    }).catch(function() {});
-  });
-}
-function openFollowedKarya_(kode) {
-  document.getElementById('scStatusInput').value = kode;
-  cekShowcaseStatus();
-}
-
-// ---- Cek Status ----
-function openShowcaseStatus(noPush) {
-  scHideAllViews_();
-  document.getElementById('scStatusView').style.display = 'block';
-  document.getElementById('scStatusResult').innerHTML = '';
-  document.getElementById('scStatusInput').value = '';
-  document.getElementById('scOwnDetailBody').innerHTML = '';
-  document.getElementById('scOwnDetailBody').style.display = 'none';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  renderFollowedKaryaSection_();
-  if (noPush) history.replaceState({ view: 'scStatus' }, '', location.href);
-  else history.pushState({ view: 'scStatus' }, '', location.href);
-}
-
-async function cekShowcaseStatus() {
-  var kode = document.getElementById('scStatusInput').value.trim();
-  var resultEl = document.getElementById('scStatusResult');
-  if (!kode) { resultEl.innerHTML = '<p class="msg-error">' + t('sc_status_kosong') + '</p>'; return; }
-  resultEl.innerHTML = '<p class="msg-center">' + t('sc_loading') + '</p>';
-  try {
-    var res = await gasGet({ action: 'showcase_status', kode: kode, lang: currentLang });
-    if (!res || !res.ok) {
-      resultEl.innerHTML = '<p class="msg-error">' + escHtml((res && res.message) || t('sc_status_not_found')) + '</p>';
-      return;
-    }
-    _scLastStatusRes = res;
-    var pillClass = res.statusModerasi === 'Disetujui' ? 'sc-status-disetujui' : (res.statusModerasi === 'Ditolak' ? 'sc-status-ditolak' : 'sc-status-menunggu');
-    var pillLabel = res.statusModerasi === 'Disetujui' ? t('sc_status_disetujui') : (res.statusModerasi === 'Ditolak' ? t('sc_status_ditolak') : t('sc_status_menunggu'));
-    var html = '<div class="sc-card">' +
-      '<div class="sc-status-card-top">' +
-        '<div><div class="sc-status-name">' + escHtml(res.namaProgram) + '</div><div class="sc-status-code">' + escHtml(res.kode) + '</div></div>' +
-        '<span class="sc-status-pill ' + pillClass + '">' + pillLabel + '</span>' +
-      '</div>';
-    if (res.statusModerasi === 'Disetujui') {
-      html += '<button class="sc-btn sc-btn-outline sc-btn-sm" onclick="openShowcaseDetail(\'' + escHtml(res.kode) + '\')">' + t('sc_btn_lihat_galeri') + '</button>';
-    } else if (res.statusModerasi === 'Ditolak') {
-      if (res.alasanDitolak) html += '<div class="sc-reject-reason"><b>' + t('sc_status_alasan_label') + ':</b> ' + escHtml(res.alasanDitolak) + '</div>';
-      html += '<div class="sc-action-row"><button class="sc-btn sc-btn-primary sc-btn-sm" onclick="scOpenResubmit(\'' + escHtml(res.kode) + '\')">' + t('sc_btn_edit_kirim_ulang') + '</button></div>';
-    } else {
-      html += '<div class="sc-action-row"><button class="sc-btn sc-btn-outline sc-btn-sm" onclick="scViewOwnDetail(\'' + escHtml(res.kode) + '\')">' + t('sc_btn_lihat_detail') + '</button></div>';
-    }
-    html += '<button type="button" class="follow-btn' + (isFollowingKarya_(res.kode) ? ' active' : '') + '" id="followKaryaBtn" style="margin-top:10px;" onclick="toggleFollowKarya_(\'' + escHtml(res.kode) + '\')">' + t(isFollowingKarya_(res.kode) ? 'follow_btn_active' : 'follow_karya_btn') + '</button>';
-    html += '</div>';
-    resultEl.innerHTML = html;
-    document.getElementById('scOwnDetailBody').innerHTML = '';
-    document.getElementById('scOwnDetailBody').style.display = 'none';
-    markFollowedKaryaSeen_(res.kode, res.statusModerasi);
-  } catch (e) {
-    resultEl.innerHTML = '<p class="msg-error">' + t('sc_error') + '</p>';
-  }
-}
-
-async function scViewOwnDetail(kode) {
-  var box = document.getElementById('scOwnDetailBody');
-  box.style.display = 'block';
-  box.innerHTML = '<p class="msg-center">' + t('sc_loading') + '</p>';
-  try {
-    var res = await gasGet({ action: 'showcase_mine', kode: kode, lang: currentLang });
-    if (!res || !res.ok) { box.innerHTML = '<p class="msg-error">' + escHtml((res && res.message) || t('sc_error')) + '</p>'; return; }
-    box.innerHTML = '<div class="sc-card">' + scBuildDetailBodyHtml_(res.item, { showLike: false, showReport: false }) + '</div>';
-    scHeroCarouselInit_();
-  } catch (e) {
-    box.innerHTML = '<p class="msg-error">' + t('sc_error') + '</p>';
-  }
 }
