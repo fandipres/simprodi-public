@@ -201,39 +201,24 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; s
 /* ---- LAYOUT ---- */
 .page-wrap { max-width: 900px; margin: 0 auto; padding: 20px 16px 48px; }
 
-/* Lebar baca per fitur - meniru proporsi masing-masing di mockup: beranda
-   (kartu menu) pakai lebar penuh .page-wrap, fitur lain yang isinya teks
-   dibatasi lebih sempit supaya tetap nyaman dibaca meski .page-wrap sudah
-   melebar jadi 900px. */
-#searchSection, #detailView { max-width: 700px; margin-left: auto; margin-right: auto; }
-#searchSection .home-hero-inner, #detailView .home-hero-inner { max-width: 732px; }
-#scGaleriView { max-width: 780px; margin-left: auto; margin-right: auto; }
-#scDetailView, #scFormView, #scStatusView { max-width: 780px; margin-left: auto; margin-right: auto; }
-#scDetailView .home-hero-inner { max-width: 780px; }
-#quizView, #quizResultView { max-width: 560px; margin-left: auto; margin-right: auto; }
-#quizView .home-hero-inner, #quizResultView .home-hero-inner { max-width: 592px; }
-#statistikView { max-width: 780px; margin-left: auto; margin-right: auto; }
-#panduanView { max-width: 780px; margin-left: auto; margin-right: auto; }
-#dosenView { max-width: 780px; margin-left: auto; margin-right: auto; }
+/* Lebar konten: dua ukuran saja, di semua ukuran layar.
+   - Lebar: mengikuti .page-wrap (900px, 1140px di desktop) untuk halaman
+     ikhtisar/grid: Beranda, Buku Panduan, Dosen, Statistik, Galeri dan
+     Detail Showcase. View-nya tidak diberi max-width sendiri.
+   - Sempit: 760px untuk halaman baca/isian: Portofolio (cari + detail),
+     Tes Peminatan (+ hasil), Kirim Karya, Cek Status.
+   .home-hero-inner selalu = lebar konten + 32px (padding 16px kiri-kanan),
+   supaya judul hero sejajar dengan tepi konten di bawahnya. Untuk halaman
+   lebar itu otomatis (default .home-hero-inner = lebar .page-wrap). */
+#searchSection, #detailView, #quizView, #quizResultView, #scFormView, #scStatusView {
+  max-width: 760px; margin-left: auto; margin-right: auto;
+}
+#searchSection .home-hero-inner, #detailView .home-hero-inner, #quizView .home-hero-inner,
+#quizResultView .home-hero-inner, #scFormView .home-hero-inner, #scStatusView .home-hero-inner { max-width: 792px; }
 
-/* Laptop/desktop saja: semua fitur dilebarkan ke lebar yang sama agar
-   tidak ada ruang kosong berlebih di kanan-kiri pada layar lebar. Mobile
-   dan tablet tidak disentuh sama sekali (di bawah breakpoint ini). */
 @media (min-width: 1024px) {
   .page-wrap { max-width: 1140px; }
   .header-inner { max-width: 1140px; }
-  #searchSection, #detailView { max-width: 760px; }
-  #searchSection .home-hero-inner, #detailView .home-hero-inner { max-width: 792px; }
-  #scGaleriView, #scDetailView, #scFormView, #scStatusView { max-width: 1140px; }
-  #scGaleriView .home-hero-inner, #scDetailView .home-hero-inner, #scFormView .home-hero-inner, #scStatusView .home-hero-inner { max-width: 1140px; }
-  #quizView, #quizResultView { max-width: 720px; }
-  #quizView .home-hero-inner, #quizResultView .home-hero-inner { max-width: 752px; }
-  #statistikView { max-width: 1140px; }
-  #statistikView .home-hero-inner { max-width: 1140px; }
-  #panduanView { max-width: 1140px; }
-  #panduanView .home-hero-inner { max-width: 1140px; }
-  #dosenView { max-width: 1140px; }
-  #dosenView .home-hero-inner { max-width: 1140px; }
 }
 
 /* ---- SEARCH ---- */
@@ -533,7 +518,8 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; s
    .header-inner (satu lapis padding pada elemen yang di-max-width+center),
    sehingga tombol/teks di header sejajar dengan batas nav dan konten di
    bawahnya, bukan tergeser 16px lebih ke kiri. */
-.home-hero-inner { max-width: 780px; margin: 0 auto; padding: 0 16px; }
+.home-hero-inner { max-width: 900px; margin: 0 auto; padding: 0 16px; }
+@media (min-width: 1024px) { .home-hero-inner { max-width: 1140px; } }
 #homeView .home-hero-inner { max-width: none; text-align: center; }
 .home-headline {
   font-size: 1.6rem; font-weight: 800; line-height: 1.2;

@@ -385,7 +385,7 @@ function scPopulateFilterOptions_() {
 
 // Nama dosen dicocokkan tanpa peduli tanda baca, spasi, dan huruf besar/kecil:
 // karya lama yang diisi sebelum ada pilihan dosen bisa berbeda tulisan
-// (mis. "Andri S.Kom." vs "Andri, S.Kom."). Sama dengan dosenNormName_ di app.js.
+// (mis. "Andri S.Kom." vs "Andri, S.Kom.").
 function scNormName_(s) {
   return String(s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
 }

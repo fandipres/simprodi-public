@@ -8,9 +8,10 @@
 /* ---- Navigasi Showcase ---- */
 .scn { background: var(--card); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
 .scn-inner {
-  max-width: 1140px; margin: 0 auto; padding: 10px 16px;
+  max-width: 900px; margin: 0 auto; padding: 10px 16px;
   display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px;
 }
+@media (min-width: 1024px) { .scn-inner { max-width: 1140px; } }
 .scn-brand { display: flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none; margin-right: auto; }
 .scn-mark {
   width: 34px; height: 34px; border-radius: 9px; background: var(--blue); color: #fff;
@@ -307,11 +308,7 @@ body[data-page="showcase"] .home-hero .home-sub { color: var(--muted); }
 }
 
 /* ---- Kirim Karya & Cek Status: diselaraskan dengan galeri/detail ----
-   Lebar baca 760px (form panjang tidak nyaman di 1140px). Hero-nya 792px
-   (= 760 + padding 16px kiri-kanan .home-hero-inner) supaya judul sejajar
-   dengan tepi konten di bawahnya; keduanya harus diubah bersamaan. */
-#scFormView, #scStatusView { max-width: 760px; }
-#scFormView .home-hero-inner, #scStatusView .home-hero-inner { max-width: 792px; }
+   Lebarnya (760px, halaman "sempit") diatur bersama halaman lain di app.css. */
 .sc-card { border-radius: 14px; box-shadow: none; }
 .sc-form-card { border-radius: 16px; padding: 20px 22px; box-shadow: none; }
 .sc-form-card-icon { border-radius: 10px; }

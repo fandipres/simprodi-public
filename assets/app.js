@@ -116,7 +116,6 @@ const I18N = {
     sc_more_pem: 'Karya Lain di Peminatan {p}',
     sc_more_jenis: 'Karya {j} Lainnya',
     sc_report_q: 'Ada yang salah dengan karya ini?',
-    dosen_karya_link: 'Karya bimbingan ({n})',
     scn_status: 'Cek Status',
     scn_submit: 'Kirim Karya',
     home_pengumuman_link: 'Selengkapnya',
@@ -382,7 +381,6 @@ const I18N = {
     sc_more_pem: 'More {p} Works',
     sc_more_jenis: 'More {j} Works',
     sc_report_q: 'Something wrong with this work?',
-    dosen_karya_link: 'Supervised works ({n})',
     scn_status: 'Check Status',
     scn_submit: 'Submit Work',
     home_pengumuman_link: 'Read more',
@@ -1894,44 +1892,16 @@ function dosenFilterBarHtml_() {
 
 var DOSEN_ICON_EXTERNAL = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>';
 
-// Jumlah karya Showcase per nama dosen pembimbing, dihitung dari galeri
-// publik (sudah di-cache di server) di latar belakang. Tautan "Karya
-// bimbingan" hanya muncul untuk dosen yang punya karya, dan membuka galeri
-// Showcase yang langsung tersaring ke dosen itu (/showcase/?dosen=Nama).
-let dosenKaryaCount_ = null;
-
-// Nama dicocokkan tanpa tanda baca/spasi/huruf besar, karena karya lama bisa
-// menulis nama dosen sedikit berbeda (mis. tanpa koma setelah nama).
-// Sama dengan scNormName_ di showcase.js.
-function dosenNormName_(s) {
-  return String(s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-}
-
-async function loadDosenKaryaCount_() {
-  if (dosenKaryaCount_) return;
-  try {
-    var res = await gasGet({ action: 'showcase_galeri' });
-    if (!res || !res.ok) return;
-    var counts = {};
-    (res.items || []).forEach(function(it) {
-      (it.dosenPembimbing || []).forEach(function(n) { var k = dosenNormName_(n); counts[k] = (counts[k] || 0) + 1; });
-    });
-    dosenKaryaCount_ = counts;
-    if (document.getElementById('dosenView').style.display !== 'none') renderDosen_();
-  } catch (e) { /* tautan karya bimbingan bersifat tambahan */ }
-}
-
+// Sengaja tidak ada hitungan "karya bimbingan" di kartu dosen: data
+// Showcase belum mencakup semua bimbingan, jadi angkanya bisa menyesatkan
+// (diminta user 2026-11-26).
 function dosenCardHtml_(d) {
   var sintaHtml = d.sintaId
     ? '<a class="dosen-sinta-link" href="https://sinta.kemdiktisaintek.go.id/authors/profile/' + encodeURIComponent(d.sintaId) + '" target="_blank" rel="noopener">' + DOSEN_ICON_EXTERNAL + t('dosen_sinta_link') + '</a>'
     : '';
-  var nKarya = dosenKaryaCount_ && dosenKaryaCount_[dosenNormName_(d.nama)];
-  var karyaHtml = nKarya
-    ? '<a class="dosen-sinta-link" href="/showcase/?dosen=' + encodeURIComponent(d.nama) + '">' + t('dosen_karya_link', { n: nKarya }) + '</a>'
-    : '';
   return '<div class="dosen-card">' +
     '<div class="dosen-card-name">' + escHtml(d.nama) + '</div>' +
-    ((sintaHtml || karyaHtml) ? '<div class="dosen-card-links">' + sintaHtml + karyaHtml + '</div>' : '') +
+    (sintaHtml ? '<div class="dosen-card-links">' + sintaHtml + '</div>' : '') +
     '</div>';
 }
 
@@ -1960,7 +1930,6 @@ async function openDosen(noPush) {
   document.getElementById('dosenView').style.display = 'block';
   setCleanPath_('/lecturers/', noPush);
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  loadDosenKaryaCount_();
   var el = document.getElementById('dosenContent');
   if (dosenList_) { renderDosen_(); return; }
   el.innerHTML = '';
