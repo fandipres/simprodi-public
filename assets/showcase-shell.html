@@ -5,7 +5,6 @@
       <span class="scn-brand-text"><span class="scn-title">Showcase</span><span class="scn-sub" data-i18n="scn_sub">Karya Mahasiswa Teknik Informatika</span></span>
     </a>
     <nav class="scn-links" aria-label="Showcase">
-      <button type="button" class="scn-link" id="scnJelajahi" onclick="openShowcaseGaleri()" data-i18n="scn_explore">Jelajahi</button>
       <button type="button" class="scn-link" id="scnStatus" onclick="openShowcaseStatus()" data-i18n="scn_status">Cek Status</button>
       <button type="button" class="scn-link scn-cta" id="scnKirim" onclick="openShowcaseForm()" data-i18n="scn_submit">Kirim Karya</button>
     </nav>
@@ -44,63 +43,70 @@
           <button type="button" class="scg-tab" role="tab" data-val="Desktop" onclick="scSetJenisTab_('Desktop',this)">Desktop</button>
           <button type="button" class="scg-tab" role="tab" data-val="Console" onclick="scSetJenisTab_('Console',this)">Console</button>
           </div>
-          <button type="button" class="scg-filter-btn" id="scFilterToggleBtn" onclick="scToggleFilterPanel()">
+          <button type="button" class="scg-filter-btn" id="scFilterToggleBtn" onclick="scToggleFilterPanel()" aria-expanded="false" aria-controls="scFilterPanel">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
             <span data-i18n="sc_filter_btn">Filter</span>
             <span class="sc-filter-badge" id="scFilterBadge" style="display:none;"></span>
           </button>
         </div>
+        <div class="scg-active" id="scActiveFilters" style="display:none;"></div>
+      <div class="scf-overlay" id="scFilterOverlay" onclick="if(event.target===this)scCloseFilterPanel()">
+      <div class="scf-panel" id="scFilterPanel" role="dialog" aria-modal="true" aria-labelledby="scFilterTitle">
+        <div class="scf-head">
+          <h2 class="scf-title" id="scFilterTitle" data-i18n="sc_filter_btn">Filter</h2>
+          <button type="button" class="scf-reset" onclick="scResetFilters_()" data-i18n="sc_filter_reset">Reset</button>
+          <button type="button" class="scf-close" onclick="scCloseFilterPanel()" data-i18n-aria-label="sc_filter_close" aria-label="Tutup filter">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </button>
+        </div>
+        <div class="scf-body">
+        <fieldset class="scf-group">
+          <legend class="scf-label" data-i18n="sc_filter_peminatan_label">Peminatan</legend>
+          <div class="scf-chips" data-group="peminatan">
+            <button type="button" class="scf-chip" data-val="" aria-pressed="true" onclick="scSetFilter('peminatan','',this)"><svg class="scf-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><span data-i18n="sc_filter_semua">Semua</span></button>
+            <button type="button" class="scf-chip" data-val="Tanpa Peminatan" aria-pressed="false" onclick="scSetFilter('peminatan','Tanpa Peminatan',this)"><svg class="scf-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><span data-i18n="sc_peminatan_tanpa">Tanpa Peminatan</span></button>
+            <button type="button" class="scf-chip" data-val="SSD" aria-pressed="false" onclick="scSetFilter('peminatan','SSD',this)"><svg class="scf-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><span>SSD</span></button>
+            <button type="button" class="scf-chip" data-val="AISD" aria-pressed="false" onclick="scSetFilter('peminatan','AISD',this)"><svg class="scf-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><span>AISD</span></button>
+          </div>
+        </fieldset>
+        <fieldset class="scf-group">
+          <legend class="scf-label" data-i18n="sc_filter_status_label">Status Deploy</legend>
+          <div class="scf-chips" data-group="status">
+            <button type="button" class="scf-chip" data-val="" aria-pressed="true" onclick="scSetFilter('status','',this)"><svg class="scf-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><span data-i18n="sc_filter_semua">Semua</span></button>
+            <button type="button" class="scf-chip" data-val="Sudah Deploy" aria-pressed="false" onclick="scSetFilter('status','Sudah Deploy',this)"><svg class="scf-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><span data-i18n="sc_status_sudah">Sudah Deploy</span></button>
+            <button type="button" class="scf-chip" data-val="Belum Deploy" aria-pressed="false" onclick="scSetFilter('status','Belum Deploy',this)"><svg class="scf-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><span data-i18n="sc_status_belum">Belum Deploy</span></button>
+          </div>
+        </fieldset>
+        <fieldset class="scf-group">
+          <legend class="scf-label" data-i18n="sc_filter_status_publish_label">Status Publish</legend>
+          <div class="scf-chips" data-group="statusPublish">
+            <button type="button" class="scf-chip" data-val="" aria-pressed="true" onclick="scSetFilter('statusPublish','',this)"><svg class="scf-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><span data-i18n="sc_filter_semua">Semua</span></button>
+            <button type="button" class="scf-chip" data-val="Sudah Publish" aria-pressed="false" onclick="scSetFilter('statusPublish','Sudah Publish',this)"><svg class="scf-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><span data-i18n="sc_opt_sudah_publish">Sudah Publish</span></button>
+            <button type="button" class="scf-chip" data-val="Belum Publish" aria-pressed="false" onclick="scSetFilter('statusPublish','Belum Publish',this)"><svg class="scf-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><span data-i18n="sc_opt_belum_publish">Belum Publish</span></button>
+          </div>
+        </fieldset>
+        <fieldset class="scf-group">
+          <legend class="scf-label" data-i18n="sc_filter_sumber_label">Sumber Karya</legend>
+          <div class="scf-chips" data-group="sumber">
+            <button type="button" class="scf-chip" data-val="" aria-pressed="true" onclick="scSetFilter('sumber','',this)"><svg class="scf-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><span data-i18n="sc_filter_semua">Semua</span></button>
+            <button type="button" class="scf-chip" data-val="Kompetisi" aria-pressed="false" onclick="scSetFilter('sumber','Kompetisi',this)"><svg class="scf-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><span data-i18n="sc_opt_kompetisi">Kompetisi</span></button>
+            <button type="button" class="scf-chip" data-val="Mata Kuliah" aria-pressed="false" onclick="scSetFilter('sumber','Mata Kuliah',this)"><svg class="scf-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><span data-i18n="sc_opt_matkul">Mata Kuliah</span></button>
+            <button type="button" class="scf-chip" data-val="Tugas Akhir" aria-pressed="false" onclick="scSetFilter('sumber','Tugas Akhir',this)"><svg class="scf-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><span data-i18n="sc_opt_ta">Tugas Akhir</span></button>
+          </div>
+        </fieldset>
+          <div class="scf-group">
+            <label class="scf-label" for="scFilterTek" data-i18n="sc_filter_tek_label">Teknologi</label>
+            <select class="scf-select" id="scFilterTek" onchange="scSetSelectFilter_('teknologi', this.value)"></select>
+          </div>
+          <div class="scf-group">
+            <label class="scf-label" for="scFilterDosen" data-i18n="sc_filter_dosen_label">Dosen Pembimbing</label>
+            <select class="scf-select" id="scFilterDosen" onchange="scSetSelectFilter_('dosen', this.value)"></select>
+          </div>
+        </div>
+        <div class="scf-foot">
+          <button type="button" class="scf-apply" id="scFilterApply" onclick="scCloseFilterPanel()">Tampilkan karya</button>
+        </div>
       </div>
-
-      <div class="sc-filter-overlay" id="scFilterOverlay" onclick="if(event.target===this)scCloseFilterPanel()">
-      <div class="sc-filter-panel" id="scFilterPanel">
-        <div class="sc-filter-panel-head">
-          <div class="sc-filter-panel-title" data-i18n="sc_filter_btn">Filter</div>
-          <button class="sc-filter-panel-close" onclick="scCloseFilterPanel()" title="Tutup">&times;</button>
-        </div>
-        <div class="sc-filter-row">
-          <div class="sc-filter-row-label" data-i18n="sc_filter_peminatan_label">Peminatan</div>
-          <div class="sc-chipbar" id="scChipPeminatan">
-            <button class="sc-fchip active" data-val="" onclick="scSetFilter('peminatan','',this)" data-i18n="sc_filter_semua_peminatan">Semua Peminatan</button>
-            <button class="sc-fchip" data-val="Tanpa Peminatan" onclick="scSetFilter('peminatan','Tanpa Peminatan',this)" data-i18n="sc_peminatan_tanpa">Tanpa Peminatan</button>
-            <button class="sc-fchip" data-val="SSD" onclick="scSetFilter('peminatan','SSD',this)">SSD</button>
-            <button class="sc-fchip" data-val="AISD" onclick="scSetFilter('peminatan','AISD',this)">AISD</button>
-          </div>
-        </div>
-        <div class="sc-filter-row">
-          <div class="sc-filter-row-label" data-i18n="sc_filter_status_label">Status</div>
-          <div class="sc-chipbar" id="scChipStatus">
-            <button class="sc-fchip active" data-val="" onclick="scSetFilter('status','',this)" data-i18n="sc_filter_semua_status">Semua Status</button>
-            <button class="sc-fchip" data-val="Sudah Deploy" onclick="scSetFilter('status','Sudah Deploy',this)" data-i18n="sc_status_sudah">Sudah Deploy</button>
-            <button class="sc-fchip" data-val="Belum Deploy" onclick="scSetFilter('status','Belum Deploy',this)" data-i18n="sc_status_belum">Belum Deploy</button>
-          </div>
-        </div>
-        <div class="sc-filter-row">
-          <div class="sc-filter-row-label" data-i18n="sc_filter_status_publish_label">Status Publish</div>
-          <div class="sc-chipbar" id="scChipStatusPublish">
-            <button class="sc-fchip active" data-val="" onclick="scSetFilter('statusPublish','',this)" data-i18n="sc_filter_semua_status_publish">Semua</button>
-            <button class="sc-fchip" data-val="Sudah Publish" onclick="scSetFilter('statusPublish','Sudah Publish',this)" data-i18n="sc_opt_sudah_publish">Sudah Publish</button>
-            <button class="sc-fchip" data-val="Belum Publish" onclick="scSetFilter('statusPublish','Belum Publish',this)" data-i18n="sc_opt_belum_publish">Belum Publish</button>
-          </div>
-        </div>
-        <div class="sc-filter-row">
-          <div class="sc-filter-row-label" data-i18n="sc_filter_sumber_label">Sumber Karya</div>
-          <div class="sc-chipbar" id="scChipSumber">
-            <button class="sc-fchip active" data-val="" onclick="scSetFilter('sumber','',this)" data-i18n="sc_filter_semua_sumber">Semua Sumber</button>
-            <button class="sc-fchip" data-val="Kompetisi" onclick="scSetFilter('sumber','Kompetisi',this)" data-i18n="sc_opt_kompetisi">Kompetisi</button>
-            <button class="sc-fchip" data-val="Mata Kuliah" onclick="scSetFilter('sumber','Mata Kuliah',this)" data-i18n="sc_opt_matkul">Mata Kuliah</button>
-            <button class="sc-fchip" data-val="Tugas Akhir" onclick="scSetFilter('sumber','Tugas Akhir',this)" data-i18n="sc_opt_ta">Tugas Akhir</button>
-          </div>
-        </div>
-<div class="sc-filter-row">
-          <label class="sc-filter-row-label" for="scFilterTek" data-i18n="sc_filter_tek_label">Teknologi</label>
-          <select class="scg-select" id="scFilterTek" onchange="scSetSelectFilter_('teknologi', this.value)"></select>
-        </div>
-        <div class="sc-filter-row">
-          <label class="sc-filter-row-label" for="scFilterDosen" data-i18n="sc_filter_dosen_label">Dosen Pembimbing</label>
-          <select class="scg-select" id="scFilterDosen" onchange="scSetSelectFilter_('dosen', this.value)"></select>
-        </div>
-        <button class="sc-btn sc-btn-primary sc-btn-sm sc-btn-block" onclick="scCloseFilterPanel()" data-i18n="sc_btn_terapkan">Terapkan</button>
       </div>
       </div>
 

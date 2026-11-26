@@ -17,7 +17,7 @@ function scDispatchRoute_(noPush) {
   if (path !== '/showcase') { location.replace(location.href); return; }
   var params = new URLSearchParams(location.search);
   var kode = params.get('kode');
-  if (params.get('dosen')) { _scFilters.dosen = params.get('dosen'); scUpdateFilterBadge_(); }
+  if (params.get('dosen')) { _scFilters.dosen = params.get('dosen'); scSyncFilterUi_(); }
   if (kode) openShowcaseDetail(kode, noPush);
   else openShowcaseGaleri(noPush);
 }
@@ -158,7 +158,11 @@ function scHeroCarouselInit_() {
   var carousel = document.querySelector('.sc-hero-carousel');
   if (!carousel) return;
   var track = carousel.querySelector('.sc-hero-track');
-  _scHeroAutoTimer = setInterval(function() { scHeroCarouselAutoAdvance_(track); }, 4500);
+  // Di layar lebar thumbnail dan trailer tampil berdampingan (showcase.css),
+  // jadi tidak ada slide yang perlu digeser otomatis.
+  if (!window.matchMedia('(min-width: 900px)').matches) {
+    _scHeroAutoTimer = setInterval(function() { scHeroCarouselAutoAdvance_(track); }, 4500);
+  }
   if (carousel.querySelector('#scHeroYtFrame')) scEnsureYtApi_(scHeroSetupYtWatcher_);
 }
 
@@ -211,7 +215,7 @@ var _scSort    = 'baru';
 
 async function openShowcaseGaleri(noPush) {
   scHideAllViews_();
-  scSetNavActive_('scnJelajahi');
+  scSetNavActive_(''); // galeri & detail: dibuka lewat brand "Showcase", tidak ada menu aktif
   document.getElementById('scGaleriView').style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
   setCleanPath_('/showcase/', noPush);
@@ -233,23 +237,49 @@ async function scEnsureGaleriLoaded() {
 
 function scToggleFilterPanel() {
   var overlay = document.getElementById('scFilterOverlay');
-  var btn     = document.getElementById('scFilterToggleBtn');
-  var open    = !overlay.classList.contains('open');
-  overlay.classList.toggle('open', open);
-  btn.classList.toggle('active', open);
+  if (overlay.classList.contains('open')) { scCloseFilterPanel(); return; }
+  overlay.classList.add('open');
+  document.getElementById('scFilterToggleBtn').setAttribute('aria-expanded', 'true');
+  var first = overlay.querySelector('.scf-chip[aria-pressed="true"]') || overlay.querySelector('.scf-chip');
+  if (first) first.focus();
 }
 
 function scCloseFilterPanel() {
-  document.getElementById('scFilterOverlay').classList.remove('open');
-  document.getElementById('scFilterToggleBtn').classList.remove('active');
+  var overlay = document.getElementById('scFilterOverlay');
+  if (!overlay || !overlay.classList.contains('open')) return;
+  overlay.classList.remove('open');
+  var btn = document.getElementById('scFilterToggleBtn');
+  btn.setAttribute('aria-expanded', 'false');
+  btn.focus();
 }
 
-function scSetFilter(group, val, btn) {
+// Esc dan klik di luar panel menutup filter (di desktop panelnya berupa
+// dropdown, jadi tidak ada latar yang menangkap klik).
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') scCloseFilterPanel();
+});
+document.addEventListener('click', function(e) {
+  var overlay = document.getElementById('scFilterOverlay');
+  if (!overlay || !overlay.classList.contains('open')) return;
+  if (!e.target.closest('#scFilterPanel') && !e.target.closest('#scFilterToggleBtn')) scCloseFilterPanel();
+});
+
+function scSetFilter(group, val) {
   _scFilters[group] = val;
-  var bar = btn.parentElement;
-  bar.querySelectorAll('.sc-fchip').forEach(function(c) { c.classList.remove('active'); });
-  btn.classList.add('active');
-  scUpdateFilterBadge_();
+  scSyncFilterUi_();
+  scRenderGaleri();
+}
+
+function scClearFilter_(group) {
+  _scFilters[group] = '';
+  scSyncFilterUi_();
+  scRenderGaleri();
+}
+
+// Reset hanya filter di panel; Jenis dipilih lewat tab dan tetap terlihat.
+function scResetFilters_() {
+  Object.keys(_scFilters).forEach(function(k) { if (k !== 'jenis') _scFilters[k] = ''; });
+  scSyncFilterUi_();
   scRenderGaleri();
 }
 
@@ -285,16 +315,49 @@ function scSetJenisTab_(val, btn) {
 
 function scSetSelectFilter_(group, val) {
   _scFilters[group] = val;
-  scUpdateFilterBadge_();
+  scSyncFilterUi_();
   scRenderGaleri();
 }
 
-function scUpdateFilterBadge_() {
-  var n = Object.keys(_scFilters).filter(function(k) { return k !== 'jenis' && _scFilters[k]; }).length;
+// Label filter aktif sesuai bahasa yang sedang dipakai.
+function scFilterValueLabel_(group, v) {
+  var keys = {
+    'Tanpa Peminatan': 'sc_peminatan_tanpa', 'Sudah Deploy': 'sc_status_sudah', 'Belum Deploy': 'sc_status_belum',
+    'Sudah Publish': 'sc_opt_sudah_publish', 'Belum Publish': 'sc_opt_belum_publish',
+    'Kompetisi': 'sc_opt_kompetisi', 'Mata Kuliah': 'sc_opt_matkul', 'Tugas Akhir': 'sc_opt_ta'
+  };
+  return (group !== 'teknologi' && group !== 'dosen' && keys[v]) ? t(keys[v]) : v;
+}
+
+// Menyamakan semua tampilan filter dengan _scFilters: chip di panel
+// (aria-pressed), dropdown, angka di tombol Filter, dan baris filter aktif
+// di bawah tab (tiap filter bisa dicabut langsung tanpa membuka panel).
+function scSyncFilterUi_() {
+  document.querySelectorAll('.scf-chips').forEach(function(box) {
+    var current = _scFilters[box.dataset.group] || '';
+    box.querySelectorAll('.scf-chip').forEach(function(c) { c.setAttribute('aria-pressed', c.dataset.val === current ? 'true' : 'false'); });
+  });
+  var tek = document.getElementById('scFilterTek');
+  if (tek && tek.value !== _scFilters.teknologi) tek.value = _scFilters.teknologi;
+  var dsn = document.getElementById('scFilterDosen');
+  if (dsn && scNormName_(dsn.value) !== scNormName_(_scFilters.dosen)) dsn.value = _scFilters.dosen;
+
+  var active = Object.keys(_scFilters).filter(function(k) { return k !== 'jenis' && _scFilters[k]; });
   var badge = document.getElementById('scFilterBadge');
-  if (!badge) return;
-  if (n > 0) { badge.textContent = n; badge.style.display = 'inline-flex'; }
-  else badge.style.display = 'none';
+  if (badge) {
+    if (active.length) { badge.textContent = active.length; badge.style.display = 'inline-flex'; }
+    else badge.style.display = 'none';
+  }
+  var row = document.getElementById('scActiveFilters');
+  if (!row) return;
+  if (!active.length) { row.innerHTML = ''; row.style.display = 'none'; return; }
+  // group adalah kunci tetap milik kode (bukan input pengguna), aman di onclick.
+  row.innerHTML = active.map(function(k) {
+    var label = scFilterValueLabel_(k, _scFilters[k]);
+    return '<button type="button" class="scg-active-chip" onclick="scClearFilter_(\'' + k + '\')" aria-label="' + escHtml(t('sc_filter_remove', { v: label })) + '">' +
+      escHtml(label) + '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>';
+  }).join('') + '<button type="button" class="scg-active-clear" onclick="scResetFilters_()">' + t('sc_filter_clear_all') + '</button>';
+  row.style.display = '';
 }
 
 // Pilihan Teknologi/Dosen diambil dari karya yang sudah tayang, jadi tidak
@@ -359,7 +422,7 @@ function scDetailLinkAttrs_(item) {
 }
 
 function scCardHtml_(item) {
-  var tech = sortTeknologi_(item.teknologi || []).slice(0, 2).map(function(x) { return '<span class="scg-pill">' + escHtml(x) + '</span>'; }).join('');
+  var tech = sortTeknologi_(item.teknologi || []).slice(0, 2).map(function(x) { return '<span class="scg-pill" title="' + escHtml(x) + '">' + escHtml(x) + '</span>'; }).join('');
   return '<a class="scg-card" ' + scDetailLinkAttrs_(item) + '>' +
     '<div class="scg-thumb">' + scThumbHtml_(item) +
       (item.statusPublish === 'Sudah Publish' ? '<span class="scg-badge">' + t('sc_status_publish_sudah') + '</span>' : '') + '</div>' +
@@ -422,6 +485,8 @@ function scRenderGaleri() {
   }
   document.getElementById('scAllTitle').textContent = t(browse ? 'sc_all_title' : 'sc_results_title');
   document.getElementById('scResultCount').textContent = t('sc_result_count', { n: list.length });
+  var applyBtn = document.getElementById('scFilterApply');
+  if (applyBtn) applyBtn.textContent = t('sc_filter_show', { n: list.length });
 
   var grid = document.getElementById('scGaleriGrid');
   if (!list.length) { grid.innerHTML = '<div class="sc-empty">' + t('sc_empty') + '</div>'; return; }
@@ -438,7 +503,7 @@ var _scDetailReqKode = null;
 
 async function openShowcaseDetail(kode, noPush) {
   scHideAllViews_();
-  scSetNavActive_('scnJelajahi');
+  scSetNavActive_(''); // galeri & detail: dibuka lewat brand "Showcase", tidak ada menu aktif
   document.getElementById('scDetailView').style.display = 'block';
   document.getElementById('scDetailBody').innerHTML = '<p class="msg-center">' + t('sc_loading') + '</p>';
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -599,10 +664,12 @@ function scBuildDetailBodyHtml_(item, opts) {
     '</section>' +
     '<section class="scd-section"><h2 class="scd-h">' + t('sc_preview_title') + '</h2>' + mediaHtml + '</section>' +
     '<section class="scd-card"><h2 class="scd-h">' + t('sc_about_title') + '</h2><p class="scd-desc">' + escHtml(pick(item.deskripsi)) + '</p>' + techHtml + '</section>' +
-    '<div class="scd-grid2">' +
-      '<section class="scd-card"><h2 class="scd-h">' + t('sc_creators_label') + '</h2>' + teamHtml + '</section>' +
-      (dosenHtml ? '<section class="scd-card"><h2 class="scd-h">' + t('sc_dosen_label') + '</h2>' + dosenHtml + '</section>' : '') +
-    '</div>' +
+    // Tim (bisa sampai 5) dan dosen (biasanya 1-2) dalam satu kartu supaya
+    // tidak ada kartu dosen yang setengah kosong; barisnya 2 kolom di layar lebar.
+    '<section class="scd-card"><h2 class="scd-h">' + t('sc_team_dosen_title') + '</h2>' +
+      '<div class="scd-sub">' + t('sc_creators_label') + '</div><div class="scd-rows">' + teamHtml + '</div>' +
+      (dosenHtml ? '<div class="scd-sub">' + t('sc_dosen_label') + '</div><div class="scd-rows">' + dosenHtml + '</div>' : '') +
+    '</section>' +
     '<section class="scd-card"><h2 class="scd-h">' + t('sc_info_title') + '</h2><div class="scd-info">' + infoHtml + '</div></section>' +
     (linksHtml ? '<section class="scd-card scd-links"><h2 class="scd-h">' + t('sc_sec_tautan') + '</h2>' + linksHtml + '</section>' : '') +
     (opts.showLike ? '<div id="scMore"></div>' : '') +
