@@ -427,7 +427,7 @@ function scCardHtml_(item) {
     '<div class="scg-thumb">' + scThumbHtml_(item) +
       (item.statusPublish === 'Sudah Publish' ? '<span class="scg-badge">' + t('sc_status_publish_sudah') + '</span>' : '') + '</div>' +
     '<div class="scg-body">' +
-      '<div class="scg-row"><span class="scg-icon">' + (SC_ICON_JENIS[item.jenis] || SC_ICON_JENIS_DEFAULT) + '</span>' +
+      '<div class="scg-row">' +
         '<span class="scg-titles"><span class="scg-name">' + escHtml(scName_(item)) + '</span>' +
         '<span class="scg-meta">' + escHtml(scCardMeta_(item)) + '</span></span></div>' +
       '<div class="scg-foot"><span class="scg-pills">' + tech + '</span><span class="scg-likes">' + SC_ICON_HEART + item.likes + '</span></div>' +
@@ -654,7 +654,6 @@ function scBuildDetailBodyHtml_(item, opts) {
   return crumb +
     '<section class="scd-card scd-head">' +
       '<div class="scd-head-top">' +
-        '<span class="scd-icon">' + (SC_ICON_JENIS[item.jenis] || SC_ICON_JENIS_DEFAULT) + '</span>' +
         '<div class="scd-head-text"><h1 class="scd-title">' + escHtml(scName_(item)) + '</h1>' +
           '<div class="scd-meta">' + t('sc_team_count', { n: item.kreator.length }) + ' · ' + escHtml(sumberLabel) + '</div>' +
           (badges ? '<div class="scd-badges">' + badges + '</div>' : '') + '</div>' +

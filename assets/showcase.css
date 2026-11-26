@@ -105,11 +105,6 @@ body[data-page="showcase"] .home-hero .home-sub { color: var(--muted); }
 }
 .scg-body { padding: 13px 14px 14px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
 .scg-row { display: flex; align-items: center; gap: 10px; min-width: 0; }
-.scg-icon {
-  flex: none; width: 34px; height: 34px; border-radius: 10px; background: var(--blue-soft); color: var(--accent);
-  display: flex; align-items: center; justify-content: center;
-}
-.scg-icon svg { width: 18px; height: 18px; }
 .scg-titles { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
 .scg-name { font-size: 0.9rem; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .scg-meta { font-size: 0.74rem; font-weight: 500; color: var(--muted); }
@@ -140,11 +135,6 @@ body[data-page="showcase"] .home-hero .home-sub { color: var(--muted); }
 .scd-section { margin-bottom: 22px; }
 .scd-h { font-size: 1.02rem; font-weight: 800; color: var(--text); margin: 0 0 12px; }
 .scd-head-top { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 18px; }
-.scd-icon {
-  flex: none; width: 88px; height: 88px; border-radius: 22px; background: var(--blue); color: #fff;
-  display: flex; align-items: center; justify-content: center;
-}
-.scd-icon svg { width: 40px; height: 40px; }
 .scd-head-text { flex: 1 1 260px; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
 .scd-title { font-size: 1.6rem; line-height: 1.2; font-weight: 800; color: var(--text); margin: 0; overflow-wrap: anywhere; }
 .scd-meta { font-size: 0.86rem; font-weight: 600; color: var(--accent); }
@@ -213,8 +203,6 @@ body[data-page="showcase"] .home-hero .home-sub { color: var(--muted); }
 .scd-report-link { border: 0; background: none; padding: 0; font-family: var(--font); font-size: 0.8rem; font-weight: 700; color: var(--accent); cursor: pointer; text-decoration: underline; }
 @media (max-width: 480px) {
   .scd-card { padding: 16px; }
-  .scd-icon { width: 64px; height: 64px; border-radius: 16px; }
-  .scd-icon svg { width: 30px; height: 30px; }
   .scd-title { font-size: 1.3rem; }
   .scd-btn-primary { max-width: none; }
 }
