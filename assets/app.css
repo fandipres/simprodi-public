@@ -241,8 +241,8 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; s
   font-size: 0.92rem; font-weight: 600; font-family: var(--font);
   cursor: pointer; transition: background .15s; white-space: nowrap;
 }
-.search-btn:hover    { background: #1d4ed8; }
-.search-btn:disabled { background: #93c5fd; cursor: not-allowed; }
+.search-btn:hover    { filter: brightness(1.25); }
+.search-btn:disabled { opacity: .45; cursor: not-allowed; }
 .search-hint { font-size: 0.78rem; color: var(--muted); margin-top: 8px; }
 
 /* ---- STATUS ---- */
@@ -683,7 +683,7 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; s
 }
 .result-note {
   font-size: 0.76rem; color: var(--subtle); line-height: 1.6;
-  background: #f8fafc; border: 1px solid var(--border);
+  background: var(--bg); border: 1px solid var(--border);
   border-radius: 8px; padding: 10px 13px; margin-bottom: 14px;
 }
 .result-actions { display: flex; flex-direction: column; gap: 8px; }
@@ -845,8 +845,8 @@ html { scrollbar-width: thin; scrollbar-color: var(--blue-border) transparent; s
   text-decoration: none;
 }
 .sc-btn-primary { background: var(--blue); color: #fff; }
-.sc-btn-primary:hover { background: #1d4ed8; }
-.sc-btn-primary:disabled { background: #93c5fd; cursor: not-allowed; }
+.sc-btn-primary:hover { filter: brightness(1.25); }
+.sc-btn-primary:disabled { opacity: .45; cursor: not-allowed; }
 .sc-btn-outline { background: var(--card); color: var(--text); border-color: var(--border); }
 .sc-btn-outline:hover { border-color: var(--accent); color: var(--accent); }
 .sc-btn-block { width: 100%; }
